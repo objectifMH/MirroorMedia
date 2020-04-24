@@ -1,0 +1,32 @@
+
+<div class="myForm">
+    
+    <form [formGroup]="monForm">
+        <h3>Inscription</h3>
+        <div class="form-group posRelative ">
+            <input type="text" class="form-control" formControlName="pseudo" id="pseudoInput" placeholder="Pseudo" 
+                
+            >
+            <i class="material-icons  posAbsolute  " ></i>
+        </div>
+        <div class="form-group posRelative">
+            <input type="password" class="form-control" formControlName="mdp" id="mdpInput" placeholder="Mot de Passe"
+            required
+            >
+            <i class="material-icons  posAbsolute  " ></i>
+        </div>
+        <div class="form-group posRelative">
+            <input type="password" class="form-control" formControlName="confMdp" id="confMdpInput" placeholder="Confirmer votre mot de passe"
+            required
+            >
+            <i class="material-icons  posAbsolute  " ></i>
+        </div>
+        <div class="form-group posRelative">
+            <input type="number" class="form-control" formControlName="zip" id="zipInput" placeholder="Zip code"
+            
+            >
+            <i class="material-icons  posAbsolute  zipI" ></i>
+        </div>
+        <button type="submit" class="btn" (click)="onSubmit()" [ngClass]="{'test':errorInput}">Envoyer</button>
+    </form>
+</div>

@@ -1,148 +1,72 @@
-<section class="header">
-  <div class="container">
-    <div class="gauche">LksFilm</div>
-    <div class="centre">SEARCH
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search">
-            <div class="input-group-append">
-              <button class="btn btn-success" type="submit">Go</button>
-            </div>
-          </div>
-      
-    </div>
-    <div class="droit">
-      <ul>
-        <li title="Retour à la home">
-            <span class="material-icons">
+<section class="body">
+
+  <!-- bar nav head -->
+  <section class="header">
+    <div class="headContainer">
+      <div class="gauche">
+        <img src="../assets/CoverFilm/lks.svg" style="width: 280px;
+      padding: 9px 30px;">
+      </div>
+      <div class="centre">
+
+        <input type="text" class="form-control" placeholder="Rechercher" id="idSearch">
+        <span class="material-icons">
+          search
+        </span>
+      </div>
+
+      <div class="droit">
+        <ul>
+          <li #lih (click)="clickIcon(lih)" [ngClass]="{'iconSelected':isSelectedIcon.home}" data-icon='home'>
+            <a routerLink="/home" title="Retour à la home">
+              <span class="material-icons" >
                 home
-            </span>
-        </li>
-        <li title="Nos films favoris">
+              </span>
+            </a>
+
+          </li>
+          <li #lif title="Nos films favoris" (click)="clickIcon(lif)" [ngClass]="{'iconSelected':isSelectedIcon.favoris}" data-icon='favoris'>
             <span class="material-icons">
-                favorite
+              favorite
             </span>
-        </li>
-        <li title="Son Compte">
+          </li>
+          <li #lii (click)="clickIcon(lii)" [ngClass]="{'iconSelected':isSelectedIcon.inscription}" data-icon="inscription">
+            <a routerLink="/inscription" title="Inscription" >
+              <span class="material-icons">
+                person_add
+              </span>
+            </a>
+
+          </li>
+          <li #lic title="Son Compte" data-icon="compte" (click)="clickIcon(lic)" [ngClass]="{'iconSelected':isSelectedIcon.compte}">
             <span class="material-icons">
               account_box
             </span>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-</section>
-<section class="headerTest">
+  </section>
+
+  <!-- bar nav head test 2 -->
+  <section class="headerTest">
     <div class="containerTest">
       <div class="gaucheTest">LksFilm</div>
       <div class="centreTest">SEARCH</div>
       <div class="droitTest">Connexion</div>
     </div>
-  
+
   </section>
 
-<section class="myGrid">
-  <div id="fils1" class="fils"> 
-    <a href="#fils3">
-      <span class="material-icons">
-        arrow_back_ios
-      </span>
-    </a>
-      <div class="item">
-        <img src="../assets/CoverFilm/gat.jpeg">
-      </div>
-      <div class="item">
-        <img src="../assets/CoverFilm/inter.jpeg">
-      </div>
-      <div class="item">
-        <img src="../assets/CoverFilm/joe.jpeg">
-      </div>
-      <div class="item">
-        <img src="../assets/CoverFilm/jr.jpeg">
-      </div>
-      <div class="item">
-        <img src="../assets/CoverFilm/undercover.jpeg">
-      </div>
-      <div class="item">
-        <img src="../assets/CoverFilm/dk.jpeg">
-      </div>
-      <div class="item">
-        <img src="../assets/CoverFilm/wh.jpeg">
-      </div>
-      
-    <a href="#fils2">
-      <span class="material-icons">
-        arrow_forward_ios
-      </span>
-    </a>
-  </div>
+  <!-- Détaile film clic -->
+  <section class="head-card" *ngIf="isFilmAffiche">
+    <app-test-component></app-test-component>
+  </section>
 
-  <div id="fils2" class="fils">
-    <a href="#fils1"><span class="material-icons">
-      arrow_back_ios
-      </span></a>
-    <div class="item">
-      <img src="../assets/CoverFilm/jr.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/undercover.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/dk.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/wh.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/gat.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/inter.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/joe.jpeg">
-    </div>
-   
-      
-    <a href="#fils3"><span class="material-icons">
-      arrow_forward_ios
-      </span></a>
-  </div>
+  <!-- le routeur -->
+  <router-outlet></router-outlet>
 
-  <div id="fils3" class="fils">
-    <a href="#fils2"><span class="material-icons">
-      arrow_back_ios
-      </span></a>
-    <div class="item">
-      <img src="../assets/CoverFilm/joe.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/jr.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/undercover.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/gat.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/inter.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/dk.jpeg">
-    </div>
-    <div class="item">
-      <img src="../assets/CoverFilm/wh.jpeg">
-    </div>
-
-
-    <a href="#fils1"><span class="material-icons">
-      arrow_forward_ios
-      </span></a>
-  </div>
+  
 
 </section>
-<section class="head-card">
-  <app-test-component></app-test-component>
-</section>
-<router-outlet></router-outlet>

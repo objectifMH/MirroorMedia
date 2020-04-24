@@ -1,0 +1,31 @@
+div {
+
+    
+    margin: 2px 1px;
+    padding: 20px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+
+    img {
+        width: 100%;
+    }
+
+
+    p {
+        color: white;
+        opacity: 0;
+        transition: all .3s ease-in-out;
+        margin: auto;
+    }
+
+    &:hover {
+        transform: scale(1.12);
+
+        p {
+            opacity: 1;
+        }
+    }
+}
