@@ -61,7 +61,7 @@
 
   <!-- Détaile film clic -->
   <section class="head-card" *ngIf="isFilmAffiche">
-    <app-test-component></app-test-component>
+    <app-test-component [film]="isFilmAffiche"></app-test-component>
   </section>
 
   <!-- le routeur -->

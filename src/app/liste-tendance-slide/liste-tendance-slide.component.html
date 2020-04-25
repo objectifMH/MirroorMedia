@@ -1,6 +1,4 @@
-<div (click)="detailFilm()">
-    <app-tendance-slide [titre]="titre1" ></app-tendance-slide>
-    <app-tendance-slide [titre]="titre2"></app-tendance-slide>
-    <app-tendance-slide [titre]="titre3"></app-tendance-slide>
+<div >
+    <app-tendance-slide [titre]="titre1" (filmOutput)="afficheFilmSelected($event)"></app-tendance-slide>
 
 </div>

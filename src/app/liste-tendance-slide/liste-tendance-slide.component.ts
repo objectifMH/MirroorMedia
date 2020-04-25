@@ -16,13 +16,21 @@ export class ListeTendanceSlideComponent implements OnInit {
   titre1 = 'Tendance Actuelle';
   titre2 = 'Nouveautés';
   titre3 = 'Films';
-  err;
+
   ngOnInit() {
   }
 
-  detailFilm() {
+  /* detailFilm() {
     console.log('Dans la liste : j ai bien cliqué sur la liste ');
     // this.afficheFilm.emit();
     this.inoutService.setAfficheFilm();
+  } */
+
+  afficheFilmSelected(film) {
+
+    console.log('Dans liste Slide : ', film);
+    //this.inoutService.setAfficheFilm();
+    this.inoutService.setAfficheThisFilm(film);
+    
   }
 }

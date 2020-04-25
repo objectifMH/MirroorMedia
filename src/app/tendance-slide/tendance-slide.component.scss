@@ -19,7 +19,9 @@
         display: grid;
         grid-template-columns: repeat(3, 100%);
 
+
         overflow: hidden;
+        height: 360px;
 
         .fils {
             //height: 160px;
@@ -116,11 +118,11 @@
     }
 }
 
- @keyframes slide-animation {
+/*  @keyframes slide-animation {
     20% {left:0}
     33% {left: -100%}
     36% {left: -100%}
     66% {left: -200%}
     70% {left: -200%}
     100% {left: 0}
-} 
+}  */

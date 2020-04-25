@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Film } from 'src/film';
+import { InOutService } from '../in-out.service';
 
 @Component({
   selector: 'app-test-component',
@@ -7,10 +9,16 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class TestComponentComponent implements OnInit {
 
+  @Input()
+  film: Film;
 
-  constructor() { }
+  constructor(private inoutService: InOutService) { }
 
   ngOnInit() {
+  }
+
+  closeAffiche() {
+    this.inoutService.setAfficheThisFilm(null);
   }
 
 }

@@ -17,10 +17,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.afficheFilm();
+    this.afficheThisFilm();
   }
 
   afficheFilm(): void {
-    console.log('Dans App.component.ts : ', ' bien arrivé');
+    /* console.log('Dans App.component.ts : ', ' bien arrivé');
     this.inoutService.getAfficheFilm().subscribe(
       data => {
         console.log('Dans App.component.ts : dans l observable' , data);
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
       err => {
         console.log('erreur observable dans app.coments', err);
       }
-    );
+    ); */
   }
 
   clickIcon(li) {
@@ -44,6 +45,19 @@ export class AppComponent implements OnInit {
 
     }
     console.log(this.isSelectedIcon);
+  }
+
+  afficheThisFilm() {
+    console.log('Dans App.component.ts : afficheThisFilm on souscrit à l observable > ');
+    this.inoutService.getAfficheThisFilm().subscribe(
+      data => {
+        console.log('Dans App.component.ts : dans l observable affiche this film >' , data);
+        this.isFilmAffiche = data;
+      },
+      err => {
+        console.log('erreur observable dans app.coments', err);
+      }
+    );
   }
 
 

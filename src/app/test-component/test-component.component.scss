@@ -11,6 +11,23 @@ section {
     
     .haut {
       padding: 5px 15px;
+      position: relative;
+
+      & .material-icons {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.25);
+          border: 2px solid red;
+          color: red;
+        }
+      }
+
     }
 
     .bas {

@@ -8,26 +8,8 @@
             arrow_back_ios
           </span>
         </a>
-        <div class="item">
-          <img src="../assets/CoverFilm/gat.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/inter.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/joe.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/jr.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/undercover.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/dk.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/wh.jpeg">
+        <div *ngFor="let film of films">
+          <app-item-slide [filmItem]="film" (clickFilm)="clickFilmSlide($event)"></app-item-slide>
         </div>
 
         <a href="#fils2">

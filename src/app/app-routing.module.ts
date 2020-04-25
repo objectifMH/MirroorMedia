@@ -6,7 +6,7 @@ import { ListeTendanceSlideComponent } from './liste-tendance-slide/liste-tendan
 const routes: Routes = [
   {path: 'home', component: ListeTendanceSlideComponent},
   {path: 'inscription', component: FormValidationComponent},
-  {path: '**', redirectTo: '/' }
+  /* {path: '**', redirectTo: '/' } */
 ];
 
 @NgModule({
