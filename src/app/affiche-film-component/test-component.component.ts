@@ -12,6 +12,8 @@ export class TestComponentComponent implements OnInit {
   @Input()
   film: Film;
 
+  cheminImgSrc = '../../assets/CoverFilm/AfficheFilm/';
+
   constructor(private inoutService: InOutService) { }
 
   ngOnInit() {

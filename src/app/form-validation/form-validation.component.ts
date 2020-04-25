@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { zipCodeValidator, mdpValidator } from '../validators';
+import { InOutService } from '../in-out.service';
 
 @Component({
   selector: 'app-form-validation',
@@ -12,7 +13,7 @@ export class FormValidationComponent implements OnInit {
   errorInput = false;
 
   monForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private inoutService: InOutService) {
     this.monForm = this.fb.group({
       pseudo: ['', [Validators.required, Validators.minLength(4)]  ], //required dans le html soit ici avec les validators 
       mdp: ['', Validators.minLength(4)  ],
@@ -25,6 +26,9 @@ export class FormValidationComponent implements OnInit {
     this.monForm.controls.mdp.valueChanges.subscribe(
       x => this.monForm.controls.confMdp.updateValueAndValidity()
     );
+
+
+    this.inoutService.setAfficheThisFilm(null);
   }
 
   ngOnInit() {

@@ -16,6 +16,8 @@ export class ItemSlideComponent implements OnInit {
   @Output()
   clickFilm = new EventEmitter();
 
+  cheminImgSrc = '../../assets/CoverFilm/';
+
   constructor() { }
 
   ngOnInit() {
