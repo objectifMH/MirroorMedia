@@ -24,28 +24,28 @@ export class ListeRechercheFilmComponent implements OnInit {
   }
 
   recupereListeFilm() {
-    console.log('Dans ListeRechercheFilmComponent.ts :  > ');
+    //console.log('Dans ListeRechercheFilmComponent.ts :  > ');
     this.inoutService.getListeFilmRecherche().subscribe(
       data => {
-        console.log('Dans ListeRechercheFilmComponent.ts : dans l observable affiche this listeRecherche >' , data);
+        //console.log('Dans ListeRechercheFilmComponent.ts : dans l observable affiche this listeRecherche >' , data);
         this.listeFilmRecherche = data;
       },
       err => {
-        console.log('erreur observable dans ListeRechercheFilmComponent', err);
+        //console.log('erreur observable dans ListeRechercheFilmComponent', err);
       }
     );
   }
 
   recupereInputRecherche() {
-    console.log('Dans ListeRechercheFilmComponent.ts : recupereInputRecherche > ');
+    //console.log('Dans ListeRechercheFilmComponent.ts : recupereInputRecherche > ');
     this.inoutService.getRechercheInput().subscribe(
       data => {
         this.maRecherche = data;
-        console.log('Dans ListeRechercheFilmComponent.ts : dans l observable affiche this listeRecherche >' , data);
+        //console.log('Dans ListeRechercheFilmComponent.ts : dans l observable affiche this listeRecherche >' , data);
         this.recupereListeFilm();
       },
       err => {
-        console.log('erreur observable dans ListeRechercheFilmComponent', err);
+        //console.log('erreur observable dans ListeRechercheFilmComponent', err);
       }
     );
   }

@@ -12,20 +12,12 @@ export class InOutService {
     // tslint:disable-next-line:max-line-length
     description: 'A genetically inferior man assumes the identity of a superior one in order to pursue his lifelong dream o space travel.', cover: '0.jpg'},
     // tslint:disable-next-line:max-line-length
-    {id: 1, titre: 'Interstellar', realisateur: '', acteurs: ['Ethan Hawke', 'Uma Thurman'], 
+    {id: 1, titre: 'Interstellar', realisateur: '‎Christopher Nolan', acteurs: ['Matthew McConaughey', 'Anne Hathaway', 'Jessica Chastain', 'Michael Caine', 'Casey Affleck', 'Matt Damon'], 
     // tslint:disable-next-line:max-line-length
-    description: 'A genetically inferior man assumes the identity of a superior one in order to pursue his lifelong dream o space travel.', cover: '1.jpg'},
+    description: 'Dans un futur proche, la Terre est de moins en moins accueillante pour l\'humanité qui connaît une grave crise alimentaire. Le film raconte les aventures d\'un groupe d\'explorateurs qui utilise une faille récemment découverte dans l\'espace-temps afin de repousser les limites humaines et partir à la conquête des distances astronomiques dans un voyage interstellaire.', cover: '1.jpg'},
     {id: 2, titre: 'Dark Knight', realisateur: '', acteurs: [], description: '', cover: '2.jpg'},
-    {id: 3, titre: 'Rencontre Avec Joe Black', realisateur: '', acteurs: [], description: '', cover: '3.jpg'},
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
+    // tslint:disable-next-line:max-line-length
+    {id: 3, titre: 'Rencontre Avec Joe Black', realisateur: 'Martin Brest', acteurs: ['Anthony Hopkins', 'Brad Pitt', 'Claire Forlani', 'Jake Weber', 'Marcia Gay Harden'], description: 'Une nuit, le magnat William Parrish ressent une violente douleur tandis qu\'une voix surgissant des ténèbres lui annonce sa mort prochaine. À ce moment-là, un jeune inconnu se présente à son domicile pour l\'accompagner dans son dernier voyage. Ce messager de l\'au-delà impose à Parrish de l’héberger chez lui afin de lui donner l\'occasion de partager un temps les expériences, les joies, les émotions et les drames des vivants, qui semblent lui être étrangers. En l\'espace de trois jours, Joe Black révèlera toute la famille Parrish à elle-même.', cover: '3.jpg'},
     {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
     {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
     {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
@@ -40,50 +32,6 @@ export class InOutService {
 
     {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
     {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: 'order', cover: '5.jpg'},
     {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
 
     {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
@@ -165,9 +113,18 @@ export class InOutService {
                           ||
                           film.description.toLowerCase().includes(resultat.toLowerCase())
                           );
+    const resultatListeActeurs = [];
+    // On recherche les acteurs :
+    this.listeFilmBD.forEach(film => film.acteurs.forEach(acteur => {
+         if ( acteur.toLowerCase().includes(resultat.toLowerCase()) ) {
+            resultatListeActeurs.push(film);
+         }
+      }));
+    console.log(resultatListeActeurs);
 
     console.log('Dans le service : on fixe la recherche input' , resultat,  resultatListe);
-    this.setListeFilmRecherche(resultatListe);
+    // On cacatène la premiere liste et celle des acteurs :
+    this.setListeFilmRecherche(resultatListe.concat(resultatListeActeurs));
 
   }
 
