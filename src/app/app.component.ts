@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InOutService } from './in-out.service';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
   isFilmAffiche;
   isSelectedIcon = {home: false, favoris: false, inscription: false, compte: false};
 
-  constructor(private inoutService: InOutService) { }
+  constructor(private inoutService: InOutService, private router: Router) { }
 
 
   ngOnInit() {
@@ -60,5 +61,10 @@ export class AppComponent implements OnInit {
     );
   }
 
+  clickSearch(element: any) {
+    console.log(element.value);
+    this.inoutService.setRechercheInput(element.value);
+    this.router.navigate(['/recherche']);
+  }
 
 }

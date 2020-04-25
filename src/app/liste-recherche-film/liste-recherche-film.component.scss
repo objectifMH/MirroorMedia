@@ -1,0 +1,17 @@
+h4 {
+    color: white;
+    font-weight: normal;
+    margin: 5px 20px;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+        min-width: 300px;
+        min-height: 300px;
+    }
+
+
+}
