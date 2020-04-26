@@ -13,11 +13,13 @@ export class AppComponent implements OnInit {
   isFilmAffiche;
   isSelectedIcon = {home: false, favoris: false, inscription: false, compte: false};
 
-  constructor(private inoutService: InOutService, private router: Router) { }
+  constructor(private inoutService: InOutService, private router: Router) { 
+    this.inoutService.setAfficheThisFilm(null);
+  }
 
 
   ngOnInit() {
-    this.afficheFilm();
+    //this.afficheFilm();
     this.afficheThisFilm();
   }
 

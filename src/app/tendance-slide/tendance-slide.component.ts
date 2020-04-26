@@ -25,7 +25,7 @@ export class TendanceSlideComponent implements OnInit {
   }
 
   clickFilmSlide(film) {
-    console.log('Dans tendanceSlide :', film);
+    //console.log('Dans tendanceSlide :', film);
     this.filmOutput.emit(film);
   }
 }

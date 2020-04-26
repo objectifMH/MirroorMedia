@@ -15,12 +15,14 @@ export class ListeRechercheFilmComponent implements OnInit {
    ];
   maRecherche = '';
 
-  constructor(private inoutService: InOutService) { }
+  constructor(private inoutService: InOutService) {
+    this.inoutService.setAfficheThisFilm(null);
+  }
 
   ngOnInit() {
-
     this.recupereInputRecherche();
     this.recupereListeFilm();
+    
   }
 
   recupereListeFilm() {
@@ -50,5 +52,9 @@ export class ListeRechercheFilmComponent implements OnInit {
     );
   }
 
+  afficheFilmRecherche(film) {
+    //console.log('set affiche this film ', film);
+    this.inoutService.setAfficheThisFilm(film);
+  }
 
 }

@@ -28,7 +28,7 @@ export class ListeTendanceSlideComponent implements OnInit {
 
   afficheFilmSelected(film) {
 
-    console.log('Dans liste Slide : ', film);
+    //console.log('Dans liste Slide : ', film);
     //this.inoutService.setAfficheFilm();
     this.inoutService.setAfficheThisFilm(film);
     
