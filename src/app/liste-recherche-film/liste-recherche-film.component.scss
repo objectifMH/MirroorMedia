@@ -7,11 +7,13 @@ h4 {
 section {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 
     img {
         min-width: 300px;
         min-height: 300px;
     }
 
+   
 
 }

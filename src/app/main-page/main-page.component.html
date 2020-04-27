@@ -1,0 +1,70 @@
+<section class="body">
+
+  <!-- bar nav head -->
+  <header>
+    <div class="headContainer">
+      <div class="gauche">
+        <img src="../assets/CoverFilm/lks.svg" style="width: 280px;
+        padding: 9px 30px;">
+      </div>
+      <div class="centre">
+
+        <input #search type="text" class="form-control" placeholder="Rechercher" id="idSearch" name="search">
+        <span class="material-icons" (click)="clickSearch(search)">
+          search
+        </span>
+      </div>
+
+      <div class="droit">
+        <ul>
+          <li #lih (click)="clickIcon(lih)" [ngClass]="{'iconSelected':isSelectedIcon.home}" data-icon='home'>
+            <a routerLink="/home" title="Retour à la home">
+              <span class="material-icons">
+                home
+              </span>
+            </a>
+
+          </li>
+          <li #lif title="Nos films favoris" (click)="clickIcon(lif)"
+            [ngClass]="{'iconSelected':isSelectedIcon.favoris}" data-icon='favoris'>
+            <span class="material-icons">
+              favorite
+            </span>
+          </li>
+          <li #lii (click)="clickIcon(lii)" [ngClass]="{'iconSelected':isSelectedIcon.inscription}"
+            data-icon="inscription">
+            <a routerLink="/inscription" title="Inscription">
+              <span class="material-icons">
+                person_add
+              </span>
+            </a>
+
+          </li>
+          <li #lic title="Son Compte" data-icon="compte" (click)="clickIcon(lic)"
+            [ngClass]="{'iconSelected':isSelectedIcon.compte}">
+            <span class="material-icons">
+              account_box
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Détaile film clic -->
+  <section class="head-card" *ngIf="isFilmAffiche">
+    <app-test-component [film]="isFilmAffiche"></app-test-component>
+  </section>
+
+  <!-- le routeur -->
+  <div class="margin-top-90">
+    <router-outlet></router-outlet>
+  </div>
+  
+
+
+
+</section>
+<footer>
+    © Tous droits réservés - 2020
+</footer>

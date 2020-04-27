@@ -1,7 +1,7 @@
 <h4> "{{maRecherche}}"</h4>
 <section>
     <div *ngFor="let film of listeFilmRecherche">
-        <app-item-slide [filmItem]="film" (clickFilm)="afficheFilmRecherche($event)"></app-item-slide>
+        <app-item-slide [filmItem]="film" (clickFilm)="afficheFilmRecherche($event)" ></app-item-slide>
     </div>
 
 </section>

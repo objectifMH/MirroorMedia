@@ -1,5 +1,8 @@
 
-<div class="" (click)="clickedFilm()" title={{filmItem.titre}}>
+<div class="">
     <p>{{filmItem.titre}}</p>
     <img src={{cheminImgSrc}}{{filmItem.cover}}>
+    <span class="material-icons" (click)="clickedFilm()" title={{filmItem.titre}}>
+        keyboard_arrow_down
+    </span>
 </div>

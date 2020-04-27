@@ -1,84 +1,23 @@
 
   <section class="container-myGrid">
     <h4>{{titre}}</h4>
+
     <section class="myGrid">
-      <div id="fils1" class="fils">
-        <a href="#fils3">
-          <span class="material-icons">
-            arrow_back_ios
-          </span>
-        </a>
+      <a (click)="clickGauche()" *ngIf="isPresentG" class="gauche">
+        <span class="material-icons">
+          arrow_back_ios
+        </span>
+      </a>
+      <div class="fils" [ngStyle]="{'left.px': styleLeft }">
         <div *ngFor="let film of films">
           <app-item-slide [filmItem]="film" (clickFilm)="clickFilmSlide($event)"></app-item-slide>
         </div>
-
-        <a href="#fils2">
-          <span class="material-icons">
-            arrow_forward_ios
-          </span>
-        </a>
       </div>
-
-      <div id="fils2" class="fils">
-        <a href="#fils1"><span class="material-icons">
-            arrow_back_ios
-          </span></a>
-        <div class="item">
-          <img src="../assets/CoverFilm/jr.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/undercover.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/dk.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/wh.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/gat.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/inter.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/joe.jpeg">
-        </div>
-
-
-        <a href="#fils3"><span class="material-icons">
-            arrow_forward_ios
-          </span></a>
-      </div>
-
-      <div id="fils3" class="fils">
-        <a href="#fils2"><span class="material-icons">
-            arrow_back_ios
-          </span></a>
-        <div class="item">
-          <img src="../assets/CoverFilm/joe.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/jr.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/undercover.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/gat.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/inter.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/dk.jpeg">
-        </div>
-        <div class="item">
-          <img src="../assets/CoverFilm/wh.jpeg">
-        </div>
-        <a href="#fils1"><span class="material-icons">
-            arrow_forward_ios
-          </span></a>
-      </div>
+      <a (click)="clickDroit()" class="droit" *ngIf="isPresentD">
+        <span class="material-icons">
+          arrow_forward_ios
+        </span>
+      </a>
+     
     </section>
 </section>

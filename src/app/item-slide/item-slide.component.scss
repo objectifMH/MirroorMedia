@@ -1,3 +1,5 @@
+@import '../../styles.scss';
+
 div {
 
     
@@ -9,10 +11,12 @@ div {
     justify-content: center;
     transition: all .2s ease-in-out;
 
-    cursor: pointer;
+    
 
     img {
-        width: 100%;
+        width: $image-item;
+        
+
     }
 
 
@@ -21,6 +25,20 @@ div {
         opacity: 0;
         transition: all .3s ease-in-out;
         margin: auto;
+    }
+
+    span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: large;
+        opacity: 0;
+        position: relative;
+        font-size: 4em;
+        top: -20px;
+
+        cursor: pointer;
     }
 
     &:hover {
@@ -34,6 +52,16 @@ div {
             border: solid 4px white;
             padding: 2px;
             margin: 2px;
+        }
+
+        span {
+            
+            opacity: 1;
+
+            &:hover {
+                transform: scale(1.25);
+                color: red;
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ export class InOutService {
     // tslint:disable-next-line:max-line-length
     {id: 3, titre: 'Rencontre Avec Joe Black', realisateur: 'Martin Brest', acteurs: ['Anthony Hopkins', 'Brad Pitt', 'Claire Forlani', 'Jake Weber', 'Marcia Gay Harden'], description: 'Une nuit, le magnat William Parrish ressent une violente douleur tandis qu\'une voix surgissant des ténèbres lui annonce sa mort prochaine. À ce moment-là, un jeune inconnu se présente à son domicile pour l\'accompagner dans son dernier voyage. Ce messager de l\'au-delà impose à Parrish de l’héberger chez lui afin de lui donner l\'occasion de partager un temps les expériences, les joies, les émotions et les drames des vivants, qui semblent lui être étrangers. En l\'espace de trois jours, Joe Black révèlera toute la famille Parrish à elle-même.', cover: '3.jpg'},
     {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
+    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: ['Tom cruise'], description: '', cover: '5.jpg'},
     {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
 
     {id: 7, titre: 'Will hunting', realisateur: '', acteurs: [], description: '', cover: '7.jpg'},

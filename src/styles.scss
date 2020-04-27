@@ -2,7 +2,10 @@
 
 html, body { 
     height: 100%; 
-    background:  black;
+    background: black;
     background-color: black;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: black;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: black !important;}
+
+$image-item: calc(  (100vw / 7) );
+$slide-item: calc( 2 * $image-item );
