@@ -15,6 +15,8 @@ export class ListeRechercheFilmComponent implements OnInit {
    ];
   maRecherche = '';
 
+  isFilmAffiche: Film = null;
+
   constructor(private inoutService: InOutService) {
     this.inoutService.setAfficheThisFilm(null);
   }
@@ -54,7 +56,13 @@ export class ListeRechercheFilmComponent implements OnInit {
 
   afficheFilmRecherche(film) {
     //console.log('set affiche this film ', film);
-    this.inoutService.setAfficheThisFilm(film);
+    //this.inoutService.setAfficheThisFilm(film);
+    this.isFilmAffiche = film;
+  }
+
+  closeAfficheFilm() {
+    this.isFilmAffiche = null;
+    console.log("jeteferme");
   }
 
 }

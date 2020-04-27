@@ -21,3 +21,6 @@
      
     </section>
 </section>
+<section class="head-card" *ngIf="isFilmAffiche">
+  <app-test-component [film]="isFilmAffiche" (isCloseAffiche)="closeAfficheFilm($event)"></app-test-component>
+</section>

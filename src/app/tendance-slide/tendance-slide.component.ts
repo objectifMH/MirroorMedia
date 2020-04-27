@@ -20,6 +20,8 @@ export class TendanceSlideComponent implements OnInit {
   isPresentG = true;
   isPresentD = true;
 
+  isFilmAffiche: Film = null;
+
   constructor(private inoutService: InOutService) { }
 
   ngOnInit() {
@@ -30,7 +32,15 @@ export class TendanceSlideComponent implements OnInit {
 
   clickFilmSlide(film) {
     // console.log('Dans tendanceSlide :', film);
-    this.filmOutput.emit(film);
+    //this.filmOutput.emit(film);
+
+    this.isFilmAffiche = film;
+    console.log("> Slide ", film);
+
+  }
+
+  closeAfficheFilm(ev) {
+    this.isFilmAffiche = null;
   }
 
   clickDroit() {
