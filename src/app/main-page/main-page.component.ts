@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';

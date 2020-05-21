@@ -102,15 +102,17 @@ header {
                     // input Search #idSearch::placeholder 
                     input {
                         border-radius: 0;
-                        background: black;
+                        background: $back-main;
 
-                        color: white; 
+                        color: $color; 
+                        border: 1px solid $back-main;
                     
                         &::placeholder {
 
-                            color: #d3d3d3; 
+                            color: $color; 
                             font-weight: lighter;
                             font-size: normal;
+                            background: $back-main;
                           }
                     }
 
@@ -224,7 +226,7 @@ header {
 .footer {
     height: 100px;
     background: $back;
-    width: 100%;
+    //width: 100%;
     position: absolute;
     left: 0;
     bottom: 0;

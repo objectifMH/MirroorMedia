@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Film } from 'src/film';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
+import { TmdbService } from '../services/tmdb.service';
 
 @Component({
   selector: 'app-tendance-slide',
@@ -22,11 +23,12 @@ export class TendanceSlideComponent implements OnInit {
 
   isFilmAffiche: Film = null;
 
-  constructor(private inoutService: InOutService) { }
+  constructor(private inoutService: InOutService, private tmdbService: TmdbService) { }
 
   ngOnInit() {
-    this.films = this.inoutService.listeFilmBD;
-
+    //this.films = this.inoutService.listeFilmBD;
+    console.log('Dans ngOnInit');
+    this.onGetDiscoversFilms();
     this.isPresentG = false;
   }
 
@@ -74,4 +76,23 @@ export class TendanceSlideComponent implements OnInit {
       this.isPresentG = false;
     }
   }
+
+
+  onGetDiscoversFilms() {
+    console.log("dans on discover");
+    this.tmdbService.getDiscover().subscribe(
+        data => {
+         /*  this.films = data;
+          if (data["_embedded"].villes[0]) {
+            this.villeCourante = data["_embedded"].villes[0];
+            this.onParcellesByVille(this.villeCourante);
+          } */
+
+          console.log(data);
+
+        },
+        err => {
+          console.log(err);
+        });
+    }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
+import { TmdbService } from '../services/tmdb.service';
 
 @Component({
   selector: 'app-liste-tendance-slide',
@@ -7,8 +8,9 @@ import { InOutService } from '../in-out.service';
   styleUrls: ['./liste-tendance-slide.component.scss']
 })
 export class ListeTendanceSlideComponent implements OnInit {
+  films: any;
 
-  constructor(private inoutService: InOutService) { }
+  constructor(private inoutService: InOutService, private tmdb: TmdbService) { }
 
   @Output()
   afficheFilm = new EventEmitter();
@@ -18,6 +20,8 @@ export class ListeTendanceSlideComponent implements OnInit {
   titre3 = 'Films';
 
   ngOnInit() {
+    this.onGetDiscoversFilms();
+
   }
 
   /* detailFilm() {
@@ -33,4 +37,17 @@ export class ListeTendanceSlideComponent implements OnInit {
     this.inoutService.setAfficheThisFilm(film);
     
   }
+
+  onGetDiscoversFilms() {
+    console.log('dans Liste Tendance Slide');
+    this.tmdb.getDiscover().subscribe(
+        data => {
+           this.films = data.results;
+           console.log(data);
+
+        },
+        err => {
+          console.log(err);
+        });
+    }
 }

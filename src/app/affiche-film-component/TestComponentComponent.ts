@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Film } from 'src/film';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
 @Component({
   selector: 'app-test-component',
   templateUrl: './test-component.component.html',
