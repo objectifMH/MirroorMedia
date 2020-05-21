@@ -4,8 +4,9 @@
   <header>
     <div class="headContainer">
       <div class="gauche">
-        <img src="../assets/CoverFilm/lks.svg" style="width: 280px;
-        padding: 9px 30px;">
+        <div class="logo">
+          8Mirr∞r
+        </div>
       </div>
       <div class="centre">
 
@@ -55,8 +56,36 @@
   <div class="margin-top-90">
     <router-outlet></router-outlet>
   </div>
-  
+
 </section>
 <footer>
-    © Tous droits réservés - 2020
+  <div class="position-relative footer ">
+
+    <ul>
+        <li class="nav-item active mx-2 ">
+            <a class="nav-link link-logo" routerLink='/home' > <span class="logo-bottom">8Mirr∞r</span> </a>
+
+        </li>
+        <li>
+            <a href='https://www.themoviedb.org/?language=fr-FR' > <img class="card-img-top" src="../../assets/tmdb.svg" alt="The movie DB" />
+            </a>
+
+        </li>
+        <li>Contact Us
+            <div class="reseaux">
+                <a href='https://www.linkedin.com/in/m-hatchi-bb4b49156/' >
+                  <fa-icon class="fa-git" [icon]="faLinkedinIn"></fa-icon>
+                </a>
+                <a href='https://github.com/objectifMH/reactReduxMovieDB' >
+                  <fa-icon [icon]="faGithub"></fa-icon>
+                </a>
+
+            </div>
+        </li>
+
+    </ul>
+    <div class="footer-foot">
+        <span>©2020 Copyright.fr. All right reserved.</span>
+    </div>
+</div>
 </footer>

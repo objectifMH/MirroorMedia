@@ -7,8 +7,10 @@
     margin-top: 40px;
 
     h4 {
-        color: white; 
-        font-weight: normal;
+        color: $color; 
+
+        text-shadow: $shadow 1px 1px;
+        font-weight: large;
         margin: 5px 20px;
     }
 
