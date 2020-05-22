@@ -33,7 +33,7 @@ export class MainPageComponent implements OnInit {
         }
 
     }
-    console.log(this.isSelectedIcon);
+    //console.log(this.isSelectedIcon);
   }
 
   afficheThisFilm() {

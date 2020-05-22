@@ -14,6 +14,7 @@ import { ListeTendanceSlideComponent } from './liste-tendance-slide/liste-tendan
 import { ItemSlideComponent } from './item-slide/item-slide.component';
 import { ListeRechercheFilmComponent } from './liste-recherche-film/liste-recherche-film.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MainPageComponent } from './main-page/main-page.component';
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    MatDividerModule
+    MatDividerModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Film } from 'src/film';
 import { InOutService } from '../in-out.service';
+import { MovieService } from '../service/movie.service';
 
 @Component({
   selector: 'app-tendance-slide',
@@ -22,10 +23,11 @@ export class TendanceSlideComponent implements OnInit {
 
   isFilmAffiche: Film = null;
 
-  constructor(private inoutService: InOutService) { }
+  constructor(private inoutService: InOutService, private filmService: MovieService) { }
 
   ngOnInit() {
-    this.films = this.inoutService.listeFilmBD;
+    //this.films = this.inoutService.listeFilmBD;
+    this.getFilms();
 
     this.isPresentG = false;
   }
@@ -35,7 +37,7 @@ export class TendanceSlideComponent implements OnInit {
     //this.filmOutput.emit(film);
 
     this.isFilmAffiche = film;
-    console.log("> Slide ", film);
+    //console.log("> Slide ", film);
 
   }
 
@@ -47,31 +49,59 @@ export class TendanceSlideComponent implements OnInit {
     const tailleImage = window.innerWidth / 7;
     this.isPresentD = true;
     this.isPresentG = true;
-    if ( this.styleLeft >  ( -window.innerWidth)) {
-    this.styleLeft -= tailleImage;
+    if (this.styleLeft > (-window.innerWidth)) {
+      this.styleLeft -= tailleImage;
     } else {
       this.isPresentD = false;
     }
     console.log(this.styleLeft);
 
-    if ( Math.abs(this.styleLeft) >= Math.abs(window.innerWidth) )   {
+    if (Math.abs(this.styleLeft) >= Math.abs(window.innerWidth)) {
       this.isPresentD = false;
       console.log("supprime toi a droit");
     }
 
-    console.log( Math.abs(this.styleLeft) + '  ' + Math.abs(window.innerWidth) );
+    console.log(Math.abs(this.styleLeft) + '  ' + Math.abs(window.innerWidth));
   }
 
   clickGauche() {
     const tailleImage = window.innerWidth / 7;
     this.isPresentG = true;
     this.isPresentD = true;
-    if ( this.styleLeft < 0) {
+    if (this.styleLeft < 0) {
       this.styleLeft += tailleImage;
     }
 
-    if ( this.styleLeft >= 0 && this.styleLeft < tailleImage)   {
+    if (this.styleLeft >= 0 && this.styleLeft < tailleImage) {
       this.isPresentG = false;
     }
+  }
+
+  getFilms() {
+    this.filmService.getFilms().subscribe(
+      film => {
+        if (film['_embedded']['movies']) {
+          film['_embedded']['movies'].forEach(movies => {
+            let film: Film = {id: 0, titre: 'Gattaca', realisateur: '', acteurs: [], description: '', cover: '../../assets/CoverFilm/no.jpg', date:''};
+            console.log(movies, film, movies.id);
+            film.id = movies.id;
+            film.titre = movies.title;
+            film.date = movies.date; 
+            
+            this.films.push(film);
+          
+          
+        });
+      }
+
+    console.log("%s %O", "Mes films : ", this.films);
+  },
+  err => {
+  console.log("%s %O", "Pas de films ", err);
+
+  //this.errorMessage = err.error.message;
+
+}
+    )
   }
 }

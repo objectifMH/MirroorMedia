@@ -78,12 +78,12 @@ export class InOutService {
 
   public setAfficheThisFilm(film) {
     this.filmAAfficher.next(film);
-    console.log('Dans le service : on fixe le setAfficheThisFilm' , film);
+    //console.log('Dans le service : on fixe le setAfficheThisFilm' , film);
 
   }
 
   public getAfficheThisFilm() {
-    console.log('Dans le service : on return le getAfficheThisFilm' , this.filmAAfficher);
+    //console.log('Dans le service : on return le getAfficheThisFilm' , this.filmAAfficher);
     return this.filmAAfficher.asObservable();
   }
 
