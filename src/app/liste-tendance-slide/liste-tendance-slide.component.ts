@@ -9,6 +9,7 @@ import { TmdbService } from '../services/tmdb.service';
 })
 export class ListeTendanceSlideComponent implements OnInit {
   films: any;
+  filmsOther: any;
   tvs: any;
 
   constructor(private inoutService: InOutService, private tmdb: TmdbService) { }
@@ -18,7 +19,7 @@ export class ListeTendanceSlideComponent implements OnInit {
 
   titre1 = 'Most popular movies';
   titre2 = 'Most popular tv Show';
-  titre3 = 'Films';
+  titre3 = 'Movies';
 
   ngOnInit() {
     this.onGetDiscoversFilms();
@@ -44,7 +45,8 @@ export class ListeTendanceSlideComponent implements OnInit {
     this.tmdb.getDiscoverFilms().subscribe(
         data => {
            this.films = data['results'];
-           console.log('films dans liste tendance Slide ' , this.films , data);
+           this.filmsOther = this.films.slice(6, this.films.length);
+           console.log('films dans liste tendance Slide ' , this.films , this.filmsOther);
         },
         err => {
           console.log(err);
