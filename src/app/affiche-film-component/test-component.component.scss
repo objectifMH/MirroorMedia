@@ -51,6 +51,11 @@ section {
         margin-top: 20px;
         padding: 15px 20px;
       }
+
+      .gauche {
+        display: flex;
+        align-items: center;
+      }
     }
 
 
@@ -63,4 +68,10 @@ section {
     
   }
   
+  .acteur {
+    max-height: 100px !important;
+    border-radius: 15px !important;
+    padding: 0 !important;
+    
+  }
   

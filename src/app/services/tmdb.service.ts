@@ -19,8 +19,10 @@ export class TmdbService {
     return this.httpClient.get(this.urlBase + this.discoverTv);
   }
   //movie/{movie_id}/credits?api_key=<<api_key>> https://api.themoviedb.org/3/movie/603/credits?api_key=369db2052a84d1a49d133d25a3983cbd
-  public getActeursByFilm(id) {
-    return this.httpClient.get(this.urlBase + 'movie/' + id + '/credits?api_key=369db2052a84d1a49d133d25a3983cbd');
+  public getActeursByFilm(film) {
+    console.log(film);
+    const pref = film.title !== undefined ? 'movie' : 'tv';
+    return this.httpClient.get(this.urlBase + pref + '/' + film.id + '/credits?api_key=369db2052a84d1a49d133d25a3983cbd');
   }
 
 
