@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +17,7 @@ import { ListeTendanceSlideComponent } from './liste-tendance-slide/liste-tendan
 import { ItemSlideComponent } from './item-slide/item-slide.component';
 import { ListeRechercheFilmComponent } from './liste-recherche-film/liste-recherche-film.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import { MainPageComponent } from './main-page/main-page.component';
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
-    MatDividerModule
+    MatDividerModule,
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

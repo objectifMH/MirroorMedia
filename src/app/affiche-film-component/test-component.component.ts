@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Film } from 'src/film';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
 
 @Component({
   selector: 'app-test-component',

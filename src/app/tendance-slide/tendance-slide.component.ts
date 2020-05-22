@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Film } from 'src/film';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
+import { TmdbService } from '../services/tmdb.service';
 
 @Component({
   selector: 'app-tendance-slide',
@@ -12,9 +13,11 @@ export class TendanceSlideComponent implements OnInit {
   @Input()
   titre: string;
 
+
   @Output()
   filmOutput = new EventEmitter();
 
+  @Input()
   films: Film[] = [];
   styleLeft = 0;
   isPresentG = true;
@@ -22,11 +25,11 @@ export class TendanceSlideComponent implements OnInit {
 
   isFilmAffiche: Film = null;
 
-  constructor(private inoutService: InOutService) { }
+  constructor(private inoutService: InOutService, private tmdbService: TmdbService) { }
 
   ngOnInit() {
-    this.films = this.inoutService.listeFilmBD;
-
+    //this.films = this.inoutService.listeFilmBD;
+    console.log('Dans ngOnInit');
     this.isPresentG = false;
   }
 
@@ -74,4 +77,5 @@ export class TendanceSlideComponent implements OnInit {
       this.isPresentG = false;
     }
   }
+
 }

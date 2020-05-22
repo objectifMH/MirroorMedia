@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
+import { TmdbService } from '../services/tmdb.service';
 
 @Component({
   selector: 'app-liste-tendance-slide',
@@ -7,17 +8,22 @@ import { InOutService } from '../in-out.service';
   styleUrls: ['./liste-tendance-slide.component.scss']
 })
 export class ListeTendanceSlideComponent implements OnInit {
+  films: any;
+  tvs: any;
 
-  constructor(private inoutService: InOutService) { }
+  constructor(private inoutService: InOutService, private tmdb: TmdbService) { }
 
   @Output()
   afficheFilm = new EventEmitter();
 
-  titre1 = 'Tendance Actuelle';
-  titre2 = 'Nouveautés';
+  titre1 = 'Most popular movies';
+  titre2 = 'Most popular tv Show';
   titre3 = 'Films';
 
   ngOnInit() {
+    this.onGetDiscoversFilms();
+    this.onGetDiscoversTvs();
+
   }
 
   /* detailFilm() {
@@ -33,4 +39,26 @@ export class ListeTendanceSlideComponent implements OnInit {
     this.inoutService.setAfficheThisFilm(film);
     
   }
+
+  onGetDiscoversFilms() {
+    this.tmdb.getDiscoverFilms().subscribe(
+        data => {
+           this.films = data['results'];
+           console.log('films dans liste tendance Slide ' , this.films , data);
+        },
+        err => {
+          console.log(err);
+        });
+    }
+
+    onGetDiscoversTvs() {
+      this.tmdb.getDiscoverTvs().subscribe(
+          data => {
+             this.tvs = data['results'];
+             console.log('tvs shows dans liste tendance Slide ' , this.tvs, data);
+          },
+          err => {
+            console.log(err);
+          });
+      }
 }
