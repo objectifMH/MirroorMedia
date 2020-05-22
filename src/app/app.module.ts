@@ -41,10 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     MatDividerModule,
-<<<<<<< HEAD
-=======
     FontAwesomeModule,
->>>>>>> bfa0b220547b893569ce7d56ef990de7dba761ee
     HttpClientModule
   ],
   providers: [],
