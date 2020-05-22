@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { zipCodeValidator, mdpValidator } from '../validators';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
 
 @Component({
   selector: 'app-form-validation',

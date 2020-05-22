@@ -1,11 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+
+
+$back: gold;  //#232323
+$back-main: #f5e06e;
+$color : #56c3bd;
+$shadow : rgba(0,0,0,0.75);
+
 html, body { 
     height: 100%; 
-    background: black;
-    background-color: black;
+    //background: black;
+    //background-color: black;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: black !important;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background: $back-main !important;}
 
 $image-item: calc(  (100vw / 7) );
 $slide-item: calc( 2 * $image-item );
+

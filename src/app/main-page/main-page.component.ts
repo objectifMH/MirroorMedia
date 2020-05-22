@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { InOutService } from '../in-out.service';
+import { InOutService } from '../services/in-out.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-main-page',
@@ -9,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
+
+  faLinkedinIn = faLinkedinIn;
+  faGithub = faGithub;
 
   title = 'NetFilm';
   isFilmAffiche;

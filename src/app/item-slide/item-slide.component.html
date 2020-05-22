@@ -1,8 +1,8 @@
 
 <div class="">
-    <p>{{filmItem.titre}}</p>
-    <img src={{cheminImgSrc}}{{filmItem.cover}}>
-    <span class="material-icons" (click)="clickedFilm()" title={{filmItem.titre}}>
+    <p><span>{{filmItem.title ? filmItem.title : filmItem.name}}</span></p>
+    <img src={{cheminImgSrc}}{{filmItem.poster_path}}>
+    <span class="material-icons" (click)="clickedFilm()" title={{filmItem.name}}>
         keyboard_arrow_down
     </span>
 </div>

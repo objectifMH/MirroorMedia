@@ -1,7 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Film } from 'src/film';
+<<<<<<< HEAD
 import { InOutService } from '../in-out.service';
 import { MovieService } from '../service/movie.service';
+=======
+import { InOutService } from '../services/in-out.service';
+import { TmdbService } from '../services/tmdb.service';
+>>>>>>> bfa0b220547b893569ce7d56ef990de7dba761ee
 
 @Component({
   selector: 'app-tendance-slide',
@@ -13,9 +18,11 @@ export class TendanceSlideComponent implements OnInit {
   @Input()
   titre: string;
 
+
   @Output()
   filmOutput = new EventEmitter();
 
+  @Input()
   films: Film[] = [];
   styleLeft = 0;
   isPresentG = true;
@@ -23,12 +30,20 @@ export class TendanceSlideComponent implements OnInit {
 
   isFilmAffiche: Film = null;
 
+<<<<<<< HEAD
   constructor(private inoutService: InOutService, private filmService: MovieService) { }
 
   ngOnInit() {
     //this.films = this.inoutService.listeFilmBD;
     this.getFilms();
 
+=======
+  constructor(private inoutService: InOutService, private tmdbService: TmdbService) { }
+
+  ngOnInit() {
+    //this.films = this.inoutService.listeFilmBD;
+    console.log('Dans ngOnInit');
+>>>>>>> bfa0b220547b893569ce7d56ef990de7dba761ee
     this.isPresentG = false;
   }
 
@@ -77,6 +92,7 @@ export class TendanceSlideComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   getFilms() {
     this.filmService.getFilms().subscribe(
       film => {
@@ -104,4 +120,6 @@ export class TendanceSlideComponent implements OnInit {
 }
     )
   }
+=======
+>>>>>>> bfa0b220547b893569ce7d56ef990de7dba761ee
 }

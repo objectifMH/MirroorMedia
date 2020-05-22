@@ -11,12 +11,12 @@ export class ItemSlideComponent implements OnInit {
   //film: Film = {id: 0, titre: 'Gattaca', realisateur: '', acteurs: [], description: '', cover: '../../assets/CoverFilm/gat.jpeg'};
 
   @Input()
-  filmItem: Film;
+  filmItem: any;
 
   @Output()
   clickFilm = new EventEmitter();
 
-  cheminImgSrc = '../../assets/CoverFilm/';
+  cheminImgSrc = "https://image.tmdb.org/t/p/original/"; //'../../assets/CoverFilm/';
 
   constructor() { }
 

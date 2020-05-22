@@ -2,7 +2,7 @@
 
 .body {
     //background-color: black;
-    //height: 100vh;
+    min-height: 100%;
 }
 
 
@@ -42,7 +42,9 @@ header {
     width: 100%;
     height: 70px;
     top: 0;
+    
     background:#232323;
+    background: $back;
 
     //border-bottom: 1px solid #9a9494b3;
     box-shadow: 0 4px 2px -2px gray;
@@ -57,6 +59,20 @@ header {
         a { 
             color: white; 
             text-decoration: none;
+        }
+
+        .gauche {
+            .logo {
+                            
+                
+                //color: gold;
+                color: $color;
+
+                font-weight: bolder;
+                font-size: xx-large;
+                letter-spacing: 1px;
+                text-shadow:$shadow 1px 1px;
+            }
         }
 
         div {
@@ -86,15 +102,17 @@ header {
                     // input Search #idSearch::placeholder 
                     input {
                         border-radius: 0;
-                        background: black;
+                        background: $back-main;
 
-                        color: white; 
+                        color: $color; 
+                        border: 1px solid $back-main;
                     
                         &::placeholder {
 
-                            color: #d3d3d3; 
+                            color: $color; 
                             font-weight: lighter;
                             font-size: normal;
+                            background: $back-main;
                           }
                     }
 
@@ -178,15 +196,24 @@ header {
     
 }
 
-a:active { color: #25769f    !important; } 
-li:hover { border-bottom: 3px solid white !important;}
+.droit {
+
+    a:active { color: $color    !important; } 
+    li:hover { 
+        //border : 2px solid $color !important;
+        border-bottom: 3px solid white !important;
+    
+    }
+}
 
 .margin-top-90 {
     margin-top: 90px;
 }
 
-footer {
-    display: none;
+
+// Footer // 
+
+/* footer {
     color: #d3d3d3; 
     padding: 20px;
     position: relative;
@@ -194,4 +221,86 @@ footer {
     font-size: smaller;
     width: 100%;
     background:#232323;
+} */
+
+.footer {
+    height: 100px;
+    background: $back;
+    //width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        flex: 1;
+        justify-content: space-around;
+        align-items: center;
+
+
+        li {
+            padding: 15px;
+            color: $color;
+            font-size: normal;
+
+            
+
+            .logo-bottom {
+
+                text-shadow: $shadow 1px 1px;
+                color: $color;
+                font-weight: bolder;
+                font-size: x-large;
+
+
+            }
+
+            img {
+                width: 50px;
+            }
+
+            .reseaux {
+                 .ng-fa-icon {
+                    font-size: 24px;
+                    padding: 5px;
+                    color: $color;
+                    //transform: scale(1.59);
+                    
+                
+                    transition: all .2s ease-in-out;
+                
+                    &:hover {
+                        color: red;
+                        transform: scale(1.29);
+                        text-shadow: $shadow 1px 1px;
+                        //font-size: 26px;
+                
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    .footer-foot {
+        //position: absolute;
+        font-size: small;
+        bottom: 15px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        align-items: center;
+        margin: 5px;
+        color: $color;
+    }
+
 }
+
