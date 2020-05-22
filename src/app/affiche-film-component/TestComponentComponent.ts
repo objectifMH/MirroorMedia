@@ -62,6 +62,7 @@ export class TestComponentComponent implements OnInit {
 
 
 
+
          //console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull, ' director > ', this.directorName);
       },
       err => {
