@@ -41,7 +41,7 @@ export class TestComponentComponent implements OnInit {
          this.crewsFull = data['crew'];
 
          this.acteurs = this.acteursFull.slice(0, 8);
-         console.log(this.acteurs);
+         console.log(this.acteurs );
 
 
 
