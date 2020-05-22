@@ -41,12 +41,12 @@ export class TestComponentComponent implements OnInit {
          this.crewsFull = data['crew'];
 
          this.acteurs = this.acteursFull.slice(0, 8);
-         console.log(this.acteurs);
+         console.log(this.acteurs );
 
 
 
 
-         console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crews);
+         console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull);
       },
       err => {
         console.log(err);
