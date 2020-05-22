@@ -18,12 +18,17 @@ export class TestComponentComponent implements OnInit {
   acteursFull: any;
   crewsFull: any;
   acteurs: any;
+  director: any;
 
   urlBackDrop = 'https://image.tmdb.org/t/p/original/';
 
   cheminImgSrc = '../../assets/CoverFilm/AfficheFilm/';
   constructor(private inoutService: InOutService, private tmdb: TmdbService) { }
   ngOnInit() {
+    this.getUtilisateurs();
+  }
+
+  ngAfterViewChecked() {
     this.getUtilisateurs();
   }
 
@@ -42,11 +47,12 @@ export class TestComponentComponent implements OnInit {
 
          this.acteurs = this.acteursFull.slice(0, 8);
          console.log(this.acteurs );
+         this.director = this.crewsFull.filter( crew => crew.job === "Director");
 
 
 
 
-         console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull);
+         console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull, " director > ", this.director);
       },
       err => {
         console.log(err);

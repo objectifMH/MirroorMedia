@@ -51,7 +51,7 @@ export class TendanceSlideComponent implements OnInit {
     this.isPresentD = true;
     this.isPresentG = true;
     if ( this.styleLeft >  ( -window.innerWidth)) {
-    this.styleLeft -= tailleImage;
+    this.styleLeft -= (tailleImage + 10);
     } else {
       this.isPresentD = false;
     }
@@ -70,7 +70,7 @@ export class TendanceSlideComponent implements OnInit {
     this.isPresentG = true;
     this.isPresentD = true;
     if ( this.styleLeft < 0) {
-      this.styleLeft += tailleImage;
+      this.styleLeft += (tailleImage + 10);
     }
 
     if ( this.styleLeft >= 0 && this.styleLeft < tailleImage)   {

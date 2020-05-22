@@ -18,7 +18,7 @@ export class TmdbService {
   public getDiscoverTvs() {
     return this.httpClient.get(this.urlBase + this.discoverTv);
   }
-  //movie/{movie_id}/credits?api_key=<<api_key>>
+  //movie/{movie_id}/credits?api_key=<<api_key>> https://api.themoviedb.org/3/movie/603/credits?api_key=369db2052a84d1a49d133d25a3983cbd
   public getActeursByFilm(id) {
     return this.httpClient.get(this.urlBase + 'movie/' + id + '/credits?api_key=369db2052a84d1a49d133d25a3983cbd');
   }
