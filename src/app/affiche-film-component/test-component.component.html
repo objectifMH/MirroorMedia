@@ -1,6 +1,6 @@
-<section>
+<section [ngStyle]="{'background-image': 'url(' + this.urlBackDrop+film.backdrop_path + ')'}">
   <div class="haut">
-    <h4>{{film.titre}}</h4>
+    <h4>{{film.title ? film.title : film.name }}</h4>
     <i class="material-icons" (click)="closeAffiche()" title="Fermer cette affiche">close</i>
   </div>
   <div class="bas">
@@ -17,13 +17,17 @@
         <div class="">
           <h4 class="">Acteur:</h4>
           <p>
-            <span *ngFor="let acteur of film.acteurs">{{acteur }} </span>
+            <span *ngFor="let acteur of this.acteurs; let i = index" class="btn btn-info m-1 mt-3">
+              <span *ngIf="i < 8">
+                {{acteur.name }}
+              </span> 
+            </span>
           </p>
         </div>
 
         <div class="">
-          <h4 class="">Description:</h4>
-          <p>{{film.description}}</p>
+          <h4 class="">Synopsis:</h4>
+          <p>{{film.overview}}</p>
         </div>
 
       </div>

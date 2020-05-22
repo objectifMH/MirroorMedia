@@ -13,9 +13,11 @@ export class TendanceSlideComponent implements OnInit {
   @Input()
   titre: string;
 
+
   @Output()
   filmOutput = new EventEmitter();
 
+  @Input()
   films: Film[] = [];
   styleLeft = 0;
   isPresentG = true;
@@ -28,7 +30,6 @@ export class TendanceSlideComponent implements OnInit {
   ngOnInit() {
     //this.films = this.inoutService.listeFilmBD;
     console.log('Dans ngOnInit');
-    this.onGetDiscoversFilms();
     this.isPresentG = false;
   }
 
@@ -77,22 +78,4 @@ export class TendanceSlideComponent implements OnInit {
     }
   }
 
-
-  onGetDiscoversFilms() {
-    console.log("dans on discover");
-    this.tmdbService.getDiscover().subscribe(
-        data => {
-         /*  this.films = data;
-          if (data["_embedded"].villes[0]) {
-            this.villeCourante = data["_embedded"].villes[0];
-            this.onParcellesByVille(this.villeCourante);
-          } */
-
-          console.log(data);
-
-        },
-        err => {
-          console.log(err);
-        });
-    }
 }

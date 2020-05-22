@@ -21,16 +21,36 @@ div {
 
 
     p {
+        top: 15%;
+        position: absolute;
         color: $color;
-        font-size: 0;
+        font-size: large;
         font-weight: bolder;
-        //display: none;
 
         //text-shadow: $shadow 1px 1px;
         opacity: 0;
         transition: all .3s ease-in-out;
-        margin: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
         text-align: center;
+
+        padding: 15px;
+
+        span {
+            color: $color;
+            font-size: x-large;
+            font-weight: bolder;
+
+            text-shadow: $shadow 1px 1px;
+            opacity: 1;
+            transition: all .3s ease-in-out;
+            border: 3px solid $color;
+            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+        }
     }
 
     span {
@@ -73,7 +93,7 @@ div {
 
             &:hover {
                 transform: scale(1.15);
-                color: #25769f; //red;
+                color: $back-main ;// #25769f; //red;
 
             }
         }

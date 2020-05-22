@@ -6,13 +6,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TmdbService {
 
-  discover = 'https://api.themoviedb.org/3/discover/movie?api_key=369db2052a84d1a49d133d25a3983cbd&language=en-US&sort_by=popularity.desc';
+  urlBase =  'https://api.themoviedb.org/3/';
+  discoverFilms = 'discover/movie?api_key=369db2052a84d1a49d133d25a3983cbd&language=en-US&sort_by=popularity.desc';
+  discoverTv = 'discover/tv?api_key=369db2052a84d1a49d133d25a3983cbd&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false';
+  
   constructor(private httpClient: HttpClient) { }
 
-  public getDiscover() {
-    console.log('Get Discover est appelé');
-    return this.httpClient.get(this.discover);
+  public getDiscoverFilms() {
+    return this.httpClient.get(this.urlBase + this.discoverFilms);
   }
+  public getDiscoverTvs() {
+    return this.httpClient.get(this.urlBase + this.discoverTv);
+  }
+  //movie/{movie_id}/credits?api_key=<<api_key>>
+  public getActeursByFilm(id) {
+    return this.httpClient.get(this.urlBase + 'movie/' + id + '/credits?api_key=369db2052a84d1a49d133d25a3983cbd');
+  }
+
 
 
 }
