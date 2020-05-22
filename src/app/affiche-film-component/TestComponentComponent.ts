@@ -15,8 +15,9 @@ export class TestComponentComponent implements OnInit {
   @Output()
   isCloseAffiche = new EventEmitter();
 
+  acteursFull: any;
+  crewsFull: any;
   acteurs: any;
-  crews: any;
 
   urlBackDrop = 'https://image.tmdb.org/t/p/original/';
 
@@ -36,8 +37,14 @@ export class TestComponentComponent implements OnInit {
   getUtilisateurs() {
     this.tmdb.getActeursByFilm(this.film.id).subscribe(
       data => {
-         this.acteurs = data['cast']//[0]['cast'];
-         this.crews = data['crew']//[0]['crew'];
+         this.acteursFull = data['cast'];
+         this.crewsFull = data['crew'];
+
+         this.acteurs = this.acteursFull.slice(0, 8);
+         console.log(this.acteurs);
+
+
+
 
          console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crews);
       },

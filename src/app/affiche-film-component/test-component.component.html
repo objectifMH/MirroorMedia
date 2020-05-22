@@ -5,22 +5,22 @@
   </div>
   <div class="bas">
     <div class="gauche">
-      <img mat-card-image src={{cheminImgSrc}}{{film.cover}} alt={{film.titre}}>
+      <img mat-card-image src={{this.urlBackDrop}}{{film.poster_path}} alt={{film.title}}>
     </div>
     <div class="droit">
       <div class="">
 
         <div class="">
-          <h4 class="">Réalisateur:</h4>
+          <h4 class="">Productor:</h4>
           <p>{{film.realisateur}}</p>
         </div>
         <div class="">
-          <h4 class="">Acteur:</h4>
+          <h4 class="">Actors:</h4>
           <p>
             <span *ngFor="let acteur of this.acteurs; let i = index" class="btn btn-info m-1 mt-3">
-              <span *ngIf="i < 8">
+              
                 {{acteur.name }}
-              </span> 
+              
             </span>
           </p>
         </div>
