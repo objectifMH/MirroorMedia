@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Film } from 'src/film';
 import { InOutService } from '../services/in-out.service';
 import { TmdbService } from '../services/tmdb.service';
+
 @Component({
   selector: 'app-test-component',
   templateUrl: './test-component.component.html',
@@ -15,22 +16,26 @@ export class TestComponentComponent implements OnInit {
   @Output()
   isCloseAffiche = new EventEmitter();
 
-  acteursFull:  any = [];
-  crewsFull: any = [];
-  acteurs: any = [];
-  director: any = [];
+  acteursFull: any;
+  crewsFull: any;
+  acteurs: any;
+  directorName: any;
+  director: any;
+  plus = true;
 
-  urlBackDrop = 'https://image.tmdb.org/t/p/original/';
+  urlBackDrop = 'https://image.tmdb.org/t/p/original';
+  urlImgActeur = '';
 
   cheminImgSrc = '../../assets/CoverFilm/AfficheFilm/';
-  constructor(private inoutService: InOutService, private tmdb: TmdbService) { }
+  constructor(private inoutService: InOutService, private tmdb: TmdbService) { 
+  }
+
   ngOnInit() {
     this.getUtilisateurs();
   }
 
-  ngAfterViewChecked() {
-    //this.getUtilisateurs();
-    console.log("coucou");
+  ngOnChanges() {
+    this.getUtilisateurs();
   }
 
   closeAffiche() {
@@ -41,22 +46,38 @@ export class TestComponentComponent implements OnInit {
   }
 
   getUtilisateurs() {
-    this.tmdb.getActeursByFilm(this.film.id).subscribe(
+    //console.log(this.film);
+    this.tmdb.getActeursByFilm(this.film).subscribe(
       data => {
-         this.acteursFull = data['cast'];
-         this.crewsFull = data['crew'];
+        console.log(data);
+        this.acteursFull = data['cast'];
+        this.crewsFull = data['crew'];
 
-         this.acteurs = this.acteursFull.slice(0, 8);
-         console.log(this.acteurs );
-         this.director = this.crewsFull.filter( crew => crew.job === "Director");
+        this.acteurs = this.acteursFull.slice(0, 8);
+        //console.log(this.acteurs );
+        this.director  = this.crewsFull.filter( crew => crew.job === 'Director'); 
+        //console.log(data['crew'].length);
+        this.directorName = data['crew'].length !== 0 ? this.director[0].name : false;
+        //console.log('director :: > ' + this.directorName);
 
 
 
 
-         console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull, " director > ", this.director);
+
+         //console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull, ' director > ', this.directorName);
       },
       err => {
         console.log(err);
       });
   }
+
+  plusMoinsActeurs() {
+    if ( this.plus === true) {
+      this.acteurs = this.acteursFull;
+    } else {
+      this.acteurs = this.acteursFull.slice(0, 8);
+    }
+    this.plus = !this.plus;
+  }
+
 }

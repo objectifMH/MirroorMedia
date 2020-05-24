@@ -24,7 +24,6 @@ export class ItemSlideComponent implements OnInit {
   }
 
   clickedFilm() {
-    console.log(this.filmItem);
     this.clickFilm.emit(this.filmItem);
   }
 

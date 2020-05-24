@@ -29,7 +29,7 @@ export class TendanceSlideComponent implements OnInit {
 
   ngOnInit() {
     //this.films = this.inoutService.listeFilmBD;
-    console.log('Dans ngOnInit');
+    //console.log('Dans ngOnInit');
     this.isPresentG = false;
   }
 
@@ -38,7 +38,7 @@ export class TendanceSlideComponent implements OnInit {
     //this.filmOutput.emit(film);
 
     this.isFilmAffiche = film;
-    console.log("> Slide film a afficher ", this.isFilmAffiche);
+    //console.log("> Film Slide Affiche : ", film);
 
   }
 

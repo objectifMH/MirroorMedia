@@ -63,8 +63,6 @@ header {
 
         .gauche {
             .logo {
-                            
-                
                 //color: gold;
                 color: $color;
 
@@ -72,6 +70,7 @@ header {
                 font-size: xx-large;
                 letter-spacing: 1px;
                 text-shadow:$shadow 1px 1px;
+                margin-left: 80px;
             }
         }
 
@@ -84,7 +83,8 @@ header {
 
             // **********   Gauche  **********
             &:nth-child(1) {
-                flex-grow: 1 ; 
+                flex-grow: 5 ; 
+                justify-content: start;
                 //background: green;
 
                 font-size: 1.75em;
