@@ -1,0 +1,57 @@
+<section >
+    <div class="haut">
+      <h4>{{people.name !== undefined ? people.name : ''}}</h4>
+    </div>
+    <div class="bas">
+      <div class="gauche">
+        <img mat-card-image 
+                            src="{{people.profile_path ? this.urlBaseImage+people.profile_path : '../../assets/no_image.png'}}"
+        alt={{people.name}}>
+      </div>
+      <div class="droit">
+        <div class="">
+  
+          
+  
+          <div class="" *ngIf="this.people.biography">
+            {{people.birthday}}  {{ people.deathday ? '/ '+people.deathday : ''}}
+            <h4 class="">Biography:</h4>
+            <p>{{people.biography}}</p>
+          </div>
+  
+  
+          <div class="" *ngIf="this.moviesFull.length > 0">
+            <h4 class="">Movies:</h4>
+            <p>
+              <span *ngFor="let movie of this.movies; let i = index" class="btn btn-info m-1 mt-3">
+                
+                  
+                  <img mat-card-image class="acteur" src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : '../../assets/no_image.png'}}" alt={{movie.name}} />
+                  <!-- <p>{{movie.title }} </p> -->
+              </span>
+              <span *ngIf="this.minMovies" class="material-icons btn btn-warning m-1 mt-3 more-movies" (click)="plusMoinsMovies()">
+                {{plusMovies ? 'add' : 'remove'}}
+              </span>
+            </p>
+          </div>
+          <div  *ngIf="this.tvsFull.length > 0" class="">
+            <h4 class="">Tv Show:</h4>
+            <p>
+              <span *ngFor="let tv of this.tvs; let i = index" class="btn btn-info m-1 mt-3">
+                
+                  
+                  <img mat-card-image class="acteur" src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : '../../assets/no_image.png'}}" alt={{tv.name}} />
+                  <!-- <p>{{tv.name }} </p> -->
+              </span>
+              <span *ngIf="this.minTvs" class="material-icons btn btn-warning m-1 mt-3 more-tvs" (click)="plusMoinsTvs()">
+                {{plusTvs ? 'add' : 'remove'}}
+              </span>
+            </p>
+          </div>
+          
+  
+        </div>
+      </div>
+    </div>
+  </section>
+  

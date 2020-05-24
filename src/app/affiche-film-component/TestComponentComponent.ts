@@ -21,6 +21,7 @@ export class TestComponentComponent implements OnInit {
   acteurs: any;
   directorName: any;
   director: any;
+  plus = true;
 
   urlBackDrop = 'https://image.tmdb.org/t/p/original';
   urlImgActeur = '';
@@ -69,4 +70,14 @@ export class TestComponentComponent implements OnInit {
         console.log(err);
       });
   }
+
+  plusMoinsActeurs() {
+    if ( this.plus === true) {
+      this.acteurs = this.acteursFull;
+    } else {
+      this.acteurs = this.acteursFull.slice(0, 8);
+    }
+    this.plus = !this.plus;
+  }
+
 }

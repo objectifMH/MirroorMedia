@@ -27,9 +27,14 @@
           <p>
             <span *ngFor="let acteur of this.acteurs; let i = index" class="btn btn-info m-1 mt-3">
               
-                {{acteur.name }} 
-                <img mat-card-image class="acteur" src="{{acteur.profile_path ? this.urlBackDrop+acteur.profile_path : '../../assets/no_image.png'}}" alt={{acteur.name}} />
-              
+                
+                <a routerLink="/people/{{acteur.id}}" title="Fiche infos de {{acteur.name}}">
+                  <span>{{acteur.name }} </span>
+                  <img mat-card-image class="acteur" src="{{acteur.profile_path ? this.urlBackDrop+acteur.profile_path : '../../assets/no_image.png'}}" alt={{acteur.name}} />
+                </a>
+            </span>
+            <span  class="material-icons btn btn-info m-1 mt-3 more-actor" (click)="plusMoinsActeurs()">
+              {{plus ? 'add' : 'remove'}}
             </span>
           </p>
         </div>

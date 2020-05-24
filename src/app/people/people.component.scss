@@ -54,8 +54,7 @@ section {
 
       .gauche {
         display: flex;
-        //align-items: center;
-        padding: 60px 15px!important
+        padding: 80px 15px!important
       }
     }
 
@@ -71,36 +70,12 @@ section {
   
   .acteur {
     max-width: 100px !important;
-    border-radius: 15px !important;
+    //border-radius: 15px !important;
     padding: 0 !important;
-
-    
     
   }
 
-  a {
-    text-decoration: none;
-    color: white;
-    transition: all 0.3s ease-in-out;
-
-    span {
-      //border: 2px solid green;
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        //border: 4px solid red;
-        //font-weight: bolder;
-        transform: scale(1.1);
-      }
-
-    }
-
-    :hover {
-      transform: scale(1.1);
-    }
-  }
-
-  .more-actor {
+  .more-movies, .more-tvs {
     font-size: large;
     transition: all 0.3s ease-in-out;
 

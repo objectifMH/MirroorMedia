@@ -18,6 +18,7 @@ import { ItemSlideComponent } from './item-slide/item-slide.component';
 import { ListeRechercheFilmComponent } from './liste-recherche-film/liste-recherche-film.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PeopleComponent } from './people/people.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListeTendanceSlideComponent,
     ItemSlideComponent,
     ListeRechercheFilmComponent,
-    MainPageComponent
+    MainPageComponent,
+    PeopleComponent
   ],
   imports: [
     BrowserModule,
