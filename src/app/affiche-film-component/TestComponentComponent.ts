@@ -15,10 +15,10 @@ export class TestComponentComponent implements OnInit {
   @Output()
   isCloseAffiche = new EventEmitter();
 
-  acteursFull: any;
-  crewsFull: any;
-  acteurs: any;
-  director: any;
+  acteursFull:  any = [];
+  crewsFull: any = [];
+  acteurs: any = [];
+  director: any = [];
 
   urlBackDrop = 'https://image.tmdb.org/t/p/original/';
 
@@ -29,7 +29,8 @@ export class TestComponentComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    this.getUtilisateurs();
+    //this.getUtilisateurs();
+    console.log("coucou");
   }
 
   closeAffiche() {

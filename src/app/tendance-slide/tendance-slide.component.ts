@@ -38,7 +38,7 @@ export class TendanceSlideComponent implements OnInit {
     //this.filmOutput.emit(film);
 
     this.isFilmAffiche = film;
-    //console.log("> Slide ", film);
+    console.log("> Slide film a afficher ", this.isFilmAffiche);
 
   }
 
@@ -50,13 +50,8 @@ export class TendanceSlideComponent implements OnInit {
     const tailleImage = window.innerWidth / 7;
     this.isPresentD = true;
     this.isPresentG = true;
-<<<<<<< HEAD
-    if (this.styleLeft > (-window.innerWidth)) {
-      this.styleLeft -= (tailleImage + 8);
-=======
     if ( this.styleLeft >  ( -window.innerWidth)) {
     this.styleLeft -= (tailleImage + 10);
->>>>>>> 27a56d9597a5ea4107794069e3a8c7893639d07b
     } else {
       this.isPresentD = false;
     }
@@ -74,13 +69,8 @@ export class TendanceSlideComponent implements OnInit {
     const tailleImage = window.innerWidth / 7;
     this.isPresentG = true;
     this.isPresentD = true;
-<<<<<<< HEAD
-    if (this.styleLeft < 0) {
-      this.styleLeft += (tailleImage + 8 );
-=======
     if ( this.styleLeft < 0) {
       this.styleLeft += (tailleImage + 10);
->>>>>>> 27a56d9597a5ea4107794069e3a8c7893639d07b
     }
 
     if (this.styleLeft >= 0 && this.styleLeft < tailleImage) {
