@@ -4,7 +4,7 @@ deploy : ng build --prod --output-path docs --base-href /MirroorMedia/
 
 déployé sur : https://objectifmh.github.io/MirroorMedia/ 
 
-# Itunes
+# MirroorMedia
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
 
