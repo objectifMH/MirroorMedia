@@ -1,4 +1,6 @@
 Clé : 5455369db2052a84d1a49d133d25a3983cbd
+deploy : ng build --prod --output-path docs --base-href /MirroorMedia/ 
+déployé sur : https://objectifmh.github.io/MirroorMedia/ 
 
 # Itunes
 
