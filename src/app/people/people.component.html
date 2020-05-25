@@ -5,7 +5,7 @@
     <div class="bas">
       <div class="gauche">
         <img mat-card-image 
-                            src="{{people.profile_path ? this.urlBaseImage+people.profile_path : '../../assets/no_image.png'}}"
+                            src="{{people.profile_path ? this.urlBaseImage+people.profile_path : 'assets/no_image.png'}}"
         alt={{people.name}}>
       </div>
       <div class="droit">
@@ -26,7 +26,7 @@
               <span *ngFor="let movie of this.movies; let i = index" class="btn btn-info m-1 mt-3">
                 
                   
-                  <img mat-card-image class="acteur" src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : '../../assets/no_image.png'}}" alt={{movie.name}} />
+                  <img mat-card-image class="acteur" src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}" alt={{movie.name}} />
                   <!-- <p>{{movie.title }} </p> -->
               </span>
               <span *ngIf="this.minMovies" class="material-icons btn btn-warning m-1 mt-3 more-movies" (click)="plusMoinsMovies()">
@@ -40,7 +40,7 @@
               <span *ngFor="let tv of this.tvs; let i = index" class="btn btn-info m-1 mt-3">
                 
                   
-                  <img mat-card-image class="acteur" src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : '../../assets/no_image.png'}}" alt={{tv.name}} />
+                  <img mat-card-image class="acteur" src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : 'assets/no_image.png'}}" alt={{tv.name}} />
                   <!-- <p>{{tv.name }} </p> -->
               </span>
               <span *ngIf="this.minTvs" class="material-icons btn btn-warning m-1 mt-3 more-tvs" (click)="plusMoinsTvs()">
