@@ -92,8 +92,9 @@ div {
             transition: all .3s ease-in-out;
 
             &:hover {
-                transform: scale(1.15);
-                color: $back-main ;// #25769f; //red;
+                transform: scale(1.25);
+                //color: $back-main ;// #25769f; //red;
+                //color: white;
 
             }
         }

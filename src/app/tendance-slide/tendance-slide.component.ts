@@ -47,7 +47,7 @@ export class TendanceSlideComponent implements OnInit {
   }
 
   clickDroit() {
-    const tailleImage = window.innerWidth / 7;
+    const tailleImage = window.innerWidth / 7.2;
     this.isPresentD = true;
     this.isPresentG = true;
     if ( this.styleLeft >  ( -window.innerWidth)) {
@@ -66,7 +66,7 @@ export class TendanceSlideComponent implements OnInit {
   }
 
   clickGauche() {
-    const tailleImage = window.innerWidth / 7;
+    const tailleImage = window.innerWidth / 7.2;
     this.isPresentG = true;
     this.isPresentD = true;
     if ( this.styleLeft < 0) {

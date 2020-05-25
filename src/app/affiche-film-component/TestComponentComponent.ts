@@ -25,30 +25,26 @@ export class TestComponentComponent implements OnInit {
 
   plus = true;
 
-  urlBackDrop = 'https://image.tmdb.org/t/p/original';
-  urlImgActeur = '';
+  urlBaseImage: any;
 
-  cheminImgSrc = '../../assets/CoverFilm/AfficheFilm/';
-  constructor(private inoutService: InOutService, private tmdb: TmdbService) { 
+  constructor(private tmdb: TmdbService) {
+    this.urlBaseImage = this.tmdb.getUrlBaseImg();
+
   }
 
   ngOnInit() {
-    this.getUtilisateurs();
+    this.getActeurs();
   }
 
   ngOnChanges() {
-    this.getUtilisateurs();
+    this.getActeurs();
   }
 
   closeAffiche() {
-    //this.inoutService.setAfficheThisFilm(null);
-
-    //this.film = null;
     this.isCloseAffiche.emit();
   }
 
-  getUtilisateurs() {
-    //console.log(this.film);
+  getActeurs() {
     this.tmdb.getActeursByFilm(this.film).subscribe(
       data => {
         console.log(data);
@@ -56,11 +52,8 @@ export class TestComponentComponent implements OnInit {
         this.crewsFull = data['crew'];
 
         this.acteurs = this.acteursFull.slice(0, 8);
-        //console.log(this.acteurs );
-        this.director  = this.crewsFull.filter( crew => crew.job === 'Director'); 
-        //console.log(data['crew'].length);
-        this.directorName = data['crew'].length !== 0 ? this.director[0].name : false;
-        //console.log('director :: > ' + this.directorName);
+        this.director  = this.crewsFull.filter( crew => crew.job === 'Director');
+        this.directorName = data['crew'].length !== 0 ? ( this.director[0] ? this.director[0].name : false ) : false;
         this.minActeurs = this.acteursFull.length > 8 ? true : false;
 
 

@@ -10,16 +10,12 @@ section {
     color: white;
 
 
-    height: 100%;
+    min-height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-
-    h4 {
-      color: $color;
-    }
     
     .haut {
       padding: 5px 15px;
@@ -36,7 +32,7 @@ section {
         &:hover {
           transform: scale(1.25);
           border: 2px solid $color ;
-          color: $color; 
+          color: $color; //red;
         }
       }
 
@@ -44,6 +40,7 @@ section {
 
     .bas {
       display: flex;
+      //background: grey;
       
       border: 1px solid white;
       border-bottom: 2px solid white;
@@ -53,12 +50,21 @@ section {
       .droit {
         margin-top: 20px;
         padding: 15px 20px;
+
+        .genres {
+            border-radius: 15px;
+            padding: 2px 15px;
+        }
       }
 
       .gauche {
         display: flex;
         //align-items: center;
-        padding: 60px 15px!important
+        padding: 60px 15px!important;
+
+        
+
+        
       }
     }
 
@@ -108,16 +114,15 @@ section {
 
     &:hover {
       
-      img {
-        opacity: 0.3;
-      }
+        img {
+            opacity: 0.3;
+        }
 
-
-      span {
-        visibility: visible;
-        transform: scale(1.2);
-        z-index: 5;
-      }
+        span {
+            visibility: visible;
+            transform: scale(1.2);
+            z-index: 5;
+        }
     }
   }
 
@@ -129,5 +134,9 @@ section {
       background: green;
       transform: rotate(180deg) scale(1.2);
     }
+  }
+
+  h4 {
+      color: $color;
   }
   

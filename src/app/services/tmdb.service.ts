@@ -52,6 +52,18 @@ export class TmdbService {
     return this.httpClient.get(url);
   }
 
+  // https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+  // Les informations sur un film :
+  public getInfoFilm(id) {
+    const url = ''.concat(this.urlBase, 'movie/', id, '?api_key=', this.apiKey);
+    return this.httpClient.get(url);
+  }
+
+  // Les informations sur un tv :
+  public getInfoTv(id) {
+    const url = ''.concat(this.urlBase, 'tv/', id, '?api_key=', this.apiKey);
+    return this.httpClient.get(url);
+  }
 
 
 }

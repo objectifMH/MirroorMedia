@@ -31,6 +31,7 @@ export class PeopleComponent implements OnInit {
     this.getActeurs(peopleId);
     this.getFilmsForActeurs(peopleId);
     this.getTvsForActeurs(peopleId);
+
   }
 
   getActeurs(id) {
@@ -48,7 +49,9 @@ export class PeopleComponent implements OnInit {
     this.tmdb.getFilmsForActeur(id).subscribe(
       result => {
         this.moviesFull = result['cast'];
+        //console.log(this.moviesFull);
         this.movies = this.moviesFull.slice(0, 6);
+        
         this.minMovies = this.moviesFull.length > 6 ? true : false;
 
       }
@@ -61,7 +64,7 @@ export class PeopleComponent implements OnInit {
     this.tmdb.getTvForActeur(id).subscribe(
       result => {
         this.tvsFull = result['cast'];
-        this.tvs = this.tvsFull.slice(0, 6);
+        this.tvs = this.tvsFull.slice(0, 6); console.log(this.tvs);
         this.minTvs = this.tvsFull.length > 6 ? true : false;
         //console.log('tv show actor ', result);
 
