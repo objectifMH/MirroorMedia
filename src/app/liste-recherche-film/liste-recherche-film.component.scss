@@ -1,7 +1,13 @@
+@import '../../styles.scss';
+
 h4 {
-    color: white;
+    color: $color;
     font-weight: normal;
     margin: 5px 20px;
+}
+
+.mt-50 {
+    margin-top: 80px;
 }
 
 section {
@@ -10,10 +16,50 @@ section {
     justify-content: space-evenly;
 
     img {
-        min-width: 300px;
-        min-height: 300px;
+        max-width: 300px;
+        max-height: 300px;
     }
 
+    a {
+    
+        align-items: flex-end;
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    
+        img {
+          box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+          transition: all 0.3s ease-in-out;
+        }
+    
+        span {
+          transition: all 0.3s ease-in-out;
+          position: absolute;
+          visibility: hidden;
+          border: solid 3px white;
+          padding: 6px;
+          color: white;
+          box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+          scale:0;
+        }
+    
+        &:hover {
+          
+          img {
+            opacity: 0.3;
+            transform: scale(1.2);
+          }
+    
+          span {
+            visibility: visible;
+            transform: scale(1.2);
+            z-index: 5;
+          }
+        }
+      }
    
 
 }

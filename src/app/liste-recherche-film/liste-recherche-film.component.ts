@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InOutService } from '../services/in-out.service';
 import { Film } from 'src/film';
+import { TmdbService } from '../services/tmdb.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-liste-recherche-film',
@@ -9,60 +11,37 @@ import { Film } from 'src/film';
 })
 export class ListeRechercheFilmComponent implements OnInit {
 
+  movies: any = [];
+  tvs: any = [];
+  peoples: any = [];
 
-  listeFilmRecherche: Film[] = [
-    
-   ];
-  maRecherche = '';
+  maRecherche: any = '';
 
-  isFilmAffiche: Film = null;
+  urlBaseImage: any;
 
-  constructor(private inoutService: InOutService) {
-    this.inoutService.setAfficheThisFilm(null);
+  constructor(private tmdb: TmdbService, private inout: InOutService, private route: ActivatedRoute, private router: Router, ) {
+    this.urlBaseImage = this.tmdb.getUrlBaseImg();
+    this.maRecherche = this.route.snapshot.paramMap.get('query');
+    console.log(this.maRecherche);
+   
   }
 
   ngOnInit() {
-    this.recupereInputRecherche();
-    this.recupereListeFilm();
-    
+    this.search();
   }
 
-  recupereListeFilm() {
-    //console.log('Dans ListeRechercheFilmComponent.ts :  > ');
-    this.inoutService.getListeFilmRecherche().subscribe(
-      data => {
-        //console.log('Dans ListeRechercheFilmComponent.ts : dans l observable affiche this listeRecherche >' , data);
-        this.listeFilmRecherche = data;
-      },
-      err => {
-        //console.log('erreur observable dans ListeRechercheFilmComponent', err);
+
+  search() {
+    this.tmdb.search(this.maRecherche).subscribe(
+      result => {
+        console.log(result);
+        this.movies = result['results'].filter(movie => movie.media_type === 'movie');
+        this.tvs = result['results'].filter(tv => tv.media_type === 'tv');
+        this.peoples = result['results'].filter(people => people.media_type === 'people');
       }
+      ,
+      // tslint:disable-next-line:max-line-length
+      error => console.log('Une erreur est survenue, On arrive pas à charger les resultats de la mutli recherche pour' + this.maRecherche, error)
     );
   }
-
-  recupereInputRecherche() {
-    //console.log('Dans ListeRechercheFilmComponent.ts : recupereInputRecherche > ');
-    this.inoutService.getRechercheInput().subscribe(
-      data => {
-        this.maRecherche = data;
-        //console.log('Dans ListeRechercheFilmComponent.ts : dans l observable affiche this listeRecherche >' , data);
-        this.recupereListeFilm();
-      },
-      err => {
-        //console.log('erreur observable dans ListeRechercheFilmComponent', err);
-      }
-    );
-  }
-
-  afficheFilmRecherche(film) {
-    //console.log('set affiche this film ', film);
-    //this.inoutService.setAfficheThisFilm(film);
-    this.isFilmAffiche = film;
-  }
-
-  closeAfficheFilm() {
-    this.isFilmAffiche = null;
-    console.log("jeteferme");
-  }
-
 }

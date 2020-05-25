@@ -17,35 +17,6 @@ export class InOutService {
     description: 'Dans un futur proche, la Terre est de moins en moins accueillante pour l\'humanité qui connaît une grave crise alimentaire. Le film raconte les aventures d\'un groupe d\'explorateurs qui utilise une faille récemment découverte dans l\'espace-temps afin de repousser les limites humaines et partir à la conquête des distances astronomiques dans un voyage interstellaire.', cover: '1.jpg'},
     {id: 2, titre: 'Dark Knight', realisateur: '', acteurs: [], description: '', cover: '2.jpg'},
     // tslint:disable-next-line:max-line-length
-    {id: 3, titre: 'Rencontre Avec Joe Black', realisateur: 'Martin Brest', acteurs: ['Anthony Hopkins', 'Brad Pitt', 'Claire Forlani', 'Jake Weber', 'Marcia Gay Harden'], description: 'Une nuit, le magnat William Parrish ressent une violente douleur tandis qu\'une voix surgissant des ténèbres lui annonce sa mort prochaine. À ce moment-là, un jeune inconnu se présente à son domicile pour l\'accompagner dans son dernier voyage. Ce messager de l\'au-delà impose à Parrish de l’héberger chez lui afin de lui donner l\'occasion de partager un temps les expériences, les joies, les émotions et les drames des vivants, qui semblent lui être étrangers. En l\'espace de trois jours, Joe Black révèlera toute la famille Parrish à elle-même.', cover: '3.jpg'},
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: ['Tom cruise'], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 7, titre: 'Will hunting', realisateur: '', acteurs: [], description: '', cover: '7.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-
-    {id: 4, titre: 'Joker', realisateur: '', acteurs: [], description: '', cover: '4.jpg'},
-    {id: 5, titre: 'Jack Reacher', realisateur: '', acteurs: [], description: '', cover: '5.jpg'},
-    {id: 6, titre: 'Undercover', realisateur: '', acteurs: [], description: '', cover: '6.jpg'},
-    
    ];
 
   filmAAfficher: BehaviorSubject<Film>;
@@ -54,11 +25,19 @@ export class InOutService {
   rechercheInput: BehaviorSubject<string>;
   bool = false;
 
+  movies: BehaviorSubject<any>;
+  tvs: BehaviorSubject<any>;
+  peoples: BehaviorSubject<any>;
+
   constructor() {
     this.isAffiche = new BehaviorSubject<boolean>(false);
     this.filmAAfficher = new BehaviorSubject<Film>(null);
     this.listeFilmRecherche = new BehaviorSubject<Film[]>(null);
     this.rechercheInput = new BehaviorSubject<string>(null);
+
+    this.movies = new BehaviorSubject<any>(null);
+    this.tvs = new BehaviorSubject<any>(null);
+    this.peoples = new BehaviorSubject<any>(null);
   }
 
   public getListFilmBD() {
@@ -106,7 +85,7 @@ export class InOutService {
     this.rechercheInput.next(resultat);
     // on va faire la recherche du mot clé dans notre tableau ;
     // tslint:disable-next-line:max-line-length
-    const resultatListe = this.listeFilmBD.filter(film =>
+    /* const resultatListe = this.listeFilmBD.filter(film =>
                           film.titre.toLowerCase().includes(resultat.toLowerCase())
                           ||
                           film.realisateur.toLowerCase().includes(resultat.toLowerCase())
@@ -125,11 +104,40 @@ export class InOutService {
     console.log('Dans le service : on fixe la recherche input' , resultat,  resultatListe);
     // On cacatène la premiere liste et celle des acteurs :
     this.setListeFilmRecherche(resultatListe.concat(resultatListeActeurs));
-
+ */
   }
 
   public getRechercheInput() {
     console.log('Dans le service : on return la recherche input' , this.rechercheInput);
     return this.rechercheInput.asObservable();
   }
+
+
+  // Les tableaux pour la recherche :
+  public setSearchMovies(resultat) {
+    console.log('movies > ', this.movies);
+    this.movies.next(resultat);
+  }
+
+  public getSearchMovies() {
+    console.log('movies > ', this.movies);
+    return this.movies.asObservable();
+  }
+
+  public setSearchTvs(resultat) {
+    this.tvs.next(resultat);
+  }
+
+  public getSearchTvs() {
+    return this.tvs.asObservable();
+  }
+
+  public setSearchPeoples(resultat) {
+    this.peoples.next(resultat);
+  }
+
+  public getSearchPeoples() {
+    return this.peoples.asObservable();
+  }
+
 }

@@ -3,6 +3,7 @@ import { InOutService } from '../services/in-out.service';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { TmdbService } from '../services/tmdb.service';
 
 @Component({
   selector: 'app-main-page',
@@ -16,9 +17,9 @@ export class MainPageComponent implements OnInit {
 
   title = 'NetFilm';
   isFilmAffiche;
-  isSelectedIcon = {home: false, favoris: false, inscription: false, compte: false};
+  isSelectedIcon = { home: false, favoris: false, inscription: false, compte: false };
 
-  constructor(private inoutService: InOutService, private router: Router) { 
+  constructor(private inoutService: InOutService, private router: Router, private tmdb: TmdbService) {
     this.inoutService.setAfficheThisFilm(null);
   }
 
@@ -31,10 +32,10 @@ export class MainPageComponent implements OnInit {
     const attr = li.getAttribute('data-icon');
     // tslint:disable-next-line:forin
     for (const icon in this.isSelectedIcon) {
-        this.isSelectedIcon[icon] = false;
-        if ( icon === attr) {
+      this.isSelectedIcon[icon] = false;
+      if (icon === attr) {
         this.isSelectedIcon[icon] = true;
-        }
+      }
 
     }
     console.log(this.isSelectedIcon);
@@ -44,7 +45,7 @@ export class MainPageComponent implements OnInit {
     console.log('Dans App.component.ts : afficheThisFilm on souscrit à l observable > ');
     this.inoutService.getAfficheThisFilm().subscribe(
       data => {
-        console.log('Dans App.component.ts : dans l observable affiche this film >' , data);
+        console.log('Dans App.component.ts : dans l observable affiche this film >', data);
         this.isFilmAffiche = data;
       },
       err => {
@@ -54,9 +55,7 @@ export class MainPageComponent implements OnInit {
   }
 
   clickSearch(element: any) {
-    console.log(element.value);
-    this.inoutService.setRechercheInput(element.value);
-    this.router.navigate(['/recherche']);
+    this.router.navigate(['/recherche/' + element.value]);
     element.value = '';
   }
 

@@ -1,11 +1,46 @@
-<h4> "{{maRecherche}}"</h4>
-<section class="head-card" *ngIf="isFilmAffiche">
-    <app-test-component [film]="isFilmAffiche" (isCloseAffiche)="closeAfficheFilm($event)"></app-test-component>
-  </section>
-<section>
-    <div *ngFor="let film of listeFilmRecherche">
-        <app-item-slide [filmItem]="film" (clickFilm)="afficheFilmRecherche($event)" ></app-item-slide>
-    </div>
+<h4 class="text-center"> "{{maRecherche}}"</h4>
+<section class="head-card">
+<div *ngIf="this.movies.length > 0" class="mt-50">
+  <h4 class="">Movies:</h4>
+  <p>
+    <span *ngFor="let movie of this.movies; let i = index" class="btn btn  m-1 mt-3">
+      <a routerLink="/film/{{movie.id}}/movie" title="Fiche infos de {{movie.title}}">
+        <span class="span-acteur">{{movie.title }} </span>
+        <img mat-card-image class="acteur"
+          src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}"
+          alt={{movie.title}} />
+      </a>
+    </span>
+  </p>
+</div>
 
+  <div *ngIf="this.tvs.length" class="mt-50">
+    <h4 class="">Tv Shows:</h4>
+    <p>
+      <span *ngFor="let tv of this.tvs; let i = index" class="btn m-1 mt-3">
+
+        <a routerLink="/film/{{tv.id}}/tv" title="Fiche infos de {{tv.name}}">
+          <span class="span-acteur">{{tv.name }} </span>
+          <img mat-card-image class="acteur"
+            src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : 'assets/no_image.png'}}" alt={{tv.name}} />
+        </a>
+      </span>
+    </p>
+  </div>
+
+  <div class="mt-50" *ngIf="this.peoples.length > 0">
+    <h4 class="">Peoples:</h4>
+    <p>
+      <span *ngFor="let people of this.peoples; let i = index" class="btn btn  m-1 mt-3">
+
+
+        <a routerLink="/people/{{people.id}}" title="Fiche infos de {{people.name}}">
+          <span class="span-acteur">{{people.name }} </span>
+          <img mat-card-image class="acteur"
+            src="{{people.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}"
+            alt={{people.title}} />
+        </a>
+      </span>
+    </p>
+  </div>
 </section>
-
