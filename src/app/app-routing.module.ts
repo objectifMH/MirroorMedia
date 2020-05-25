@@ -7,7 +7,7 @@ import { PeopleComponent } from './people/people.component';
 
 const routes: Routes = [
 
-  {path: '/', component: ListeTendanceSlideComponent},
+  /* {path: '/', component: ListeTendanceSlideComponent}, */
   {path: 'home', component: ListeTendanceSlideComponent},
   {path: 'inscription', component: FormValidationComponent},
   {path: 'recherche', component: ListeRechercheFilmComponent},
