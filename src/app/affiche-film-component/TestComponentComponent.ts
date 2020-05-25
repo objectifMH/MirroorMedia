@@ -21,6 +21,8 @@ export class TestComponentComponent implements OnInit {
   acteurs: any;
   directorName: any;
   director: any;
+  minActeurs = false;
+
   plus = true;
 
   urlBackDrop = 'https://image.tmdb.org/t/p/original';
@@ -59,6 +61,7 @@ export class TestComponentComponent implements OnInit {
         //console.log(data['crew'].length);
         this.directorName = data['crew'].length !== 0 ? this.director[0].name : false;
         //console.log('director :: > ' + this.directorName);
+        this.minActeurs = this.acteursFull.length > 8 ? true : false;
 
 
 
