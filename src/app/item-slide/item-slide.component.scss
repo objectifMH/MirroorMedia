@@ -100,3 +100,84 @@ div {
         }
     }
 }
+
+
+
+@media (max-width: 768px) {
+    div {
+        //background: red;
+
+        img {
+            width: calc(  (100vw / 5) );
+        }
+
+        p {
+            top: 15%;
+            position: absolute;
+            color: $color;
+            font-size: normal;
+            font-weight: bold;
+    
+            opacity: 0;
+            transition: all .3s ease-in-out;
+    
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            text-align: center;
+    
+            //padding: 15px;
+    
+            span {
+                color: white;
+                font-size: normal;
+                font-weight: normal;
+    
+                text-shadow: $shadow 1px 1px;
+                opacity: 1;
+                transition: all .3s ease-in-out;
+                border: 0px solid $color;
+                box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    
+            }
+        }
+
+        span {
+        
+            color: white;  //$color;
+            font-size: normal;
+            
+            font-size: 3em;
+            top: -20px;
+    
+            transition: all .3s ease-in-out;
+    
+            cursor: pointer;
+        }
+    
+        &:hover {
+            transform: scale(1.08);
+    
+            p {
+                font-size: large;
+                display: block;
+                opacity: 1;
+            }
+      }
+
+    }
+}
+
+
+@media (max-width: 350px) {
+    div {
+        //background: green;
+
+        img {
+            width: calc(  (100vw / 3) );
+        }
+    }
+    
+}
+    

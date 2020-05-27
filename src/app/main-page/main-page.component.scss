@@ -71,6 +71,15 @@ header {
                 letter-spacing: 1px;
                 text-shadow:$shadow 1px 1px;
                 margin-left: 80px;
+
+                .menu-burger {
+                    right: 20px;
+                    top: 15px;
+                    position: absolute;
+                    font-size: larger;
+                    color: gold;
+                    display: none;
+                }
             }
         }
 
@@ -316,7 +325,12 @@ header {
 }
 
 @media (max-width: 480px) {
+    .menu-burger {
+        cursor: pointer;
+        display: block !important;
+    }
 
+    
     
     .footer {
 
@@ -329,6 +343,20 @@ header {
 
 @media (max-width: 768px) {
 
+    .menu-burger {
+        cursor: pointer;
+        display: block !important;
+    }
+
+    .menu-burger.menu-show.material-icons:before {
+        content:'close' !important;
+        color: red !important; 
+    }
+
+    .menu-burger.menu-hide.material-icons:before {
+        content:'menu' !important;
+    }
+
     section {
         margin-top: 220px;
         .mt-50 {
@@ -338,20 +366,22 @@ header {
     .headContainer {
         flex-direction: column;
         background: $color;
+        
 
         .droit {
             display: flex;
             justify-content: center;
+            border-bottom: 2px solid grey;
         }
 
         .centre {
             padding: 30px;
-            background: purple;
+            background: $color;
         }
 
         .droit {
             justify-content: center !important;
-            background: purple;
+            background: $color;
         }
     
     }

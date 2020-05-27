@@ -3,16 +3,21 @@
   <!-- bar nav head -->
   <header>
     <div class="headContainer">
+
+    
       <div class="gauche">
         <div class="logo">
           <a routerLink="/home" title="Home">
             <span class="logo-bottom logo-gd">8Mirr∞r</span>
             <span class="logo-bottom logo-pt">8M∞</span>
           </a>
+          <span class="material-icons menu-burger" [ngClass]="{'menu-show': isShow , 'menu-hide': !isShow} " (click)="showMenu()">
+            
+          </span>
           
         </div>
       </div>
-      <div class="centre">
+      <div class="centre" [ngClass]="{'show': isShow , 'd-none fade': !isShow} ">
 
         <input #search type="text" class="form-control" placeholder="Rechercher" id="idSearch" name="search">
         <span class="material-icons" (click)="clickSearch(search)">
@@ -20,7 +25,7 @@
         </span>
       </div>
 
-      <div class="droit">
+      <div class="droit" [ngClass]="{'show': isShow , 'd-none fade': !isShow} ">
         <ul>
           <li #lih (click)="clickIcon(lih)" [ngClass]="{'iconSelected':isSelectedIcon.home}" data-icon='home'>
             <a routerLink="/home" title="Retour à la home">

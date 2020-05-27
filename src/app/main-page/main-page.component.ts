@@ -18,6 +18,7 @@ export class MainPageComponent implements OnInit {
   title = 'NetFilm';
   isFilmAffiche;
   isSelectedIcon = { home: false, favoris: false, inscription: false, compte: false };
+  isShow = false;
 
   constructor(private inoutService: InOutService, private router: Router, private tmdb: TmdbService) {
     this.inoutService.setAfficheThisFilm(null);
@@ -59,6 +60,11 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/recherche/' + element.value + '/1']);
     }
     element.value = '';
+  }
+
+  showMenu() {
+    this.isShow = ! this.isShow;
+    console.log(this.isShow);
   }
 
 }
