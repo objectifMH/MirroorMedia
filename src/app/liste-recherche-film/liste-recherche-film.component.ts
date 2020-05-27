@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InOutService } from '../services/in-out.service';
 import { Film } from 'src/film';
 import { TmdbService } from '../services/tmdb.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-liste-recherche-film',
@@ -18,30 +18,80 @@ export class ListeRechercheFilmComponent implements OnInit {
   maRecherche: any = '';
 
   urlBaseImage: any;
+  pagination: any = [];
+  page: any = [];
+  page3: any;
+  pageTotal: any;
+  results: any = [];
+
+  noReponse = null;
 
   constructor(private tmdb: TmdbService, private inout: InOutService, private route: ActivatedRoute, private router: Router, ) {
     this.urlBaseImage = this.tmdb.getUrlBaseImg();
     this.maRecherche = this.route.snapshot.paramMap.get('query');
-    console.log(this.maRecherche);
-   
+    this.page = parseInt(this.route.snapshot.paramMap.get('page'));
+    //console.log(this.maRecherche);
+    // console.log(' 0 dans constructor');
+
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.maRecherche = this.route.snapshot.paramMap.get('query');
+        this.page = parseInt(this.route.snapshot.paramMap.get('page'));
+
+        const url = val.url;
+        console.log(url);
+        console.log('dans constructor  ma recherche = ', this.maRecherche);
+        this.search();
+      }
+    });
   }
 
   ngOnInit() {
-    this.search();
+
   }
 
+  ngOnChanges() {
+    this.page3 = this.page + 3;
+    console.log(this.page3);
+  }
+
+  initialisation() {
+    this.movies = [];
+    this.tvs = [];
+    this.peoples = [];
+
+    this.pagination = [];
+    this.results = [];
+
+    this.noReponse = null;
+
+  }
 
   search() {
-    this.tmdb.search(this.maRecherche).subscribe(
+    console.log('dans search ma recherche = ', this.maRecherche);
+    this.initialisation();
+    this.page3 = parseInt(this.page) + 3;
+
+
+    this.tmdb.search(this.maRecherche, this.page).subscribe(
       result => {
-        console.log(result);
-        this.movies = result['results'].filter(movie => movie.media_type === 'movie');
-        this.tvs = result['results'].filter(tv => tv.media_type === 'tv');
-        this.peoples = result['results'].filter(people => people.media_type === 'people');
+        console.log('resultat requete ', result);
+          this.results = result['results'];
+          this.movies = result['results'].filter(movie => movie.media_type === 'movie');
+          this.tvs = result['results'].filter(tv => tv.media_type === 'tv');
+          this.peoples = result['results'].filter(people => people.media_type === 'person');
+
+          this.pagination = this.pagination ? new Array(result['total_pages']).fill(result['total_pages']) : [];
+          this.pageTotal = result['total_pages'];
+          console.log('quel est la page :: ', this.page , this.page3 , this.pageTotal, 'taille : ', this.results.length);
       }
       ,
       // tslint:disable-next-line:max-line-length
-      error => console.log('Une erreur est survenue, On arrive pas à charger les resultats de la mutli recherche pour' + this.maRecherche, error)
+      error => {
+        console.log('Une erreur est survenue, On arrive pas à charger les resultats de la mutli recherche pour' + this.maRecherche, error);
+        this.noReponse = "Pas de résulstats pour votre recherche !! Soyez pas timide retentez votre chance avec une nouvelle recherche ";
+    
+      }
     );
   }
 }

@@ -55,7 +55,7 @@ export class MainPageComponent implements OnInit {
   }
 
   clickSearch(element: any) {
-    this.router.navigate(['/recherche/' + element.value]);
+    this.router.navigate(['/recherche/' + element.value + '/1']);
     element.value = '';
   }
 

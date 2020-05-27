@@ -1,46 +1,64 @@
 <h4 class="text-center"> "{{maRecherche}}"</h4>
+<h4 *ngIf="this.noReponse" class="text-center"> {{noReponse}} </h4>
 <section class="head-card">
-<div *ngIf="this.movies.length > 0" class="mt-50">
-  <h4 class="">Movies:</h4>
-  <p>
-    <span *ngFor="let movie of this.movies; let i = index" class="btn btn  m-1 mt-3">
-      <a routerLink="/film/{{movie.id}}/movie" title="Fiche infos de {{movie.title}}">
-        <span class="span-acteur">{{movie.title }} </span>
-        <img mat-card-image class="acteur"
-          src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}"
-          alt={{movie.title}} />
-      </a>
-    </span>
-  </p>
-</div>
-
-  <div *ngIf="this.tvs.length" class="mt-50">
-    <h4 class="">Tv Shows:</h4>
+    <div *ngIf="this.movies.length > 0" class="mt-50">
+    <h4 class="">Movies:</h4>
     <p>
-      <span *ngFor="let tv of this.tvs; let i = index" class="btn m-1 mt-3">
-
-        <a routerLink="/film/{{tv.id}}/tv" title="Fiche infos de {{tv.name}}">
-          <span class="span-acteur">{{tv.name }} </span>
-          <img mat-card-image class="acteur"
-            src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : 'assets/no_image.png'}}" alt={{tv.name}} />
+        <span *ngFor="let movie of this.movies; let i = index" class="btn btn  m-1 mt-3">
+        <a routerLink="/film/{{movie.id}}/movie" title="Fiche infos de {{movie.title}}">
+            <span class="span-acteur">{{movie.title }} </span>
+            <img mat-card-image class="acteur"
+            src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}"
+            alt={{movie.title}} />
         </a>
-      </span>
+        </span>
     </p>
-  </div>
+    </div>
 
-  <div class="mt-50" *ngIf="this.peoples.length > 0">
-    <h4 class="">Peoples:</h4>
-    <p>
-      <span *ngFor="let people of this.peoples; let i = index" class="btn btn  m-1 mt-3">
+    <div *ngIf="this.tvs.length" class="mt-50">
+        <h4 class="">Tv Shows:</h4>
+        <p>
+        <span *ngFor="let tv of this.tvs; let i = index" class="btn m-1 mt-3">
+
+            <a routerLink="/film/{{tv.id}}/tv" title="Fiche infos de {{tv.name}}">
+            <span class="span-acteur">{{tv.name }} </span>
+            <img mat-card-image class="acteur"
+                src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : 'assets/no_image.png'}}" alt={{tv.name}} />
+            </a>
+        </span>
+        </p>
+    </div>
+
+    <div class="mt-50" *ngIf="this.peoples.length > 0">
+        <h4 class="">Peoples:</h4>
+        <p>
+        <span *ngFor="let people of this.peoples; let i = index" class="btn btn  m-1 mt-3">
 
 
-        <a routerLink="/people/{{people.id}}" title="Fiche infos de {{people.name}}">
-          <span class="span-acteur">{{people.name }} </span>
-          <img mat-card-image class="acteur"
-            src="{{people.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}"
-            alt={{people.title}} />
-        </a>
-      </span>
-    </p>
-  </div>
+            <a routerLink="/people/{{people.id}}" title="Fiche infos de {{people.name}}">
+            <span class="span-acteur">{{people.name }} </span>
+            <img mat-card-image class="acteur"
+                src="{{people.profile_path ? this.urlBaseImage+people.profile_path : 'assets/no_image.png'}}"
+                alt={{people.title}} />
+            </a>
+        </span>
+        </p>
+    </div>
+
+    <!-- Center-aligned -->
+    <ul class="pagination pagination-sm justify-content-center mt-50" *ngIf="this.results.length > 0">
+        <li class="page-item" *ngIf="this.page > 4"><a class="page-link" routerLink="/recherche/{{maRecherche}}/1">1</a></li>
+        <li class="page-item" *ngIf="this.page > 5"><a class="page-link" routerLink="/recherche/{{maRecherche}}/{{page - 3 - 2}}">...</a></li>
+         <li class="page-item"  *ngFor="let pagi of this.pagination; let i = index" > 
+            <a  class=" page-link active" *ngIf="(i + 1) >= page - 3 && i < page3 " [ngClass]="{'active': (i +1) == page , '': i != page}" routerLink="/recherche/{{maRecherche}}/{{i+1}}" title="recherche {{maRecherche}} / {{i+1}}">
+                {{i+1}}
+            </a>
+        </li>
+        <li *ngIf="this.page < this.pageTotal - 4" class="page-item"><a class="page-link" routerLink="/recherche/{{maRecherche}}/{{page + 3 + 2}}">...</a></li>
+        <li *ngIf="this.page < this.pageTotal - 3" class="page-item"><a class="page-link" routerLink="/recherche/{{maRecherche}}/{{pageTotal}}">{{this.pageTotal}}</a></li>
+    </ul>
+
+
+
+
 </section>

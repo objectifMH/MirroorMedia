@@ -12,12 +12,12 @@ h4 {
 
 section {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
 
     img {
-        max-width: 300px;
-        max-height: 300px;
+        max-width: 150px;
     }
 
     a {
@@ -60,6 +60,26 @@ section {
           }
         }
       }
-   
+      
+
+    .pagination {
+        color: $color;
+        
+
+        a {
+            color: $color;
+            //border: 12px solid greenyellow;
+
+           
+        }
+
+        .active {
+            background: $color;
+            color: $back;
+            transform: scale(1.2);
+            z-index: 5;
+        }
+    }
+
 
 }

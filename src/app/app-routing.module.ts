@@ -11,7 +11,7 @@ const routes: Routes = [
   /* {path: '/', component: ListeTendanceSlideComponent}, */
   {path: 'home', component: ListeTendanceSlideComponent},
   {path: 'inscription', component: FormValidationComponent},
-  {path: 'recherche/:query', component: ListeRechercheFilmComponent},
+  {path: 'recherche/:query/:page', component: ListeRechercheFilmComponent},
   {path: 'people', component: PeopleComponent},
   {path: 'people/:id', component: PeopleComponent},
   {path: 'film/:id/:type', component: FilmComponent},
