@@ -90,6 +90,14 @@ header {
                 font-size: 1.75em;
                 font-family: -webkit-pictograph;
                 color: white;
+
+                .logo-gd {
+                    display: block;
+                }
+
+                .logo-pt {
+                    display: none;
+                }
                 
             }
 
@@ -306,4 +314,50 @@ header {
     }
 
 }
+
+@media (max-width: 480px) {
+
+    
+    .footer {
+
+        height: 100%;
+        ul {
+            flex-direction: column;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    section {
+        margin-top: 220px;
+        .mt-50 {
+            margin-top: 0;
+        }
+    }
+    .headContainer {
+        flex-direction: column;
+        background: $color;
+
+        .droit {
+            display: flex;
+            justify-content: center;
+        }
+
+        .centre {
+            padding: 30px;
+            background: purple;
+        }
+
+        .droit {
+            justify-content: center !important;
+            background: purple;
+        }
+    
+    }
+}
+
+
+
+
 

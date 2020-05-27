@@ -140,4 +140,16 @@ section {
       }
     }
   }
-  
+
+
+@media (max-width: 768px) {
+  .bas {
+    flex-direction: column;
+  } 
+
+  .gauche {
+    img {
+      max-width: 100%;
+    }
+  }
+}

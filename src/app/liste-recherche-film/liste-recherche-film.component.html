@@ -2,7 +2,7 @@
 <h4 *ngIf="this.noReponse" class="text-center"> {{noReponse}} </h4>
 <section class="head-card">
     <div *ngIf="this.movies.length > 0" class="mt-50">
-    <h4 class="">Movies:</h4>
+    <h4 class="">Movies</h4>
     <p>
         <span *ngFor="let movie of this.movies; let i = index" class="btn btn  m-1 mt-3">
         <a routerLink="/film/{{movie.id}}/movie" title="Fiche infos de {{movie.title}}">
@@ -16,7 +16,7 @@
     </div>
 
     <div *ngIf="this.tvs.length" class="mt-50">
-        <h4 class="">Tv Shows:</h4>
+        <h4 class="">Tv Shows</h4>
         <p>
         <span *ngFor="let tv of this.tvs; let i = index" class="btn m-1 mt-3">
 
@@ -30,7 +30,7 @@
     </div>
 
     <div class="mt-50" *ngIf="this.peoples.length > 0">
-        <h4 class="">Peoples:</h4>
+        <h4 class="">Peoples</h4>
         <p>
         <span *ngFor="let people of this.peoples; let i = index" class="btn btn  m-1 mt-3">
 
