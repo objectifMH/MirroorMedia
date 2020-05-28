@@ -111,11 +111,15 @@ export class TendanceSlideComponent implements OnInit {
     this.isPresentD = true;
     if (this.styleLeft < 0) {
       this.styleLeft += (tailleImage + add);
+      console.log('< 0 ' , this.styleLeft);
     }
 
-    if (this.styleLeft >= 0 && this.styleLeft < tailleImage) {
+    if (Math.abs(this.styleLeft) >= 0 && Math.abs(this.styleLeft) < tailleImage) {
       this.isPresentG = false;
+      console.log('>= 0 && this.styleLeft < tailleImage' , this.styleLeft);
     }
+    console.log(Math.abs(this.styleLeft)+ '  ' + window.innerWidth + ' ' + Math.abs(tailleImage * 15) + ' ' + container + ' ' +tailleImage );
+  
   }
 
 }

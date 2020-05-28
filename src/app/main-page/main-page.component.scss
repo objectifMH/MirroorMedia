@@ -355,13 +355,23 @@ header {
         display: block !important;
     }
 
+    .material-icons {
+        transition: all 0.3s ease-in-out;
+    }
+
     .menu-burger.menu-show.material-icons:before {
         content:'close' !important;
-        color: red !important; 
+        color: $back !important; 
+
+        
     }
 
     .menu-burger.menu-hide.material-icons:before {
         content:'menu' !important;
+    }
+
+    .material-icons:hover {
+        transform: scale(1.3) rotate(180deg);
     }
 
     section {
