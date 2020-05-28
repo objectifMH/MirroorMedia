@@ -16,6 +16,6 @@ html, body {
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
     background: $back-main !important;}
 
-$image-item: calc(  (100vw / 7) );
+$image-item: calc(  (100vw / 7.12) );
 $slide-item: calc( 2 * $image-item );
 

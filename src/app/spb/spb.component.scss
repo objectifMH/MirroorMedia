@@ -1,0 +1,20 @@
+@import '../../styles.scss';
+
+span {
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    //visibility: hidden;
+    border: solid 3px white;
+    padding: 6px;
+    color: white;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    //scale:0;
+  }
+
+  .material-icons {
+      color: green;
+      cursor: pointer;
+      //position: absolute;
+      font-size: large;
+      font-weight: bolder;
+  }

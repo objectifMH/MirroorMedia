@@ -3,12 +3,21 @@
   <!-- bar nav head -->
   <header>
     <div class="headContainer">
+
+    
       <div class="gauche">
         <div class="logo">
-          8M∞
+          <a routerLink="/home" title="Home">
+            <span class="logo-bottom logo-gd">8Mirr∞r</span>
+            <span class="logo-bottom logo-pt">8M∞</span>
+          </a>
+          <span class="material-icons menu-burger" [ngClass]="{'menu-show': isShow , 'menu-hide': !isShow} " (click)="showMenu()">
+            
+          </span>
+          
         </div>
       </div>
-      <div class="centre">
+      <div class="centre" [ngClass]="{'show': isShow , 'd-none fade': !isShow} ">
 
         <input #search type="text" class="form-control" placeholder="Rechercher" id="idSearch" name="search">
         <span class="material-icons" (click)="clickSearch(search)">
@@ -16,7 +25,7 @@
         </span>
       </div>
 
-      <div class="droit">
+      <div class="droit" [ngClass]="{'show': isShow , 'd-none fade': !isShow} ">
         <ul>
           <li #lih (click)="clickIcon(lih)" [ngClass]="{'iconSelected':isSelectedIcon.home}" data-icon='home'>
             <a routerLink="/home" title="Retour à la home">
@@ -47,13 +56,21 @@
               account_box
             </span>
           </li>
+          <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)"
+            [ngClass]="{'iconSelected':isSelectedIcon.spb}">
+            <a routerLink="/spb" title="Spb">
+              <span class="material-icons">
+                cloud
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </header>
 
   <!-- le routeur -->
-  <div class="margin-top-90">
+  <div class="margin-top-90 margin-bottom-90">
     <router-outlet></router-outlet>
   </div>
 
@@ -67,7 +84,7 @@
 
         </li>
         <li>
-            <a href='https://www.themoviedb.org/?language=fr-FR' > <img class="card-img-top" src="../../assets/tmdb.svg" alt="The movie DB" />
+            <a href='https://www.themoviedb.org/?language=fr-FR' > <img class="card-img-top" src="assets/tmdb.svg" alt="The movie DB" />
             </a>
 
         </li>
@@ -85,7 +102,7 @@
 
     </ul>
     <div class="footer-foot">
-        <span>©2020 Copyright.fr. All right reserved.</span>
+        <span>©2021 Copyright.fr. All right reserved.</span>
     </div>
 </div>
 </footer>

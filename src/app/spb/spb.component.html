@@ -1,0 +1,38 @@
+<section class="head-card">
+    <div *ngIf="this.films" class="mt-50">
+    <h4 class="">Movies</h4>
+        <p>
+            <span *ngFor="let film of this.films; let i = index" class="btn btn-info  m-1 mt-3">
+            <a routerLink="/recherche/{{film.title}}/film" title="Fiche infos de {{film.title}}">
+                <span class="span-acteur btn btn-info  m-1 mt-3">{{film.title }} </span>
+               <!--  <img mat-card-image class="acteur"
+                src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}"
+                alt={{movie.title}} /> -->
+            </a>
+            <span class="btn btn-warning m-1 mt-3">{{film.prix}}$
+            </span>
+            <span class="btn btn-danger m-1 mt-3">
+                <i class="material-icons" >check</i>
+            </span>
+            </span>
+        </p>
+    </div>
+
+
+    <!-- Center-aligned -->
+    <!-- <ul class="pagination pagination-sm justify-content-center mt-50" *ngIf="this.results.length > 0">
+        <li class="page-item" *ngIf="this.page > 4"><a class="page-link" routerLink="/recherche/{{maRecherche}}/1">1</a></li>
+        <li class="page-item" *ngIf="this.page > 5"><a class="page-link" routerLink="/recherche/{{maRecherche}}/{{page - 3 - 2}}">...</a></li>
+         <li class="page-item"  *ngFor="let pagi of this.pagination; let i = index" > 
+            <a  class=" page-link active" *ngIf="(i + 1) >= page - 3 && i < page3 " [ngClass]="{'active': (i +1) == page , '': i != page}" routerLink="/recherche/{{maRecherche}}/{{i+1}}" title="recherche {{maRecherche}} / {{i+1}}">
+                {{i+1}}
+            </a>
+        </li>
+        <li *ngIf="this.page < this.pageTotal - 4" class="page-item"><a class="page-link" routerLink="/recherche/{{maRecherche}}/{{page + 3 + 2}}">...</a></li>
+        <li *ngIf="this.page < this.pageTotal - 3" class="page-item"><a class="page-link" routerLink="/recherche/{{maRecherche}}/{{pageTotal}}">{{this.pageTotal}}</a></li>
+    </ul> -->
+
+
+
+
+</section>

@@ -1,0 +1,66 @@
+<section [ngStyle]="{'background-image': 'url(' + this.urlBaseImage+film.backdrop_path + ')'}">
+    <div class="haut">
+      <h4>{{film.title ? film.title : film.name }}</h4>
+    </div>
+    <div class="bas">
+      <div class="gauche">
+        <img mat-card-image alt={{film.title}}
+        src="{{film.poster_path ? this.urlBaseImage+film.poster_path : 'assets/no_image.png'}}"
+        >
+        <div  *ngIf="!film" className="spinner-border text-info"></div>
+      </div>
+      <div class="droit">
+        <div class="">
+
+            <div class=""  >
+                <p>
+                    <span *ngFor="let genre of this.film.genres; let i = index" class="btn btn-success btn-sm m-1 mt-3 genres">{{genre.name}}
+                    </span>
+                    <span class="btn btn-danger m-1 mt-3 genres">Vote : {{this.film.vote_average}}
+                    </span>
+                </p>
+                
+                
+                    
+                
+            </div> 
+
+          <div class="" *ngIf="directorName" >
+            <h4 class="">Director:</h4>
+            <p>
+                <span class="btn btn-warning m-1 mt-3">{{this.directorName}}
+                </span>
+            </p>
+          </div>
+  
+          <div class="">
+            <h4 class="">Synopsis:</h4>
+            <p>{{film.overview}}</p>
+          </div>
+  
+  
+          <div class="">
+            <h4 class="">Actors:</h4>
+            <p>
+              <span *ngFor="let acteur of this.acteurs; let i = index" class="btn btn m-1 mt-3">
+                
+                  
+                  <a routerLink="/people/{{acteur.id}}" title="Fiche infos de {{acteur.name}}">
+                    <span class="span-acteur">{{acteur.name }} </span>
+                    <img mat-card-image class="acteur" src="{{acteur.profile_path ? this.urlBaseImage+acteur.profile_path : 'assets/no_image.png'}}" alt={{acteur.name}} />
+                  </a>
+              </span>
+              <span  *ngIf="minActeurs" class="material-icons btn btn-info m-1 mt-3 more-actor" (click)="plusMoinsActeurs()">
+                {{plus ? 'add' : 'remove'}}
+              </span>
+            </p>
+            <div  *ngIf="!this.acteurs" className="spinner-border text-info"></div>
+          </div>
+  
+          
+  
+        </div>
+      </div>
+    </div>
+  </section>
+  

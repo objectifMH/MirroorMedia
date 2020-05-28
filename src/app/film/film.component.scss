@@ -1,0 +1,157 @@
+@import '../../styles.scss';
+
+section {
+    width: 90vw;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    color: white;
+
+
+    min-height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    
+    .haut {
+      padding: 5px 15px;
+      position: relative;
+
+      & .material-icons {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.25);
+          border: 2px solid $color ;
+          color: $color; //red;
+        }
+      }
+
+    }
+
+    .bas {
+      display: flex;
+      //background: grey;
+      
+      border: 1px solid white;
+      border-bottom: 2px solid white;
+      border-right: 2px solid white;
+
+
+      .droit {
+        margin-top: 20px;
+        padding: 15px 20px;
+
+        .genres {
+            border-radius: 15px;
+            padding: 2px 15px;
+        }
+      }
+
+      .gauche {
+        display: flex;
+        //align-items: center;
+        padding: 60px 15px!important;
+
+        
+
+        
+      }
+    }
+
+
+
+    img {
+      padding: 10px 15px;
+      max-width: 500px;
+      max-height: 500px;
+    }
+    
+  }
+  
+  .acteur {
+    max-width: 100px !important;
+    border-radius: 15px !important;
+    padding: 0 !important;
+
+    
+    
+  }
+
+  a {
+    
+    align-items: flex-end;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    img {
+      box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    span {
+      transition: all 0.3s ease-in-out;
+      position: absolute;
+      visibility: hidden;
+      border: solid 3px white;
+      padding: 6px;
+      color: white;
+      box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+      scale:0;
+    }
+
+    &:hover {
+      
+        img {
+            opacity: 0.3;
+        }
+
+        span {
+            visibility: visible;
+            transform: scale(1.2);
+            z-index: 5;
+
+            background: $color;
+        }
+    }
+  }
+
+  .more-actor {
+    font-size: large;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: green;
+      transform: rotate(180deg) scale(1.2);
+    }
+  }
+
+  h4 {
+      color: $color;
+  }
+
+
+  @media (max-width: 768px) {
+    .bas {
+      flex-direction: column;
+    } 
+  
+    .gauche {
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+  

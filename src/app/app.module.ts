@@ -19,6 +19,8 @@ import { ListeRechercheFilmComponent } from './liste-recherche-film/liste-recher
 import { MainPageComponent } from './main-page/main-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PeopleComponent } from './people/people.component';
+import { FilmComponent } from './film/film.component';
+import { SpbComponent } from './spb/spb.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { PeopleComponent } from './people/people.component';
     ItemSlideComponent,
     ListeRechercheFilmComponent,
     MainPageComponent,
-    PeopleComponent
+    PeopleComponent,
+    FilmComponent,
+    SpbComponent
   ],
   imports: [
     BrowserModule,

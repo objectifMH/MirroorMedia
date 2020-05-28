@@ -71,6 +71,19 @@ header {
                 letter-spacing: 1px;
                 text-shadow:$shadow 1px 1px;
                 margin-left: 80px;
+
+                .menu-burger {
+                    right: 20px;
+                    top: 15px;
+                    position: absolute;
+                    font-size: larger;
+                    color: gold;
+                    display: none;
+                }
+
+               .material-icons {
+                   display: block;
+               }
             }
         }
 
@@ -90,6 +103,14 @@ header {
                 font-size: 1.75em;
                 font-family: -webkit-pictograph;
                 color: white;
+
+                .logo-gd {
+                    display: block;
+                }
+
+                .logo-pt {
+                    display: none;
+                }
                 
             }
 
@@ -209,6 +230,9 @@ header {
 .margin-top-90 {
     margin-top: 90px;
 }
+.margin-bottom-90 {
+    margin-bottom: 90px;
+}
 
 
 // Footer // 
@@ -303,4 +327,84 @@ header {
     }
 
 }
+
+
+
+@media (max-width: 480px) {
+    .menu-burger {
+        cursor: pointer;
+        display: block !important;
+    }
+
+    
+    
+    .footer {
+
+        height: 100%;
+        ul {
+            flex-direction: column;
+            padding: 0;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    .menu-burger {
+        cursor: pointer;
+        display: block !important;
+    }
+
+    .material-icons {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .menu-burger.menu-show.material-icons:before {
+        content:'close' !important;
+        color: $back !important; 
+
+        
+    }
+
+    .menu-burger.menu-hide.material-icons:before {
+        content:'menu' !important;
+    }
+
+    .material-icons:hover {
+        transform: scale(1.3) rotate(180deg);
+    }
+
+    section {
+        margin-top: 220px;
+        .mt-50 {
+            margin-top: 0;
+        }
+    }
+    .headContainer {
+        flex-direction: column;
+        background: $color;
+        
+
+        .droit {
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid grey;
+        }
+
+        .centre {
+            padding: 30px;
+            background: $color;
+        }
+
+        .droit {
+            justify-content: center !important;
+            background: $color;
+        }
+    
+    }
+}
+
+
+
+
 

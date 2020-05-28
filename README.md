@@ -1,6 +1,12 @@
+En cours de création ... 
+
 Clé : 5455369db2052a84d1a49d133d25a3983cbd
 
-# Itunes
+deploy : ng build --prod --output-path docs --base-href /MirroorMedia/ 
+
+déployé sur : https://objectifmh.github.io/MirroorMedia/ 
+
+# MirroorMedia
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
 

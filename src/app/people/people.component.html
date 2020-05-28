@@ -5,17 +5,17 @@
     <div class="bas">
       <div class="gauche">
         <img mat-card-image 
-                            src="{{people.profile_path ? this.urlBaseImage+people.profile_path : '../../assets/no_image.png'}}"
+                            src="{{people.profile_path ? this.urlBaseImage+people.profile_path : 'assets/no_image.png'}}"
         alt={{people.name}}>
       </div>
       <div class="droit">
         <div class="">
   
-          
+          <span class="btn btn-success btn-sm  mt-3 mb-2 know-for">{{people.known_for_department}}
+          </span>
   
           <div class="" *ngIf="this.people.biography">
-            {{people.birthday}}  {{ people.deathday ? '/ '+people.deathday : ''}}
-            <h4 class="">Biography:</h4>
+            <h4 class="">Biography:</h4> <span class="bith"> {{people.birthday}}  {{ people.deathday ? '/ '+people.deathday : ''}} </span> 
             <p>{{people.biography}}</p>
           </div>
   
@@ -23,11 +23,13 @@
           <div class="" *ngIf="this.moviesFull.length > 0">
             <h4 class="">Movies:</h4>
             <p>
-              <span *ngFor="let movie of this.movies; let i = index" class="btn btn-info m-1 mt-3">
+              <span *ngFor="let movie of this.movies; let i = index" class="btn btn  m-1 mt-3">
                 
                   
-                  <img mat-card-image class="acteur" src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : '../../assets/no_image.png'}}" alt={{movie.name}} />
-                  <!-- <p>{{movie.title }} </p> -->
+                  <a routerLink="/film/{{movie.id}}/movie" title="Fiche infos de {{movie.title}}">
+                    <span class="span-acteur">{{movie.title }} </span>
+                    <img mat-card-image class="acteur" src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}" alt={{movie.title}} />
+                  </a>
               </span>
               <span *ngIf="this.minMovies" class="material-icons btn btn-warning m-1 mt-3 more-movies" (click)="plusMoinsMovies()">
                 {{plusMovies ? 'add' : 'remove'}}
@@ -37,11 +39,12 @@
           <div  *ngIf="this.tvsFull.length > 0" class="">
             <h4 class="">Tv Show:</h4>
             <p>
-              <span *ngFor="let tv of this.tvs; let i = index" class="btn btn-info m-1 mt-3">
+              <span *ngFor="let tv of this.tvs; let i = index" class="btn m-1 mt-3">
                 
-                  
-                  <img mat-card-image class="acteur" src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : '../../assets/no_image.png'}}" alt={{tv.name}} />
-                  <!-- <p>{{tv.name }} </p> -->
+                  <a routerLink="/film/{{tv.id}}/tv" title="Fiche infos de {{tv.name}}">
+                    <span class="span-acteur">{{tv.name }} </span>
+                    <img mat-card-image class="acteur" src="{{tv.poster_path ? this.urlBaseImage+tv.poster_path : 'assets/no_image.png'}}" alt={{tv.name}} />
+                  </a>
               </span>
               <span *ngIf="this.minTvs" class="material-icons btn btn-warning m-1 mt-3 more-tvs" (click)="plusMoinsTvs()">
                 {{plusTvs ? 'add' : 'remove'}}

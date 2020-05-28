@@ -16,7 +16,7 @@
 
     .myGrid {
 
-        width: 99vw;
+        width: 100vw;
         position: relative;
         //overflow: hidden;
 
@@ -25,6 +25,7 @@
 
             display: flex;
             position: relative;
+            align-items: center;
 
             transition: left 1s ease-in-out;
             animation: slide-animation 44s infinite;
@@ -95,4 +96,15 @@
     100% {left: 0}
 }   */
 
+@media (max-width: 768px) {
 
+    a {
+        background: none !important;
+    }
+    .material-icons {
+        font-size: .45em !important;
+        
+    }
+
+    
+}
