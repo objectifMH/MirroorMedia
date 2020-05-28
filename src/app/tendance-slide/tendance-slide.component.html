@@ -3,13 +3,13 @@
     <h4>{{titre}}</h4>
 
     <section class="myGrid">
-      <a (click)="clickGauche()" *ngIf="isPresentG" class="gauche">
+      <a (click)="clickGauche()"  *ngIf="isPresentG" class="gauche">
         <span class="material-icons">
           arrow_back_ios
         </span>
       </a>
       <div class="fils" [ngStyle]="{'left.px': styleLeft }">
-        <div *ngFor="let film of films">
+        <div *ngFor="let film of films" class="film">
           <app-item-slide [filmItem]="film" (clickFilm)="clickFilmSlide($event)"></app-item-slide>
         </div>
       </div>

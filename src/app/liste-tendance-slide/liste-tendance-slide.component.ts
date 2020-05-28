@@ -44,8 +44,8 @@ export class ListeTendanceSlideComponent implements OnInit {
   onGetDiscoversFilms() {
     this.tmdb.getDiscoverFilms().subscribe(
         data => {
-           this.films = data['results'];
-           this.filmsOther = this.films.slice(6, this.films.length);
+           this.films = data['results'].slice(0, 15);
+           this.filmsOther = data['results'].slice(5, data['results'].length);
            console.log('films dans liste tendance Slide ' , this.films , this.filmsOther);
         },
         err => {

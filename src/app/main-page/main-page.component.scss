@@ -80,6 +80,10 @@ header {
                     color: gold;
                     display: none;
                 }
+
+               .material-icons {
+                   display: block;
+               }
             }
         }
 
@@ -324,6 +328,8 @@ header {
 
 }
 
+
+
 @media (max-width: 480px) {
     .menu-burger {
         cursor: pointer;
@@ -337,6 +343,7 @@ header {
         height: 100%;
         ul {
             flex-direction: column;
+            padding: 0;
         }
     }
 }

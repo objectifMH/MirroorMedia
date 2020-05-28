@@ -17,8 +17,8 @@ export class MainPageComponent implements OnInit {
 
   title = 'NetFilm';
   isFilmAffiche;
-  isSelectedIcon = { home: false, favoris: false, inscription: false, compte: false };
-  isShow = false;
+  isSelectedIcon = { home: true, favoris: false, inscription: false, compte: false };
+  isShow = true;
 
   constructor(private inoutService: InOutService, private router: Router, private tmdb: TmdbService) {
     this.inoutService.setAfficheThisFilm(null);
