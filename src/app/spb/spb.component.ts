@@ -17,6 +17,7 @@ export class SpbComponent implements OnInit {
   results: any =[];
   covers: any = [];
   urlBaseImage: any; 
+  errorConSpb:any;
 
   constructor(private route: ActivatedRoute, private router: Router, private spb: SpbService,
               private tmdb: TmdbService
@@ -43,10 +44,13 @@ export class SpbComponent implements OnInit {
           )        
         }); 
        // console.log("films spb boot :" , this.films , filmsWCover);
-        
+       this.errorConSpb = '';
       }
       ,
-      error => console.log('Une erreur est survenue, On arrive pas à charger les films de la spb bd', error)
+      error => {
+        console.log('Une erreur est survenue, On arrive pas à charger les films de la spb bd', error);
+        this.errorConSpb = "Erreur de connexion à la base de donnée Spring Boot Lks Movies";
+      }
     );
   }
 
