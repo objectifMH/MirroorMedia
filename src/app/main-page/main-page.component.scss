@@ -8,7 +8,7 @@
 
 
 .headerTest {
-    background: pink;
+    //background: pink;
     display: none;
 
     .containerTest {
@@ -349,6 +349,10 @@ header {
 }
 
 @media (max-width: 768px) {
+
+    header {
+        width: 100vw;
+    }
 
     .menu-burger {
         cursor: pointer;
