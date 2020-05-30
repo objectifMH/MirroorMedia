@@ -82,9 +82,23 @@ section {
     max-width: 100px !important;
     border-radius: 15px !important;
     padding: 0 !important;
+  }
 
-    
-    
+  .play {
+    color: gold !important;
+    display: block;
+    visibility: visible !important;
+    border: 0 !important;
+    font-size: xxx-large!important;
+    background: none !important;
+    box-shadow: none !important;
+    transition: ease-in-out 0.3s all !important;
+    top: 52px !important;
+
+    :hover {
+      transform: scale(1.1) !important;
+    }
+
   }
 
   a {
@@ -99,6 +113,7 @@ section {
 
     img {
       box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+      transition: ease-in-out 0.3s all;
     }
 
     span {
@@ -116,6 +131,7 @@ section {
       
         img {
             opacity: 0.3;
+            transform: scale(1.05) ;
         }
 
         span {

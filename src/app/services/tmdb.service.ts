@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SpbService } from './spb.service';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TmdbService {
 
-  urlImage =  'https://image.tmdb.org/t/p/original';
-  apiKey =  '369db2052a84d1a49d133d25a3983cbd';
-  urlBase =  'https://api.themoviedb.org/3/';
+  urlImage = 'https://image.tmdb.org/t/p/original';
+  apiKey = '369db2052a84d1a49d133d25a3983cbd';
+  urlBase = 'https://api.themoviedb.org/3/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private spb: SpbService) { }
 
   public getUrlBaseImg() {
     return this.urlImage;
@@ -20,9 +23,21 @@ export class TmdbService {
     const url = ''.concat(this.urlBase, 'discover/movie?api_key=', this.apiKey, '&language=en-US&sort_by=popularity.desc');
     return this.httpClient.get(url);
   }
+
+  public getTopRatedFilms() {
+    const url = ''.concat(this.urlBase, 'movie/top_rated?api_key=', this.apiKey, '&language=en-US&sort_by=popularity.desc');
+    return this.httpClient.get(url);
+  }
+
+  public getTopRatedTvs() {
+    const url = ''.concat(this.urlBase, 'tv/top_rated?api_key=', this.apiKey, '&language=en-US&sort_by=popularity.desc');
+    return this.httpClient.get(url);
+  }
+  
+
   public getDiscoverTvs() {
     const url = ''.concat(this.urlBase, 'discover/tv?api_key=', this.apiKey,
-                '&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false');
+      '&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false');
     return this.httpClient.get(url);
   }
 
@@ -34,6 +49,7 @@ export class TmdbService {
     return this.httpClient.get(url);
   }
 
+  // Acteurs Informations 
   // Information acteur :
   public getActeurs(id) {
     const url = ''.concat(this.urlBase, 'person/', id, '?api_key=', this.apiKey);
@@ -52,12 +68,24 @@ export class TmdbService {
     return this.httpClient.get(url);
   }
 
+
+
   // https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
   // Les informations sur un film :
   public getInfoFilm(id) {
     const url = ''.concat(this.urlBase, 'movie/', id, '?api_key=', this.apiKey);
     return this.httpClient.get(url);
   }
+
+  // trailers Film / tv
+  // https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key=<<api_key>>&language=en-US
+  public getTrailers(film) {
+    const pref = film.title !== undefined ? 'movie' : 'tv';
+    const url = ''.concat(this.urlBase, pref, '/', film.id, '/videos?api_key=', this.apiKey);
+    return this.httpClient.get(url);
+  }
+
+  
 
   // Les informations sur un tv :
   public getInfoTv(id) {
@@ -69,11 +97,13 @@ export class TmdbService {
   // multi Recherche Movie, TvShow, People :
 
   public search(recherche, page = null) {
-    page = page ? page : 1 ;
+    page = page ? page : 1;
     const url = ''.concat(this.urlBase, 'search/multi?api_key=', this.apiKey,
-                   '&language=en-US&page=', page, '&include_adult=false&query=', recherche);
+      '&language=en-US&page=', page, '&include_adult=false&query=', recherche);
     return this.httpClient.get(url);
   }
+
+
 
 
 }

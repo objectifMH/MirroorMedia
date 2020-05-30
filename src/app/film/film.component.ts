@@ -12,6 +12,7 @@ export class FilmComponent implements OnInit {
   film: any = {};
   directorName: any = '';
   urlBaseImage: any = '';
+  trailers: any = [];
 
   acteursFull: any;
   crewsFull: any;
@@ -47,6 +48,7 @@ export class FilmComponent implements OnInit {
         console.log(this.film);
         this.getActeurs();
 
+
       }
       ,
       error => console.log('Une erreur est survenue, On arrive pas à charger les infos du film' + id, error)
@@ -78,6 +80,13 @@ export class FilmComponent implements OnInit {
         this.director  = this.crewsFull.filter( crew => crew.job === 'Director');
         this.directorName = data['crew'].length !== 0 ? ( this.director[0] ? this.director[0].name : false ) : false;
         this.minActeurs = this.acteursFull.length > 8 ? true : false;
+        this.tmdb.getTrailers(this.film).subscribe(
+          dataTrailers => {
+            console.log(dataTrailers);
+            this.trailers = dataTrailers['results'];
+
+          }
+        )
         
       },
       err => {

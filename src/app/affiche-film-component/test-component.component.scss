@@ -76,12 +76,11 @@ section {
     max-width: 100px !important;
     border-radius: 15px !important;
     padding: 0 !important;
-
-    
-    
   }
 
-  a {
+  
+
+  .a-vignette {
     
     align-items: flex-end;
     text-decoration: none;
@@ -128,6 +127,22 @@ section {
     &:hover {
       background: green;
       transform: rotate(180deg) scale(1.2);
+    }
+  }
+
+  .play {
+    color: gold !important;
+    display: block;
+    visibility: visible !important;
+    border: 0 !important;
+    font-size: xxx-large!important;
+    background: none !important;
+    box-shadow: none !important;
+    transition: ease-in-out 0.3s all !important;
+    top: 52px !important;
+
+    :hover {
+      transform: scale(1.1) !important;
     }
   }
   

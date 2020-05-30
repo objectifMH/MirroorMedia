@@ -22,6 +22,7 @@ export class TestComponentComponent implements OnInit {
   directorName: any;
   director: any;
   minActeurs = false;
+  trailers: any = [];
 
   plus = true;
 
@@ -55,6 +56,13 @@ export class TestComponentComponent implements OnInit {
         this.director  = this.crewsFull.filter( crew => crew.job === 'Director');
         this.directorName = data['crew'].length !== 0 ? ( this.director[0] ? this.director[0].name : false ) : false;
         this.minActeurs = this.acteursFull.length > 8 ? true : false;
+        this.tmdb.getTrailers(this.film).subscribe(
+          dataTrailers => {
+            console.log(dataTrailers);
+            this.trailers = dataTrailers['results'];
+
+          }
+        )
 
 
 

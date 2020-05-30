@@ -37,6 +37,22 @@
             <h4 class="">Synopsis:</h4>
             <p>{{film.overview}}</p>
           </div>
+
+          <div class="">
+            <h4 class="">Trailers:</h4>
+            <p>
+              <span *ngFor="let trail of this.trailers; let i = index" class="btn btn m-1 mt-3">
+                <a href="https://www.youtube.com/watch?v={{trail.key}}" *ngIf="trail.site === 'YouTube'" target="_blank">
+                  <span class="material-icons play">
+                    play_circle_outline
+                  </span>
+                  <img mat-card-image class="acteur" alt={{film.title}}
+                                      src="{{film.poster_path ? this.urlBaseImage+film.poster_path : 'assets/no_image.png'}}"
+                  >
+                </a>
+              </span>
+            </p>
+          </div>
   
   
           <div class="">

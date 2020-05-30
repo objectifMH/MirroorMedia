@@ -9,8 +9,9 @@ import { TmdbService } from '../services/tmdb.service';
 })
 export class ListeTendanceSlideComponent implements OnInit {
   films: any;
-  filmsOther: any;
+  topFilms: any;
   tvs: any;
+  topTvs: any;
 
   constructor(private inoutService: InOutService, private tmdb: TmdbService) { }
 
@@ -19,12 +20,14 @@ export class ListeTendanceSlideComponent implements OnInit {
 
   titre1 = 'Most popular movies';
   titre2 = 'Most popular tv Show';
-  titre3 = 'Movies';
+  titre3 = 'Top rated Movies';
+  titre4 = 'Top rated tv Show';
 
   ngOnInit() {
     this.onGetDiscoversFilms();
     this.onGetDiscoversTvs();
-
+    this.onGetTopRatedFilms();
+    this.onGetTopRatedTvs();
   }
 
   /* detailFilm() {
@@ -45,8 +48,8 @@ export class ListeTendanceSlideComponent implements OnInit {
     this.tmdb.getDiscoverFilms().subscribe(
         data => {
            this.films = data['results'].slice(0, 15);
-           this.filmsOther = data['results'].slice(5, data['results'].length);
-           console.log('films dans liste tendance Slide ' , this.films , this.filmsOther);
+           //this.filmsOther = data['results'].slice(5, data['results'].length);
+           //console.log('films dans liste tendance Slide ' , this.films , this.filmsOther);
         },
         err => {
           console.log(err);
@@ -63,4 +66,26 @@ export class ListeTendanceSlideComponent implements OnInit {
             console.log(err);
           });
       }
+
+      //getTopRatedFilms
+      onGetTopRatedFilms() {
+        this.tmdb.getTopRatedFilms().subscribe(
+            data => {
+               this.topFilms = data['results'];
+            },
+            err => {
+              console.log(err);
+            });
+        } 
+
+        
+        onGetTopRatedTvs() {
+          this.tmdb.getTopRatedTvs().subscribe(
+              data => {
+                 this.topTvs = data['results'];
+              },
+              err => {
+                console.log(err);
+              });
+          } 
 }

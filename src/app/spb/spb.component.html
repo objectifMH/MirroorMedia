@@ -1,21 +1,31 @@
 <section class="head-card">
-    <div *ngIf="this.films" class="mt-50">
+    <div *ngIf="this.covers" class="mt-50 ">
     <h4 class="">Movies</h4>
-        <p>
-            <span *ngFor="let film of this.films; let i = index" class="btn btn-info  m-1 mt-3">
-            <a routerLink="/recherche/{{film.title}}/film" title="Fiche infos de {{film.title}}">
-                <span class="span-acteur btn btn-info  m-1 mt-3">{{film.title }} </span>
-               <!--  <img mat-card-image class="acteur"
-                src="{{movie.poster_path ? this.urlBaseImage+movie.poster_path : 'assets/no_image.png'}}"
-                alt={{movie.title}} /> -->
-            </a>
-            <span class="btn btn-warning m-1 mt-3">{{film.prix}}$
-            </span>
-            <span class="btn btn-danger m-1 mt-3">
-                <i class="material-icons" >check</i>
-            </span>
-            </span>
-        </p>
+        <div class="container">
+
+        
+            <p *ngFor="let film of this.films; let i = index" class=" span-container m-1 mt-3">
+                <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.title}}">
+                    <span class="span-film   m-1 mt-3">{{film.filmdb.title }} </span>
+                    <img mat-card-image class="acteur"
+                    src="{{film.filmdb.poster_path ? this.urlBaseImage+film.filmdb.poster_path : 'assets/no_image.png'}}"
+                    alt={{film.title}} /> 
+                </a>
+                <span class="btn btn-warning m-1 mt-3">{{film.prixdb}}$
+                </span>
+                <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.filmdb.title}}">
+                    <span class="material-icons infos btn btn-info">
+                        info
+                    </span>
+                </a>
+            
+                <span class="btn btn-danger m-1 mt-3">
+                    <i class="material-icons" >add_shopping_cart
+                    </i>
+                </span>
+            </p>
+        </div>
+        
     </div>
 
 
