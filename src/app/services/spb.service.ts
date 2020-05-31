@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SpbService {
 
-  urlSpb =  'http://localhost:8088/';
+  urlSpb =  'https://filmlksapi.herokuapp.com/';
 
   constructor(private httpClient: HttpClient) { }
 
