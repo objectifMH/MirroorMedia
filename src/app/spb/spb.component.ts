@@ -76,7 +76,7 @@ export class SpbComponent implements OnInit {
     this.cart = {
                 quantity: compt,
                 // tslint:disable-next-line:radix
-                total: parseInt(tot.toFixed(2))
+                total: parseFloat(tot.toFixed(2))
               };
     this.article = compt > 0 ? 'articles' : 'article';
   }
