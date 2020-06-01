@@ -16,8 +16,11 @@ export class SpbComponent implements OnInit {
   films: any = [];
   results: any =[];
   covers: any = [];
-  urlBaseImage: any; 
-  errorConSpb:any;
+  urlBaseImage: any;
+  errorConSpb: any;
+  cart = {quantity: 0, total: 0};
+  carts: any = [];
+  article = 'article';
 
   constructor(private route: ActivatedRoute, private router: Router, private spb: SpbService,
               private tmdb: TmdbService
@@ -38,7 +41,7 @@ export class SpbComponent implements OnInit {
         let filmsWCover = this.covers.map(film => {
           this.tmdb.search(film.title).subscribe(
             resCovers => {
-              this.films = [...this.films, {filmdb: resCovers['results'][0] ,iddb : film.id, prixdb : film.prix}];
+              this.films = [...this.films, {filmdb: resCovers['results'][0] ,iddb : film.id, prixdb : film.prix, inCart : false}];
               console.log("covers ",  this.covers, this.films);
             }
           )        
@@ -54,5 +57,27 @@ export class SpbComponent implements OnInit {
     );
   }
 
+  addCart(film) {
+    console.log(film);
+    let index = this.films.indexOf(film);
+    film.inCart = !film.inCart;
+    console.log(index);
+    this.totalCarts();
+  }
 
+  totalCarts() {
+    console.log("dans Total carts");
+    let tot = 0;
+    let compt = 0;
+    this.films.filter( film => film.inCart === true).map(film =>  {
+      compt++;
+      tot = film.prixdb + tot;
+    });
+    this.cart = {
+                quantity: compt,
+                // tslint:disable-next-line:radix
+                total: parseInt(tot.toFixed(2))
+              };
+    this.article = compt > 0 ? 'articles' : 'article';
+  }
 }

@@ -29,147 +29,89 @@ h4 {
 
 section {
 
-    
+    .material-icons.shopping {
+        color: red;
+        font-size: x-large;
+    }
+
+    .btn.shopping {
+        text-align: center;
+        padding: 6px 12px;
+        border: 3px solid red;
+        float: right;
+        color: white;
+        font-family: "Gill Sans", sans-serif;
+        position: fixed;
+        right: 30px;
+    }
     .container {
         display: flex;
         align-items: center;
         flex-direction: row;
         flex-wrap: wrap !important;
-    }
 
-    td {
-        margin: auto;
-        padding: 5px;
 
-        color: #56c3bd;
-        font-weight: bolder;
-    }
-
-    tr {
-        transition: all 0.3s ease-in-out;
         
+    }
 
-        &:hover {
-            transform: scale(1.1);
-            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    table {
+        width: 70%;
+        margin: auto;
+
+        td {
+            margin: auto;
+            padding: 5px;
+            font-size: large;
+    
+            color: #56c3bd;
+            font-weight: bolder;
+        }
+    
+        tr {
+            transition: all 0.3s ease-in-out;
+            
+    
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+            }
+    
         }
 
     }
 
+    
+
     a {
 
         img {
-            max-height: 100px;
+            max-height: 150px;
         }
     }
 
     .material-icons {
-        transition: ease-in-out all 0.3s;
-        cursor: pointer;
-
-        &:hover {
-            transform: scale(1.35);
-        }
-    }
-
-    .material-icons.add {
-        color: orange;
-    }
-
-   /*  p {
-
-        position: relative;
-        //background: green;
-
-        .btn-warning, .btn-danger {
-            display: none;
-            position: absolute;
-            
-        }
-
-        &:hover {
-            .btn-warning {
-                cursor: pointer;
-                display: block;
-                top: -35px;
-                left: -15px;
-                z-index: 5;
-            }
-
-            .btn-danger {
-                cursor: pointer;
-                display: block;
-                top: -20px;
-                right: -20px;
-                z-index: 5;
-            }
-        }
-    }
-
-    img {
-        max-width: 150px;
-    }
-
-    a {
-    
-        align-items: flex-end;
-        text-decoration: none;
-        color: white;
-        transition: all 0.3s ease-in-out;
-        position: relative;
-        display: flex;
-        justify-content: center;
-    
-        img {
-          box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-          transition: all 0.3s ease-in-out;
-        }
-    
-        span {
-          transition: all 0.3s ease-in-out;
-          position: relative;
-          visibility: visible;
-          border: solid 3px white;
-          padding: 6px;
-          color: white;
-          box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-          //scale:0;
-        }
-    
-        &:hover {
-          
-          img {
-            opacity: 0.3;
-            transform: scale(1.2);
-          }
-    
-          span {
-            visibility: visible;
-            transform: scale(1.2);
-            z-index: 5;
-            background: $color;
-          }
-        }
-      }
-      
-
-    .pagination {
-        color: $color;
         
+        cursor: pointer;
+    }
 
-        a {
-            color: $color;
-
-           
+    .cart-add, .cart-check {
+        transition: ease-in-out all 0.3s;
+        &:hover {
+            transform:  rotate(360deg) scale(1.35);     
         }
 
-        .active {
-            background: $color;
-            color: $back;
-            transform: scale(1.2);
-            z-index: 5;
-        }
-    } */
+    }
 
+    .cart-add:before {
+        content:'add_circle' !important;
+        color: orange !important; 
+    }
+
+    .cart-check:before {
+        content:'check_circle' !important;
+        color: green !important;
+    }
+
+  
 
 }

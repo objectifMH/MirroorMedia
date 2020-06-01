@@ -1,11 +1,17 @@
 <section class="head-card">
     <h1 >Spring Boot Movies DB</h1>
-    <h4 *ngIf="this.errorConSpb.length > 0" class="text-center" class="h4-error"> {{errorConSpb}} </h4>
+    <h4 *ngIf="this.errorConSpb" class="text-center" class="h4-error"> {{errorConSpb}} </h4>
     <div *ngIf="this.covers.length > 0" class="mt-50 ">
-    <h4 class="">Movies</h4>
+    <h4 class="">Movies 
+        <span class="btn btn-danger shopping">
+            <i class="material-icons shopping" >add_shopping_cart
+            </i>
+            {{cart.quantity}} {{article}}, ${{cart.total}} 
+        </span>
+    </h4>
+        
         <div class="container">
-
-            <table>
+             <table>
                 <!-- <th>img</th><th>titre</th><th>prix</th><th>info</th><th>add</th> -->
                 <tr *ngFor="let film of this.films; let i = index" class=" span-container ">
                     <td>
@@ -30,12 +36,13 @@
                         </a>
                     </td>
                     <td>
-                        <span class="btn ">
-                            <i class="material-icons add" ><!-- add_shopping_cart --> add_circle
-                            </i>
+                        <span  class="material-icons" [ngClass]="film.inCart ?  'cart-check' : 'cart-add'" (click)="addCart(film)">
+                            
                         </span>
 
+
                     </td>
+                    
                 </tr>
 
             </table>
