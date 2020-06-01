@@ -1,87 +1,11 @@
-/* @import '../../styles.scss';
+@import '../../styles.scss';
 
-
-section {
-    width: 90vw;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-
-    h4 {
-        color: $color;
-        color: #56c3bd;
-        text-shadow: rgba(0, 0, 0, 0.75) 1px 1px;
-        font-weight: large;
-        margin: 5px 20px;
-    }
+h1 {
+    color: $color;
+    text-shadow: rgba(0, 0, 0, 0.75) 1px 1px;
+    font-weight: large;
+    margin: 5px 20px;
 }
-.container {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap !important;
-}
-span {
-    transition: all 0.3s ease-in-out;
-    position: absolute;
-    border: solid 3px white;
-    padding: 6px;
-    color: white;
-    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    background: $back;
-    bottom: -28px;
-    left: -124px;
-
-  }
-
-  .material-icons {
-      color: white;
-      cursor: pointer;
-  }
-
-  .infos {
-      position: relative;
-      top: -15px;
-  }
-
-  a {
-      position: relative;
-
-
-    span.span-film {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        border: solid 3px white;
-        padding: 6px;
-        color: white;
-        box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-        background: $color;
-
-    }
-    img {
-        max-width: 150px !important;
-    }
-  }
-
-  p {
-      position: relative;
-
-    transition: ease-in-out all 0.3s;
-    &:hover {
-        //border: 2px solid red;
-        transform: scale(1.12);
-        img {
-            
-            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-        }
-    }
-  }
-   */
-
-   @import '../../styles.scss';
-
 h4 {
 
     color: $color;
@@ -113,7 +37,46 @@ section {
         flex-wrap: wrap !important;
     }
 
-    p {
+    td {
+        margin: auto;
+        padding: 5px;
+
+        color: #56c3bd;
+        font-weight: bolder;
+    }
+
+    tr {
+        transition: all 0.3s ease-in-out;
+        
+
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        }
+
+    }
+
+    a {
+
+        img {
+            max-height: 100px;
+        }
+    }
+
+    .material-icons {
+        transition: ease-in-out all 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.35);
+        }
+    }
+
+    .material-icons.add {
+        color: orange;
+    }
+
+   /*  p {
 
         position: relative;
         //background: green;
@@ -164,13 +127,13 @@ section {
     
         span {
           transition: all 0.3s ease-in-out;
-          position: absolute;
-          visibility: hidden;
+          position: relative;
+          visibility: visible;
           border: solid 3px white;
           padding: 6px;
           color: white;
           box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-          scale:0;
+          //scale:0;
         }
     
         &:hover {
@@ -206,7 +169,7 @@ section {
             transform: scale(1.2);
             z-index: 5;
         }
-    }
+    } */
 
 
 }
