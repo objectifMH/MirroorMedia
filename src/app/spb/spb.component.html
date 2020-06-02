@@ -1,31 +1,51 @@
 <section class="head-card">
-    
-    <h4 *ngIf="this.errorConSpb.length > 0" class="text-center" class="h4-error"> {{errorConSpb}} </h4>
+    <h1 >Spring Boot Movies DB</h1>
+    <h4 *ngIf="this.errorConSpb" class="text-center" class="h4-error"> {{errorConSpb}} </h4>
     <div *ngIf="this.covers.length > 0" class="mt-50 ">
-    <h4 class="">Movies</h4>
-        <div class="container">
-
+    <h4 class="">Movies 
+        <span class="btn btn-danger shopping">
+            <i class="material-icons shopping" >add_shopping_cart
+            </i>
+            {{cart.quantity}} {{article}}, ${{cart.total}} 
+        </span>
+    </h4>
         
-            <p *ngFor="let film of this.films; let i = index" class=" span-container m-1 mt-3">
-                <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.title}}">
-                    <span class="span-film   m-1 mt-3">{{film.filmdb.title }} </span>
-                    <img mat-card-image class="acteur"
-                    src="{{film.filmdb.poster_path ? this.urlBaseImage+film.filmdb.poster_path : 'assets/no_image.png'}}"
-                    alt={{film.title}} /> 
-                </a>
-                <span class="btn btn-warning m-1 mt-3">{{film.prixdb}}$
-                </span>
-                <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.filmdb.title}}">
-                    <span class="material-icons infos btn btn-info">
-                        info
-                    </span>
-                </a>
-            
-                <span class="btn btn-danger m-1 mt-3">
-                    <i class="material-icons" >add_shopping_cart
-                    </i>
-                </span>
-            </p>
+        <div class="container">
+             <table>
+                <!-- <th>img</th><th>titre</th><th>prix</th><th>info</th><th>add</th> -->
+                <tr *ngFor="let film of this.films; let i = index" class=" span-container ">
+                    <td>
+                        <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.title}}">
+                            
+                            <img mat-card-image class="acteur"
+                            src="{{film.filmdb.poster_path ? this.urlBaseImage+film.filmdb.poster_path : 'assets/no_image.png'}}"
+                            alt={{film.title}} /> 
+                        </a>
+                    </td>
+                    <td>
+                        <span class="span-film  ">{{film.filmdb.title }} </span>
+                    </td>
+                    <td>
+                        <span class="btn btn-warning">{{film.prixdb}}$</span>
+                    </td>
+                    <td>
+                        <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.filmdb.title}}">
+                            <span class="material-icons infos ">
+                                info
+                            </span>
+                        </a>
+                    </td>
+                    <td>
+                        <span  class="material-icons" [ngClass]="film.inCart ?  'cart-check' : 'cart-add'" (click)="addCart(film)">
+                            
+                        </span>
+
+
+                    </td>
+                    
+                </tr>
+
+            </table>
         </div>
         
     </div>

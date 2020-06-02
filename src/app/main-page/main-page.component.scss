@@ -207,21 +207,14 @@ header {
 
 
 .head-card {
-    //display: flex; 
-    //visibility: hidden;
-    //justify-content: center; 
-    
     margin-top: 90px;
-    transition: left 1s ease-in-out;
-
-    
+    transition: left 1s ease-in-out; 
 }
 
 .droit {
 
     a:active { color: $color    !important; } 
     li:hover { 
-        //border : 2px solid $color !important;
         border-bottom: 3px solid white !important;
     
     }
@@ -234,23 +227,9 @@ header {
     margin-bottom: 90px;
 }
 
-
-// Footer // 
-
-/* footer {
-    color: #d3d3d3; 
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    font-size: smaller;
-    width: 100%;
-    background:#232323;
-} */
-
 .footer {
     height: 100px;
     background: $back;
-    //width: 100%;
     position: absolute;
     left: 0;
     bottom: 0;
@@ -281,8 +260,6 @@ header {
                 color: $color;
                 font-weight: bolder;
                 font-size: x-large;
-
-
             }
 
             img {
@@ -294,17 +271,12 @@ header {
                     font-size: 24px;
                     padding: 5px;
                     color: $color;
-                    //transform: scale(1.59);
-                    
-                
                     transition: all .2s ease-in-out;
                 
                     &:hover {
                         color: red;
                         transform: scale(1.29);
-                        text-shadow: $shadow 1px 1px;
-                        //font-size: 26px;
-                
+                        text-shadow: $shadow 1px 1px;                
                     }
                 }
             }
@@ -314,7 +286,6 @@ header {
     }
 
     .footer-foot {
-        //position: absolute;
         font-size: small;
         bottom: 15px;
         text-align: center;
