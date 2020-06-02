@@ -17,7 +17,7 @@ export class SpbComponent implements OnInit {
   results: any =[];
   covers: any = [];
   urlBaseImage: any; 
-  errorConSpb:any;
+  errorConSpb:any = '';
 
   constructor(private route: ActivatedRoute, private router: Router, private spb: SpbService,
               private tmdb: TmdbService

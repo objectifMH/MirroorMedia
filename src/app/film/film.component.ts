@@ -13,6 +13,7 @@ export class FilmComponent implements OnInit {
   directorName: any = '';
   urlBaseImage: any = '';
   trailers: any = [];
+  urlBackDrop: string = '';
 
   acteursFull: any;
   crewsFull: any;
@@ -46,6 +47,7 @@ export class FilmComponent implements OnInit {
       result => {
         this.film = result;
         console.log(this.film);
+        this.urlBackDrop = this.film.backdrop_path ? this.urlBaseImage+this.film.backdrop_path : '';
         this.getActeurs();
 
 
