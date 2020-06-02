@@ -14,6 +14,11 @@
         </span>
     </p>
     </div>
+    <div  *ngIf="!this.movies " class="mt-50 container d-flex justify-content-center">
+        <div class="spinner-border text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
 
     <div *ngIf="this.tvs.length" class="mt-50">
         <h4 class="">Tv Shows</h4>
@@ -28,6 +33,12 @@
         </span>
         </p>
     </div>
+    <div  *ngIf="!this.tvs " class="mt-50 container d-flex justify-content-center">
+        <div class="spinner-border text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
+
 
     <div class="mt-50" *ngIf="this.peoples.length > 0">
         <h4 class="">Peoples</h4>
@@ -43,6 +54,11 @@
             </a>
         </span>
         </p>
+    </div>
+    <div  *ngIf="!this.peoples " class="mt-50 container d-flex justify-content-center">
+        <div class="spinner-border text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
     </div>
 
     <!-- Center-aligned -->
@@ -62,3 +78,4 @@
 
 
 </section>
+

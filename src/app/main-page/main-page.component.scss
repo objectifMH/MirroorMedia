@@ -106,10 +106,13 @@ header {
 
                 .logo-gd {
                     display: block;
+                    color: $color;
+                    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
                 }
 
                 .logo-pt {
                     display: none;
+                    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
                 }
                 
             }
@@ -302,6 +305,8 @@ header {
 
 
 @media (max-width: 480px) {
+
+    
     .menu-burger {
         cursor: pointer;
         display: block !important;
@@ -317,11 +322,14 @@ header {
             padding: 0;
         }
     }
+
+    .logo-gd {
+        color: white;
+    }
 }
 
 @media (max-width: 768px) {
 
-    
 
     .menu-burger {
         cursor: pointer;
@@ -373,6 +381,12 @@ header {
             justify-content: center !important;
             background: $color;
         }
+
+        
+    .logo-gd {
+        color: white !important;
+        
+    }
     
     }
 }

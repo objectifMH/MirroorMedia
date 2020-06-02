@@ -1,7 +1,11 @@
 
 <div class="item-container">
     <p><span>{{filmItem.title ? filmItem.title : filmItem.name}}</span></p>
-    <img src={{cheminImgSrc}}{{filmItem.poster_path}}>
+    <img *ngIf="filmItem" src={{cheminImgSrc}}{{filmItem.poster_path}}>
+    <div *ngIf="!filmItem" class="spinner-border text-info d-flex justify-content-center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    
     <span class="material-icons" (click)="clickedFilm()" title={{filmItem.name}}>
         keyboard_arrow_down
     </span>

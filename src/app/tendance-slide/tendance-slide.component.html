@@ -2,7 +2,7 @@
   <section class="container-myGrid">
     <h4>{{titre}}</h4>
 
-    <section class="myGrid">
+    <section class="myGrid" *ngIf="this.films ">
       <a (click)="clickGauche()"  *ngIf="isPresentG" class="gauche">
         <span class="material-icons">
           arrow_back_ios
@@ -20,6 +20,11 @@
       </a>
      
     </section>
+    <div  *ngIf="!this.films " class="mt-50 container d-flex justify-content-center">
+      <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+  </div>
 </section>
 <section class="head-card" *ngIf="isFilmAffiche">
   <app-test-component [film]="isFilmAffiche" (isCloseAffiche)="closeAfficheFilm($event)"></app-test-component>
