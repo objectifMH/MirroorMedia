@@ -7,7 +7,7 @@ import { Film } from 'src/film';
 })
 export class InOutService {
 
-  listeFilmBD = [
+  /* listeFilmBD = [
     {id: 0, titre: 'Gattaca', realisateur: 'Andrew Niccol', acteurs: ['Ethan Hawke', 'Uma Thurman'], 
     // tslint:disable-next-line:max-line-length
     description: 'A genetically inferior man assumes the identity of a superior one in order to pursue his lifelong dream o space travel.', cover: '0.jpg'},
@@ -17,7 +17,7 @@ export class InOutService {
     description: 'Dans un futur proche, la Terre est de moins en moins accueillante pour l\'humanité qui connaît une grave crise alimentaire. Le film raconte les aventures d\'un groupe d\'explorateurs qui utilise une faille récemment découverte dans l\'espace-temps afin de repousser les limites humaines et partir à la conquête des distances astronomiques dans un voyage interstellaire.', cover: '1.jpg'},
     {id: 2, titre: 'Dark Knight', realisateur: '', acteurs: [], description: '', cover: '2.jpg'},
     // tslint:disable-next-line:max-line-length
-   ];
+   ]; */
 
   filmAAfficher: BehaviorSubject<Film>;
   isAffiche: BehaviorSubject<boolean>;
@@ -29,6 +29,9 @@ export class InOutService {
   tvs: BehaviorSubject<any>;
   peoples: BehaviorSubject<any>;
 
+  cart: BehaviorSubject<any>;
+  carts: BehaviorSubject<any>;
+
   constructor() {
     this.isAffiche = new BehaviorSubject<boolean>(false);
     this.filmAAfficher = new BehaviorSubject<Film>(null);
@@ -38,10 +41,13 @@ export class InOutService {
     this.movies = new BehaviorSubject<any>(null);
     this.tvs = new BehaviorSubject<any>(null);
     this.peoples = new BehaviorSubject<any>(null);
+
+    this.cart = new BehaviorSubject<any>({quantity: 0, total: 0});
+    this.carts = new BehaviorSubject<any>(null);
   }
 
   public getListFilmBD() {
-    return this.listeFilmBD;
+    //return this.listeFilmBD;
   }
 
   public getAfficheFilm() {
@@ -138,6 +144,23 @@ export class InOutService {
 
   public getSearchPeoples() {
     return this.peoples.asObservable();
+  }
+
+  public setCart(resultat) {
+    this.cart.next(resultat);
+  }
+
+  public getCart() {
+    return this.cart.asObservable();
+  }
+
+  public setCarts(resultat) {
+    //console.log("on fixe cart", resultat);
+    this.carts.next(resultat);
+  }
+
+  public getCarts() {
+    return this.carts.asObservable();
   }
 
 }

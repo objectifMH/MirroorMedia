@@ -195,7 +195,27 @@ header {
 
                             
                         }
+
+
+                        .a-list-spb {
+                            position: relative;
+                            
+
+                            .span-list-spb {
+                                position: absolute;
+                                top: -16px;
+                                right: -41px;
+                            }
+                        }
+                        
                     }
+                }
+
+                .shopping {
+                    margin-right: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
 
@@ -328,7 +348,7 @@ header {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 990px) { //768
 
 
     .menu-burger {

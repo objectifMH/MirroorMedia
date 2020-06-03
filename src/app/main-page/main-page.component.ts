@@ -19,14 +19,16 @@ export class MainPageComponent implements OnInit {
   isFilmAffiche;
   isSelectedIcon = { home: true, favoris: false, inscription: false, compte: false, spb: false };
   isShow = true;
+  cart = {quantity: 0, total: 0};
 
   constructor(private inoutService: InOutService, private router: Router, private tmdb: TmdbService) {
-    this.inoutService.setAfficheThisFilm(null);
+    //this.inoutService.setAfficheThisFilm(null);
   }
 
 
   ngOnInit() {
-    this.afficheThisFilm();
+    //this.afficheThisFilm();
+    this.recupereSpb();
   }
 
   clickIcon(li) {
@@ -39,10 +41,9 @@ export class MainPageComponent implements OnInit {
       }
 
     }
-    //console.log(this.isSelectedIcon);
   }
 
-  afficheThisFilm() {
+  /* afficheThisFilm() {
     console.log('Dans App.component.ts : afficheThisFilm on souscrit à l observable > ');
     this.inoutService.getAfficheThisFilm().subscribe(
       data => {
@@ -53,7 +54,7 @@ export class MainPageComponent implements OnInit {
         console.log('erreur observable dans app.coments', err);
       }
     );
-  }
+  } */
 
   clickSearch(element: any) {
     if (  element.value ) {
@@ -65,6 +66,18 @@ export class MainPageComponent implements OnInit {
   showMenu() {
     this.isShow = ! this.isShow;
     console.log(this.isShow);
+  }
+
+  recupereSpb() {
+    this.inoutService.getCart().subscribe(
+      data => {
+        console.log('Dans main.ts : dans l observable affiche this film >', data);
+        this.cart = data;
+      },
+      err => {
+        console.log('erreur observable dans main.coments', err);
+      }
+    );
   }
 
 }

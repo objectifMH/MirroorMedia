@@ -58,13 +58,22 @@
           </li>
           <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">
-            <a routerLink="/spb" title="Spb">
+            <a routerLink="/spb" title="Spb" class="a-list-spb">
               <span class="material-icons">
                 cloud
               </span>
+              
+              <span class="badge badge-pill badge-success span-list-spb">{{cart.quantity}}</span>
+
             </a>
           </li>
+          
         </ul>
+        <span  *ngIf="cart.quantity > 0" class="btn btn-danger shopping">
+          <i class="material-icons shopping" >add_shopping_cart
+          </i>
+          ({{cart.quantity}}) ${{cart.total}} 
+        </span>
       </div>
     </div>
   </header>
