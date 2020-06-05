@@ -2,8 +2,13 @@
     <h1>Spring Boot Movies DB</h1>
     <h4 *ngIf="this.errorConSpb" class="text-center" class="h4-error"> {{errorConSpb}} </h4>
     <div *ngIf="this.covers.length > 0" class="mt-50 ">
+        <div class="alert alert-info alert-dismissible container">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <span>Base de donnée <strong> Spring Boot H2</strong>  </span>.
+        </div>
         <h4 class="">Movies</h4>
         <div class="container">
+            
             <table>
                 <!-- <th>img</th><th>titre</th><th>prix</th><th>info</th><th>add</th> -->
                 <tr *ngFor="let film of this.films; let i = index" class=" span-container ">
