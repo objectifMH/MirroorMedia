@@ -15,7 +15,6 @@ export class SpbComponent implements OnInit {
 
 
   films: any = [];
-  results: any = [];
   covers: any = [];
   urlBaseImage: any;
   errorConSpb: any;
@@ -30,30 +29,21 @@ export class SpbComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("je suis passé dans nooninit");
     this.recupereCarts();
-    console.log(this.films)
-
-
   }
 
   getAllMovies() {
-    console.log("je suis passé dans getAlMovies");
     this.spb.getAllMovies().subscribe(
       result => {
 
         this.covers = result['_embedded']['movies'];
-        this.results = result['_embedded']['movies'];
-
         let filmsWCover = this.covers.map(film => {
-          this.tmdb.search(film.title).subscribe(
+            this.tmdb.search(film.title).subscribe(
             resCovers => {
               this.films = [...this.films, { filmdb: resCovers['results'][0], iddb: film.id, prixdb: film.prix, inCart: false }];
-              //console.log("covers ", this.covers, this.films);
             }
           )
         });
-        // console.log("films spb boot :" , this.films , filmsWCover);
         this.errorConSpb = '';
       }
       ,
@@ -67,13 +57,11 @@ export class SpbComponent implements OnInit {
   addCart(film) {
     let index = this.films.indexOf(film);
     film.inCart = !film.inCart;
-    console.log(this.films)
     this.inout.setCarts(this.films);
 
   }
 
   totalCarts() {
-    console.log("dans Total carts");
     let tot = 0;
     let compt = 0;
 
@@ -96,7 +84,6 @@ export class SpbComponent implements OnInit {
     console.log(this.films);
     this.inout.getCarts().subscribe(
       data => {
-        console.log(">>>>>>>>>>>>>>>>>>><", data);
         if (data) {
 
           this.films = data;

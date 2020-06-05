@@ -320,6 +320,10 @@ header {
         color: $color;
     }
 
+    .cd-show, .cd-fade {
+        display: flex;
+    }
+
 }
 
 
@@ -332,7 +336,16 @@ header {
         display: block !important;
     }
 
-    
+    li {
+        margin: 0px 1px !important;
+        padding: 3px 2px  !important;
+        color: green  !important;
+    }
+
+    .shopping {
+        font-size: small  !important;
+        margin: 0  !important;
+    }
     
     .footer {
 
@@ -345,6 +358,14 @@ header {
 
     .logo-gd {
         color: white;
+    }
+
+    .cd-show {
+        display: flex !important;
+    }
+
+    .cd-fade {
+        display: none !important;
     }
 }
 
@@ -403,12 +424,21 @@ header {
         }
 
         
-    .logo-gd {
-        color: white !important;
+        .logo-gd {
+            color: white !important;
+        }
+
+        .cd-show {
+            display: flex !important;
+        }
+
+        .cd-fade {
+            display: none !important;
+        }
+
         
     }
-    
-    }
+
 }
 
 

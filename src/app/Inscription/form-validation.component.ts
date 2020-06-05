@@ -31,8 +31,7 @@ export class FormValidationComponent implements OnInit {
     this.inoutService.setAfficheThisFilm(null);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onSubmit() {
     this.monForm.markAllAsTouched();

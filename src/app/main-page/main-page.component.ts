@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InOutService } from '../services/in-out.service';
 import { of } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { TmdbService } from '../services/tmdb.service';
 
@@ -15,19 +15,20 @@ export class MainPageComponent implements OnInit {
   faLinkedinIn = faLinkedinIn;
   faGithub = faGithub;
 
-  title = 'NetFilm';
   isFilmAffiche;
-  isSelectedIcon = { home: true, favoris: false, inscription: false, compte: false, spb: false };
+  isSelectedIcon = {home: false, favoris: false, inscription: false, compte: false, spb: false };
   isShow = true;
   cart = {quantity: 0, total: 0};
 
-  constructor(private inoutService: InOutService, private router: Router, private tmdb: TmdbService) {
-    //this.inoutService.setAfficheThisFilm(null);
+  constructor(private inoutService: InOutService, private route: ActivatedRoute, private router: Router, private tmdb: TmdbService) {
   }
 
 
   ngOnInit() {
-    //this.afficheThisFilm();
+    // On fixe la bonne icone au niveau de la navbar en fonction du chemin 
+    const chemin = window.location.pathname.substr(1);
+    this.isSelectedIcon[chemin] = true;
+    
     this.recupereSpb();
   }
 
@@ -43,19 +44,6 @@ export class MainPageComponent implements OnInit {
     }
   }
 
-  /* afficheThisFilm() {
-    console.log('Dans App.component.ts : afficheThisFilm on souscrit à l observable > ');
-    this.inoutService.getAfficheThisFilm().subscribe(
-      data => {
-        console.log('Dans App.component.ts : dans l observable affiche this film >', data);
-        this.isFilmAffiche = data;
-      },
-      err => {
-        console.log('erreur observable dans app.coments', err);
-      }
-    );
-  } */
-
   clickSearch(element: any) {
     if (  element.value ) {
     this.router.navigate(['/recherche/' + element.value + '/1']);
@@ -68,10 +56,10 @@ export class MainPageComponent implements OnInit {
     console.log(this.isShow);
   }
 
+  // On récupère la cart gràce au service
   recupereSpb() {
     this.inoutService.getCart().subscribe(
       data => {
-        console.log('Dans main.ts : dans l observable affiche this film >', data);
         this.cart = data;
       },
       err => {
