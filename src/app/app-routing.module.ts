@@ -6,6 +6,7 @@ import { ListeRechercheFilmComponent } from './liste-recherche-film/liste-recher
 import { PeopleComponent } from './people/people.component';
 import { FilmComponent } from './film/film.component';
 import { SpbComponent } from './spb/spb.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'people/:id', component: PeopleComponent},
   {path: 'film/:id/:type', component: FilmComponent},
   {path: 'spb', component: SpbComponent},
+  {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: '/home' },
 
   /* {path: '**', redirectTo: '/' } */

@@ -50,9 +50,12 @@
           </li>
           <li #lic title="Son Compte" data-icon="compte" (click)="clickIcon(lic)"
             [ngClass]="{'iconSelected':isSelectedIcon.compte}">
-            <span class="material-icons">
-              account_box
-            </span>
+           
+            <a routerLink="/login" title="Login">
+              <span class="material-icons">
+                account_box
+              </span>
+            </a>
           </li>
           <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">

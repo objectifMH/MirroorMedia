@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PeopleComponent } from './people/people.component';
 import { FilmComponent } from './film/film.component';
 import { SpbComponent } from './spb/spb.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { SpbComponent } from './spb/spb.component';
     MainPageComponent,
     PeopleComponent,
     FilmComponent,
-    SpbComponent
+    SpbComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

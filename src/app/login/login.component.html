@@ -1,0 +1,15 @@
+<div class="myForm">
+    
+    <form [formGroup]="monForm">
+        <h3 class="login">Login</h3>
+        <div class="form-group posRelative ">
+            <input type="text" class="form-control" formControlName="pseudo" id="pseudoInput" placeholder="Pseudo" >
+        </div>
+        <div class="form-group posRelative">
+            <input type="password" class="form-control" formControlName="mdp" id="mdpInput" placeholder="Mot de Passe"
+            required>
+            <i class="material-icons  posAbsolute  " ></i>
+        </div>
+        <button type="submit" class="btn" (click)="onSubmit()" [ngClass]="{'test':errorInput}">Envoyer</button>
+    </form>
+</div>

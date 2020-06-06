@@ -23,9 +23,12 @@ export class SpbComponent implements OnInit {
   carts: any = [];
   article = 'article';
 
+  isFade: boolean = false; 
+
   constructor(private route: ActivatedRoute, private router: Router, private spb: SpbService,
     private tmdb: TmdbService, private inout: InOutService) {
     this.urlBaseImage = this.tmdb.getUrlBaseImg();
+    this.isFadeShow();
   }
 
   ngOnInit() {
@@ -100,6 +103,11 @@ export class SpbComponent implements OnInit {
     );
   }
 
+  isFadeShow() {
+    setTimeout(() => {
+      this.isFade = true; 
+    }, 10000)
+  }
 
 
 }
