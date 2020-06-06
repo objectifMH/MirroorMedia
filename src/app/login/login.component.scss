@@ -68,27 +68,21 @@ input.ng-touched.ng-valid + .material-icons:before {
         input {
             background: $color;
             color: white; 
-
             border-radius: 0;
-
-            
 
             &::placeholder {
                 color: #d3d3d3; 
                 font-weight: lighter;
                 font-size: small;
-            }
-        
-        
-            
+            }        
         }
 
         button {
             //background: white;
-            border: 1px solid white;
+            border: 2px solid $color;
             padding: 8px 12px;
             border-radius: 0;
-            color: black; 
+            color: $color; 
 
             transition: all .4s ease-in-out;
 
