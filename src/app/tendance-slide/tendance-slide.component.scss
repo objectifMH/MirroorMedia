@@ -2,9 +2,8 @@
 
 // **********   myGrid  **********
 .container-myGrid {
-
-
-    margin-top: 40px;
+    margin-top: 40px; 
+    overflow: hidden !important;
 
     h4 {
         color: $color; 
@@ -16,7 +15,7 @@
 
     .myGrid {
 
-        //width: 99vw;
+        width: 100vw;
         position: relative;
         overflow: hidden !important;
 

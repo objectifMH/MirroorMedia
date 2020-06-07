@@ -18,7 +18,7 @@ export class TestComponentComponent implements OnInit {
 
   acteursFull: any;
   crewsFull: any;
-  acteurs: any;
+  acteurs = [];
   directorName: any;
   director: any;
   minActeurs = false;

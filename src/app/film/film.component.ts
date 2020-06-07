@@ -17,7 +17,7 @@ export class FilmComponent implements OnInit {
 
   acteursFull: any;
   crewsFull: any;
-  acteurs: any;
+  acteurs = [];
   director: any;
   minActeurs = false;
 
