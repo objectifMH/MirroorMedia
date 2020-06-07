@@ -42,7 +42,7 @@
         </div>
 
 
-        <div class="">
+        <div class="" *ngIf="acteurs.length>0">
           <h4 class="">Actors:</h4>
           <p>
             <span *ngFor="let acteur of this.acteurs; let i = index" class="btn btn m-1 mt-3">
