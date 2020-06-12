@@ -8,6 +8,8 @@
           <a routerLink="/home" title="Home">
             <span class="logo-bottom logo-gd">8Mirr∞r</span>
             <span class="logo-bottom logo-pt">8M∞</span>
+            auth : {{isAuthenticated}}
+            user : {{userAuth |json}}
           </a>
           <span class="material-icons menu-burger" 
                 [ngClass]="{'menu-show': isShow , 'menu-hide': !isShow} " (click)="showMenu()">
@@ -48,29 +50,35 @@
             </a>
 
           </li>
-          <li #lic title="Son Compte" data-icon="compte" (click)="clickIcon(lic)"
-            [ngClass]="{'iconSelected':isSelectedIcon.compte}">
+          <li #lilo title="login" data-icon="login" (click)="clickIcon(lilo)"
+            [ngClass]="{'iconSelected':isSelectedIcon.login , 'd-none': isAuthenticated}">
            
             <a routerLink="/login" title="Login">
-              <span class="material-icons">
-                account_box
+              <span class="material-icons"  >
+                login
               </span>
             </a>
           </li>
-          <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)"
+          <li #lilog title="logout" data-icon="logout" (click)="clickIcon(lilog)"
+            [ngClass]="{'iconSelected':isSelectedIcon.logout ,  'd-none': !isAuthenticated}">
+              <span class="material-icons" (click)="logOut()">
+                logout
+              </span>
+          </li>
+          <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="isAuthenticated"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">
             <a routerLink="/spb" title="Spb" class="a-list-spb">
               <span class="material-icons">
                 cloud
               </span>
               
-              <span class="badge badge-pill badge-success span-list-spb">{{cart.quantity}}</span>
+              <span  class="badge badge-pill badge-success span-list-spb">{{cart.quantity}}</span>
 
             </a>
           </li>
           
         </ul>
-        <span  *ngIf="cart.quantity > 0" class="btn btn-danger shopping">
+        <span  *ngIf="cart.quantity > 0 && isAuthenticated" class="btn btn-danger shopping">
           <i class="material-icons shopping" >add_shopping_cart
           </i>
           ({{cart.quantity}}) ${{cart.total}} 

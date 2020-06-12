@@ -22,10 +22,9 @@ export class InOutService {
 
   
   selectedIcon: BehaviorSubject<any>;
-  //isSelectedIcon = 
 
   constructor() {
-    this.selectedIcon = new BehaviorSubject({home: true, favoris: false, inscription: false, compte: false, spb: false });
+    this.selectedIcon = new BehaviorSubject({home: true, favoris: false, inscription: false, login: false, logout:false, spb: false });
     this.isAffiche = new BehaviorSubject<boolean>(false);
     this.filmAAfficher = new BehaviorSubject<Film>(null);
     this.listeFilmRecherche = new BehaviorSubject<Film[]>(null);
