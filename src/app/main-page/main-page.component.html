@@ -8,8 +8,8 @@
           <a routerLink="/home" title="Home">
             <span class="logo-bottom logo-gd">8Mirr∞r</span>
             <span class="logo-bottom logo-pt">8M∞</span>
-            auth : {{isAuthenticated}}
-            user : {{userAuth |json}}
+           <!-- auth : {{isAuthenticated}} 
+            user : {{userAuth |json}} -->
           </a>
           <span class="material-icons menu-burger" 
                 [ngClass]="{'menu-show': isShow , 'menu-hide': !isShow} " (click)="showMenu()">

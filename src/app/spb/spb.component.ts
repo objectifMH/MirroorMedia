@@ -61,7 +61,6 @@ export class SpbComponent implements OnInit {
   }
 
   addCart(film) {
-    let index = this.films.indexOf(film);
     film.inCart = !film.inCart;
     this.inout.setCarts(this.films);
 
@@ -124,6 +123,7 @@ export class SpbComponent implements OnInit {
         }
         else {
           this.userAuth = this.spb.getUserAuthenticated();
+          console.log(this.userAuth);
           this.recupereCarts();
         }
       },

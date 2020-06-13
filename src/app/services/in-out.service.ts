@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
 import { Film } from 'src/film';
+import { SpbService } from './spb.service';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +65,6 @@ export class InOutService {
   }
 
   public getAfficheThisFilm() {
-    //console.log('Dans le service : on return le getAfficheThisFilm' , this.filmAAfficher);
     return this.filmAAfficher.asObservable();
   }
 
@@ -151,6 +151,13 @@ export class InOutService {
   }
 
   public setCarts(resultat) {
+    
+    // on recupere l'utilisateur dans le local storage
+    let setUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {} ;
+    setUser.carts = resultat;
+    let stateStringify = JSON.stringify(setUser)
+    localStorage.setItem('user', stateStringify);
+    
     this.carts.next(resultat);
   }
 

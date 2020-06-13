@@ -18,15 +18,15 @@ export class LoginComponent implements OnInit {
   userAuth;
 
   monForm: FormGroup;
-  constructor(private fb: FormBuilder, private spb: SpbService, private router: Router) {
+  constructor(private fb: FormBuilder, private spb: SpbService, private router: Router, private inout: InOutService) {
     this.monForm = this.fb.group({
       pseudo: [''],
       mdp: ['']
     });
   }
 
-  ngOnInit() { 
-   
+  ngOnInit() {
+
   }
 
   onSubmit() {
@@ -41,30 +41,36 @@ export class LoginComponent implements OnInit {
   verifUser() {
     this.spb.login(this.monForm.value.pseudo, this.monForm.value.mdp);
     this.getIsAuthenticated();
-    console.log("verif user du login form effectué, login etgetisAuthenticated");
   }
 
   getIsAuthenticated() {
     this.spb.getIsAuthenticated().subscribe(
       data => {
         this.connect = data;
-        console.log("dans login getisAuthenticated recuperation de l'observable this.connect > " , data)
         if (this.connect === true) {
-          console.log('utilisateur authentifié' , this.connect);
           this.connectInput = true;
           this.userAuth = this.spb.getUserAuthenticated();
 
-          console.log( this.userAuth,  " va aller sur spb");
-          this.router.navigate(['/spb'])
-          //setTimeout(() => this.router.navigate(['/spb']), 2000);
+          let setUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
+          if (this.monForm.value.pseudo === setUser.pseudo) {
+            this.spb.setUserAuthenticated(setUser);
+          }
+          else {
+            this.inout.setCart({quantity: 0, total: 0});
+          }
+
+          
+          this.inout.setCarts(this.userAuth.carts);
+          console.log(this.userAuth, " va aller sur spb");
+          //this.router.navigate(['/spb'])
+          setTimeout(() => this.router.navigate(['/spb']), 3000);
           this.monForm = this.fb.group({
             pseudo: [''],
             mdp: ['']
           });
           this.errorInput = false;
         }
-        else{
-          console.log(" Mot de passe erroné : this.connect > ", this.connect )
+        else {
           this.errorInput = true;
         }
       }
@@ -72,6 +78,6 @@ export class LoginComponent implements OnInit {
       error => console.log("Erreur de récuperation de isauthenticated")
     )
   }
-  
+
 
 }
