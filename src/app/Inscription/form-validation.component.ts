@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { zipCodeValidator, mdpValidator } from '../validators';
 import { InOutService } from '../services/in-out.service';
+import { SpbService } from '../services/spb.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-validation',
@@ -11,9 +13,10 @@ import { InOutService } from '../services/in-out.service';
 export class FormValidationComponent implements OnInit {
 
   errorInput = false;
+  inscription = false; 
 
   monForm: FormGroup;
-  constructor(private fb: FormBuilder, private inoutService: InOutService) {
+  constructor(private fb: FormBuilder, private inoutService: InOutService, private spb: SpbService, private router:Router) {
     this.monForm = this.fb.group({
       pseudo: ['', [Validators.required, Validators.minLength(4)]  ], //required dans le html soit ici avec les validators 
       mdp: ['', Validators.minLength(4)  ],
@@ -31,11 +34,24 @@ export class FormValidationComponent implements OnInit {
     this.inoutService.setAfficheThisFilm(null);
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    console.log(this.spb.getUsers())
+  }
 
   onSubmit() {
     this.monForm.markAllAsTouched();
     console.log(this.monForm.value);
+    
+    
+    let res = this.spb.inscription(this.monForm.value.pseudo, this.monForm.value.mdp);
+    this.errorInput = !res; 
+    this.inscription = res; 
+    if ( res )
+    {
+      setTimeout(() => this.router.navigate(['/login']), 2000);
+    }
+    console.log(this.spb.getUsers());
+    
   }
 
 }

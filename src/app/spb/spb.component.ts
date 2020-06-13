@@ -23,7 +23,10 @@ export class SpbComponent implements OnInit {
   carts: any = [];
   article = 'article';
 
-  isFade: boolean = false; 
+  isFade: boolean = false;
+
+  auth = false;
+  userAuth;
 
   constructor(private route: ActivatedRoute, private router: Router, private spb: SpbService,
     private tmdb: TmdbService, private inout: InOutService) {
@@ -32,7 +35,7 @@ export class SpbComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.recupereCarts();
+    this.recupereAuth();
   }
 
   getAllMovies() {
@@ -41,7 +44,7 @@ export class SpbComponent implements OnInit {
 
         this.covers = result['_embedded']['movies'];
         let filmsWCover = this.covers.map(film => {
-            this.tmdb.search(film.title).subscribe(
+          this.tmdb.search(film.title).subscribe(
             resCovers => {
               this.films = [...this.films, { filmdb: resCovers['results'][0], iddb: film.id, prixdb: film.prix, inCart: false }];
             }
@@ -58,7 +61,6 @@ export class SpbComponent implements OnInit {
   }
 
   addCart(film) {
-    let index = this.films.indexOf(film);
     film.inCart = !film.inCart;
     this.inout.setCarts(this.films);
 
@@ -105,8 +107,28 @@ export class SpbComponent implements OnInit {
 
   isFadeShow() {
     setTimeout(() => {
-      this.isFade = true; 
+      this.isFade = true;
     }, 10000)
+  }
+
+  recupereAuth() {
+    this.spb.getIsAuthenticated().subscribe(
+      rep => {
+        this.auth = rep
+        // Si l'utilisateur n'est pas connecté on est renvoyé vers la home : 
+        console.log("recupere auth dans spb" , this.auth);
+        if (!this.auth) {
+          console.log("je suis dans sp et pas authenthifié" , this.auth)
+          this.router.navigate(['/home']);
+        }
+        else {
+          this.userAuth = this.spb.getUserAuthenticated();
+          console.log(this.userAuth);
+          this.recupereCarts();
+        }
+      },
+      error => console.log("erreur pour récuperer si on est authentifié")
+    );
   }
 
 
