@@ -27,6 +27,18 @@
             >
             <i class="material-icons  posAbsolute  zipI" ></i>
         </div>
-        <button type="submit" class="btn" (click)="onSubmit()" [ngClass]="{'test':errorInput}">Envoyer</button>
+        <button type="submit" class="btn" (click)="onSubmit()" >Envoyer</button>
+        <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="errorInput">
+            <span>Votre pseudo est pas disponible, veuillez en trouver un autre.</span>
+         </div> 
+         <div class="alert alert-info alert-dismissible container mt-5" *ngIf="inscription">
+            <span> Bienvenue {{this.pseudo}}, votre inscription a bien été prise en compte !</span>
+            <div class="d-flex justify-content-center mt-5 mb-2">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
     </form>
+    
 </div>

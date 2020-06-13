@@ -87,4 +87,20 @@ export class SpbService {
     return this.userAuthenticated;
   }
 
+  public inscription(login, mdp){
+    let res = true;
+    for ( let user of this.users)
+    {
+      if  ( user.pseudo === login )
+      {
+        res = false;
+      }
+    }
+    if ( res )
+    {
+      this.users = [...this.users,  { pseudo: login, mdp: mdp, role: "USER" }]
+    }
+    return res;
+  }
+
 }
