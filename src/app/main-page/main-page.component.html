@@ -41,13 +41,15 @@
 
             </span>
           </li>
-          <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo"
+          
+          <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo" class="p-relative"
             [ngClass]="{'iconSelected':isSelectedIcon.person}" data-icon='person'>
+            <span >{{userAuth.pseudo}} </span>
             <a routerLink="/user" title="User">
               <span class="material-icons">
                 person
               </span>
-              <span>{{userAuth.pseudo}} </span>
+              
             </a>
           </li>
           <li #lii (click)="clickIcon(lii)" [ngClass]="{'iconSelected':isSelectedIcon.inscription}"

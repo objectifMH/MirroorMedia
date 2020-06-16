@@ -13,13 +13,14 @@ import { Router } from '@angular/router';
 export class FormValidationComponent implements OnInit {
 
   errorInput = false;
-  inscription = false; 
+  inscription = false;
+
 
   monForm: FormGroup;
-  constructor(private fb: FormBuilder, private inoutService: InOutService, private spb: SpbService, private router:Router) {
+  constructor(private fb: FormBuilder, private inoutService: InOutService, private spb: SpbService, private router: Router) {
     this.monForm = this.fb.group({
-      pseudo: ['', [Validators.required, Validators.minLength(4)]  ], //required dans le html soit ici avec les validators 
-      mdp: ['', Validators.minLength(4)  ],
+      pseudo: ['', [Validators.required, Validators.minLength(4)]], //required dans le html soit ici avec les validators 
+      mdp: ['', Validators.minLength(4)],
       confMdp: ['', mdpValidator],
       zip: ['', zipCodeValidator]
     });
@@ -34,24 +35,25 @@ export class FormValidationComponent implements OnInit {
     this.inoutService.setAfficheThisFilm(null);
   }
 
-  ngOnInit() { 
-    console.log(this.spb.getUsers())
+  ngOnInit() {
+    console.log(this.spb.getUsers());
   }
 
   onSubmit() {
-    this.monForm.markAllAsTouched();
-    console.log(this.monForm.value);
-    
-    
-    let res = this.spb.inscription(this.monForm.value.pseudo, this.monForm.value.mdp);
-    this.errorInput = !res; 
-    this.inscription = res; 
-    if ( res )
-    {
-      setTimeout(() => this.router.navigate(['/login']), 2000);
-    }
-    console.log(this.spb.getUsers());
-    
+    console.log(this.monForm.value, this.monForm);
+
+    if (this.monForm.status ===  'VALID')
+     {
+      let res = this.spb.inscription(this.monForm.value.pseudo, this.monForm.value.mdp);
+      this.errorInput = !res;
+      this.inscription = res;
+      if (res) {
+        setTimeout(() => this.router.navigate(['/login']), 2000);
+      }
+      console.log(this.spb.getUsers());
+    } 
+
+
   }
 
 }

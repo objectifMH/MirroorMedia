@@ -1,37 +1,33 @@
-
 <div class="myForm">
-    
+
     <form [formGroup]="monForm">
         <h3>Inscription</h3>
         <div class="form-group posRelative ">
-            <input type="text" class="form-control" formControlName="pseudo" id="pseudoInput" placeholder="Pseudo" 
-                
-            >
-            <i class="material-icons  posAbsolute  " ></i>
+            <input type="text" class="form-control" formControlName="pseudo" id="pseudoInput" placeholder="Pseudo">
+            <i class="material-icons  posAbsolute  "></i>
         </div>
         <div class="form-group posRelative">
             <input type="password" class="form-control" formControlName="mdp" id="mdpInput" placeholder="Mot de Passe"
-            required
-            >
-            <i class="material-icons  posAbsolute  " ></i>
+                required>
+            <i class="material-icons  posAbsolute  "></i>
         </div>
         <div class="form-group posRelative">
-            <input type="password" class="form-control" formControlName="confMdp" id="confMdpInput" placeholder="Confirmer votre mot de passe"
-            required
-            >
-            <i class="material-icons  posAbsolute  " ></i>
+            <input type="password" class="form-control" formControlName="confMdp" id="confMdpInput"
+                placeholder="Confirmer votre mot de passe" required>
+            <i class="material-icons  posAbsolute  "></i>
         </div>
         <div class="form-group posRelative">
-            <input type="number" class="form-control" formControlName="zip" id="zipInput" placeholder="Zip code"
-            
-            >
-            <i class="material-icons  posAbsolute  zipI" ></i>
+            <input type="number" class="form-control" formControlName="zip" id="zipInput" placeholder="Zip code">
+            <i class="material-icons  posAbsolute  zipI"></i>
         </div>
-        <button type="submit" class="btn" (click)="onSubmit()" >Envoyer</button>
+        <button type="submit" class="btn" (click)="onSubmit()">Envoyer</button>
         <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="errorInput">
             <span>Votre pseudo est pas disponible, veuillez en trouver un autre.</span>
-         </div> 
-         <div class="alert alert-info alert-dismissible container mt-5" *ngIf="inscription">
+        </div>
+        <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="this.monForm.invalid">
+            <span>Le formulaire n'est pas rempli correctement pour autoriser votre inscription.</span>
+        </div>
+        <div class="alert alert-info alert-dismissible container mt-5" *ngIf="inscription">
             <span> Bienvenue {{this.pseudo}}, votre inscription a bien été prise en compte !</span>
             <div class="d-flex justify-content-center mt-5 mb-2">
                 <div class="spinner-border text-info" role="status">
@@ -40,5 +36,5 @@
             </div>
         </div>
     </form>
-    
+
 </div>

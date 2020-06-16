@@ -183,6 +183,12 @@ header {
                         padding: 6px 5px;
                         color: white;
 
+                        .userPseudo {
+                            position: absolute;
+                            top: -5px;
+                            
+                        }
+
                         &.iconSelected {
                             border-bottom: 4px solid white !important;
                         }
