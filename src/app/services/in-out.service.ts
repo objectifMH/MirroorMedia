@@ -18,8 +18,8 @@ export class InOutService {
   tvs: BehaviorSubject<any>;
   peoples: BehaviorSubject<any>;
 
-  cart: BehaviorSubject<any>;
-  carts: BehaviorSubject<any>;
+  /* cart: BehaviorSubject<any>;
+  carts: BehaviorSubject<any>; */
 
   
   selectedIcon: BehaviorSubject<any>;
@@ -35,8 +35,8 @@ export class InOutService {
     this.tvs = new BehaviorSubject<any>(null);
     this.peoples = new BehaviorSubject<any>(null);
 
-    this.cart = new BehaviorSubject<any>({quantity: 0, total: 0});
-    this.carts = new BehaviorSubject<any>(null);
+    /* this.cart = new BehaviorSubject<any>({quantity: 0, total: 0});
+    this.carts = new BehaviorSubject<any>(null); */
   }
 
   public setSelectIcon(resultat) {
@@ -142,7 +142,7 @@ export class InOutService {
     return this.peoples.asObservable();
   }
 
-  public setCart(resultat) {
+  /* public setCart(resultat) {
     this.cart.next(resultat);
   }
 
@@ -163,6 +163,6 @@ export class InOutService {
 
   public getCarts() {
     return this.carts.asObservable();
-  }
+  } */
 
 }

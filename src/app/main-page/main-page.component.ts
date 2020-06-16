@@ -3,6 +3,7 @@ import { InOutService } from '../services/in-out.service';
 import { of } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { TmdbService } from '../services/tmdb.service';
 import { SpbService } from '../services/spb.service';
 
@@ -15,12 +16,12 @@ export class MainPageComponent implements OnInit {
 
   faLinkedinIn = faLinkedinIn;
   faGithub = faGithub;
+  faUserCircle = faUserCircle;
 
   isFilmAffiche;
-  isSelectedIcon = { home: false, favoris: false, inscription: false, login: false, spb: false, logout: false };
+  isSelectedIcon = { home: false, favoris: false, inscription: false, login: false, spb: false, logout: false, person: false };
   isShow = true;
   cart = { quantity: 0, total: 0 };
-  isAuthenticated = false;
   userAuth;
 
   constructor(private inoutService: InOutService, private route: ActivatedRoute, private router: Router,
@@ -33,8 +34,8 @@ export class MainPageComponent implements OnInit {
     const chemin = window.location.pathname.substr(1);
     this.isSelectedIcon[chemin] = true;
 
-    this.recupereSpb();
     this.getIsAuthenticated();
+    setTimeout(() => this.recupereSpb(), 2000);  
   }
 
   clickIcon(li) {
@@ -45,7 +46,6 @@ export class MainPageComponent implements OnInit {
       if (icon === attr) {
         this.isSelectedIcon[icon] = true;
       }
-
     }
   }
 
@@ -63,7 +63,8 @@ export class MainPageComponent implements OnInit {
 
   // On récupère la cart gràce au service
   recupereSpb() {
-    this.inoutService.getCart().subscribe(
+    //this.inoutService.getCart().subscribe(
+    this.spb.getCart().subscribe(
       data => {
         this.cart = data;
       },
@@ -74,21 +75,22 @@ export class MainPageComponent implements OnInit {
   }
 
   getIsAuthenticated() {
-    this.spb.getIsAuthenticated().subscribe(
+    this.spb.getUserAuthenticated().subscribe(
       data => {
-        this.isAuthenticated = data;
-        this.userAuth = this.spb.userAuthenticated; 
-        console.log("auth dans main ", this.userAuth , this.isAuthenticated);
+        this.userAuth = data;
       }
       ,
-      error => console.log('Erreur de récupération isAuthenticated')
-    )
+      error => console.log("Erreur, récuperation getUserAuthenticated")
+    );
+
   }
 
   logOut() {
     console.log("vous allez etre deconnecté");
-    this.spb.setIsAuthenticated(false);
-    this.spb.setUserAuthenticated(null);
+    //this.spb.setIsAuthenticated(false);
+    this.spb.setCart({ quantity: 0, total: 0 });
+
+    this.spb.setUserAuthenticated({ pseudo: null, role: null, mdp: null, cart: null, carts: null });
     this.router.navigate(['/login']);
   }
 

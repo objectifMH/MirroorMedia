@@ -8,13 +8,12 @@
           <a routerLink="/home" title="Home">
             <span class="logo-bottom logo-gd">8Mirr∞r</span>
             <span class="logo-bottom logo-pt">8M∞</span>
-           <!-- auth : {{isAuthenticated}} 
-            user : {{userAuth |json}} -->
+
           </a>
-          <span class="material-icons menu-burger" 
-                [ngClass]="{'menu-show': isShow , 'menu-hide': !isShow} " (click)="showMenu()">
+          <span class="material-icons menu-burger" [ngClass]="{'menu-show': isShow , 'menu-hide': !isShow} "
+            (click)="showMenu()">
           </span>
-          
+
         </div>
       </div>
       <div class="centre" [ngClass]="{'cd-show': isShow , 'cd-fade': !isShow} ">
@@ -35,14 +34,24 @@
             </a>
 
           </li>
-          <li #lif title="Nos films favoris" (click)="clickIcon(lif)"
+          <li #lif title="Nos films favoris" (click)="clickIcon(lif)" *ngIf="userAuth.pseudo"
             [ngClass]="{'iconSelected':isSelectedIcon.favoris}" data-icon='favoris'>
             <span class="material-icons">
               favorite
+
             </span>
           </li>
+          <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo"
+            [ngClass]="{'iconSelected':isSelectedIcon.person}" data-icon='person'>
+            <a routerLink="/user" title="User">
+              <span class="material-icons">
+                person
+              </span>
+              <span>{{userAuth.pseudo}} </span>
+            </a>
+          </li>
           <li #lii (click)="clickIcon(lii)" [ngClass]="{'iconSelected':isSelectedIcon.inscription}"
-            data-icon="inscription">
+            *ngIf="!userAuth.pseudo" data-icon="inscription">
             <a routerLink="/inscription" title="Inscription">
               <span class="material-icons">
                 person_add
@@ -50,38 +59,40 @@
             </a>
 
           </li>
-          <li #lilo title="login" data-icon="login" (click)="clickIcon(lilo)"
-            [ngClass]="{'iconSelected':isSelectedIcon.login , 'd-none': isAuthenticated}">
-           
-            <a routerLink="/login" title="Login">
-              <span class="material-icons"  >
-                login
-              </span>
-            </a>
-          </li>
-          <li #lilog title="logout" data-icon="logout" (click)="clickIcon(lilog)"
-            [ngClass]="{'iconSelected':isSelectedIcon.logout ,  'd-none': !isAuthenticated}">
-              <span class="material-icons" (click)="logOut()">
-                logout
-              </span>
-          </li>
-          <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="isAuthenticated"
+
+          <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="userAuth.pseudo"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">
             <a routerLink="/spb" title="Spb" class="a-list-spb">
               <span class="material-icons">
                 cloud
               </span>
-              
-              <span  class="badge badge-pill badge-success span-list-spb">{{cart.quantity}}</span>
+
+              <span class="badge badge-pill badge-success span-list-spb">{{cart.quantity}}</span>
 
             </a>
           </li>
-          
+          <li #lilo title="login" data-icon="login" (click)="clickIcon(lilo)"
+            [ngClass]="{'iconSelected':isSelectedIcon.login , 'd-none': userAuth.pseudo}">
+
+            <a routerLink="/login" title="Login">
+              <span class="material-icons">
+                login
+              </span>
+            </a>
+          </li>
+          <li #lilog title="logout" data-icon="logout" (click)="clickIcon(lilog)"
+            [ngClass]="{'iconSelected':isSelectedIcon.logout ,  'd-none': !userAuth.pseudo}">
+            <span class="material-icons" (click)="logOut()">
+              logout
+            </span>
+          </li>
+
+
         </ul>
-        <span  *ngIf="cart.quantity > 0 && isAuthenticated" class="btn btn-danger shopping">
-          <i class="material-icons shopping" >add_shopping_cart
+        <span *ngIf="cart.quantity > 0 && userAuth.pseudo" class="btn btn-danger shopping">
+          <i class="material-icons shopping">add_shopping_cart
           </i>
-          ({{cart.quantity}}) ${{cart.total}} 
+          ({{cart.quantity}}) ${{cart.total}}
         </span>
       </div>
     </div>
@@ -97,30 +108,37 @@
   <div class="position-relative footer">
 
     <ul>
-        <li class="nav-item active mx-2 ">
-            <a class="nav-link link-logo" routerLink='/home' > <span class="logo-bottom">8Mirr∞r</span> </a>
+      <li class="nav-item active mx-2 ">
+        <a class="nav-link link-logo" routerLink='/home'> <span class="logo-bottom">8Mirr∞r</span> </a>
 
-        </li>
-        <li>
-            <a href='https://www.themoviedb.org/?language=fr-FR' target="_blank"> <img class="card-img-top" src="assets/tmdb.svg" alt="The movie DB" />
-            </a>
+      </li>
+      <li>
+        <a href='https://www.themoviedb.org/?language=fr-FR' target="_blank"> <img class="card-img-top"
+            src="assets/tmdb.svg" alt="The movie DB" />
+        </a>
 
-        </li>
-        <li>Contact Us
-            <div class="reseaux">
-                <a href='https://www.linkedin.com/in/m-hatchi-bb4b49156/' target="_blank">
-                  <fa-icon class="fa-git" [icon]="faLinkedinIn"></fa-icon>
-                </a>
-                <a href='https://github.com/objectifMH/MirroorMedia'  target="_blank">
-                  <fa-icon [icon]="faGithub"></fa-icon>
-                </a>
+      </li>
+      <li>About Us
+        <div class="reseaux">
 
-            </div>
-        </li>
+          <a routerLink="/admin" title="admin">
+            <fa-icon [icon]="faUserCircle"></fa-icon>
+          </a>
+          <a href='https://www.linkedin.com/in/m-hatchi-bb4b49156/' target="_blank">
+            <fa-icon class="fa-git" [icon]="faLinkedinIn"></fa-icon>
+          </a>
+          <a href='https://github.com/objectifMH/MirroorMedia' target="_blank">
+            <fa-icon [icon]="faGithub"></fa-icon>
+          </a>
+
+
+
+        </div>
+      </li>
 
     </ul>
     <div class="footer-foot">
-        <span>©2021 Copyright.fr. All right reserved.</span>
+      <span>©2021 Copyright.fr. All right reserved.</span>
     </div>
-</div>
+  </div>
 </footer>

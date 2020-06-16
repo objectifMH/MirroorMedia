@@ -1,0 +1,31 @@
+<section >
+    <div class="haut">
+      <h4> {{userAuth ? userAuth.pseudo : ''}} </h4>
+    </div>
+    <div class="bas">
+      <div class="gauche">
+        <img mat-card-image height="300"
+                            src="{{'assets/users/major.jpg'}}"
+        alt="img user">
+      </div>
+      <div class="droit">
+        <div class="">
+  
+  
+          <div class="" *ngIf="userAuth" >
+            <h4 class="">Role:</h4> 
+            <p>{{userAuth.role}}</p>
+            <h4 class="">Spb List:</h4> 
+            <p *ngFor="let film of this.films"> {{film.filmdb.title}}</p>
+          </div>
+  
+  
+          
+         
+          
+  
+        </div>
+      </div>
+    </div>
+  </section>
+  

@@ -22,6 +22,8 @@ import { PeopleComponent } from './people/people.component';
 import { FilmComponent } from './film/film.component';
 import { SpbComponent } from './spb/spb.component';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { LoginComponent } from './login/login.component';
     PeopleComponent,
     FilmComponent,
     SpbComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

@@ -28,21 +28,25 @@ export class SpbComponent implements OnInit {
   auth = false;
   userAuth;
 
+  usersStorage;
+
   constructor(private route: ActivatedRoute, private router: Router, private spb: SpbService,
     private tmdb: TmdbService, private inout: InOutService) {
     this.urlBaseImage = this.tmdb.getUrlBaseImg();
     this.isFadeShow();
+
   }
 
   ngOnInit() {
     this.recupereAuth();
+    this.recupereCarts();
   }
 
   getAllMovies() {
     this.spb.getAllMovies().subscribe(
       result => {
 
-        this.covers = result['_embedded']['movies'];
+        this.covers = result['_embedded']['movies'] ;// .slice(0,3);
         let filmsWCover = this.covers.map(film => {
           this.tmdb.search(film.title).subscribe(
             resCovers => {
@@ -58,11 +62,11 @@ export class SpbComponent implements OnInit {
         this.errorConSpb = "Erreur de connexion à la base de donnée Spring Boot Lks Movies";
       }
     );
-  }
+  } 
 
   addCart(film) {
     film.inCart = !film.inCart;
-    this.inout.setCarts(this.films);
+    this.spb.setCarts(this.films);
 
   }
 
@@ -81,16 +85,19 @@ export class SpbComponent implements OnInit {
       total: parseFloat(tot.toFixed(2))
     };
     console.log(this.cart);
-    this.inout.setCart(this.cart);
+    this.spb.setCart(this.cart);
     this.article = compt > 0 ? 'articles' : 'article';
-  }
+  } 
+
 
   recupereCarts() {
-    console.log(this.films);
-    this.inout.getCarts().subscribe(
+      console.log("RecupereCarts >>> debut");
+      this.spb.getCarts().subscribe(
       data => {
+        console.log("RecupereCarts >>> data : ", data);
         if (data) {
 
+          console.log("RecupereCarts >>> data ", data);
           this.films = data;
           this.covers = data;
           this.totalCarts();
@@ -103,7 +110,7 @@ export class SpbComponent implements OnInit {
         console.log('erreur observable dans spb.coments', err);
       }
     );
-  }
+  } 
 
   isFadeShow() {
     setTimeout(() => {
@@ -112,24 +119,33 @@ export class SpbComponent implements OnInit {
   }
 
   recupereAuth() {
-    this.spb.getIsAuthenticated().subscribe(
+      this.spb.getUserAuthenticated().subscribe(
       rep => {
-        this.auth = rep
-        // Si l'utilisateur n'est pas connecté on est renvoyé vers la home : 
-        console.log("recupere auth dans spb" , this.auth);
-        if (!this.auth) {
-          console.log("je suis dans sp et pas authenthifié" , this.auth)
-          this.router.navigate(['/home']);
+        this.userAuth = rep;      
+        if (this.userAuth.pseudo !== null) {
+          
+         /*  console.log("recupere auth dans spb" , this.userAuth);
+          this.films = this.userAuth.carts;
+          this.covers = this.films;
+          console.log(this.films); */
+          //this.totalCarts();
+          //this.recupereUsersStorage();
+          //this.recupereCarts();
         }
         else {
-          this.userAuth = this.spb.getUserAuthenticated();
-          console.log(this.userAuth);
-          this.recupereCarts();
+          // Si l'utilisateur n'est pas connecté on est renvoyé vers la home : 
+          console.log("je suis dans sp et pas authenthifié" , this.userAuth)
+          this.router.navigate(['/home']);
         }
       },
       error => console.log("erreur pour récuperer si on est authentifié")
     );
   }
+
+  /* recupereUsersStorage(){
+
+    console.log(this.userAuth);
+  } */
 
 
 }
