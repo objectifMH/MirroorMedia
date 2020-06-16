@@ -24,7 +24,7 @@
         <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="errorInput">
             <span>Votre pseudo est pas disponible, veuillez en trouver un autre.</span>
         </div>
-        <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="this.monForm.invalid">
+        <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="this.monForm.invalid && this.count > 0 ">
             <span>Le formulaire n'est pas rempli correctement pour autoriser votre inscription.</span>
         </div>
         <div class="alert alert-info alert-dismissible container mt-5" *ngIf="inscription">

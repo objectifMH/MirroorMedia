@@ -14,6 +14,7 @@ export class FormValidationComponent implements OnInit {
 
   errorInput = false;
   inscription = false;
+  count = 0 ; 
 
 
   monForm: FormGroup;
@@ -33,6 +34,7 @@ export class FormValidationComponent implements OnInit {
 
 
     this.inoutService.setAfficheThisFilm(null);
+    this.count = 0 ; 
   }
 
   ngOnInit() {
@@ -40,6 +42,7 @@ export class FormValidationComponent implements OnInit {
   }
 
   onSubmit() {
+    this.count++; 
     console.log(this.monForm.value, this.monForm);
 
     if (this.monForm.status ===  'VALID')
