@@ -9,6 +9,7 @@ import { SpbComponent } from './spb/spb.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
+import { ConsoleComponent } from './console/console.component';
 
 const routes: Routes = [
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'user', component: UserComponent},
   {path: 'admin', component: AdminComponent},
+  {path: 'console', component: ConsoleComponent},
 
   {path: '**', redirectTo: '/home' },
 

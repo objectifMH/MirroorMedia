@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit {
   faUserCircle = faUserCircle;
 
   isFilmAffiche;
-  isSelectedIcon = { home: false, favoris: false, inscription: false, login: false, spb: false, logout: false, person: false };
+  isSelectedIcon = { home: false, admin: false, inscription: false, login: false, spb: false, logout: false, person: false };
   isShow = true;
   cart = { quantity: 0, total: 0 };
   userAuth;

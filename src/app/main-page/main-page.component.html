@@ -34,12 +34,13 @@
             </a>
 
           </li>
-          <li #lif title="Nos films favoris" (click)="clickIcon(lif)" *ngIf="userAuth.pseudo"
-            [ngClass]="{'iconSelected':isSelectedIcon.favoris}" data-icon='favoris'>
-            <span class="material-icons">
-              favorite
-
-            </span>
+          <li #liad (click)="clickIcon(liad)" *ngIf="userAuth.role === 'ADMIN'" class="console"
+            [ngClass]="{'iconSelected':isSelectedIcon.admin}" data-icon='admin'>
+            <a routerLink="/console" title="Console Admin">
+              <span class="material-icons">
+                admin_panel_settings
+              </span>
+            </a>
           </li>
           
           <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo" class="p-relative"

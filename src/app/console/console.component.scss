@@ -1,0 +1,79 @@
+@import '../../styles.scss';
+
+section {
+    width: 90vw;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    color: white;
+    background: $back;
+
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+    h1 {
+        color: $color;
+        text-shadow: rgba(0, 0, 0, 0.75) 1px 1px;
+        font-weight: large;
+        margin: 5px 20px;
+    }
+
+    h4 {
+      color: white; //$color;
+    }
+
+    .panel-heading {
+
+      padding: 5px 15px;
+      position: relative;
+      background: #289cc3;
+      color: white;
+
+      a {
+          color: white;
+          text-decoration: none;
+      }
+    }
+    .panel-body {
+        display: flex;
+        justify-content: space-around;
+
+
+        table {
+            width: 90%;
+            color: $color;
+            //background: purple;
+
+            td {
+                text-align: center;
+                padding: 10px;
+
+                .edit {
+                    color: green;
+                }
+
+                .delete {
+                    color: red;
+                }
+                .material-icons {
+                    transition: all ease-in-out 0.3s;
+                    cursor: pointer;
+
+                    &:hover {
+                        transform: scale(1.2);
+                    }
+                }
+
+            }
+        
+
+        }
+
+    }
+}

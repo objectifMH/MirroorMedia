@@ -41,12 +41,11 @@ export class SpbService {
   }
 
   public getLocatStorageUsers() {
-    let users = JSON.parse(localStorage.getItem('users'));
+    const users = JSON.parse(localStorage.getItem('users'));
     if (!users) {
-      let stateStringify = JSON.stringify(this.users)
+      const stateStringify = JSON.stringify(this.users)
       localStorage.setItem('users', stateStringify);
-    }
-    else {
+    } else {
       this.users = users;
     }
   }
@@ -68,11 +67,11 @@ export class SpbService {
   }
 
   public login(pseudo, mdp) {
-    for (let user of this.users) {
+    for (const user of this.users) {
       if (user.pseudo === pseudo && user.mdp === mdp) {
 
         // on recupère dans le local storage les utilisateurs :
-        let users = JSON.parse(localStorage.getItem('users'));
+        const users = JSON.parse(localStorage.getItem('users'));
         let userAuth = users.filter(user => user.pseudo === pseudo)
         if (userAuth) {
           userAuth.map(user => {
@@ -137,7 +136,7 @@ export class SpbService {
         user.carts = resultat
       }
     }
-    let stateStringify = JSON.stringify(this.users)
+    const stateStringify = JSON.stringify(this.users)
     localStorage.setItem('users', stateStringify);
     console.log(this.users)
 
@@ -145,7 +144,7 @@ export class SpbService {
   }
 
   public getCarts() {
-    console.log(" Dans  getCarts : " , this.carts);
+    console.log(' Dans  getCarts : ' , this.carts);
     return this.carts.asObservable();
   }
 

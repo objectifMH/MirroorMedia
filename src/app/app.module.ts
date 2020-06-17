@@ -24,6 +24,7 @@ import { SpbComponent } from './spb/spb.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
+import { ConsoleComponent } from './console/console.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AdminComponent } from './admin/admin.component';
     SpbComponent,
     LoginComponent,
     UserComponent,
-    AdminComponent
+    AdminComponent,
+    ConsoleComponent
   ],
   imports: [
     BrowserModule,
