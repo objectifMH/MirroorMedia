@@ -1,79 +1,99 @@
 @import '../../styles.scss';
 
 section {
-    width: 90vw;
-    margin: auto;
+  width: 90vw;
+  margin: auto;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
+  color: white;
+  background: $back;
+
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+
+  h1 {
+    color: $color;
+    text-shadow: rgba(0, 0, 0, 0.75) 1px 1px;
+    font-weight: large;
+    margin: 5px 20px;
+  }
+
+  h4 {
+    color: white; //$color;
+  }
+
+  .panel-heading {
+
+    padding: 5px 15px;
+    position: relative;
+    background: #289cc3;
     color: white;
-    background: $back;
 
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-
-    h1 {
-        color: $color;
-        text-shadow: rgba(0, 0, 0, 0.75) 1px 1px;
-        font-weight: large;
-        margin: 5px 20px;
-    }
-
-    h4 {
-      color: white; //$color;
-    }
-
-    .panel-heading {
-
-      padding: 5px 15px;
-      position: relative;
-      background: #289cc3;
+    a {
       color: white;
-
-      a {
-          color: white;
-          text-decoration: none;
-      }
+      text-decoration: none;
     }
-    .panel-body {
-        display: flex;
-        justify-content: space-around;
+  }
+
+  .panel-body {
+    display: flex;
+    justify-content: space-around;
 
 
-        table {
-            width: 90%;
-            color: $color;
-            //background: purple;
+    table {
+      width: 100%;
+      color: $color;
+      //background: purple;
 
-            td {
-                text-align: center;
-                padding: 10px;
+      td {
+        text-align: center;
+        padding: 10px;
 
-                .edit {
-                    color: green;
-                }
-
-                .delete {
-                    color: red;
-                }
-                .material-icons {
-                    transition: all ease-in-out 0.3s;
-                    cursor: pointer;
-
-                    &:hover {
-                        transform: scale(1.2);
-                    }
-                }
-
-            }
-        
-
+        select {
+          border-radius: 0;
+          background: #f5e06e;
+          color: #56c3bd;
+          border: 1px solid #f5e06e;
         }
 
+        .table-film {
+            width: 100% !important;
+            background: $back-main;
+            box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+            text-align: justify;
+
+            td {
+                width: 100%;
+            }
+        }
+
+        .edit {
+          color: green;
+        }
+
+        .delete {
+          color: red;
+        }
+
+        .material-icons {
+          transition: all ease-in-out 0.3s;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+
+      }
+
+
     }
+
+  }
 }

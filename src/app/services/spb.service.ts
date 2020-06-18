@@ -8,6 +8,8 @@ import { InOutService } from './in-out.service';
 })
 export class SpbService {
 
+  roles = ['USER', 'ADMIN', 'SUPERADMIN'];
+
   users = [
     { pseudo: "mario", mdp: "mdpmdp", role: "USER", cart: null, carts: null },
     { pseudo: "meruem", mdp: "mdpmdp", role: "SUPERADMIN", cart: null, carts: null },
@@ -43,16 +45,25 @@ export class SpbService {
   public getLocatStorageUsers() {
     const users = JSON.parse(localStorage.getItem('users'));
     if (!users) {
-      const stateStringify = JSON.stringify(this.users)
-      localStorage.setItem('users', stateStringify);
+      this.setLocalStorageUsers(this.users);
     } else {
       this.users = users;
     }
   }
 
+  public setLocalStorageUsers(users) {
+    const stateStringify = JSON.stringify(users);
+    localStorage.setItem('users', stateStringify);
+  }
+
   public getAllMovies() {
     const url = ''.concat(this.urlSpb, 'movies');
     return this.httpClient.get(url);
+  }
+
+
+  public getRoles() {
+    return this.roles;
   }
 
 
@@ -63,7 +74,19 @@ export class SpbService {
   }
 
   public setUsers(users) {
+    this.setLocalStorageUsers(users);
     this.users = users;
+  }
+
+  public deteleUser(user) {
+    this.setUsers(this.users.filter( u => u.pseudo !== user.pseudo));
+  }
+
+  public validRoleUser(user, newRole) {
+    user.role = newRole['roleControl'];
+    console.log(user, this.users);
+
+    //this.setUsers(this.users);
   }
 
   public login(pseudo, mdp) {

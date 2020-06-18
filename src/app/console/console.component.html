@@ -1,38 +1,97 @@
 <section>
-<h1>Consol Admin</h1>
+  <h1>Consol Admin</h1>
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" >
             Utilisateurs</a>
         </h4>
       </div>
-      <div id="collapse1" class="panel-collapse collapse in">
+      <div id="collapse1" class="panel-collapse collapse in show">
         <div class="panel-body">
 
           <table>
-            <tr *ngFor="let user of this.users; let i = index">
+            <tr *ngFor="let user of this.users; let i = index" id="accordion-films">
               <td>
                 {{user.pseudo}}
               </td>
               <td>
-                {{user.role}}
+                  <div *ngIf="!isEdtUser || user !== edtUser" >
+                      {{user.role}}
+                  </div>
+                  <div *ngIf="isEdtUser && user === edtUser">
+                    <form [formGroup]="formEdit"  *ngIf="roles">
+                        <select formControlName="roleControl" >
+                          <option *ngFor="let role of roles" [value]="role">
+                            {{role}}
+                          </option>
+                        </select>
+                      </form>
+                  </div>
+              </td>
+              <td >
+                <div class="panel-group" id="{{'accordion-'+user.pseudo}}" >
+                    <div class="panel panel-default" *ngIf="user.carts">
+                      <div class="" >
+
+                        <a data-toggle="collapse"  href="{{'#collapse-'+user.pseudo}}"  data-parent="{{'#accordion-'+user.pseudo}}">
+                            <span class="material-icons "  >
+                                add_circle
+                            </span>
+                        </a>
+                        </div>
+                        <div id="{{'collapse-'+user.pseudo}}" class="panel-collapse collapse in ">
+                            <div class="">
+                                <div *ngIf="user.carts">
+                                   
+                                    <div *ngFor="let cart of this.user.carts; let c = index">
+                                        <table *ngIf = "cart.inCart" class="table-film">
+                                            <td>{{cart.filmdb.title}}</td>
+                                            <td>${{cart.prixdb}}</td> 
+                                            <td>
+                                                <span class="material-icons delete" >
+                                                    delete
+                                                </span>
+                                            </td>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
               </td>
               <td>
-                <span class="material-icons edit">
+                <span class="material-icons edit " (click)="editUser(user)" *ngIf="!isEdtUser || user !== edtUser">
                   edit
                 </span>
+                <span class="material-icons edit " (click)="validRoleUser(user)" *ngIf="isEdtUser && user === edtUser">
+                    check
+                  </span>
               </td>
               <td>
-                <span class="material-icons delete">
+                <span class="material-icons delete" (click)="deleteUser(user)">
                   delete
                 </span>
               </td>
+
+
+
+
+
             </tr>
+           
           </table>
         </div>
       </div>
+
+
+
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -63,4 +122,6 @@
       </div>
     </div>
   </div>
+
+
 </section>
