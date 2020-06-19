@@ -10,13 +10,14 @@ export class SpbService {
 
   roles = ['USER', 'ADMIN', 'SUPERADMIN'];
 
-  users = [
+  users: BehaviorSubject<any>;
+  /* [
     { pseudo: "mario", mdp: "mdpmdp", role: "USER", cart: null, carts: null },
     { pseudo: "meruem", mdp: "mdpmdp", role: "SUPERADMIN", cart: null, carts: null },
     { pseudo: "motoko", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null },
     { pseudo: "moto", mdp: "mdpmdp", role: "USER", cart: null, carts: null }
 
-  ]
+  ] */
   /* 
     isAuthenticated: BehaviorSubject<boolean>; */
   userAuthenticated: BehaviorSubject<any>;
@@ -32,6 +33,12 @@ export class SpbService {
     this.isAuthenticated = new BehaviorSubject<boolean>(false); */
     this.userAuthenticated = new BehaviorSubject<any>({ pseudo: null, role: null, mdp: null, cart: null, carts: null });
 
+    this.users = new BehaviorSubject<any>([
+      { pseudo: "mario", mdp: "mdpmdp", role: "USER", cart: null, carts: null },
+      { pseudo: "meruem", mdp: "mdpmdp", role: "SUPERADMIN", cart: null, carts: null },
+      { pseudo: "motoko", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null },
+      { pseudo: "moto", mdp: "mdpmdp", role: "USER", cart: null, carts: null }
+    ]);
 
     this.cart = new BehaviorSubject<any>({ quantity: 0, total: 0 });
     this.carts = new BehaviorSubject<any>(null);
@@ -45,9 +52,10 @@ export class SpbService {
   public getLocatStorageUsers() {
     const users = JSON.parse(localStorage.getItem('users'));
     if (!users) {
-      this.setLocalStorageUsers(this.users);
+      this.setLocalStorageUsers(this.users.value);
     } else {
-      this.users = users;
+      // this.users = users;
+      this.setUsers(users);
     }
   }
 
@@ -70,32 +78,32 @@ export class SpbService {
   // ********** Authentification **********
 
   public getUsers() {
-    return this.users;
+    return this.users.asObservable();
   }
 
   public setUsers(users) {
     this.setLocalStorageUsers(users);
-    this.users = users;
+    this.users.next(users);
   }
 
   public deteleUser(user) {
-    this.setUsers(this.users.filter( u => u.pseudo !== user.pseudo));
+    this.setUsers(this.users.value.filter( u => u.pseudo !== user.pseudo));
   }
 
   public validRoleUser(user, newRole) {
     user.role = newRole['roleControl'];
     console.log(user, this.users);
 
-    //this.setUsers(this.users);
+    this.setUsers(this.users.value);
   }
 
   public login(pseudo, mdp) {
-    for (const user of this.users) {
+    for (const user of this.users.value) {
       if (user.pseudo === pseudo && user.mdp === mdp) {
 
         // on recupère dans le local storage les utilisateurs :
         const users = JSON.parse(localStorage.getItem('users'));
-        let userAuth = users.filter(user => user.pseudo === pseudo)
+        const userAuth = this.users.value.filter(user => user.pseudo === pseudo)
         if (userAuth) {
           userAuth.map(user => {
             this.setUserAuthenticated(user);
@@ -104,10 +112,12 @@ export class SpbService {
         }
         else {
           // si c'est un nouveau inscrit, on l'ajoute à la liste dans le locatStorage : 
-          let setUser = { pseudo: user.pseudo, role: user.role, mdp: user.mdp, cart: this.userCart, carts: this.userCarts };
-          this.users = [...this.users, setUser];
+          const setUser = { pseudo: user.pseudo, role: user.role, mdp: user.mdp, cart: this.userCart, carts: this.userCarts };
+          let userVal = this.users.value;
+          userVal = [...this.users.value, setUser];
+          this.setUsers(userVal);
 
-          let stateStringify = JSON.stringify(this.users)
+          const stateStringify = JSON.stringify(this.users.value)
           localStorage.setItem('users', stateStringify);
           this.setUserAuthenticated(setUser);
           
@@ -117,7 +127,6 @@ export class SpbService {
   }
 
   public setUserAuthenticated(res) {
-    console.log(" Dans set User : " , res);
     this.userAuthenticated.next(res);
   }
 
@@ -127,14 +136,17 @@ export class SpbService {
 
   public inscription(login, mdp) {
     let res = true;
-    for (let user of this.users) {
+    for (const user of this.users.value) {
       if (user.pseudo === login) {
         res = false;
       }
     }
     if (res) {
-      this.users = [...this.users, { pseudo: login, mdp: mdp, role: "USER", cart: null, carts: null }];
-      let stateStringify = JSON.stringify(this.users)
+      let usersVal = this.users.value;
+      usersVal = [...this.users.value, { pseudo: login, mdp, role: 'USER', cart: null, carts: null }];
+      // this.users = [...this.users, { pseudo: login, mdp: mdp, role: "USER", cart: null, carts: null }];
+      this.setUsers(usersVal);
+      const stateStringify = JSON.stringify(this.users.value);
       localStorage.setItem('users', stateStringify);
     }
     return res;
@@ -151,17 +163,15 @@ export class SpbService {
   }
 
   public setCarts(resultat) {
-
-    console.log("Ma nouvelle liste ", this.users, this.userAuthenticated['_value']['pseudo'] , resultat)
-
-    for (let user of this.users) {
+    console.log('Dans SetCats', resultat);
+    for (const user of this.users.value) {
       if (user.pseudo === this.userAuthenticated['_value']['pseudo']) {
-        user.carts = resultat
+        user.carts = resultat;
       }
     }
-    const stateStringify = JSON.stringify(this.users)
+    const stateStringify = JSON.stringify(this.users.value);
     localStorage.setItem('users', stateStringify);
-    console.log(this.users)
+    console.log(this.users);
 
     this.carts.next(resultat);
   }

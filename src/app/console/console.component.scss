@@ -52,7 +52,7 @@ section {
       //background: purple;
 
       td {
-        text-align: center;
+        //text-align: center;
         padding: 10px;
 
         select {
@@ -66,10 +66,11 @@ section {
             width: 100% !important;
             background: $back-main;
             box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-            text-align: justify;
+            //text-align: justify;
 
             td {
                 width: 100%;
+                text-align: start;
             }
         }
 

@@ -36,24 +36,23 @@ export class FormValidationComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.spb.getUsers());
+    // console.log(this.spb.getUsers());
   }
 
   onSubmit() {
-    //this.count++; 
+    // this.count++;
     console.log(this.monForm.value, this.monForm.touched);
 
     if (this.monForm.status ===  'VALID')
      {
-      let res = this.spb.inscription(this.monForm.value.pseudo, this.monForm.value.mdp);
+      const res = this.spb.inscription(this.monForm.value.pseudo, this.monForm.value.mdp);
       this.errorInput = !res;
       this.inscription = res;
       if (res) {
         setTimeout(() => this.router.navigate(['/login']), 2000);
       }
-      console.log(this.spb.getUsers());
-    } 
-    else {
+      // console.log(this.spb.getUsers());
+    } else {
       this.monForm.markAllAsTouched();
     }
 

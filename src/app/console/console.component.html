@@ -4,7 +4,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" >
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
             Utilisateurs</a>
         </h4>
       </div>
@@ -17,62 +17,68 @@
                 {{user.pseudo}}
               </td>
               <td>
-                  <div *ngIf="!isEdtUser || user !== edtUser" >
-                      {{user.role}}
-                  </div>
-                  <div *ngIf="isEdtUser && user === edtUser">
-                    <form [formGroup]="formEdit"  *ngIf="roles">
-                        <select formControlName="roleControl" >
-                          <option *ngFor="let role of roles" [value]="role">
-                            {{role}}
-                          </option>
-                        </select>
-                      </form>
-                  </div>
+                <div *ngIf="!isEdtUser || user !== edtUser">
+                  {{user.role}}
+                </div>
+                <div *ngIf="isEdtUser && user === edtUser">
+                  <form [formGroup]="formEdit" *ngIf="roles">
+                    <select formControlName="roleControl">
+                      <option *ngFor="let role of roles" [value]="role">
+                        {{role}}
+                      </option>
+                    </select>
+                  </form>
+                </div>
               </td>
-              <td >
-                <div class="panel-group" id="{{'accordion-'+user.pseudo}}" >
-                    <div class="panel panel-default" *ngIf="user.carts">
-                      <div class="" >
+              <td>
+                <div class="panel-group" id="{{'accordion-'+user.pseudo}}">
+                  <div class="panel panel-default" *ngIf="user.carts">
+                    <div class="">
 
-                        <a data-toggle="collapse"  href="{{'#collapse-'+user.pseudo}}"  data-parent="{{'#accordion-'+user.pseudo}}">
-                            <span class="material-icons "  >
-                                add_circle
-                            </span>
-                        </a>
-                        </div>
-                        <div id="{{'collapse-'+user.pseudo}}" class="panel-collapse collapse in ">
-                            <div class="">
-                                <div *ngIf="user.carts">
-                                   
-                                    <div *ngFor="let cart of this.user.carts; let c = index">
-                                        <table *ngIf = "cart.inCart" class="table-film">
-                                            <td>{{cart.filmdb.title}}</td>
-                                            <td>${{cart.prixdb}}</td> 
-                                            <td>
-                                                <span class="material-icons delete" >
-                                                    delete
-                                                </span>
-                                            </td>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                            
-                        </div>
+                      <a data-toggle="collapse" href="{{'#collapse-'+user.pseudo}}"
+                        data-parent="{{'#accordion-'+user.pseudo}}">
+                        <span class="material-icons ">
+                          add_circle
+                        </span>
+                      </a>
                     </div>
+                    <div id="{{'collapse-'+user.pseudo}}" class="panel-collapse collapse in ">
+                      <div class="">
+                        <div *ngIf="user.carts">
+                          <table class="table-film">
+                            <tr *ngFor="let cart of this.user.carts; let c = index">
+                              <div *ngIf="cart.inCart">
+                                <!-- <td>{{cart.iddb}}</td> -->
+                                <td>{{cart.filmdb.title}}</td>
+
+                                <td>${{cart.prixdb}}</td>
+                                <td>
+                                  <span class="material-icons delete" (click)="deleteFilm(user, cart)">
+                                    delete
+                                  </span>
+                                </td>
+
+                              </div>
+
+                            </tr>
+                          </table>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
 
-                
+
               </td>
               <td>
                 <span class="material-icons edit " (click)="editUser(user)" *ngIf="!isEdtUser || user !== edtUser">
                   edit
                 </span>
                 <span class="material-icons edit " (click)="validRoleUser(user)" *ngIf="isEdtUser && user === edtUser">
-                    check
-                  </span>
+                  check
+                </span>
               </td>
               <td>
                 <span class="material-icons delete" (click)="deleteUser(user)">
@@ -85,7 +91,7 @@
 
 
             </tr>
-           
+
           </table>
         </div>
       </div>
@@ -101,10 +107,42 @@
         </h4>
       </div>
       <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</div>
+        <div class="panel-body">
+            <table>
+                <tr *ngFor="let film of films">
+                    <td>
+                        {{film.id}}
+                    </td>
+                    <td>
+                        {{film.title}}
+                    </td>
+                    <td>
+                        {{film.date}}
+                    </td>
+                    <td>
+                        ${{film.prix}}
+                    </td>
+                    <td>
+                        {{film.title}}
+                    </td>
+                    <td>
+                        <span class="material-icons edit " >
+                          edit
+                        </span>
+                        <span class="material-icons edit " >
+                          check
+                        </span>
+                      </td>
+                      <td>
+                        <span class="material-icons delete" >
+                          delete
+                        </span>
+                      </td>
+    
+                </tr>
+            </table>
+            
+        </div>
       </div>
     </div>
     <div class="panel panel-default">

@@ -23,7 +23,7 @@ export class SpbComponent implements OnInit {
   carts: any = [];
   article = 'article';
 
-  isFade: boolean = false;
+  isFade = false;
 
   auth = false;
   userAuth;
@@ -31,7 +31,7 @@ export class SpbComponent implements OnInit {
   usersStorage;
 
   constructor(private route: ActivatedRoute, private router: Router, private spb: SpbService,
-    private tmdb: TmdbService, private inout: InOutService) {
+              private tmdb: TmdbService) {
     this.urlBaseImage = this.tmdb.getUrlBaseImg();
     this.isFadeShow();
 
@@ -47,7 +47,7 @@ export class SpbComponent implements OnInit {
       result => {
 
         this.covers = result['_embedded']['movies'] ;// .slice(0,3);
-        let filmsWCover = this.covers.map(film => {
+        const filmsWCover = this.covers.map(film => {
           this.tmdb.search(film.title).subscribe(
             resCovers => {
               this.films = [...this.films, { filmdb: resCovers['results'][0], iddb: film.id, prixdb: film.prix, inCart: false }];
@@ -59,10 +59,10 @@ export class SpbComponent implements OnInit {
       ,
       error => {
         console.log('Une erreur est survenue, On arrive pas à charger les films de la spb bd', error);
-        this.errorConSpb = "Erreur de connexion à la base de donnée Spring Boot Lks Movies";
+        this.errorConSpb = 'Erreur de connexion à la base de donnée Spring Boot Lks Movies';
       }
     );
-  } 
+  }
 
   addCart(film) {
     film.inCart = !film.inCart;
@@ -74,11 +74,12 @@ export class SpbComponent implements OnInit {
     let tot = 0;
     let compt = 0;
 
-    if (this.films)
+    if (this.films) {
       this.films.filter(film => film.inCart === true).map(film => {
         compt++;
         tot = film.prixdb + tot;
       });
+    }
     this.cart = {
       quantity: compt,
       // tslint:disable-next-line:radix
@@ -87,22 +88,18 @@ export class SpbComponent implements OnInit {
     console.log(this.cart);
     this.spb.setCart(this.cart);
     this.article = compt > 0 ? 'articles' : 'article';
-  } 
+  }
 
 
   recupereCarts() {
-      console.log("RecupereCarts >>> debut");
       this.spb.getCarts().subscribe(
       data => {
-        console.log("RecupereCarts >>> data : ", data);
         if (data) {
 
-          console.log("RecupereCarts >>> data ", data);
           this.films = data;
           this.covers = data;
           this.totalCarts();
-        }
-        else {
+        } else {
           this.getAllMovies();
         }
       },
@@ -110,42 +107,35 @@ export class SpbComponent implements OnInit {
         console.log('erreur observable dans spb.coments', err);
       }
     );
-  } 
+  }
 
   isFadeShow() {
     setTimeout(() => {
       this.isFade = true;
-    }, 10000)
+    }, 10000);
   }
 
   recupereAuth() {
       this.spb.getUserAuthenticated().subscribe(
       rep => {
-        this.userAuth = rep;      
+        this.userAuth = rep;
         if (this.userAuth.pseudo !== null) {
-          
+
          /*  console.log("recupere auth dans spb" , this.userAuth);
           this.films = this.userAuth.carts;
           this.covers = this.films;
           console.log(this.films); */
-          //this.totalCarts();
-          //this.recupereUsersStorage();
-          //this.recupereCarts();
-        }
-        else {
-          // Si l'utilisateur n'est pas connecté on est renvoyé vers la home : 
-          console.log("je suis dans sp et pas authenthifié" , this.userAuth)
+          // this.totalCarts();
+          // this.recupereUsersStorage();
+          // this.recupereCarts();
+        } else {
+          // Si l'utilisateur n'est pas connecté on est renvoyé vers la home :
+          console.log('je suis dans sp et pas authenthifié' , this.userAuth)
           this.router.navigate(['/home']);
         }
       },
-      error => console.log("erreur pour récuperer si on est authentifié")
+      error => console.log('erreur pour récuperer si on est authentifié')
     );
   }
-
-  /* recupereUsersStorage(){
-
-    console.log(this.userAuth);
-  } */
-
 
 }
