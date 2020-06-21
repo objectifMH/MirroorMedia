@@ -64,12 +64,6 @@ export class SpbService {
     localStorage.setItem('users', stateStringify);
   }
 
-  public getAllMovies() {
-    const url = ''.concat(this.urlSpb, 'movies');
-    return this.httpClient.get(url);
-  }
-
-
   public getRoles() {
     return this.roles;
   }
@@ -180,5 +174,39 @@ export class SpbService {
     console.log(' Dans  getCarts : ' , this.carts);
     return this.carts.asObservable();
   }
+
+  // ********** API Spring boot **********
+
+
+  public getAllMovies() {
+    const url = ''.concat(this.urlSpb, 'movies');
+    return this.httpClient.get(url);
+  }
+
+  public getAllMoviesFull() {
+    const url = ''.concat(this.urlSpb, 'films');
+    return this.httpClient.get(url);
+  }
+
+  public getAllDirectors() {
+    const url = ''.concat(this.urlSpb, 'directors');
+    return this.httpClient.get(url);
+  }
+
+  public getAllDirectorsFull() {
+    const url = ''.concat(this.urlSpb, 'directeurs');
+    return this.httpClient.get(url);
+  }
+
+  public getAllActeurs() {
+    const url = ''.concat(this.urlSpb, 'actors');
+    return this.httpClient.get(url);
+  }
+
+  public getActeurs(acteur) {
+    const url = ''.concat(this.urlSpb, 'acteurWithFilms/', acteur.id);
+    return this.httpClient.get(url);
+  }
+
 
 }

@@ -12,6 +12,14 @@
         <div class="panel-body">
 
           <table>
+
+            <tr>
+              <th>pseudo</th>
+              <th>role</th>
+              <th>films Sbt</th>
+              <th>edit</th>
+              <th>delete</th>
+            </tr>
             <tr *ngFor="let user of this.users; let i = index" id="accordion-films">
               <td>
                 {{user.pseudo}}
@@ -46,19 +54,26 @@
                       <div class="">
                         <div *ngIf="user.carts">
                           <table class="table-film">
+                            <tr>
+                              <th>id</th>
+                              <th>title</th>
+                              
+                              <th>price</th>
+                              <th>delete</th>
+                            </tr>
                             <tr *ngFor="let cart of this.user.carts; let c = index">
-                              <div *ngIf="cart.inCart">
-                                <!-- <td>{{cart.iddb}}</td> -->
-                                <td>{{cart.filmdb.title}}</td>
 
-                                <td>${{cart.prixdb}}</td>
-                                <td>
-                                  <span class="material-icons delete" (click)="deleteFilm(user, cart)">
-                                    delete
-                                  </span>
-                                </td>
+                              
+                              <td *ngIf="cart.inCart">{{cart.iddb}}</td>
+                              <td *ngIf="cart.inCart">{{cart.filmdb.title}}</td>
 
-                              </div>
+                              <td *ngIf="cart.inCart">${{cart.prixdb}}</td>
+                              <td *ngIf="cart.inCart">
+                                <span class="material-icons delete" (click)="deleteFilm(user, cart)">
+                                  delete
+                                </span>
+                              </td>
+
 
                             </tr>
                           </table>
@@ -108,40 +123,55 @@
       </div>
       <div id="collapse2" class="panel-collapse collapse">
         <div class="panel-body">
-            <table>
-                <tr *ngFor="let film of films">
-                    <td>
-                        {{film.id}}
-                    </td>
-                    <td>
-                        {{film.title}}
-                    </td>
-                    <td>
-                        {{film.date}}
-                    </td>
-                    <td>
-                        ${{film.prix}}
-                    </td>
-                    <td>
-                        {{film.title}}
-                    </td>
-                    <td>
-                        <span class="material-icons edit " >
-                          edit
-                        </span>
-                        <span class="material-icons edit " >
-                          check
-                        </span>
-                      </td>
-                      <td>
-                        <span class="material-icons delete" >
-                          delete
-                        </span>
-                      </td>
-    
-                </tr>
-            </table>
-            
+          <table>
+            <tr>
+              <th>id</th>
+              <th>title</th>
+              <th>director</th>
+              <th>actors</th>
+              <th>date</th>
+              <th>prix</th>
+              <th>edit</th>
+              <th>delete</th>
+            </tr>
+            <tr *ngFor="let film of films">
+              <td>
+                {{film.id}}
+              </td>
+              <td>
+                {{film.title}}
+              </td>
+              <td>
+                {{film.director.name}}
+              </td>
+              <td>
+                <span *ngFor="let actor of film.actors; let virgule = index">
+                  {{actor.name}}<span *ngIf="virgule !== film.actors.length - 1">, </span>
+                </span>
+              </td>
+              <td>
+                {{film.date}}
+              </td>
+              <td>
+                ${{film.prix}}
+              </td>
+              <td>
+                <span class="material-icons edit ">
+                  edit
+                </span>
+                <span class="material-icons edit ">
+                  check
+                </span>
+              </td>
+              <td>
+                <span class="material-icons delete">
+                  delete
+                </span>
+              </td>
+
+            </tr>
+          </table>
+
         </div>
       </div>
     </div>
@@ -149,14 +179,182 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-            Collapsible Group 3</a>
+            Film Director</a>
         </h4>
       </div>
       <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</div>
+        <div class="panel-body">
+          <table>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>films</th>
+              <th>edit</th>
+              <th>delete</th>
+            </tr>
+            <tr *ngFor="let director of this.directors">
+              <td>
+                {{director.id}}
+              </td>
+              <td>
+                {{director.name}}
+              </td>
+              <td>
+
+
+                <div class="panel-group" id="{{'accordion-'+director.id}}">
+                  <div class="panel panel-default" *ngIf="director.films">
+                    <div class="">
+
+                      <a data-toggle="collapse" href="{{'#collapse-'+director.id}}"
+                        data-parent="{{'#accordion-'+director.id}}">
+                        <span class="material-icons ">
+                          add_circle
+                        </span>
+                      </a>
+                    </div>
+                    <div id="{{'collapse-'+director.id}}" class="panel-collapse collapse in ">
+                      <div class="">
+                        <div *ngIf="director.films">
+                          <table class="table-film">
+                            <tr>
+                              <th>id</th>
+                              <th>title</th>
+                              
+                              <th>delete</th>
+                            </tr>
+                            <tr *ngFor="let film of director.films">
+                              <td>{{film.id.id}}</td>
+                              <td>{{film.title}}</td>
+                             
+                             
+                              <td>{{film.id.date}}</td>
+                              <td>
+                                <span class="material-icons edit ">
+                                  delete
+                                </span>
+                              </td>
+          
+                            </tr>
+                          </table>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </td>
+              <td>
+                <span class="material-icons edit ">
+                  edit
+                </span>
+                <span class="material-icons edit ">
+                  check
+                </span>
+              </td>
+              <td>
+                <span class="material-icons delete">
+                  delete
+                </span>
+              </td>
+
+            </tr>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-Actor">
+            Actor</a>
+        </h4>
+      </div>
+      <div id="collapse-Actor" class="panel-collapse collapse">
+        <div class="panel-body">
+          <table>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>films</th>
+              <th>edit</th>
+              <th>delete</th>
+            </tr>
+            <tr *ngFor="let acteur of acteurs">
+              <td>
+                {{acteur.id}}
+              </td>
+              <td>
+                {{acteur.name}}
+              </td>
+              <td>
+
+                <div class="panel-group" id="{{'accordion-'+acteur.id}}">
+                  <div class="panel panel-default" *ngIf="acteur.films">
+                    <div class="">
+
+                      <a data-toggle="collapse" href="{{'#collapse-'+acteur.id}}"
+                        data-parent="{{'#accordion-'+acteur.id}}">
+                        <span class="material-icons " *ngIf="acteur.films.length > 0">
+                          add_circle
+                        </span>
+                      </a>
+                    </div>
+                    <div id="{{'collapse-'+acteur.id}}" class="panel-collapse collapse in ">
+                      <div class="">
+                        <div *ngIf="acteur.films">
+                          <table class="table-film">
+                            <tr>
+                              <th>id</th>
+                              <th>title</th>
+                              
+                              <th>date</th>
+                              <th>delete</th>
+                            </tr>
+                            <tr *ngFor="let film of acteur.films">
+                              <td>{{film.id}}</td>
+                              <td>{{film.title}}</td>
+                              
+                             
+                              <td>{{film.date}}</td>
+                              <td>
+                                <span class="material-icons edit ">
+                                  delete
+                                </span>
+                              </td>
+          
+                            </tr>
+                          </table>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="material-icons edit ">
+                  edit
+                </span>
+                <span class="material-icons edit ">
+                  check
+                </span>
+              </td>
+              <td>
+                <span class="material-icons delete">
+                  delete
+                </span>
+              </td>
+
+            </tr>
+          </table>
+
+        </div>
       </div>
     </div>
   </div>

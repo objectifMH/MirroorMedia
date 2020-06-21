@@ -51,7 +51,7 @@ section {
       color: $color;
       //background: purple;
 
-      td {
+      td,th {
         //text-align: center;
         padding: 10px;
 
@@ -68,8 +68,8 @@ section {
             box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
             //text-align: justify;
 
-            td {
-                width: 100%;
+            td,th {
+                //width: 100%;
                 text-align: start;
             }
         }

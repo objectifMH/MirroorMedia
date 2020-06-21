@@ -8,12 +8,14 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./console.component.scss']
 })
 export class ConsoleComponent implements OnInit {
-    $
+  
 
   users;
   isEdtUser = false;
   edtUser;
   roles;
+  directors;
+  acteurs;
   formEdit: FormGroup;
 
   films: any;
@@ -30,6 +32,8 @@ export class ConsoleComponent implements OnInit {
     this.roles = this.spb.getRoles();
     this.recupereUsers();
     this.recupereFilms();
+    this.recupereDirectors();
+    this.recupereActeurs();
   }
 
 
@@ -64,7 +68,7 @@ export class ConsoleComponent implements OnInit {
 
       this.isEdtUser = !this.isEdtUser;
       this.spb.validRoleUser(user, this.formEdit.value);
-      
+
     }
     this.recupereUsers();
 
@@ -82,13 +86,62 @@ export class ConsoleComponent implements OnInit {
 
 
   recupereFilms() {
-    this.spb.getAllMovies().subscribe(
+    this.spb.getAllMoviesFull().subscribe(
       data => {
-        this.films = data['_embedded']['movies'];
+        this.films = data;
         console.log(this.films);
+
       }
     )
   }
 
+  recupereDirectors() {
+    this.spb.getAllDirectors().subscribe(
+      data => {
+        this.directors = data['_embedded']['directors'];
+        this.directors.map(di => di.films = []);
+        console.log(this.directors);
+        this.spb.getAllDirectorsFull().subscribe(
+          dataD => {
+            let directorsFull;
+            // tslint:disable-next-line:forin
+            for (const i in dataD) {
+              directorsFull = this.directors;
+              this.directors.map( element => {
+                if ( element.id === dataD[i].director.id) {
+                  const film = {
+                    id: dataD[i],
+                    prix: dataD[i].prix,
+                    title: dataD[i].title
+                  };
+                  element.films = [...element.films, film];
+                }});
+            }
+            console.log(directorsFull);
+            this.directors = directorsFull;
+          });
+      });
+  }
+
+  recupereActeurs() {
+    this.spb.getAllActeurs().subscribe(
+      data => {
+        this.acteurs = data['_embedded']['actors'];
+        console.log(this.acteurs);
+        this.acteurs.map( elmt => {
+          console.log(elmt);
+          this.spb.getActeurs(elmt).subscribe(
+            res => {
+              const films = res;
+              elmt.films = films;
+            }
+          ),
+          error => console.log('Erreur, de récupération getActeurs')
+        });
+
+      },
+      error => console.log('Erreur, de recuperation getAllActeursFull')
+    )
+  }
 
 }
