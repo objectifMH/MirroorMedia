@@ -1,5 +1,6 @@
 <section>
   <h1>Consol Admin</h1>
+  <!--  Utilisateurs localStorage  -->
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -7,8 +8,8 @@
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
             Utilisateurs</a>
         </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse in show">
+      </div> 
+      <div id="collapse1" class="panel-collapse collapse in ">
         <div class="panel-body">
 
           <table>
@@ -16,9 +17,9 @@
             <tr>
               <th>pseudo</th>
               <th>role</th>
-              <th>films Sbt</th>
-              <th>edit</th>
-              <th>delete</th>
+              <th class="text-center">films Sbt</th>
+              <th class="text-center">edit</th>
+              <th class="text-center">delete</th>
             </tr>
             <tr *ngFor="let user of this.users; let i = index" id="accordion-films">
               <td>
@@ -38,8 +39,10 @@
                   </form>
                 </div>
               </td>
-              <td>
-                <div class="panel-group" id="{{'accordion-'+user.pseudo}}">
+
+              <!--  films user  -->
+              <td  class="text-center" >
+                <div class="panel-group" id="{{'accordion-'+user.pseudo}}" *ngIf='user.totalTrue > 0'>
                   <div class="panel panel-default" *ngIf="user.carts">
                     <div class="">
 
@@ -50,7 +53,7 @@
                         </span>
                       </a>
                     </div>
-                    <div id="{{'collapse-'+user.pseudo}}" class="panel-collapse collapse in ">
+                    <div id="{{'collapse-'+user.pseudo}}" class="panel-collapse collapse in show">
                       <div class="">
                         <div *ngIf="user.carts">
                           <table class="table-film">
@@ -59,7 +62,7 @@
                               <th>title</th>
                               
                               <th>price</th>
-                              <th>delete</th>
+                              <th class="text-center">delete</th>
                             </tr>
                             <tr *ngFor="let cart of this.user.carts; let c = index">
 
@@ -68,8 +71,8 @@
                               <td *ngIf="cart.inCart">{{cart.filmdb.title}}</td>
 
                               <td *ngIf="cart.inCart">${{cart.prixdb}}</td>
-                              <td *ngIf="cart.inCart">
-                                <span class="material-icons delete" (click)="deleteFilm(user, cart)">
+                              <td *ngIf="cart.inCart" class="text-center">
+                                <span class="material-icons delete" (click)="deleteFilmUser(user, cart)">
                                   delete
                                 </span>
                               </td>
@@ -87,15 +90,17 @@
 
 
               </td>
-              <td>
+
+              <!--  Fin Films user  -->
+              <td class="text-center">
                 <span class="material-icons edit " (click)="editUser(user)" *ngIf="!isEdtUser || user !== edtUser">
                   edit
                 </span>
                 <span class="material-icons edit " (click)="validRoleUser(user)" *ngIf="isEdtUser && user === edtUser">
                   check
                 </span>
-              </td>
-              <td>
+              </td > 
+              <td class="text-center">
                 <span class="material-icons delete" (click)="deleteUser(user)">
                   delete
                 </span>
@@ -111,9 +116,13 @@
         </div>
       </div>
 
-
-
     </div>
+
+    <!--  Films Spring Boot  -->
+
+
+
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -121,8 +130,16 @@
             Films Spring Boot</a>
         </h4>
       </div>
-      <div id="collapse2" class="panel-collapse collapse">
+      <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.films">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse in show" *ngIf="this.films">
         <div class="panel-body">
+        <!-- debut form -->
+
+        <form [formGroup]="formFilmEdit" >
           <table>
             <tr>
               <th>id</th>
@@ -131,50 +148,88 @@
               <th>actors</th>
               <th>date</th>
               <th>prix</th>
-              <th>edit</th>
-              <th>delete</th>
+              <th class="text-center">edit</th>
+              <th class="text-center">delete</th>
             </tr>
             <tr *ngFor="let film of films">
               <td>
-                {{film.id}}
-              </td>
-              <td>
-                {{film.title}}
-              </td>
-              <td>
-                {{film.director.name}}
-              </td>
-              <td>
-                <span *ngFor="let actor of film.actors; let virgule = index">
-                  {{actor.name}}<span *ngIf="virgule !== film.actors.length - 1">, </span>
+                <span *ngIf="!isEdtFilm || edtFilm !== film">
+                  {{film.id}}
+                </span>
+                <span *ngIf="isEdtFilm && edtFilm === film">
+                  <input type="text" formControlName="filmId" placeholder="id"> 
                 </span>
               </td>
               <td>
-                {{film.date}}
+                <span *ngIf="!isEdtFilm || edtFilm !== film">
+                  {{film.title}}
+                </span>
+                <span *ngIf="isEdtFilm && edtFilm === film">
+                  <input type="text" formControlName="filmTitle" placeholder="title"> 
+                </span>
               </td>
               <td>
-                ${{film.prix}}
+                <span *ngIf="!isEdtFilm || edtFilm !== film">
+                  {{film.director.name}}
+                </span>
+                <span *ngIf="isEdtFilm && edtFilm === film">
+                  <input type="text" formControlName="filmDirector" placeholder="director"> 
+                </span>
               </td>
               <td>
-                <span class="material-icons edit ">
+                <span *ngIf="!isEdtFilm || edtFilm !== film">
+                  <span *ngFor="let actor of film.actors; let virgule = index">
+                    {{actor.name}}<span *ngIf="virgule !== film.actors.length - 1">, </span>
+                  </span>
+                </span>
+                <span *ngIf="isEdtFilm && edtFilm === film">
+                  <!-- <input type="text" formControlName="filmActors" placeholder="actors">  -->
+                  <span class="material-icons ">
+                          add_circle
+                  </span>
+                </span>
+              </td>
+              <td>
+                <span *ngIf="!isEdtFilm || edtFilm !== film">
+                  {{film.date}}
+                </span>
+                <span *ngIf="isEdtFilm && edtFilm === film">
+                  <input type="text" formControlName="filmDate" placeholder="date"> 
+                </span>
+              </td>
+              <td>
+                <span *ngIf="!isEdtFilm || edtFilm !== film">
+                  ${{film.prix}}
+                </span>
+                <span *ngIf="isEdtFilm && edtFilm === film">
+                  <input type="text" formControlName="filmPrix" placeholder="prix"> 
+                </span>
+              </td>
+                
+              <td class="text-center">
+                <span class="material-icons edit " (click)="editFilm(film)"  *ngIf="!isEdtFilm || edtFilm !== film">
                   edit
                 </span>
-                <span class="material-icons edit ">
+                <span class="material-icons edit " (click)="valideEditFilm(film)" *ngIf="isEdtFilm && edtFilm === film"> 
                   check
                 </span>
               </td>
-              <td>
-                <span class="material-icons delete">
+              <td class="text-center">
+                <span class="material-icons delete" (click)="deletefilm(film)">
                   delete
                 </span>
               </td>
 
             </tr>
           </table>
+        </form>
+
 
         </div>
       </div>
-    </div>
+      </div>
+
+    <!-- Director -->
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -182,15 +237,21 @@
             Film Director</a>
         </h4>
       </div>
-      <div id="collapse3" class="panel-collapse collapse">
+      <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.directors">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            
+      </div>
+      <div id="collapse3" class="panel-collapse collapse" *ngIf="this.directors">
         <div class="panel-body">
           <table>
             <tr>
               <th>id</th>
               <th>name</th>
               <th>films</th>
-              <th>edit</th>
-              <th>delete</th>
+              <th class="text-center">edit</th>
+              <th class="text-center">delete</th>
             </tr>
             <tr *ngFor="let director of this.directors">
               <td>
@@ -246,7 +307,7 @@
                 </div>
 
               </td>
-              <td>
+              <td class="text-center">
                 <span class="material-icons edit ">
                   edit
                 </span>
@@ -254,7 +315,7 @@
                   check
                 </span>
               </td>
-              <td>
+              <td class="text-center">
                 <span class="material-icons delete">
                   delete
                 </span>
@@ -267,6 +328,7 @@
       </div>
     </div>
 
+    <!--  Actor Spring Boot  -->
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -274,15 +336,21 @@
             Actor</a>
         </h4>
       </div>
-      <div id="collapse-Actor" class="panel-collapse collapse">
+
+      <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.acteurs">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+      </div>
+      <div id="collapse-Actor" class="panel-collapse collapse" *ngIf="this.acteurs">
         <div class="panel-body">
           <table>
             <tr>
               <th>id</th>
               <th>name</th>
-              <th>films</th>
-              <th>edit</th>
-              <th>delete</th>
+              <th class="text-center">films</th>
+              <th class="text-center">edit</th>
+              <th class="text-center">delete</th>
             </tr>
             <tr *ngFor="let acteur of acteurs">
               <td>
@@ -291,7 +359,7 @@
               <td>
                 {{acteur.name}}
               </td>
-              <td>
+              <td class="text-center">
 
                 <div class="panel-group" id="{{'accordion-'+acteur.id}}">
                   <div class="panel panel-default" *ngIf="acteur.films">
@@ -313,7 +381,7 @@
                               <th>title</th>
                               
                               <th>date</th>
-                              <th>delete</th>
+                              <th class="text-center">delete</th>
                             </tr>
                             <tr *ngFor="let film of acteur.films">
                               <td>{{film.id}}</td>
@@ -337,7 +405,7 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <td class="text-center">
                 <span class="material-icons edit ">
                   edit
                 </span>
@@ -345,7 +413,7 @@
                   check
                 </span>
               </td>
-              <td>
+              <td class="text-center">
                 <span class="material-icons delete">
                   delete
                 </span>
@@ -358,6 +426,4 @@
       </div>
     </div>
   </div>
-
-
 </section>

@@ -177,7 +177,7 @@ export class SpbService {
 
   // ********** API Spring boot **********
 
-
+  // Films
   public getAllMovies() {
     const url = ''.concat(this.urlSpb, 'movies');
     return this.httpClient.get(url);
@@ -188,6 +188,21 @@ export class SpbService {
     return this.httpClient.get(url);
   }
 
+  public deleteFilm(film) {
+    const url = ''.concat(this.urlSpb, 'movies/'+film.id);
+    console.log("delete >> [" + url+ "]");
+
+    return this.httpClient.delete(url);
+  }Ò
+
+  public editFilm(film) {
+    const url = ''.concat(this.urlSpb, 'movies/'+film.id);
+    console.log("edit >> [" + url+ "]" ,film);
+
+    return this.httpClient.put(url, film);
+  }
+
+  // Director 
   public getAllDirectors() {
     const url = ''.concat(this.urlSpb, 'directors');
     return this.httpClient.get(url);
@@ -198,6 +213,8 @@ export class SpbService {
     return this.httpClient.get(url);
   }
 
+
+  // Actor
   public getAllActeurs() {
     const url = ''.concat(this.urlSpb, 'actors');
     return this.httpClient.get(url);

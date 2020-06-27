@@ -15,9 +15,10 @@ export class SpbComponent implements OnInit {
 
 
   films: any = [];
-  covers: any = [];
+  filmslStorage: any = [];
+  filmSpb: any = [];
   urlBaseImage: any;
-  errorConSpb: any;
+  errorConnexSpb: any;
   cart = { quantity: 0, total: 0 };
 
   carts: any = [];
@@ -39,27 +40,57 @@ export class SpbComponent implements OnInit {
 
   ngOnInit() {
     this.recupereAuth();
-    this.recupereCarts();
+
   }
 
+
+  // liste des films de spb api + covers apres un search dans tmdb API 
   getAllMovies() {
+
+    this.films = [];
+
     this.spb.getAllMovies().subscribe(
       result => {
 
-        this.covers = result['_embedded']['movies'] ;// .slice(0,3);
-        const filmsWCover = this.covers.map(film => {
-          this.tmdb.search(film.title).subscribe(
-            resCovers => {
-              this.films = [...this.films, { filmdb: resCovers['results'][0], iddb: film.id, prixdb: film.prix, inCart: false }];
+        // Tous les films SPB Api :
+        this.filmSpb = result['_embedded']['movies'];   //.slice(0,3);
+        console.log(this.filmSpb);
+        let inStorage = false;
+        let filmsAux = [];
+
+        if (this.filmslStorage.length > 0) {
+          this.filmSpb.map(spb => {
+            for (const local of this.filmslStorage) {
+              if (local.iddb === spb.id) {
+                filmsAux = [...filmsAux, local];
+                inStorage = true;
+              }
             }
-          )
-        });
-        this.errorConSpb = '';
+
+            if (inStorage === false) {
+              filmsAux = [...filmsAux, spb];
+
+            }
+            inStorage = false;
+
+          });
+
+        } else {
+          filmsAux = this.filmSpb;
+        }
+
+
+        console.log(" >>>> this.films >>>> : ", filmsAux);
+
+        //this.recupereCarts();
+        this.getAllMoviesWithCovers(filmsAux);
+        this.errorConnexSpb = '';
+
       }
       ,
       error => {
         console.log('Une erreur est survenue, On arrive pas à charger les films de la spb bd', error);
-        this.errorConSpb = 'Erreur de connexion à la base de donnée Spring Boot Lks Movies';
+        this.errorConnexSpb = 'Erreur de connexion à la base de donnée Spring Boot Lks Movies';
       }
     );
   }
@@ -92,16 +123,23 @@ export class SpbComponent implements OnInit {
 
 
   recupereCarts() {
-      this.spb.getCarts().subscribe(
+    this.spb.getCarts().subscribe(
       data => {
         if (data) {
 
-          this.films = data;
-          this.covers = data;
-          this.totalCarts();
-        } else {
-          this.getAllMovies();
+          this.filmslStorage = data;
+
+          console.log("local storage >> ", data);
+
         }
+
+        console.log("local Storage : ", this.filmslStorage);
+        console.log("spb api : ", this.films);
+
+        this.getAllMovies();
+
+        //this.totalCarts();
+
       },
       err => {
         console.log('erreur observable dans spb.coments', err);
@@ -116,26 +154,48 @@ export class SpbComponent implements OnInit {
   }
 
   recupereAuth() {
-      this.spb.getUserAuthenticated().subscribe(
+    this.spb.getUserAuthenticated().subscribe(
       rep => {
         this.userAuth = rep;
-        if (this.userAuth.pseudo !== null) {
+        if (this.userAuth.pseudo === null) {
 
-         /*  console.log("recupere auth dans spb" , this.userAuth);
-          this.films = this.userAuth.carts;
-          this.covers = this.films;
-          console.log(this.films); */
-          // this.totalCarts();
-          // this.recupereUsersStorage();
-          // this.recupereCarts();
-        } else {
           // Si l'utilisateur n'est pas connecté on est renvoyé vers la home :
-          console.log('je suis dans sp et pas authenthifié' , this.userAuth)
+          console.log('je suis dans sp et pas authenthifié', this.userAuth)
           this.router.navigate(['/home']);
+        } else {
+          console.log('Connecté et authenthifié', this.userAuth);
+          this.recupereCarts();
         }
       },
       error => console.log('erreur pour récuperer si on est authentifié')
     );
+  }
+
+
+  getAllMoviesWithCovers(filmsAux) {
+
+    // On récupère les covers tmdb Api :
+    const filmsWCover = filmsAux.sort().map(film => {
+
+      this.tmdb.search(film.title).subscribe(
+
+        resCovers => {
+
+          if (!film.filmdb) {
+            this.films =
+              [...this.films, { filmdb: resCovers['results'][0], title: film.title, iddb: film.id, prixdb: film.prix, inCart: false }];
+            console.log(' >>> ', this.films);
+          } else {
+            this.films =
+              [...this.films, { filmdb: film.filmdb, title: film.title, iddb: film.iddb, prixdb: film.prixdb, inCart: film.inCart }];
+            console.log(' >>> ', this.films);
+          }
+        }
+
+      );
+
+    });
+    this.totalCarts();
   }
 
 }

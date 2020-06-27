@@ -17,6 +17,9 @@ section {
 
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 
+
+  
+
   h1 {
     color: $color;
     text-shadow: rgba(0, 0, 0, 0.75) 1px 1px;
@@ -51,6 +54,10 @@ section {
       color: $color;
       //background: purple;
 
+      tr {
+        width: 100%;
+      }
+
       td,th {
         //text-align: center;
         padding: 10px;
@@ -62,15 +69,34 @@ section {
           border: 1px solid #f5e06e;
         }
 
+        input {
+          border-radius: 0;
+          background: #f5e06e;
+          color: #56c3bd !important;
+          border: 1px solid #f5e06e;
+
+          &::placeholder {
+            color: #56c3bd !important;
+          }
+      }
+
+
+
         .table-film {
             width: 100% !important;
             background: $back-main;
             box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
             //text-align: justify;
 
+            tr {
+              width: 100%;
+            }
+            
             td,th {
                 //width: 100%;
                 text-align: start;
+
+                 
             }
         }
 

@@ -17,12 +17,26 @@ export class ConsoleComponent implements OnInit {
   directors;
   acteurs;
   formEdit: FormGroup;
+  formFilmEdit: FormGroup;
+
 
   films: any;
+  isEdtFilm = false;
+  edtFilm;
 
-  constructor(private spb: SpbService, private fb: FormBuilder) {
+  constructor(private spb: SpbService, private fb: FormBuilder, private fb1: FormBuilder) {
     this.formEdit = this.fb.group({
       roleControl: ['USER']
+    });
+
+    this.formFilmEdit = this.fb1.group({
+      filmId: [''],
+      filmTitle: [''],
+      filmDirector: [''],
+      //filmActors: [''],
+      filmDate: [''],
+      filmPrix: ['']
+
     });
 
 
@@ -30,17 +44,34 @@ export class ConsoleComponent implements OnInit {
 
   ngOnInit(): void {
     this.roles = this.spb.getRoles();
+    this.init();
+  }
+
+  init() {
+
     this.recupereUsers();
     this.recupereFilms();
     this.recupereDirectors();
     this.recupereActeurs();
   }
 
-
+  /******* User  */
   recupereUsers() {
     this.spb.getUsers().subscribe(
       data => {
         this.users = data;
+
+        if ( this.users) {
+          const newUsers = this.users.map(element => {
+            let totalTrue = 0;
+            if ( element.carts ) {
+              totalTrue = element.carts.filter(el => el.inCart === true).length;
+              console.log(totalTrue);
+            }
+            element.totalTrue = totalTrue;
+          });
+        }
+        console.log(this.users);
       }
     );
 
@@ -74,7 +105,7 @@ export class ConsoleComponent implements OnInit {
 
   }
 
-  deleteFilm(user, cart) {
+  deleteFilmUser(user, cart) {
     console.log(cart);
     if (confirm('Etes-vous sur de vouloir supprimer ce film,  "' + cart.filmdb.title + '" !')) {
       cart.inCart = false;
@@ -85,6 +116,7 @@ export class ConsoleComponent implements OnInit {
   }
 
 
+  /******* Films  */
   recupereFilms() {
     this.spb.getAllMoviesFull().subscribe(
       data => {
@@ -95,6 +127,69 @@ export class ConsoleComponent implements OnInit {
     )
   }
 
+  deletefilm(film) {
+    if (confirm('Etes-vous sur de vouloir supprimer ce film, ' + film.title + ' !')) {
+        this.spb.deleteFilm(film).subscribe(
+        data => {
+          this.init();
+        }
+      )
+    }
+  }
+
+  editFilm(film) {
+     this.formFilmEdit = this.fb1.group({
+      filmId: [film.id],
+      filmTitle: [film.title],
+      filmDirector: [film.director.name],
+      //filmActors: [film.actors],
+      filmDate: [film.date],
+      filmPrix: [film.prix]
+    });
+
+    
+    this.isEdtFilm = !this.isEdtFilm;
+    this.edtFilm = film;
+    console.log(this.isEdtFilm, film);
+    
+  }
+
+  valideEditFilm(film) {
+
+    console.log( " debut validate " , film);
+    /* this.formEdit.value
+    filmId: [''],
+      filmTitle: [''],
+      filmDirector: [''],
+      //filmActors: [''],
+      filmDate: [''],
+      filmPrix: [''] */
+
+    film.id = this.formFilmEdit.value.filmId;
+    film.title = this.formFilmEdit.value.filmTitle;
+    film.date = this.formFilmEdit.value.filmDate;
+    film.prix = this.formFilmEdit.value.filmPrix;
+
+    console.log("notre nouveau film : " , film); 
+
+    if (confirm('Etes-vous sur de vouloir valider les attributs de ce film,  "' + this.formEdit.value.filmTitle + '" !')) {
+
+          
+        this.isEdtFilm = !this.isEdtFilm;
+        this.edtFilm = film;
+        console.log(" avant service " , film );
+        this.spb.editFilm(film).subscribe(
+          data => {
+            console.log(data);
+          }
+        )
+
+        }
+    //this.init();
+  }
+
+
+  /******* Director  */
   recupereDirectors() {
     this.spb.getAllDirectors().subscribe(
       data => {
@@ -123,6 +218,8 @@ export class ConsoleComponent implements OnInit {
       });
   }
 
+
+  /******* Actor  */
   recupereActeurs() {
     this.spb.getAllActeurs().subscribe(
       data => {
