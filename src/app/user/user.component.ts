@@ -12,6 +12,7 @@ export class UserComponent implements OnInit {
 
   userAuth;
   films = [];
+  filmsCovers = [];
   urlBaseImage = '';
 
   constructor(private spb: SpbService, private router: Router, private tmdb: TmdbService) {
@@ -29,6 +30,7 @@ export class UserComponent implements OnInit {
         this.userAuth = rep;
         if (this.userAuth.carts) {
           this.films = rep.carts.filter(film => film.inCart === true);
+          this.recupereCovers();
         } else {
           this.recupereCarts();
         }
@@ -51,11 +53,23 @@ export class UserComponent implements OnInit {
         if (data) {
           this.films = data.filter(film => film.inCart === true);
         }
+        this.recupereCovers();
         console.log(data, this.films);
       },
       error => {
         return console.log('Erreur, récupération recupereCarts dans user.ts');
       });
+  }
+
+  recupereCovers() {
+    this.films.map(
+      film => {
+        this.tmdb.search(film.title).subscribe(
+          resCovers => {
+            this.filmsCovers = [...this.filmsCovers, {filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
+          })
+          console.log(this.filmsCovers);
+      })
   }
 
 }

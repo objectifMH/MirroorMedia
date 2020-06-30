@@ -62,6 +62,7 @@ export class SpbService {
   }
 
   public setLocalStorageUsers(users) {
+    console.log("65 >>>  setLocalStorageUsers ", users);
     const stateStringify = JSON.stringify(users);
     localStorage.setItem('users', stateStringify);
   }
@@ -79,7 +80,7 @@ export class SpbService {
           let newCarts =  [];
           for (let cart of user.carts)
           {
-            if ( cart.iddb !== film.id )
+            if ( cart.id !== film.id )
             {
               newCarts = [...newCarts, cart];
               //console.log(cart)
@@ -93,11 +94,12 @@ export class SpbService {
           this.setUserAuthenticated(user);
         }
       };
-  this.setLocalStorageUsers(users);
+  //this.setLocalStorageUsers(users);
+  this.setUsers(users);
   }
 
   public editFilmlocalStorage(film) {
-    console.log("debut edit film local storage ");
+    console.log("102  >>>  debut edit film local storage ", film);
     let users = this.getLocatStorageUsers();
       for (let user of users)
       {
@@ -106,10 +108,10 @@ export class SpbService {
           let newCarts =  [];
           for (let cart of user.carts)
           {
-            if ( cart.iddb === film.id )
+            if ( cart.id === film.id )
             {
-              console.log("cart ", cart ,' film ', film)
-              cart = {filmdb: cart , prixdb:parseInt(film.prix), title:film.title, iddb:cart.iddb, inCart:cart.inCart};
+              console.log("cart ", cart ,' film ', film, parseInt(film.prix) )
+              cart = { date: film.date,  prix:film.prix, title:film.title, id:film.id, inCart:cart.inCart};
             }
             newCarts = [...newCarts, cart];
           }
@@ -121,7 +123,11 @@ export class SpbService {
           this.setUserAuthenticated(user);
         }
       };
-  this.setLocalStorageUsers(users);
+      
+      console.log(" fin >>< " , users);
+      console.log()
+      this.setUsers(users);
+  //this.setLocalStorageUsers(users);
   //console.log(" fin >>< " , users);
   }
 

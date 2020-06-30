@@ -67,10 +67,10 @@
                             <tr *ngFor="let cart of this.user.carts; let c = index">
 
                               
-                              <td *ngIf="cart.inCart">{{cart.iddb}}</td>
-                              <td *ngIf="cart.inCart">{{cart.filmdb.title}}</td>
+                              <td *ngIf="cart.inCart">{{cart.id}}</td>
+                              <td *ngIf="cart.inCart">{{cart.title}}</td>
 
-                              <td *ngIf="cart.inCart">${{cart.prixdb}}</td>
+                              <td *ngIf="cart.inCart">${{cart.prix}}</td>
                               <td *ngIf="cart.inCart" class="text-center">
                                 <span class="material-icons delete" (click)="deleteFilmUser(user, cart)">
                                   delete

@@ -14,6 +14,7 @@ import { InOutService } from '../services/in-out.service';
 export class SpbComponent implements OnInit {
 
 
+  filmsSansCovers: any = [];
   films: any = [];
   filmslStorage: any = [];
   filmSpb: any = [];
@@ -45,65 +46,45 @@ export class SpbComponent implements OnInit {
 
   }
 
-
-  // liste des films de spb api + covers apres un search dans tmdb API 
   getAllMovies() {
 
     this.spb.getAllMovies().subscribe(
       result => {
 
         // Tous les films SPB Api :
-        this.filmSpb = result['_embedded']['movies'];   //.slice(0,3);
-        //console.log(this.filmSpb);
-        let inStorage = false;
+        this.filmSpb = result['_embedded']['movies']; 
         let filmsAux = [];
-
-        // Si il y a une liste dans  le local storage pour notre utilisateur : 
-        if (this.filmslStorage.length > 0) {
-
-          // Parcours de la liste SPB api : 
-          this.filmSpb.map(spb => {
-
-            // spb est un film de l'api Spb :
-            //console.log(' >>>  69' , spb);
-
-            // On parcours la liste des films dans le local storage :
-            for (const local of this.filmslStorage) {
-
-              // Si le film dans le local storage est égal au film spb api 
-              // Si le film dans le local  storage se trouve dans l'api 
-              if (local.iddb === spb.id) {
-
-                //console.log(local)
-                filmsAux = [...filmsAux, { filmdb: local.filmdb, title: spb.title, iddb: spb.id, prixdb: spb.prix, inCart: local.inCart }];
-                inStorage = true;
-
+        if ( this.filmslStorage.length > 0)
+        {
+          //console.log('59, Dans film storage ', this.filmslStorage);
+          this.filmSpb.map( spb => {
+            for ( let lstorage of this.filmslStorage)
+            {
+              if ( spb.id === lstorage.id)
+              {
+                //console.log(spb);
+                filmsAux = [...filmsAux,  {date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: lstorage.inCart }];
               }
-
             }
-            // si le film dans le loacal storage n'est pas dans l'api 
-            if (inStorage === false) {
-              //console.log(spb)
-              filmsAux = [...filmsAux, spb];
-
-            }
-            inStorage = false;
-
+            
           });
-
-        } else {
-          // Si c'est un nouvel utilisateur et par conséquend pas de liste dans le local storage :
-          // Notre liste est égal à la liste SPB api :
-
-          console.log(" nouvel utilisateur donc pas de local storage");
-          filmsAux = this.filmSpb;
         }
+        else {
+          // Pas de localStorage : 
+          for ( let spb of this.filmSpb)
+            {
+                //console.log("74 >> >>" , spb);
+                filmsAux = [...filmsAux, {date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: false}];
+              
+            }
+        }
+        //console.log('69 >>> La liste sans covers : ', filmsAux);
+        this.filmsSansCovers = filmsAux;
 
+        // On va recuperer les covers :
+        this.getAllMoviesWithCovers(this.filmsSansCovers);
 
-        console.log(" >>>> this.films >>>> : ", filmsAux);
-
-        //this.recupereCarts();
-        this.getAllMoviesWithCovers(filmsAux);
+        // pas d'erreur de connexion :
         this.errorConnexSpb = '';
 
       }
@@ -118,8 +99,18 @@ export class SpbComponent implements OnInit {
   addCart(film) {
     film.inCart = !film.inCart;
     //this.spb.setCarts(this.films);
+
+    for ( let f of this.filmsSansCovers)
+    {
+      //console.log('105 >>>> ', f,film,  this.filmsSansCovers);
+      if ( f.id === film.id)
+      {
+        f.inCart = film.inCart;
+        //console.log('109 >>>> ', f, film,  this.filmsSansCovers);
+      }
+    }
     this.cartAvalide.quantity = this.films.filter(film => film.inCart === true).length;
-    let tot = this.films.filter(film => film.inCart === true).reduce((acc, film)=> acc + film.prixdb, 0);
+    let tot = this.films.filter(film => film.inCart === true).reduce((acc, film)=> acc + film.prix, 0);
     this.cartAvalide.total = parseFloat(tot.toFixed(2));
   }
 
@@ -131,7 +122,7 @@ export class SpbComponent implements OnInit {
     if (this.films) {
       this.films.filter(film => film.inCart === true).map(film => {
         compt++;
-        tot = film.prixdb + tot;
+        tot = film.prix + tot;
       });
     }
     this.cart = {
@@ -153,13 +144,12 @@ export class SpbComponent implements OnInit {
         if (data) {
 
           this.filmslStorage = data;
-
-          console.log("local storage >> ", data);
+          //console.log("local storage >> ", data);
 
         }
 
-        console.log("local Storage : ", this.filmslStorage);
-        console.log("spb api : ", this.films);
+        //console.log("local Storage : ", this.filmslStorage);
+        //console.log("spb api : ", this.films);
 
         this.getAllMovies();
 
@@ -185,10 +175,10 @@ export class SpbComponent implements OnInit {
         if (this.userAuth.pseudo === null) {
 
           // Si l'utilisateur n'est pas connecté on est renvoyé vers la home :
-          console.log('je suis dans sp et pas authenthifié', this.userAuth)
+          //console.log('je suis dans sp et pas authenthifié', this.userAuth)
           this.router.navigate(['/home']);
         } else {
-          console.log('Connecté et authenthifié', this.userAuth);
+          //console.log('Connecté et authenthifié', this.userAuth);
           this.recupereCarts();
         }
       },
@@ -198,51 +188,37 @@ export class SpbComponent implements OnInit {
 
 
   getAllMoviesWithCovers(filmsAux) {
-    console.log(" !!!!!!!!!!!!!!!!!!!!!!!  debut films covers !!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(" this films >> ", this.films , filmsAux);
+    //console.log(" !!!!!!!!!!!!!!!!!!!!!!!  debut films covers !!!!!!!!!!!!!!!!!!!!!!!");
+    //console.log(" this films >> ", this.films , filmsAux);
 
     // On récupère les covers tmdb Api :
 
     // on parcours notre liste mixte entre  local storage et api : 
     const filmsWCover = filmsAux.sort().map(film => {
       
-      console.log("206, film de la liste mixte --- : ", film);
+      //console.log("206, film de la liste mixte --- : ", film);
       // On fait une recherche pour chaque film de la liste : 
       this.tmdb.search(film.title).subscribe(
 
         resCovers => {
           // Pour chaque film, on cherche sa cover dans tmdb : 
           // si le film qu on recherche n'est pas present dans notre  liste this.films : 
-          if (  this.films.filter( f => f.iddb === film.iddb).length < 1 )
+          if (  this.films.filter( f => f.id === film.id).length < 1 )
           {
             
-            console.log(film.title, film , this.films);
+            //console.log(film.title, film , this.films);
             // si ce film vient de l'api  et pas du local storage donc il a  pas encore de filmdb : 
             if (!film.filmdb) {
 
               this.films =
-                [...this.films, { filmdb: resCovers['results'][0], title: film.title, iddb: film.id, prixdb: film.prix, inCart: film.inCart }];
-              console.log(" 220, le film  est pas dans le  local storage : ", film , this.films)
+                [...this.films, { filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
+              //console.log(" 215, le film  est pas dans le  local storage : ", film , this.films)
             } else {
               // le film était déja present dans le  local storage : 
               this.films =
-                [...this.films, { filmdb: resCovers['results'][0], title: film.title, iddb: film.iddb, prixdb: film.prixdb, inCart: film.inCart }];
-                console.log(" 224, le film  est dans le  local storage : ", film , this.films)
+                [...this.films, { filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
+                //console.log(" 220, le film  est dans le  local storage : ", film , this.films)
             }
-          }
-          else {
-            // Notre liste this.films est vierge c'est la premiere fois qu'on passe ici : 
-            /* console.log("dans le elseeee; Notre liste this.films est vierge " , this.films);
-            this.films.map( f => {
-              if ( f.iddb === film.iddb)
-              {
-                console.log("Notre liste this.films est vierge", f, film)
-                f.title = film.title;
-                f.iddb = film.iddb;
-                f.prixdb = film.prixdb;
-                f.inCart =  film.inCart;
-              }
-            }); */
           }
          
           
@@ -256,13 +232,14 @@ export class SpbComponent implements OnInit {
 
     });
 
-    console.log(" this film >> ", this.films , filmsAux);
-    console.log(" $$$$$$$$$$$$$$$$$$$$$$$$  FINNN films covers $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    console.log(" 235 this film >> ", this.films , filmsAux);
+    //console.log(" $$$$$$$$$$$$$$$$$$$$$$$$  FINNN films covers $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
   }
 
   validateList(){
     if (confirm('Etes-vous sur de vouloir valider votre liste !')) {
-    this.spb.setCarts(this.films);
+      //console.log("231, on valide la liste sans covers ", this.filmsSansCovers)
+    this.spb.setCarts(this.filmsSansCovers);
     }
   }
 

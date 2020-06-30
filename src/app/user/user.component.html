@@ -16,10 +16,10 @@
             <h4 class="">Role:</h4> 
             <p>{{userAuth.role}}</p>
 
-            <div class="" *ngIf="this.films.length > 0">
+            <div class="" *ngIf="this.filmsCovers.length > 0">
                 <h4 class="">Spb List:</h4>
                 <p>
-                  <span *ngFor="let movie of this.films; let i = index" class="btn btn  m-1 mt-3">
+                  <span *ngFor="let movie of this.filmsCovers; let i = index" class="btn btn  m-1 mt-3">
                     
                       
                       <a routerLink="/film/{{movie.filmdb.id}}/movie" title="Fiche infos de {{movie.filmdb.title}}">

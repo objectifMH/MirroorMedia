@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   userAuth = {pseudo: null};
   errorConnected = false;
+  inLogin = false ;
 
   monForm: FormGroup;
   constructor(private fb: FormBuilder, private spb: SpbService, private router: Router, private inout: InOutService) {
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.inLogin = true ; 
   }
 
   onSubmit() {
@@ -44,12 +46,15 @@ export class LoginComponent implements OnInit {
         console.log(this.userAuth)
         if ( this.userAuth.pseudo )
         {
-          
+
+          if ( this.inLogin === true )
           setTimeout(() => this.router.navigate(['/spb']), 3000);
+
           this.monForm = this.fb.group({
             pseudo: [''],
             mdp: ['']
           });
+          this.inLogin = false ; 
         }
         else {
           this.errorConnected = true ; 
