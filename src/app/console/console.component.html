@@ -153,12 +153,12 @@
             </tr>
             <tr *ngFor="let film of films">
               <td>
-                <span *ngIf="!isEdtFilm || edtFilm !== film">
+                <span > <!-- *ngIf="!isEdtFilm || edtFilm !== film" -->
                   {{film.id}}
                 </span>
-                <span *ngIf="isEdtFilm && edtFilm === film">
+               <!--  <span *ngIf="isEdtFilm && edtFilm === film">
                   <input type="text" formControlName="filmId" placeholder="id"> 
-                </span>
+                </span> -->
               </td>
               <td>
                 <span *ngIf="!isEdtFilm || edtFilm !== film">

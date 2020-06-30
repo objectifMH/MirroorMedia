@@ -57,6 +57,8 @@ export class SpbService {
       // this.users = users;
       this.setUsers(users);
     }
+
+    return users;
   }
 
   public setLocalStorageUsers(users) {
@@ -66,6 +68,61 @@ export class SpbService {
 
   public getRoles() {
     return this.roles;
+  }
+
+  public deleteFilmlocalStorage(film) {
+    let users = this.getLocatStorageUsers();
+      for (let user of users)
+      {
+        if ( user.carts && user.carts.length > 0 ) 
+        {   
+          let newCarts =  [];
+          for (let cart of user.carts)
+          {
+            if ( cart.iddb !== film.id )
+            {
+              newCarts = [...newCarts, cart];
+              //console.log(cart)
+            }
+          }
+               user.carts = newCarts;
+             
+        }
+        if ( user.pseudo === this.userAuthenticated.value.pseudo)
+        {
+          this.setUserAuthenticated(user);
+        }
+      };
+  this.setLocalStorageUsers(users);
+  }
+
+  public editFilmlocalStorage(film) {
+    console.log("debut edit film local storage ");
+    let users = this.getLocatStorageUsers();
+      for (let user of users)
+      {
+        if ( user.carts && user.carts.length > 0 ) 
+        {   
+          let newCarts =  [];
+          for (let cart of user.carts)
+          {
+            if ( cart.iddb === film.id )
+            {
+              console.log("cart ", cart ,' film ', film)
+              cart = {filmdb: cart , prixdb:parseInt(film.prix), title:film.title, iddb:cart.iddb, inCart:cart.inCart};
+            }
+            newCarts = [...newCarts, cart];
+          }
+          user.carts = newCarts;
+          //console.log(user.carts)
+        }
+        if ( user.pseudo === this.userAuthenticated.value.pseudo)
+        {
+          this.setUserAuthenticated(user);
+        }
+      };
+  this.setLocalStorageUsers(users);
+  //console.log(" fin >>< " , users);
   }
 
 
@@ -190,14 +247,16 @@ export class SpbService {
 
   public deleteFilm(film) {
     const url = ''.concat(this.urlSpb, 'movies/'+film.id);
-    console.log("delete >> [" + url+ "]");
+    // On va aussi supprimer le films dans le local storage : 
+    this.deleteFilmlocalStorage(film);
 
     return this.httpClient.delete(url);
-  }Ò
+  }
 
   public editFilm(film) {
     const url = ''.concat(this.urlSpb, 'movies/'+film.id);
     console.log("edit >> [" + url+ "]" ,film);
+    this.editFilmlocalStorage(film);
 
     return this.httpClient.put(url, film);
   }

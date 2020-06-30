@@ -34,7 +34,7 @@ section {
         font-size: x-large;
     }
 
-    .container {
+    .container-flex {
         display: flex;
         align-items: center;
         flex-direction: row;
@@ -59,6 +59,8 @@ section {
     
         tr {
             transition: all 0.3s ease-in-out;
+
+            
             &:hover {
                 transform: scale(1.1);
                 box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
@@ -67,6 +69,8 @@ section {
                     //max-height: 160px;
                 }
             }
+
+           
     
         }
 

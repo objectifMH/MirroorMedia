@@ -14,14 +14,19 @@
         </div> -->
 
     <h4 *ngIf="this.errorConnexSpb" class="text-center" class="h4-error"> {{errorConnexSpb}} </h4>
-    <div *ngIf="this.films.length > 0" class="mt-50 ">
+    <div *ngIf="this.films" class="mt-50 ">
         
         <h4 class="">Movies  <span>( {{this.films.length}} )</span>  </h4>
-        <div class="container">
+        
+        <div class="container container-flex">
+            <div class="container" >
+                <span class="btn btn-primary float-right p-2" (click)="validateList()"> Valider : ({{this.cartAvalide.quantity}}) ${{this.cartAvalide.total}} </span>
+            </div>
             
             <table>
                 <!-- <th>img</th><th>titre</th><th>prix</th><th>info</th><th>add</th> -->
-                <tr *ngFor="let film of this.films; let i = index" class=" span-container ">
+                
+                <tr *ngFor="let film of this.films.sort(); let i = index" class=" span-container ">
                     <td>
                         <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.title}}">
                                 <img    mat-card-image class="acteur"
@@ -30,7 +35,7 @@
                         </a>
                     </td>
                     <td>
-                        <span class="span-film  ">{{ film.filmdb.title }} </span>
+                        <span class="span-film  ">{{ film.title }} </span>
                     </td>
                     <td>
                         <span class="btn btn-warning">{{film.prixdb}}$</span>
@@ -52,7 +57,7 @@
             </table>
         </div>
     </div>
-    <div *ngIf="!this.films.length " class="mt-50 container d-flex justify-content-center">
+    <div *ngIf="!this.films.length" class="mt-50 container d-flex justify-content-center">
         <div class="spinner-border text-info" role="status">
             <span class="sr-only">Loading...</span>
         </div>

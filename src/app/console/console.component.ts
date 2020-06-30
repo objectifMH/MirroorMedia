@@ -224,9 +224,9 @@ export class ConsoleComponent implements OnInit {
     this.spb.getAllActeurs().subscribe(
       data => {
         this.acteurs = data['_embedded']['actors'];
-        console.log(this.acteurs);
+        //console.log(this.acteurs);
         this.acteurs.map( elmt => {
-          console.log(elmt);
+          //console.log(elmt);
           this.spb.getActeurs(elmt).subscribe(
             res => {
               const films = res;
