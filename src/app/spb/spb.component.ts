@@ -54,17 +54,22 @@ export class SpbComponent implements OnInit {
         // Tous les films SPB Api :
         this.filmSpb = result['_embedded']['movies'];
         let filmsAux = [];
+        let inList = false ; 
         if (this.filmslStorage.length > 0) {
           console.log('59, Dans film storage ', this.filmslStorage);
           this.filmSpb.map(spb => {
+            inList = false;
             for (let lstorage of this.filmslStorage) {
               if (spb.id === lstorage.id) {
                 //console.log(spb);
                 filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: lstorage.inCart }];
+                inList = true;
               }
-              else{
-                filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: lstorage.false }];
-              }
+             
+            }
+            if ( !inList)
+            {
+              filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: false }];
             }
 
           });
