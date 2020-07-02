@@ -128,6 +128,10 @@
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
             Films Spring Boot</a>
+          
+          <span class="material-icons float-right addFilm" title='Add a movie' (click)="addFilm()">
+            add_circle
+          </span>
         </h4>
       </div>
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.films">
@@ -151,6 +155,48 @@
               <th class="text-center">edit</th>
               <th class="text-center">delete</th>
             </tr>
+
+              <!-- -->
+
+              <tr *ngIf="isAddFilm">
+                <td>
+                </td>
+                <td>
+                    <input type="text" formControlName="filmTitle" placeholder="title"> 
+                </td>
+                <td>
+                    <select formControlName="filmDirector">
+                      <option [value]="director.id" *ngFor="let director of this.directors">
+                        {{director.id}} : {{director.name}}
+                      </option>
+                    </select>
+                </td>
+                <td>
+                    <span class="material-icons ">
+                            add_circle
+                    </span>
+                </td>
+                <td>
+                    <input type="text" formControlName="filmDate" placeholder="date"> 
+                </td>
+                <td>
+                    <input type="text" formControlName="filmPrix" placeholder="prix"> 
+                </td>
+                  
+                <td class="text-center">
+                  <span class="material-icons edit " (click)="valideAddFilm()" > 
+                    check
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="material-icons delete" (click)="cancelFilm()">
+                    delete
+                  </span>
+                </td>
+  
+              </tr>
+
+              <!-- -->
             <tr *ngFor="let film of films">
               <td>
                 <span > <!-- *ngIf="!isEdtFilm || edtFilm !== film" -->
@@ -173,8 +219,14 @@
                   {{film.director.name}}
                 </span>
                 <span *ngIf="isEdtFilm && edtFilm === film">
-                  <input type="text" formControlName="filmDirector" placeholder="director"> 
+                  <!-- <input type="text" formControlName="filmDirector" placeholder="director">  -->
+                  <select formControlName="filmDirector">
+                    <option [value]="director.id" *ngFor="let director of this.directors">
+                      {{director.id}} : {{director.name}}
+                    </option>
+                  </select>
                 </span>
+                
               </td>
               <td>
                 <span *ngIf="!isEdtFilm || edtFilm !== film">

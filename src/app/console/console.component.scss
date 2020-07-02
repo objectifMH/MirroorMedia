@@ -31,6 +31,15 @@ section {
     color: white; //$color;
   }
 
+  .addFilm {
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.12) rotate(360deg);
+    }
+  }
+
   .panel-heading {
 
     padding: 5px 15px;

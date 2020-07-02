@@ -62,6 +62,9 @@ export class SpbComponent implements OnInit {
                 //console.log(spb);
                 filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: lstorage.inCart }];
               }
+              else{
+                filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: lstorage.false }];
+              }
             }
 
           });
@@ -183,7 +186,7 @@ export class SpbComponent implements OnInit {
 
   getAllMoviesWithCovers(filmsAux) {
     //console.log(" !!!!!!!!!!!!!!!!!!!!!!!  debut films covers !!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(" this films >> ", this.films, filmsAux);
+    console.log(" 186, spb  this films >> ", this.films, filmsAux);
 
     // On récupère les covers tmdb Api :
 
@@ -199,7 +202,7 @@ export class SpbComponent implements OnInit {
           // si le film qu on recherche n'est pas present dans notre  liste this.films : 
           if (this.films.filter(f => f.id === film.id).length < 1) {
 
-            console.log(film.title, film, this.films);
+            console.log(" 202 >>> pas present " , film.title, film, this.films);
             // si ce film vient de l'api  et pas du local storage donc il a  pas encore de filmdb : 
             if (!film.filmdb) {
 

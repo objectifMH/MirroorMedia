@@ -261,10 +261,17 @@ export class SpbService {
 
   public editFilm(film) {
     const url = ''.concat(this.urlSpb, 'movies/'+film.id);
-    console.log("edit >> [" + url+ "]" ,film);
     this.editFilmlocalStorage(film);
 
     return this.httpClient.put(url, film);
+  }
+
+  public addFilm(film) {
+    const url = ''.concat(this.urlSpb, 'movies');
+    console.log(url , film);
+    //this.editFilmlocalStorage(film);
+
+    return this.httpClient.post(url, film);
   }
 
   // Director 
