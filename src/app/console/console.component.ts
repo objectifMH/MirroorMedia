@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpbService } from '../services/spb.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-console',
@@ -18,27 +18,37 @@ export class ConsoleComponent implements OnInit {
   acteurs;
   formEdit: FormGroup;
   formFilmEdit: FormGroup;
+  formDirectorEdit: FormGroup;
 
 
   films: any;
   isEdtFilm = false;
   edtFilm;
-
   isAddFilm = false;
 
-  constructor(private spb: SpbService, private fb: FormBuilder, private fb1: FormBuilder) {
+  isEdtDirector = false;
+  edtDirector;
+  isAddDirector = false;
+
+
+  constructor(private spb: SpbService, private fb: FormBuilder, private fb1: FormBuilder, private fb2: FormBuilder) {
     this.formEdit = this.fb.group({
       roleControl: ['USER']
     });
 
     this.formFilmEdit = this.fb1.group({
       filmId: [''],
-      filmTitle: [''],
-      filmDirector: [''],
+      filmTitle: ['', [Validators.required]],
+      filmDirector: ['', [Validators.required]],
       //filmActors: [''],
-      filmDate: [''],
-      filmPrix: ['']
+      filmDate: ['', [Validators.required]],
+      filmPrix: ['', [Validators.required]]
 
+    });
+
+    this.formDirectorEdit = this.fb2.group({
+      directorId: [''],
+      directorName: ['', [Validators.required]]
     });
 
 
@@ -68,7 +78,7 @@ export class ConsoleComponent implements OnInit {
             let totalTrue = 0;
             if (element.carts) {
               totalTrue = element.carts.filter(el => el.inCart === true).length;
-              console.log(totalTrue);
+
             }
             element.totalTrue = totalTrue;
           });
@@ -130,6 +140,7 @@ export class ConsoleComponent implements OnInit {
   }
 
   deletefilm(film) {
+    console.log(film);
     if (confirm('Etes-vous sur de vouloir supprimer ce film, ' + film.title + ' !')) {
       this.spb.deleteFilm(film).subscribe(
         data => {
@@ -164,14 +175,7 @@ export class ConsoleComponent implements OnInit {
   valideEditFilm(film) {
 
     console.log(" 163 >> validate :  debut validate ", film, this.formFilmEdit.value);
-    /* this.formEdit.value
-    filmId: [''],
-      filmTitle: [''],
-      filmDirector: [''],
-      //filmActors: [''],
-      filmDate: [''],
-      filmPrix: [''] */
-
+    
     film.id = this.formFilmEdit.value.filmId;
     film.title = this.formFilmEdit.value.filmTitle;
     film.date = this.formFilmEdit.value.filmDate;
@@ -182,7 +186,7 @@ export class ConsoleComponent implements OnInit {
 
     console.log("notre nouveau film : ", film);
 
-    if (confirm('Etes-vous sur de vouloir valider les attributs de ce film,  "' + this.formEdit.value.filmTitle + '" !')) {
+    if (confirm('Etes-vous sur de vouloir valider les attributs de ce film,  "' + this.formFilmEdit.value.filmTitle + '" !')) {
 
 
       this.isEdtFilm = !this.isEdtFilm;
@@ -191,6 +195,23 @@ export class ConsoleComponent implements OnInit {
       this.spb.editFilm(film).subscribe(
         data => {
           console.log(data);
+
+          console.log("203 ac form ", this.formFilmEdit)
+        },
+        error => { console.log("error for ", film) },
+        () => {
+          console.log(" complete ", film);
+          // Mise à zéro des champs :
+          this.formFilmEdit = this.fb1.group({
+            filmId: [''],
+            filmTitle: [''],
+            filmDirector: [''],
+            //filmActors: [''],
+            filmDate: [''],
+            filmPrix: ['']
+
+          });
+          this.init();
         }
       )
 
@@ -205,24 +226,44 @@ export class ConsoleComponent implements OnInit {
 
   valideAddFilm() {
 
+    console.log(" status du form ", this.formFilmEdit.status)
+    if (this.formFilmEdit.status === 'VALID') {
+      let film = {
+        title: this.formFilmEdit.value.filmTitle, date: this.formFilmEdit.value.filmDate, prix: this.formFilmEdit.value.filmPrix,
+        director: "/directors/" + this.formFilmEdit.value.filmDirector
+      };
 
-    let film = {
-      title: this.formFilmEdit.value.filmTitle, date: this.formFilmEdit.value.filmDate, prix: this.formFilmEdit.value.filmPrix,
-      director: "/directors/" + this.formFilmEdit.value.filmDirector
-    };
+      console.log(this.formFilmEdit.value.filmTitle);
 
-    console.log(this.formFilmEdit.value.filmTitle);
+      console.log(" validation de l'ajout", film);
+      if (confirm('Etes-vous sur de vouloir ajouter ce film, ' + film.title + ' !')) {
+        this.spb.addFilm(film).subscribe(
+          data => {
+            this.init();
+          },
+          error => { console.log("Erreur, addFilm", film) },
+          () => {
+            this.isAddFilm = false;
 
-    console.log(" validation de l'ajout", film);
-    if (confirm('Etes-vous sur de vouloir ajouter ce film, ' + film.title + ' !')) {
-      this.spb.addFilm(film).subscribe(
-        data => {
-          this.init();
-        },
-        error => { console.log("Erreur, addFilm", film) },
-        () => { this.isAddFilm = false; }
-      )
+            // complete on remet les champs à zéro :
+            this.formFilmEdit = this.fb1.group({
+              filmId: [''],
+              filmTitle: [''],
+              filmDirector: [''],
+              //filmActors: [''],
+              filmDate: [''],
+              filmPrix: ['']
+
+            });
+          }
+        )
+      }
     }
+    else {
+      this.formFilmEdit.markAllAsTouched();
+      alert(" Tous les champs ne sont pas complétés ! ");
+    }
+
   }
 
   cancelFilm() {
@@ -259,6 +300,126 @@ export class ConsoleComponent implements OnInit {
             this.directors = directorsFull;
           });
       });
+  }
+
+  deleteDirector(director) {
+    if (confirm('Etes-vous sur de vouloir supprimer ce directeur, ' + director.name + ' !')) {
+      this.spb.deleteDirector(director).subscribe(
+        data => {
+          this.init();
+        },
+        error => {
+          console.log(error, error.status)
+          if ( error.status === 409)
+          {
+            alert('Pour supprimer ce directeur vous devez supprimer tous les films de : '+ director.name);
+          }
+        }
+      )
+    }
+  }
+
+  editDirector(director) {
+
+    console.log("edit director 336 ", director, director.name);
+    this.formDirectorEdit = this.fb2.group({
+      directorId: [''],
+      directorName: [director.name]
+    });
+
+    console.log("edit director 337", this.formDirectorEdit.value, director.id + " : " + director.name);
+
+
+    this.isEdtDirector = !this.isEdtDirector;
+    this.edtDirector = director;
+    console.log(this.isEdtDirector, director);
+
+  }
+
+  valideEditDirector(director) {
+
+    console.log(" 342 >> validate :  debut validate ", director, this.formDirectorEdit.value);
+  
+    director.name = this.formDirectorEdit.value.directorName;
+
+
+    console.log("notre nouveau film : ", director);
+
+    if (confirm('Etes-vous sur de vouloir valider les attributs de ce film,  "' + this.formDirectorEdit.value.directorName + '" !')) {
+
+
+      this.isEdtDirector = !this.isEdtDirector;
+      this.edtDirector = director;
+      console.log(" avant service director ", director);
+      this.spb.editDirector(director).subscribe(
+        data => {
+          console.log(data);
+
+          console.log("359 ac form ", this.formDirectorEdit)
+        },
+        error => { console.log("error for ", director) },
+        () => {
+          console.log(" complete ", director);
+          // Mise à zéro des champs :
+          this.formDirectorEdit = this.fb2.group({
+            directorId: [''],
+            directorName: ['', [Validators.required]]
+          });
+          this.init();
+        }
+      )
+
+    }
+    //this.init();
+  }
+
+  addDirector() {
+    this.isAddDirector = true;
+    console.log("On va ajouter  un Directeur ");
+  }
+
+  valideAddDirector() {
+
+    console.log(" status du form ", this.formDirectorEdit.status)
+    if (this.formDirectorEdit.status === 'VALID') {
+      let director = {
+        name: this.formDirectorEdit.value.directorName
+      };
+
+      console.log(this.formDirectorEdit.value.directorName);
+
+      console.log(" validation de l'ajout", director);
+      if (confirm('Etes-vous sur de vouloir ajouter ce director, ' + director.name + ' !')) {
+        this.spb.addDirector(director).subscribe(
+          data => {
+            this.init();
+          },
+          error => { console.log("Erreur, addDirector", director) },
+          () => {
+            this.isAddDirector = false;
+
+            // complete on remet les champs à zéro :
+            this.formDirectorEdit = this.fb2.group({
+              directorId: [''],
+              directorName: ['']
+
+            });
+          }
+        )
+      }
+    }
+    else {
+      this.formFilmEdit.markAllAsTouched();
+      alert(" Tous les champs ne sont pas complétés ! ");
+    }
+
+  }
+
+  
+  cancelDirector() {
+    if (confirm('Etes-vous sur de vouloir abandonner l"ajout de ce Director !')) {
+      this.isAddDirector = false;
+    }
   }
 
 

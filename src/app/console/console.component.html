@@ -5,9 +5,14 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-            Utilisateurs</a>
-            ({{this.users ? this.users.length : 0}})
+          
+          
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="d-flex align-items-center">
+            <span class="material-icons">
+              how_to_reg
+            </span>
+            Utilisateurs 
+            ({{this.users ? this.users.length : 0}})</a>
         </h4>
         
       </div> 
@@ -19,7 +24,7 @@
             <tr>
               <th>pseudo</th>
               <th>role</th>
-              <th class="text-center">films Sbt</th>
+              <th class="text-center">movies Sbt</th>
               <th class="text-center">edit</th>
               <th class="text-center">delete</th>
             </tr>
@@ -120,28 +125,34 @@
 
     </div>
 
-    <!--  Films Spring Boot  -->
+    <!--  Movies Spring Boot  -->
 
 
 
 
     <div class="panel panel-default">
-      <div class="panel-heading">
+      <div class="panel-heading flex-justify-content-space-between">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-            Films Spring Boot</a> ({{this.films ? this.films.length : 0}})
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="d-flex align-items-center">
+            <span class="material-icons">
+              movie
+            </span>
+            Movies Spring Boot
+            ({{this.films ? this.films.length : 0}})
+          </a> 
           
-          <span class="material-icons float-right addFilm" title='Add a movie' (click)="addFilm()">
-            add_circle 
-          </span>
         </h4>
+        
+        <span class="material-icons  addFilm" title='Add a movie' (click)="addFilm()">
+          add_circle 
+        </span>
       </div>
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.films">
                 <div class="spinner-border text-info" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
       </div>
-      <div id="collapse2" class="panel-collapse collapse in show" *ngIf="this.films">
+      <div id="collapse2" class="panel-collapse collapse in" *ngIf="this.films">
         <div class="panel-body">
         <!-- debut form -->
 
@@ -158,13 +169,14 @@
               <th class="text-center">delete</th>
             </tr>
 
-              <!-- -->
+              <!-- addFilm -->
 
               <tr *ngIf="isAddFilm">
                 <td>
                 </td>
-                <td>
-                    <input type="text" formControlName="filmTitle" placeholder="title"> 
+                <td class="position-relative">
+                    <input type="text" formControlName="filmTitle" placeholder="title">
+                    <i class="material-icons  position-absolute  "></i>
                 </td>
                 <td>
                     <select formControlName="filmDirector">
@@ -178,11 +190,13 @@
                             add_circle
                     </span>
                 </td>
-                <td>
-                    <input type="text" formControlName="filmDate" placeholder="date"> 
+                <td class="position-relative">
+                    <input type="text" formControlName="filmDate" placeholder="date">
+                    <i class="material-icons  position-absolute  icon-date "></i> 
                 </td>
-                <td>
-                    <input type="text" formControlName="filmPrix" placeholder="prix"> 
+                <td class="position-relative">
+                    <input type="text" formControlName="filmPrix" placeholder="prix">
+                    <i class="material-icons  position-absolute  icon-prix "></i> 
                 </td>
                   
                 <td class="text-center">
@@ -198,15 +212,13 @@
   
               </tr>
 
-              <!-- -->
+              <!-- fin addFilm -->
+
             <tr *ngFor="let film of films">
               <td>
                 <span > <!-- *ngIf="!isEdtFilm || edtFilm !== film" -->
                   {{film.id}}
                 </span>
-               <!--  <span *ngIf="isEdtFilm && edtFilm === film">
-                  <input type="text" formControlName="filmId" placeholder="id"> 
-                </span> -->
               </td>
               <td>
                 <span *ngIf="!isEdtFilm || edtFilm !== film">
@@ -285,40 +297,87 @@
 
     <!-- Director -->
     <div class="panel panel-default">
-      <div class="panel-heading">
+      <div class="panel-heading flex-justify-content-space-between">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-            Film Director</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="d-flex align-items-center">
+            <span class="material-icons">
+              psychology
+              </span>
+            Movie Director
             ({{this.directors ? this.directors.length : 0}})
+          </a>
         </h4>
+        
+        <span class="material-icons  addFilm" title='Add a director' (click)="addDirector()">
+          add_circle 
+        </span>
       </div>
+
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.directors">
                 <div class="spinner-border text-info" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
-            
       </div>
-      <div id="collapse3" class="panel-collapse collapse" *ngIf="this.directors">
+
+      <div id="collapse3" class="panel-collapse collapse in show" *ngIf="this.directors">
         <div class="panel-body">
+
+        <form [formGroup]="formDirectorEdit" >
           <table>
             <tr>
               <th>id</th>
               <th>name</th>
-              <th>films</th>
+              <th>movies</th>
               <th class="text-center">edit</th>
               <th class="text-center">delete</th>
             </tr>
+
+             <!-- addDirector -->
+
+             <tr *ngIf="isAddDirector">
+              <td>
+                <!-- id -->
+              </td>
+              <td class="position-relative">
+                  <input type="text" formControlName="directorName" placeholder="name">
+                  <i class="material-icons  position-absolute  "></i>
+              </td>
+              <td>
+              </td>
+                
+              <td class="text-center">
+                <span class="material-icons edit " (click)="valideAddDirector()" > 
+                  check
+                </span>
+              </td>
+              <td class="text-center">
+                <span class="material-icons delete" (click)="cancelDirector()">
+                  delete
+                </span>
+              </td>
+
+            </tr>
+
+            <!-- Fin addDirector -->
+            
             <tr *ngFor="let director of this.directors">
               <td>
                 {{director.id}}
               </td>
+
               <td>
-                {{director.name}}
+                <span *ngIf="!isEdtDirector || edtDirector !== director">
+                  {{director.name}}
+                </span>
+                <span  *ngIf="isEdtDirector && edtDirector === director">
+                  <input type="text" formControlName="directorName" placeholder="name"> 
+                </span>
               </td>
+
               <td>
 
 
-                <div class="panel-group" id="{{'accordion-'+director.id}}">
+                <div class="panel-group" id="{{'accordion-'+director.id}}" *ngIf="director.films.length > 0">
                   <div class="panel panel-default" *ngIf="director.films">
                     <div class="">
 
@@ -346,7 +405,7 @@
                              
                               <td>{{film.id.date}}</td>
                               <td>
-                                <span class="material-icons edit ">
+                                <span class="material-icons edit "  (click)="deletefilm(film.id)">
                                   delete
                                 </span>
                               </td>
@@ -362,22 +421,26 @@
                 </div>
 
               </td>
+
               <td class="text-center">
-                <span class="material-icons edit ">
+                <span class="material-icons edit " *ngIf="!isEdtDirector || edtDirector !== director"  (click)="editDirector(director)">
                   edit
                 </span>
-                <span class="material-icons edit ">
+                <span class="material-icons edit " *ngIf="isEdtDirector && edtDirector === director" (click)="valideEditDirector(director)">
                   check
                 </span>
               </td>
+
+
               <td class="text-center">
-                <span class="material-icons delete">
+                <span class="material-icons delete "  (click)="deleteDirector(director)">
                   delete
                 </span>
               </td>
 
             </tr>
           </table>
+        </form>
 
         </div>
       </div>
@@ -387,9 +450,13 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-Actor">
-            Actor</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse-Actor" class="d-flex align-items-center">
+            <span class="material-icons">
+              group
+              </span>
+            Actor 
             ({{this.acteurs ? this.acteurs.length : 0}})
+          </a>
         </h4>
       </div>
 
@@ -404,7 +471,7 @@
             <tr>
               <th>id</th>
               <th>name</th>
-              <th class="text-center">films</th>
+              <th class="text-center">movies</th>
               <th class="text-center">edit</th>
               <th class="text-center">delete</th>
             </tr>

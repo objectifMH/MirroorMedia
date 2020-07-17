@@ -191,7 +191,7 @@ export class SpbComponent implements OnInit {
 
   getAllMoviesWithCovers(filmsAux) {
     //console.log(" !!!!!!!!!!!!!!!!!!!!!!!  debut films covers !!!!!!!!!!!!!!!!!!!!!!!");
-    console.log(" 186, spb  this films >> ", this.films, filmsAux);
+    //console.log(" 186, spb  this films >> ", this.films, filmsAux);
 
     // On récupère les covers tmdb Api :
 
@@ -207,7 +207,7 @@ export class SpbComponent implements OnInit {
           // si le film qu on recherche n'est pas present dans notre  liste this.films : 
           if (this.films.filter(f => f.id === film.id).length < 1) {
 
-            console.log(" 202 >>> pas present " , film.title, film, this.films);
+            //.log(" 202 >>> pas present " , film.title, film, this.films);
             // si ce film vient de l'api  et pas du local storage donc il a  pas encore de filmdb : 
             if (!film.filmdb) {
 
@@ -222,7 +222,7 @@ export class SpbComponent implements OnInit {
             }
           }
           else {
-            console.log(" film est present dans la liste ", film, this.films);
+            //console.log(" film est present dans la liste ", film, this.films);
             this.films.map(filmListe => {
                 if (filmListe.id === film.id) {
                   filmListe['filmdb'] = resCovers['results'][0];
@@ -233,7 +233,7 @@ export class SpbComponent implements OnInit {
                 }
               });
 
-              console.log("228 >>>> ", this.films);
+              //console.log("228 >>>> ", this.films);
           
           }
 

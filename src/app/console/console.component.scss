@@ -31,9 +31,21 @@ section {
     color: white; //$color;
   }
 
+  form { 
+    width: 100%;
+  }
+
+  .flex-justify-content-space-between {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+  }
+
   .addFilm {
     transition: all .3s ease-in-out;
     cursor: pointer;
+    right: -5px;
+    top: -6px;
 
     &:hover {
       transform: scale(1.12) rotate(360deg);
@@ -132,4 +144,41 @@ section {
     }
 
   }
+
+
+input.ng-touched.ng-invalid {
+    border-width: 1px;
+    border: red solid 4px;
+    color: red !important; 
+  }
+
+input.ng-touched.ng-invalid + .material-icons:before {
+    content:'close';
+    color: red; 
+  }
+
+
+
+input.ng-touched.ng-valid {
+    border-width: 1px;
+    border: green solid 2px;
+    color: green !important; 
+  }
+
+input.ng-touched.ng-valid + .material-icons:before {
+    content:'check';
+    color: green;
+  }
+
+  i {
+    right: 38px;
+    top: 13px;
+  }
+
+  .icon-date, .icon-prix {
+    right: 9px;
+    top: 13px;
+  }
+
+
 }

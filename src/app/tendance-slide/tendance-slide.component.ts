@@ -55,11 +55,11 @@ export class TendanceSlideComponent implements OnInit {
       div = 7;
       add = add / 7;
       console.log(window.innerWidth, div);
-    } else if ( window.innerWidth <= 768  && window.innerWidth > 375) {
+    } else if ( window.innerWidth <= 768  && window.innerWidth > 425) {
       div = 5;
       add = add / 5;
       console.log(window.innerWidth, div);
-    } else if ( window.innerWidth <= 375  ) {
+    } else if ( window.innerWidth <= 425  ) {
       div = 3;
       add = add / 3;
       console.log(window.innerWidth, div);
@@ -96,11 +96,11 @@ export class TendanceSlideComponent implements OnInit {
       div = 7;
       add = add / 7;
       console.log(window.innerWidth, div);
-    } else if ( window.innerWidth <= 768  && window.innerWidth > 375) {
+    } else if ( window.innerWidth <= 768  && window.innerWidth > 425) {
       div = 5;
       add = add / 5;
       console.log(window.innerWidth, div);
-    } else if ( window.innerWidth <= 375) {
+    } else if ( window.innerWidth <= 425) {
       div = 3;
       add = add / 3;
       console.log(window.innerWidth, div);
