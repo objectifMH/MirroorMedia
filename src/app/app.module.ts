@@ -26,6 +26,8 @@ import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { ConsoleComponent } from './console/console.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { ConsoleComponent } from './console/console.component';
     LoginComponent,
     UserComponent,
     AdminComponent,
-    ConsoleComponent
+    ConsoleComponent,
+
+    
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ import { ConsoleComponent } from './console/console.component';
     FormsModule,
     MatDividerModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

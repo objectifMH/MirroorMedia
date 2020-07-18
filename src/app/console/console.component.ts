@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpbService } from '../services/spb.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-console',
@@ -31,7 +32,7 @@ export class ConsoleComponent implements OnInit {
   isAddDirector = false;
 
 
-  constructor(private spb: SpbService, private fb: FormBuilder, private fb1: FormBuilder, private fb2: FormBuilder) {
+  constructor(private spb: SpbService, private fb: FormBuilder, private fb1: FormBuilder, private fb2: FormBuilder, private toastr: ToastrService) {
     this.formEdit = this.fb.group({
       roleControl: ['USER']
     });
@@ -93,6 +94,11 @@ export class ConsoleComponent implements OnInit {
 
     if (confirm('Etes-vous sur de vouloir supprimer cet utilisateur, ' + user.pseudo + ' !')) {
       this.spb.deteleUser(user);
+      this.toastr.warning(user.pseudo + " are deleted !", "User", {
+        timeOut: 1000,
+        progressBar: true,
+        progressAnimation: 'increasing'
+      })
     }
     this.recupereUsers();
   }
@@ -111,6 +117,11 @@ export class ConsoleComponent implements OnInit {
 
       this.isEdtUser = !this.isEdtUser;
       this.spb.validRoleUser(user, this.formEdit.value);
+      this.toastr.success(user.pseudo + " are edited with sucess !", "User", {
+        timeOut: 1000,
+        progressBar: true,
+        progressAnimation: 'increasing'
+      })
 
     }
     this.recupereUsers();
@@ -144,6 +155,11 @@ export class ConsoleComponent implements OnInit {
     if (confirm('Etes-vous sur de vouloir supprimer ce film, ' + film.title + ' !')) {
       this.spb.deleteFilm(film).subscribe(
         data => {
+          this.toastr.warning(film.title + " are delete with success !", "Movie", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
           this.init();
         }
       )
@@ -175,7 +191,7 @@ export class ConsoleComponent implements OnInit {
   valideEditFilm(film) {
 
     console.log(" 163 >> validate :  debut validate ", film, this.formFilmEdit.value);
-    
+
     film.id = this.formFilmEdit.value.filmId;
     film.title = this.formFilmEdit.value.filmTitle;
     film.date = this.formFilmEdit.value.filmDate;
@@ -196,9 +212,22 @@ export class ConsoleComponent implements OnInit {
         data => {
           console.log(data);
 
-          console.log("203 ac form ", this.formFilmEdit)
+          console.log("203 ac form ", this.formFilmEdit);
+          this.toastr.success(film.title + " are edit with success !", "Movie", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+
         },
-        error => { console.log("error for ", film) },
+        error => {
+          console.log("error for ", film);
+          this.toastr.error(film.title + " are not add !", "Movie", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+        },
         () => {
           console.log(" complete ", film);
           // Mise à zéro des champs :
@@ -239,9 +268,22 @@ export class ConsoleComponent implements OnInit {
       if (confirm('Etes-vous sur de vouloir ajouter ce film, ' + film.title + ' !')) {
         this.spb.addFilm(film).subscribe(
           data => {
+
             this.init();
+            this.toastr.success(film.title + " are add !", "Movie", {
+              timeOut: 1000,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            })
           },
-          error => { console.log("Erreur, addFilm", film) },
+          error => {
+            console.log("Erreur, addFilm", film);
+            this.toastr.error(film.title + " are not add with success !", "Director", {
+              timeOut: 1000,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            })
+          },
           () => {
             this.isAddFilm = false;
 
@@ -307,12 +349,16 @@ export class ConsoleComponent implements OnInit {
       this.spb.deleteDirector(director).subscribe(
         data => {
           this.init();
+          this.toastr.info(director.name + " are delete with success !", "Director", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
         },
         error => {
           console.log(error, error.status)
-          if ( error.status === 409)
-          {
-            alert('Pour supprimer ce directeur vous devez supprimer tous les films de : '+ director.name);
+          if (error.status === 409) {
+            alert('Pour supprimer ce directeur vous devez supprimer tous les films de : ' + director.name);
           }
         }
       )
@@ -339,7 +385,7 @@ export class ConsoleComponent implements OnInit {
   valideEditDirector(director) {
 
     console.log(" 342 >> validate :  debut validate ", director, this.formDirectorEdit.value);
-  
+
     director.name = this.formDirectorEdit.value.directorName;
 
 
@@ -353,11 +399,23 @@ export class ConsoleComponent implements OnInit {
       console.log(" avant service director ", director);
       this.spb.editDirector(director).subscribe(
         data => {
-          console.log(data);
+          this.toastr.success(director.name + " are edited with success !", "Director", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
 
           console.log("359 ac form ", this.formDirectorEdit)
         },
-        error => { console.log("error for ", director) },
+        error => {
+          console.log("error for ", director);
+
+          this.toastr.error(director.name + " are not add with success !", "Director", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+        },
         () => {
           console.log(" complete ", director);
           // Mise à zéro des champs :
@@ -392,9 +450,21 @@ export class ConsoleComponent implements OnInit {
       if (confirm('Etes-vous sur de vouloir ajouter ce director, ' + director.name + ' !')) {
         this.spb.addDirector(director).subscribe(
           data => {
+            this.toastr.success(director.name + " are add with success !", "Director", {
+              timeOut: 1000,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            })
             this.init();
           },
-          error => { console.log("Erreur, addDirector", director) },
+          error => {
+            console.log("Erreur, addDirector", director);
+            this.toastr.error(director.name + " are not add with success !", "Director", {
+              timeOut: 1000,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            })
+          },
           () => {
             this.isAddDirector = false;
 
@@ -415,7 +485,7 @@ export class ConsoleComponent implements OnInit {
 
   }
 
-  
+
   cancelDirector() {
     if (confirm('Etes-vous sur de vouloir abandonner l"ajout de ce Director !')) {
       this.isAddDirector = false;
