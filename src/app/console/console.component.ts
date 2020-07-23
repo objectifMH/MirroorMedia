@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpbService } from '../services/spb.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -20,6 +20,7 @@ export class ConsoleComponent implements OnInit {
   formEdit: FormGroup;
   formFilmEdit: FormGroup;
   formDirectorEdit: FormGroup;
+  formActorEdit: FormGroup;
 
 
   films: any;
@@ -27,12 +28,23 @@ export class ConsoleComponent implements OnInit {
   edtFilm;
   isAddFilm = false;
 
+  actorsData = [];
+
   isEdtDirector = false;
   edtDirector;
   isAddDirector = false;
 
+  isEdtActor = false;
+  edtActor;
+  isAddActor = false;
+  actorOptions: any;
 
-  constructor(private spb: SpbService, private fb: FormBuilder, private fb1: FormBuilder, private fb2: FormBuilder, private toastr: ToastrService) {
+
+  constructor(private spb: SpbService, private fb: FormBuilder,
+    private fb1: FormBuilder,
+    private fb2: FormBuilder,
+    private fb3: FormBuilder,
+    private toastr: ToastrService) {
     this.formEdit = this.fb.group({
       roleControl: ['USER']
     });
@@ -41,17 +53,27 @@ export class ConsoleComponent implements OnInit {
       filmId: [''],
       filmTitle: ['', [Validators.required]],
       filmDirector: ['', [Validators.required]],
-      //filmActors: [''],
+      filmActors: this.fb1.array([
+        [true],
+        [false],
+        [true]
+      ]),
       filmDate: ['', [Validators.required]],
       filmPrix: ['', [Validators.required]]
 
     });
+
+    
 
     this.formDirectorEdit = this.fb2.group({
       directorId: [''],
       directorName: ['', [Validators.required]]
     });
 
+    this.formActorEdit = this.fb3.group({
+      actorId: [''],
+      actorName: ['', [Validators.required]]
+    });
 
   }
 
@@ -255,7 +277,7 @@ export class ConsoleComponent implements OnInit {
 
   valideAddFilm() {
 
-    console.log(" status du form ", this.formFilmEdit.status)
+    console.log(" status du form ", this.formFilmEdit.status, this.formFilmEdit);
     if (this.formFilmEdit.status === 'VALID') {
       let film = {
         title: this.formFilmEdit.value.filmTitle, date: this.formFilmEdit.value.filmDate, prix: this.formFilmEdit.value.filmPrix,
@@ -350,7 +372,7 @@ export class ConsoleComponent implements OnInit {
         data => {
           this.init();
           this.toastr.info(director.name + " are delete with success !", "Director", {
-            timeOut: 1000,
+            timeOut: 1500,
             progressBar: true,
             progressAnimation: 'increasing'
           })
@@ -433,7 +455,6 @@ export class ConsoleComponent implements OnInit {
 
   addDirector() {
     this.isAddDirector = true;
-    console.log("On va ajouter  un Directeur ");
   }
 
   valideAddDirector() {
@@ -498,6 +519,16 @@ export class ConsoleComponent implements OnInit {
     this.spb.getAllActeurs().subscribe(
       data => {
         this.acteurs = data['_embedded']['actors'];
+        ////////
+
+        this.actorsData = this.acteurs;
+        this.actorOptions = this.acteurs;
+        const actors = this.formFilmEdit.get('filmActors').value;
+        const selectedActors = this.actorOptions.filter((actor, index) => actors[index]);
+
+    console.log(selectedActors);
+
+        ////////
         //console.log(this.acteurs);
         this.acteurs.map(elmt => {
           //console.log(elmt);
@@ -514,5 +545,150 @@ export class ConsoleComponent implements OnInit {
       error => console.log('Erreur, de recuperation getAllActeursFull')
     )
   }
+
+  deleteActor(actor) {
+    if (confirm('Are you sure you wand ton delete, ' + actor.name + ' !')) {
+      this.spb.deleteActor(actor).subscribe(
+        data => {
+          this.init();
+          this.toastr.info(actor.name + " are delete with success !", "Actor", {
+            timeOut: 1500,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+        },
+        error => {
+          console.log(error, error.status)
+          if (error.status === 409) {
+            alert('Before delete : ' + actor.name + ', you must delete all his movies !');
+          }
+        }
+      )
+    }
+  }
+
+  addActor() {
+    this.isAddActor = true;
+  }
+
+  valideAddActor() {
+
+    console.log(" status du form ", this.formActorEdit.status)
+    if (this.formActorEdit.status === 'VALID') {
+      let actor = {
+        name: this.formActorEdit.value.actorName
+      };
+
+      console.log(this.formActorEdit.value.actorName);
+
+      console.log(" validation de l'ajout", actor);
+      if (confirm('Are you sure you want to add this Actor, ' + actor.name + ' !')) {
+        this.spb.addActor(actor).subscribe(
+          data => {
+            this.toastr.success(actor.name + " are add with success !", "Actor", {
+              timeOut: 1500,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            })
+            this.init();
+          },
+          error => {
+            console.log("Erreur, addActor", actor);
+            this.toastr.error(actor.name + " are not add with success !", "Actor", {
+              timeOut: 1500,
+              progressBar: true,
+              progressAnimation: 'increasing'
+            })
+          },
+          () => {
+            this.isAddActor = false;
+
+            // complete on remet les champs à zéro :
+            this.formActorEdit = this.fb3.group({
+              actorId: [''],
+              actorName: ['']
+
+            });
+          }
+        )
+      }
+    }
+    else {
+      this.formFilmEdit.markAllAsTouched();
+      alert(" Not all fields are completed! ");
+    }
+
+  }
+
+
+  cancelActor() {
+    if (confirm('Are you sure you want to abandon the add of this Actor !')) {
+      this.isAddActor = false;
+    }
+  }
+
+  editActor(actor) {
+
+    this.formActorEdit = this.fb3.group({
+      actorId: [''],
+      actorName: [actor.name]
+    });
+
+    this.isEdtActor = !this.isEdtActor;
+    this.edtActor = actor;
+    console.log(this.isEdtActor, actor);
+
+  }
+
+
+  valideEditActor(actor) {
+
+    console.log(" 342 >> validate :  debut validate ", actor, this.formActorEdit.value);
+
+    actor.name = this.formActorEdit.value.actorName;
+
+
+    console.log("notre nouveau acteur : ", actor);
+
+    if (confirm('Are you sure you want to edit this ,  "' + this.formActorEdit.value.actorName + '" !')) {
+
+
+      this.isEdtActor = !this.isEdtActor;
+      this.edtActor = actor;
+      console.log(" avant service director ", actor);
+      this.spb.editActor(actor).subscribe(
+        data => {
+          this.toastr.success(actor.name + " are edited with success !", "Actor", {
+            timeOut: 1500,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+
+          console.log("359 ac form ", this.formActorEdit)
+        },
+        error => {
+          console.log("error for ", actor);
+
+          this.toastr.error(actor.name + " are not add with success !", "Actor", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+        },
+        () => {
+          console.log(" complete ", actor);
+          // Mise à zéro des champs :
+          this.formActorEdit = this.fb3.group({
+            actorId: [''],
+            actorName: ['', [Validators.required]]
+          });
+          this.init();
+        }
+      )
+
+    }
+  }
+
+
 
 }

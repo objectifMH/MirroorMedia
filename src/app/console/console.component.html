@@ -131,6 +131,7 @@
 
 
     <div class="panel panel-default">
+
       <div class="panel-heading flex-justify-content-space-between">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="d-flex align-items-center">
@@ -140,13 +141,13 @@
             Movies Spring Boot
             ({{this.films ? this.films.length : 0}})
           </a> 
-          
         </h4>
         
         <span class="material-icons  addFilm" title='Add a movie' (click)="addFilm()">
           add_circle 
         </span>
       </div>
+
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.films">
                 <div class="spinner-border text-info" role="status">
                     <span class="sr-only">Loading...</span>
@@ -181,15 +182,36 @@
                 <td>
                     <select formControlName="filmDirector">
                       <option [value]="director.id" *ngFor="let director of this.directors">
-                        {{director.id}} : {{director.name}}
+                        {{director.id}} : {{director.name}} => {{actorsData[i]}}
                       </option>
                     </select>
                 </td>
                 <td>
-                    <span class="material-icons ">
+                  <!-- actors -->
+                    <!-- <span class="material-icons ">
                             add_circle
-                    </span>
+                    </span> -->
+
+                   <!--  <select formControlName="filmActors">
+                      <option [value]="actor.id" *ngFor="let actor of this.acteurs">
+                        
+                        {{actor.id}} : {{actor.name}}
+                      </option>
+                    </select> -->
+                    
+                    <!-- <label formArrayName="filmActors" *ngFor="let actor of this.acteurs; let i = index">
+                      <input type="checkbox" [formControlName]="i">
+                      {{actor.id}} : {{actor.name}}
+                    </label> -->
+
+                    <div *ngFor="let actor of form.get('filmActors').controls; let i=index">
+                      <input type="checkbox" [formControl]="actorItem">
+                      {{ actorOptions[i] }}
+                    </div>
+
+
                 </td>
+
                 <td class="position-relative">
                     <input type="text" formControlName="filmDate" placeholder="date">
                     <i class="material-icons  position-absolute  icon-date "></i> 
@@ -244,9 +266,51 @@
               </td>
               <td>
                 <span *ngIf="!isEdtFilm || edtFilm !== film">
-                  <span *ngFor="let actor of film.actors; let virgule = index">
-                    {{actor.name}}<span *ngIf="virgule !== film.actors.length - 1">, </span>
-                  </span>
+
+                  <!-- table actors -->
+
+                  <div class="panel-group" id="{{'accordion-'+film.id}}" *ngIf="film.actors.length > 0">
+                    <div class="panel panel-default" *ngIf="film.actors">
+                      <div class="">
+  
+                        <a data-toggle="collapse" href="{{'#collapse-'+film.id}}"
+                          data-parent="{{'#accordion-'+film.id}}">
+                          <span class="material-icons ">
+                            add_circle
+                          </span>
+                        </a>
+                      </div>
+                      <div id="{{'collapse-'+film.id}}" class="panel-collapse collapse in ">
+                        <div class="">
+                          <div *ngIf="film.actors">
+                            <table class="table-film">
+                              <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <!-- 
+                                <th class="text-center">delete</th> -->
+                              </tr>
+                              <tr *ngFor="let actor of film.actors">
+                                <td>{{actor.id}}</td>
+                                <td>{{actor.name}}</td>
+                                <!-- <td class="text-center">
+                                  <span class="material-icons edit delete"  (click)="deleteActor(actor)">
+                                    delete
+                                  </span>
+                                </td> -->
+            
+                              </tr>
+                            </table>
+  
+                          </div>
+                        </div>
+  
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- -->
+
                 </span>
                 <span *ngIf="isEdtFilm && edtFilm === film">
                   <!-- <input type="text" formControlName="filmActors" placeholder="actors">  -->
@@ -319,7 +383,7 @@
                 </div>
       </div>
 
-      <div id="collapse3" class="panel-collapse collapse in show" *ngIf="this.directors">
+      <div id="collapse3" class="panel-collapse collapse" *ngIf="this.directors">
         <div class="panel-body">
 
         <form [formGroup]="formDirectorEdit" >
@@ -395,8 +459,8 @@
                             <tr>
                               <th>id</th>
                               <th>title</th>
-                              
-                              <th>delete</th>
+                              <th>date</th>
+                              <th class="text-center">delete</th>
                             </tr>
                             <tr *ngFor="let film of director.films">
                               <td>{{film.id.id}}</td>
@@ -404,8 +468,8 @@
                              
                              
                               <td>{{film.id.date}}</td>
-                              <td>
-                                <span class="material-icons edit "  (click)="deletefilm(film.id)">
+                              <td class="text-center">
+                                <span class="material-icons edit delete"  (click)="deletefilm(film.id)">
                                   delete
                                 </span>
                               </td>
@@ -448,7 +512,7 @@
 
     <!--  Actor Spring Boot  -->
     <div class="panel panel-default">
-      <div class="panel-heading">
+      <div class="panel-heading flex-justify-content-space-between">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-Actor" class="d-flex align-items-center">
             <span class="material-icons">
@@ -458,6 +522,9 @@
             ({{this.acteurs ? this.acteurs.length : 0}})
           </a>
         </h4>
+        <span class="material-icons  addFilm" title='Add a actor' (click)="addActor()">
+          add_circle 
+        </span>
       </div>
 
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.acteurs">
@@ -465,8 +532,9 @@
                     <span class="sr-only">Loading...</span>
                 </div>
       </div>
-      <div id="collapse-Actor" class="panel-collapse collapse" *ngIf="this.acteurs">
+      <div id="collapse-Actor" class="panel-collapse collapse in show" *ngIf="this.acteurs">
         <div class="panel-body">
+          <form [formGroup]="formActorEdit" >
           <table>
             <tr>
               <th>id</th>
@@ -475,12 +543,45 @@
               <th class="text-center">edit</th>
               <th class="text-center">delete</th>
             </tr>
+
+             <!-- addActor -->
+
+             <tr *ngIf="isAddActor">
+              <td>
+                <!-- id -->
+              </td>
+              <td class="position-relative">
+                  <input type="text" formControlName="actorName" placeholder="name">
+                  <i class="material-icons  position-absolute  "></i>
+              </td>
+              <td>
+              </td>
+                
+              <td class="text-center">
+                <span class="material-icons edit " (click)="valideAddActor()" > 
+                  check
+                </span>
+              </td>
+              <td class="text-center">
+                <span class="material-icons delete" (click)="cancelActor()">
+                  delete
+                </span>
+              </td>
+
+            </tr>
+
+            <!-- Fin addActor -->
             <tr *ngFor="let acteur of acteurs">
               <td>
                 {{acteur.id}}
               </td>
               <td>
-                {{acteur.name}}
+                <span *ngIf="!isEdtActor || edtActor !== acteur">
+                  {{acteur.name}}
+                </span>
+                <span  *ngIf="isEdtActor && edtActor === acteur">
+                  <input type="text" formControlName="actorName" placeholder="name"> 
+                </span>
               </td>
               <td class="text-center">
 
@@ -512,8 +613,8 @@
                               
                              
                               <td>{{film.date}}</td>
-                              <td>
-                                <span class="material-icons edit ">
+                              <td class="text-center">
+                                <span class="material-icons edit delete " (click)="deletefilm(film)">
                                   delete
                                 </span>
                               </td>
@@ -529,21 +630,22 @@
                 </div>
               </td>
               <td class="text-center">
-                <span class="material-icons edit ">
+                <span class="material-icons edit " *ngIf="!isEdtActor || edtActor !== acteur"  (click)="editActor(acteur)">
                   edit
                 </span>
-                <span class="material-icons edit ">
+                <span class="material-icons edit " *ngIf="isEdtActor && edtActor === acteur" (click)="valideEditActor(acteur)">
                   check
                 </span>
               </td>
               <td class="text-center">
-                <span class="material-icons delete">
+                <span class="material-icons delete"  (click)="deleteActor(acteur)">
                   delete
                 </span>
               </td>
 
             </tr>
           </table>
+        </form>
 
         </div>
       </div>

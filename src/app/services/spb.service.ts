@@ -331,5 +331,34 @@ export class SpbService {
     return this.httpClient.get(url);
   }
 
+  public deleteActor(actor) {
+    
+    const url = ''.concat(this.urlSpb, 'actors/' + actor.id);
+    return this.httpClient.delete(url);
 
+  }
+
+  public addActor(actor) {
+    const url = ''.concat(this.urlSpb, 'actors');
+    console.log(url, actor);
+
+    return this.httpClient.post(url, actor);
+  }
+
+  
+  public editActor(actor) {
+    const url = ''.concat(this.urlSpb, 'actors/' + actor.id);
+    console.log("actor spb edit : ", actor);
+
+
+    let actorPatch = {
+      id: actor.id,
+      name: actor.name
+    };
+
+    console.log(actorPatch);
+    //this.editFilmlocalStorage(film);
+
+    return this.httpClient.patch(url, actorPatch);
+  }
 }
