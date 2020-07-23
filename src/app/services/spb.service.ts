@@ -37,7 +37,8 @@ export class SpbService {
       { pseudo: "mario", mdp: "mdpmdp", role: "USER", cart: null, carts: null },
       { pseudo: "meruem", mdp: "mdpmdp", role: "SUPERADMIN", cart: null, carts: null },
       { pseudo: "motoko", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null },
-      { pseudo: "moto", mdp: "mdpmdp", role: "USER", cart: null, carts: null }
+      { pseudo: "moto", mdp: "mdpmdp", role: "USER", cart: null, carts: null },
+      { pseudo: "damien", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null }
     ]);
 
     this.cart = new BehaviorSubject<any>({ quantity: 0, total: 0 });

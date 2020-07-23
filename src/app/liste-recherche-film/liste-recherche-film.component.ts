@@ -85,7 +85,7 @@ export class ListeRechercheFilmComponent implements OnInit {
         this.pageTotal = result['total_pages'];
         console.log('quel est la page :: ', this.page , this.page3 , this.pageTotal, 'taille : ', this.results.length);
         this.noReponse =  this.results.length === 0 ? 
-        'Pas de résulstats pour votre recherche !! Soyez pas timide retentez votre chance avec une nouvelle recherche ' :
+        'No results for your search !! Don"t be shy try your luck again with a new search' :
         null;
         console.log(this.noReponse);
       }
@@ -93,7 +93,7 @@ export class ListeRechercheFilmComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       error => {
         console.log('Une erreur est survenue, On arrive pas à charger les resultats de la mutli recherche pour' + this.maRecherche, error);
-        this.noReponse = "Pas de résulstats pour votre recherche !! Soyez pas timide retentez votre chance avec une nouvelle recherche ";
+        this.noReponse = "No results for your search !! Don't be shy try your luck again with a new search";
 
       }
     );

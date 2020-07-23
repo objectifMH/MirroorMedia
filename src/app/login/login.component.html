@@ -10,12 +10,13 @@
             required>
             <i class="material-icons  position-absolute  " ></i>
         </div>
-        <button type="submit" class="btn" (click)="onSubmit()" >Envoyer</button>
+        <button type="submit" class="btn" (click)="onSubmit()" >Send</button>
         <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="errorConnected">
-            <span>Votre compte ou mot de passe est incorrect.</span>
+            <span>Your account or password is incorrect
+                </span>
         </div>
         <div class="alert alert-info alert-dismissible container mt-5" *ngIf="userAuth.pseudo">
-            <span> Bienvenue {{userAuth.pseudo}}, vous allez être connecté !</span>
+            <span> Welcome {{userAuth.pseudo}}, You will be connected !</span>
             <div class="d-flex justify-content-center mt-5 mb-2">
                 <div class="spinner-border text-info" role="status">
                     <span class="sr-only">Loading...</span>

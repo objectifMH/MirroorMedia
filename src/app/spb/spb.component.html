@@ -4,8 +4,9 @@
         <div class="alert alert-info alert-dismissible container mt-5" 
                 [ngClass]="!isFade ?  'show' : 'fade' ">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <span>Cette liste de films est extraite d'une base de donnée <strong> Spring Boot H2</strong>. 
-            Elle peut mettre du temps à se charger.  </span>.
+            <span>
+                This list of movies is taken from a <strong> Spring Boot H2 from Heroku </strong>. 
+                It may take a while to load.  </span>.
         </div>
 
         <!-- <div class="alert alert-info alert-dismissible container mt-5" *ngIf="!isFade ?  'show' : 'fade' ">
@@ -20,7 +21,7 @@
         
         <div class="container container-flex">
             <div class="container" >
-                <span class="btn btn-primary float-right p-2" (click)="validateList()"> Valider : ({{this.cartAvalide.quantity}}) ${{this.cartAvalide.total}} </span>
+                <span class="btn btn-primary float-right p-2" (click)="validateList()"> Validate : ({{this.cartAvalide.quantity}}) ${{this.cartAvalide.total}} </span>
             </div>
             
             <table>

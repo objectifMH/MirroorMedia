@@ -20,15 +20,17 @@
             <input type="number" class="form-control" formControlName="zip" id="zipInput" placeholder="Zip code">
             <i class="material-icons  posAbsolute  zipI"></i>
         </div>
-        <button type="submit" class="btn" (click)="onSubmit()">Envoyer</button>
+        <button type="submit" class="btn" (click)="onSubmit()">Send</button>
         <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="errorInput">
-            <span>Votre pseudo est pas disponible, veuillez en trouver un autre.</span>
+            <span>
+                Your nickname is not available, please find another one.</span>
         </div>
         <div class="alert alert-danger alert-dismissible container mt-5" *ngIf="this.monForm.invalid && this.monForm.touched">
-            <span>Le formulaire n'est pas rempli correctement pour autoriser votre inscription.</span>
+            <span>The Form is invalid </span>
         </div>
         <div class="alert alert-info alert-dismissible container mt-5" *ngIf="inscription">
-            <span> Bienvenue {{this.pseudo}}, votre inscription a bien été prise en compte !</span>
+            <span> Welcome {{this.pseudo}}, 
+                Your registration has been taken into account !</span>
             <div class="d-flex justify-content-center mt-5 mb-2">
                 <div class="spinner-border text-info" role="status">
                     <span class="sr-only">Loading...</span>
