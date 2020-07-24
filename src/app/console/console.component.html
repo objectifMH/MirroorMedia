@@ -182,7 +182,7 @@
                 <td>
                     <select formControlName="filmDirector">
                       <option [value]="director.id" *ngFor="let director of this.directors">
-                        {{director.id}} : {{director.name}} => {{actorsData[i]}}
+                        {{director.id}} : {{director.name}} <!-- => {{actorsData[i]}} -->
                       </option>
                     </select>
                 </td>
@@ -204,10 +204,10 @@
                       {{actor.id}} : {{actor.name}}
                     </label> -->
 
-                    <div *ngFor="let actor of form.get('filmActors').controls; let i=index">
+                   <!--  <div *ngFor="let actor of form.get('filmActors').controls; let i=index">
                       <input type="checkbox" [formControl]="actorItem">
                       {{ actorOptions[i] }}
-                    </div>
+                    </div> -->
 
 
                 </td>
