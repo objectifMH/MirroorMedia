@@ -14,9 +14,9 @@
 
             <div class=""  >
                 <p>
-                    <span *ngFor="let genre of this.film.genres; let i = index" class="btn btn-success btn-sm m-1 mt-3 genres">{{genre.name}}
+                    <span *ngFor="let genre of this.film.genres; let i = index" class="badge badge-success btn-sm m-1 mt-3 genres">{{genre.name}}
                     </span>
-                    <span class="btn btn-danger m-1 mt-3 genres">Vote : {{this.film.vote_average}}
+                    <span class="badge badge-danger m-1 mt-3 genres">Vote : {{this.film.vote_average}}
                     </span>
                 </p>
             </div> 

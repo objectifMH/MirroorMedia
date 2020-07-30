@@ -5,17 +5,17 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          
-          
+
+
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="d-flex align-items-center">
             <span class="material-icons">
               how_to_reg
             </span>
-            Users 
+            Users
             ({{this.users ? this.users.length : 0}})</a>
         </h4>
-        
-      </div> 
+
+      </div>
       <div id="collapse1" class="panel-collapse collapse in ">
         <div class="panel-body">
 
@@ -48,7 +48,7 @@
               </td>
 
               <!--  films user  -->
-              <td  class="text-center" >
+              <td class="text-center">
                 <div class="panel-group" id="{{'accordion-'+user.pseudo}}" *ngIf='user.totalTrue > 0'>
                   <div class="panel panel-default" *ngIf="user.carts">
                     <div class="">
@@ -67,13 +67,13 @@
                             <tr>
                               <th>id</th>
                               <th>title</th>
-                              
+
                               <th>price</th>
                               <th class="text-center">delete</th>
                             </tr>
                             <tr *ngFor="let cart of this.user.carts; let c = index">
 
-                              
+
                               <td *ngIf="cart.inCart">{{cart.id}}</td>
                               <td *ngIf="cart.inCart">{{cart.title}}</td>
 
@@ -106,7 +106,7 @@
                 <span class="material-icons edit " (click)="validRoleUser(user)" *ngIf="isEdtUser && user === edtUser">
                   check
                 </span>
-              </td > 
+              </td>
               <td class="text-center">
                 <span class="material-icons delete" (click)="deleteUser(user)">
                   delete
@@ -140,35 +140,35 @@
             </span>
             Movies Spring Boot
             ({{this.films ? this.films.length : 0}})
-          </a> 
+          </a>
         </h4>
-        
+
         <span class="material-icons  addFilm" title='Add a movie' (click)="addFilm()">
-          add_circle 
+          add_circle
         </span>
       </div>
 
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.films">
-                <div class="spinner-border text-info" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+        <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
       <div id="collapse2" class="panel-collapse collapse in" *ngIf="this.films">
         <div class="panel-body">
-        <!-- debut form -->
+          <!-- debut form -->
 
-        <form [formGroup]="formFilmEdit" >
-          <table>
-            <tr>
-              <th>id</th>
-              <th>title</th>
-              <th>director</th>
-              <th>actors</th>
-              <th>date</th>
-              <th>prix</th>
-              <th class="text-center">edit</th>
-              <th class="text-center">delete</th>
-            </tr>
+          <form [formGroup]="formFilmEdit">
+            <table>
+              <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>director</th>
+                <th>actors</th>
+                <th>date</th>
+                <th>prix</th>
+                <th class="text-center">edit</th>
+                <th class="text-center">delete</th>
+              </tr>
 
               <!-- addFilm -->
 
@@ -176,53 +176,61 @@
                 <td>
                 </td>
                 <td class="position-relative">
-                    <input type="text" formControlName="filmTitle" placeholder="title">
-                    <i class="material-icons  position-absolute  "></i>
+                  <input type="text" formControlName="filmTitle" placeholder="title">
+                  <i class="material-icons  position-absolute  "></i>
                 </td>
                 <td>
-                    <select formControlName="filmDirector">
-                      <option [value]="director.id" *ngFor="let director of this.directors">
-                        {{director.id}} : {{director.name}} <!-- => {{actorsData[i]}} -->
-                      </option>
-                    </select>
+                  <select formControlName="filmDirector">
+                    <option [value]="director.id" *ngFor="let director of this.directors">
+                      {{director.id}} : {{director.name}}
+                      <!-- => {{actorsData[i]}} -->
+                    </option>
+                  </select>
                 </td>
                 <td>
                   <!-- actors -->
-                    <!-- <span class="material-icons ">
+                  <!-- <span class="material-icons ">
                             add_circle
                     </span> -->
 
-                   <!--  <select formControlName="filmActors">
+                  <!--  <select formControlName="filmActors">
                       <option [value]="actor.id" *ngFor="let actor of this.acteurs">
                         
                         {{actor.id}} : {{actor.name}}
                       </option>
                     </select> -->
-                    
-                    <!-- <label formArrayName="filmActors" *ngFor="let actor of this.acteurs; let i = index">
+
+                  <!-- <label formArrayName="filmActors" *ngFor="let actor of this.acteurs; let i = index">
                       <input type="checkbox" [formControlName]="i">
                       {{actor.id}} : {{actor.name}}
                     </label> -->
 
-                   <!--  <div *ngFor="let actor of form.get('filmActors').controls; let i=index">
+                  <!--  <div *ngFor="let actor of form.get('filmActors').controls; let i=index">
                       <input type="checkbox" [formControl]="actorItem">
                       {{ actorOptions[i] }}
                     </div> -->
+                  <div class="checkbox-actors">
+                    <div *ngFor="let actor of this.acteurs; let i=index">
+                      <input type="checkbox" name="{{actor.id}}" [value]="actor.id"  formControlName="filmActors">
+                      {{actor.id}} : {{actor.name}}
+                    </div>
 
+
+                  </div>
 
                 </td>
 
                 <td class="position-relative">
-                    <input type="text" formControlName="filmDate" placeholder="date">
-                    <i class="material-icons  position-absolute  icon-date "></i> 
+                  <input type="text" formControlName="filmDate" placeholder="date">
+                  <i class="material-icons  position-absolute  icon-date "></i>
                 </td>
                 <td class="position-relative">
-                    <input type="text" formControlName="filmPrix" placeholder="prix">
-                    <i class="material-icons  position-absolute  icon-prix "></i> 
+                  <input type="text" formControlName="filmPrix" placeholder="prix">
+                  <i class="material-icons  position-absolute  icon-prix "></i>
                 </td>
-                  
+
                 <td class="text-center">
-                  <span class="material-icons edit " (click)="valideAddFilm()" > 
+                  <span class="material-icons edit " (click)="valideAddFilm()">
                     check
                   </span>
                 </td>
@@ -231,133 +239,135 @@
                     delete
                   </span>
                 </td>
-  
+
               </tr>
 
               <!-- fin addFilm -->
 
-            <tr *ngFor="let film of films">
-              <td>
-                <span > <!-- *ngIf="!isEdtFilm || edtFilm !== film" -->
-                  {{film.id}}
-                </span>
-              </td>
-              <td>
-                <span *ngIf="!isEdtFilm || edtFilm !== film">
-                  {{film.title}}
-                </span>
-                <span *ngIf="isEdtFilm && edtFilm === film">
-                  <input type="text" formControlName="filmTitle" placeholder="title"> 
-                </span>
-              </td>
-              <td>
-                <span *ngIf="!isEdtFilm || edtFilm !== film">
-                  {{film.director.name}}
-                </span>
-                <span *ngIf="isEdtFilm && edtFilm === film">
-                  <!-- <input type="text" formControlName="filmDirector" placeholder="director">  -->
-                  <select formControlName="filmDirector">
-                    <option [value]="director.id" *ngFor="let director of this.directors">
-                      {{director.id}} : {{director.name}}
-                    </option>
-                  </select>
-                </span>
-                
-              </td>
-              <td>
-                <span *ngIf="!isEdtFilm || edtFilm !== film">
+              <tr *ngFor="let film of films">
+                <td>
+                  <span>
+                    <!-- *ngIf="!isEdtFilm || edtFilm !== film" -->
+                    {{film.id}}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="!isEdtFilm || edtFilm !== film">
+                    {{film.title}}
+                  </span>
+                  <span *ngIf="isEdtFilm && edtFilm === film">
+                    <input type="text" formControlName="filmTitle" placeholder="title">
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="!isEdtFilm || edtFilm !== film">
+                    {{film.director.name}}
+                  </span>
+                  <span *ngIf="isEdtFilm && edtFilm === film">
+                    <!-- <input type="text" formControlName="filmDirector" placeholder="director">  -->
+                    <select formControlName="filmDirector">
+                      <option [value]="director.id" *ngFor="let director of this.directors">
+                        {{director.id}} : {{director.name}}
+                      </option>
+                    </select>
+                  </span>
 
-                  <!-- table actors -->
+                </td>
+                <td>
+                  <span *ngIf="!isEdtFilm || edtFilm !== film">
 
-                  <div class="panel-group" id="{{'accordion-'+film.id}}" *ngIf="film.actors.length > 0">
-                    <div class="panel panel-default" *ngIf="film.actors">
-                      <div class="">
-  
-                        <a data-toggle="collapse" href="{{'#collapse-'+film.id}}"
-                          data-parent="{{'#accordion-'+film.id}}">
-                          <span class="material-icons ">
-                            add_circle
-                          </span>
-                        </a>
-                      </div>
-                      <div id="{{'collapse-'+film.id}}" class="panel-collapse collapse in ">
+                    <!-- table actors -->
+
+                    <div class="panel-group" id="{{'accordion-'+film.id}}" *ngIf="film.actors.length > 0">
+                      <div class="panel panel-default" *ngIf="film.actors">
                         <div class="">
-                          <div *ngIf="film.actors">
-                            <table class="table-film">
-                              <tr>
-                                <th>id</th>
-                                <th>name</th>
-                                <!-- 
+
+                          <a data-toggle="collapse" href="{{'#collapse-'+film.id}}"
+                            data-parent="{{'#accordion-'+film.id}}">
+                            <span class="material-icons ">
+                              add_circle
+                            </span>
+                          </a>
+                        </div>
+                        <div id="{{'collapse-'+film.id}}" class="panel-collapse collapse in ">
+                          <div class="">
+                            <div *ngIf="film.actors">
+                              <table class="table-film">
+                                <tr>
+                                  <th>id</th>
+                                  <th>name</th>
+                                  <!-- 
                                 <th class="text-center">delete</th> -->
-                              </tr>
-                              <tr *ngFor="let actor of film.actors">
-                                <td>{{actor.id}}</td>
-                                <td>{{actor.name}}</td>
-                                <!-- <td class="text-center">
+                                </tr>
+                                <tr *ngFor="let actor of film.actors">
+                                  <td>{{actor.id}}</td>
+                                  <td>{{actor.name}}</td>
+                                  <!-- <td class="text-center">
                                   <span class="material-icons edit delete"  (click)="deleteActor(actor)">
                                     delete
                                   </span>
                                 </td> -->
-            
-                              </tr>
-                            </table>
-  
+
+                                </tr>
+                              </table>
+
+                            </div>
                           </div>
+
                         </div>
-  
                       </div>
                     </div>
-                  </div>
 
-                  <!-- -->
+                    <!-- -->
 
-                </span>
-                <span *ngIf="isEdtFilm && edtFilm === film">
-                  <!-- <input type="text" formControlName="filmActors" placeholder="actors">  -->
-                  <span class="material-icons ">
-                          add_circle
                   </span>
-                </span>
-              </td>
-              <td>
-                <span *ngIf="!isEdtFilm || edtFilm !== film">
-                  {{film.date}}
-                </span>
-                <span *ngIf="isEdtFilm && edtFilm === film">
-                  <input type="text" formControlName="filmDate" placeholder="date"> 
-                </span>
-              </td>
-              <td>
-                <span *ngIf="!isEdtFilm || edtFilm !== film">
-                  ${{film.prix}}
-                </span>
-                <span *ngIf="isEdtFilm && edtFilm === film">
-                  <input type="text" formControlName="filmPrix" placeholder="prix"> 
-                </span>
-              </td>
-                
-              <td class="text-center">
-                <span class="material-icons edit " (click)="editFilm(film)"  *ngIf="!isEdtFilm || edtFilm !== film">
-                  edit
-                </span>
-                <span class="material-icons edit " (click)="valideEditFilm(film)" *ngIf="isEdtFilm && edtFilm === film"> 
-                  check
-                </span>
-              </td>
-              <td class="text-center">
-                <span class="material-icons delete" (click)="deletefilm(film)">
-                  delete
-                </span>
-              </td>
+                  <span *ngIf="isEdtFilm && edtFilm === film">
+                    <!-- <input type="text" formControlName="filmActors" placeholder="actors">  -->
+                    <span class="material-icons ">
+                      add_circle
+                    </span>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="!isEdtFilm || edtFilm !== film">
+                    {{film.date}}
+                  </span>
+                  <span *ngIf="isEdtFilm && edtFilm === film">
+                    <input type="text" formControlName="filmDate" placeholder="date">
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="!isEdtFilm || edtFilm !== film">
+                    ${{film.prix}}
+                  </span>
+                  <span *ngIf="isEdtFilm && edtFilm === film">
+                    <input type="text" formControlName="filmPrix" placeholder="prix">
+                  </span>
+                </td>
 
-            </tr>
-          </table>
-        </form>
+                <td class="text-center">
+                  <span class="material-icons edit " (click)="editFilm(film)" *ngIf="!isEdtFilm || edtFilm !== film">
+                    edit
+                  </span>
+                  <span class="material-icons edit " (click)="valideEditFilm(film)"
+                    *ngIf="isEdtFilm && edtFilm === film">
+                    check
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="material-icons delete" (click)="deletefilm(film)">
+                    delete
+                  </span>
+                </td>
+
+              </tr>
+            </table>
+          </form>
 
 
         </div>
       </div>
-      </div>
+    </div>
 
     <!-- Director -->
     <div class="panel panel-default">
@@ -366,145 +376,147 @@
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="d-flex align-items-center">
             <span class="material-icons">
               psychology
-              </span>
+            </span>
             Movie Director
             ({{this.directors ? this.directors.length : 0}})
           </a>
         </h4>
-        
+
         <span class="material-icons  addFilm" title='Add a director' (click)="addDirector()">
-          add_circle 
+          add_circle
         </span>
       </div>
 
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.directors">
-                <div class="spinner-border text-info" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+        <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
 
       <div id="collapse3" class="panel-collapse collapse" *ngIf="this.directors">
         <div class="panel-body">
 
-        <form [formGroup]="formDirectorEdit" >
-          <table>
-            <tr>
-              <th>id</th>
-              <th>name</th>
-              <th>movies</th>
-              <th class="text-center">edit</th>
-              <th class="text-center">delete</th>
-            </tr>
+          <form [formGroup]="formDirectorEdit">
+            <table>
+              <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>movies</th>
+                <th class="text-center">edit</th>
+                <th class="text-center">delete</th>
+              </tr>
 
-             <!-- addDirector -->
+              <!-- addDirector -->
 
-             <tr *ngIf="isAddDirector">
-              <td>
-                <!-- id -->
-              </td>
-              <td class="position-relative">
+              <tr *ngIf="isAddDirector">
+                <td>
+                  <!-- id -->
+                </td>
+                <td class="position-relative">
                   <input type="text" formControlName="directorName" placeholder="name">
                   <i class="material-icons  position-absolute  "></i>
-              </td>
-              <td>
-              </td>
-                
-              <td class="text-center">
-                <span class="material-icons edit " (click)="valideAddDirector()" > 
-                  check
-                </span>
-              </td>
-              <td class="text-center">
-                <span class="material-icons delete" (click)="cancelDirector()">
-                  delete
-                </span>
-              </td>
+                </td>
+                <td>
+                </td>
 
-            </tr>
+                <td class="text-center">
+                  <span class="material-icons edit " (click)="valideAddDirector()">
+                    check
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="material-icons delete" (click)="cancelDirector()">
+                    delete
+                  </span>
+                </td>
 
-            <!-- Fin addDirector -->
-            
-            <tr *ngFor="let director of this.directors">
-              <td>
-                {{director.id}}
-              </td>
+              </tr>
 
-              <td>
-                <span *ngIf="!isEdtDirector || edtDirector !== director">
-                  {{director.name}}
-                </span>
-                <span  *ngIf="isEdtDirector && edtDirector === director">
-                  <input type="text" formControlName="directorName" placeholder="name"> 
-                </span>
-              </td>
+              <!-- Fin addDirector -->
 
-              <td>
+              <tr *ngFor="let director of this.directors">
+                <td>
+                  {{director.id}}
+                </td>
+
+                <td>
+                  <span *ngIf="!isEdtDirector || edtDirector !== director">
+                    {{director.name}}
+                  </span>
+                  <span *ngIf="isEdtDirector && edtDirector === director">
+                    <input type="text" formControlName="directorName" placeholder="name">
+                  </span>
+                </td>
+
+                <td>
 
 
-                <div class="panel-group" id="{{'accordion-'+director.id}}" *ngIf="director.films.length > 0">
-                  <div class="panel panel-default" *ngIf="director.films">
-                    <div class="">
-
-                      <a data-toggle="collapse" href="{{'#collapse-'+director.id}}"
-                        data-parent="{{'#accordion-'+director.id}}">
-                        <span class="material-icons ">
-                          add_circle
-                        </span>
-                      </a>
-                    </div>
-                    <div id="{{'collapse-'+director.id}}" class="panel-collapse collapse in ">
+                  <div class="panel-group" id="{{'accordion-'+director.id}}" *ngIf="director.films.length > 0">
+                    <div class="panel panel-default" *ngIf="director.films">
                       <div class="">
-                        <div *ngIf="director.films">
-                          <table class="table-film">
-                            <tr>
-                              <th>id</th>
-                              <th>title</th>
-                              <th>date</th>
-                              <th class="text-center">delete</th>
-                            </tr>
-                            <tr *ngFor="let film of director.films">
-                              <td>{{film.id.id}}</td>
-                              <td>{{film.title}}</td>
-                             
-                             
-                              <td>{{film.id.date}}</td>
-                              <td class="text-center">
-                                <span class="material-icons edit delete"  (click)="deletefilm(film.id)">
-                                  delete
-                                </span>
-                              </td>
-          
-                            </tr>
-                          </table>
 
-                        </div>
+                        <a data-toggle="collapse" href="{{'#collapse-'+director.id}}"
+                          data-parent="{{'#accordion-'+director.id}}">
+                          <span class="material-icons ">
+                            add_circle
+                          </span>
+                        </a>
                       </div>
+                      <div id="{{'collapse-'+director.id}}" class="panel-collapse collapse in ">
+                        <div class="">
+                          <div *ngIf="director.films">
+                            <table class="table-film">
+                              <tr>
+                                <th>id</th>
+                                <th>title</th>
+                                <th>date</th>
+                                <th class="text-center">delete</th>
+                              </tr>
+                              <tr *ngFor="let film of director.films">
+                                <td>{{film.id.id}}</td>
+                                <td>{{film.title}}</td>
 
+
+                                <td>{{film.id.date}}</td>
+                                <td class="text-center">
+                                  <span class="material-icons edit delete" (click)="deletefilm(film.id)">
+                                    delete
+                                  </span>
+                                </td>
+
+                              </tr>
+                            </table>
+
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
-                </div>
 
-              </td>
+                </td>
 
-              <td class="text-center">
-                <span class="material-icons edit " *ngIf="!isEdtDirector || edtDirector !== director"  (click)="editDirector(director)">
-                  edit
-                </span>
-                <span class="material-icons edit " *ngIf="isEdtDirector && edtDirector === director" (click)="valideEditDirector(director)">
-                  check
-                </span>
-              </td>
+                <td class="text-center">
+                  <span class="material-icons edit " *ngIf="!isEdtDirector || edtDirector !== director"
+                    (click)="editDirector(director)">
+                    edit
+                  </span>
+                  <span class="material-icons edit " *ngIf="isEdtDirector && edtDirector === director"
+                    (click)="valideEditDirector(director)">
+                    check
+                  </span>
+                </td>
 
 
-              <td class="text-center">
-                <span class="material-icons delete "  (click)="deleteDirector(director)">
-                  delete
-                </span>
-              </td>
+                <td class="text-center">
+                  <span class="material-icons delete " (click)="deleteDirector(director)">
+                    delete
+                  </span>
+                </td>
 
-            </tr>
-          </table>
-        </form>
+              </tr>
+            </table>
+          </form>
 
         </div>
       </div>
@@ -517,135 +529,137 @@
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-Actor" class="d-flex align-items-center">
             <span class="material-icons">
               group
-              </span>
-            Actor 
+            </span>
+            Actor
             ({{this.acteurs ? this.acteurs.length : 0}})
           </a>
         </h4>
         <span class="material-icons  addFilm" title='Add a actor' (click)="addActor()">
-          add_circle 
+          add_circle
         </span>
       </div>
 
       <div class="d-flex justify-content-center mt-5 mb-2" *ngIf="!this.acteurs">
-                <div class="spinner-border text-info" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+        <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
       <div id="collapse-Actor" class="panel-collapse collapse in show" *ngIf="this.acteurs">
         <div class="panel-body">
-          <form [formGroup]="formActorEdit" >
-          <table>
-            <tr>
-              <th>id</th>
-              <th>name</th>
-              <th class="text-center">movies</th>
-              <th class="text-center">edit</th>
-              <th class="text-center">delete</th>
-            </tr>
+          <form [formGroup]="formActorEdit">
+            <table>
+              <tr>
+                <th>id</th>
+                <th>name</th>
+                <th class="text-center">movies</th>
+                <th class="text-center">edit</th>
+                <th class="text-center">delete</th>
+              </tr>
 
-             <!-- addActor -->
+              <!-- addActor -->
 
-             <tr *ngIf="isAddActor">
-              <td>
-                <!-- id -->
-              </td>
-              <td class="position-relative">
+              <tr *ngIf="isAddActor">
+                <td>
+                  <!-- id -->
+                </td>
+                <td class="position-relative">
                   <input type="text" formControlName="actorName" placeholder="name">
                   <i class="material-icons  position-absolute  "></i>
-              </td>
-              <td>
-              </td>
-                
-              <td class="text-center">
-                <span class="material-icons edit " (click)="valideAddActor()" > 
-                  check
-                </span>
-              </td>
-              <td class="text-center">
-                <span class="material-icons delete" (click)="cancelActor()">
-                  delete
-                </span>
-              </td>
+                </td>
+                <td>
+                </td>
 
-            </tr>
+                <td class="text-center">
+                  <span class="material-icons edit " (click)="valideAddActor()">
+                    check
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="material-icons delete" (click)="cancelActor()">
+                    delete
+                  </span>
+                </td>
 
-            <!-- Fin addActor -->
-            <tr *ngFor="let acteur of acteurs">
-              <td>
-                {{acteur.id}}
-              </td>
-              <td>
-                <span *ngIf="!isEdtActor || edtActor !== acteur">
-                  {{acteur.name}}
-                </span>
-                <span  *ngIf="isEdtActor && edtActor === acteur">
-                  <input type="text" formControlName="actorName" placeholder="name"> 
-                </span>
-              </td>
-              <td class="text-center">
+              </tr>
 
-                <div class="panel-group" id="{{'accordion-'+acteur.id}}">
-                  <div class="panel panel-default" *ngIf="acteur.films">
-                    <div class="">
+              <!-- Fin addActor -->
+              <tr *ngFor="let acteur of acteurs">
+                <td>
+                  {{acteur.id}}
+                </td>
+                <td>
+                  <span *ngIf="!isEdtActor || edtActor !== acteur">
+                    {{acteur.name}}
+                  </span>
+                  <span *ngIf="isEdtActor && edtActor === acteur">
+                    <input type="text" formControlName="actorName" placeholder="name">
+                  </span>
+                </td>
+                <td class="text-center">
 
-                      <a data-toggle="collapse" href="{{'#collapse-'+acteur.id}}"
-                        data-parent="{{'#accordion-'+acteur.id}}">
-                        <span class="material-icons " *ngIf="acteur.films.length > 0">
-                          add_circle
-                        </span>
-                      </a>
-                    </div>
-                    <div id="{{'collapse-'+acteur.id}}" class="panel-collapse collapse in ">
+                  <div class="panel-group" id="{{'accordion-'+acteur.id}}">
+                    <div class="panel panel-default" *ngIf="acteur.films">
                       <div class="">
-                        <div *ngIf="acteur.films">
-                          <table class="table-film">
-                            <tr>
-                              <th>id</th>
-                              <th>title</th>
-                              
-                              <th>date</th>
-                              <th class="text-center">delete</th>
-                            </tr>
-                            <tr *ngFor="let film of acteur.films">
-                              <td>{{film.id}}</td>
-                              <td>{{film.title}}</td>
-                              
-                             
-                              <td>{{film.date}}</td>
-                              <td class="text-center">
-                                <span class="material-icons edit delete " (click)="deletefilm(film)">
-                                  delete
-                                </span>
-                              </td>
-          
-                            </tr>
-                          </table>
 
-                        </div>
+                        <a data-toggle="collapse" href="{{'#collapse-'+acteur.id}}"
+                          data-parent="{{'#accordion-'+acteur.id}}">
+                          <span class="material-icons " *ngIf="acteur.films.length > 0">
+                            add_circle
+                          </span>
+                        </a>
                       </div>
+                      <div id="{{'collapse-'+acteur.id}}" class="panel-collapse collapse in ">
+                        <div class="">
+                          <div *ngIf="acteur.films">
+                            <table class="table-film">
+                              <tr>
+                                <th>id</th>
+                                <th>title</th>
 
+                                <th>date</th>
+                                <th class="text-center">delete</th>
+                              </tr>
+                              <tr *ngFor="let film of acteur.films">
+                                <td>{{film.id}}</td>
+                                <td>{{film.title}}</td>
+
+
+                                <td>{{film.date}}</td>
+                                <td class="text-center">
+                                  <span class="material-icons edit delete " (click)="deletefilm(film)">
+                                    delete
+                                  </span>
+                                </td>
+
+                              </tr>
+                            </table>
+
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-              <td class="text-center">
-                <span class="material-icons edit " *ngIf="!isEdtActor || edtActor !== acteur"  (click)="editActor(acteur)">
-                  edit
-                </span>
-                <span class="material-icons edit " *ngIf="isEdtActor && edtActor === acteur" (click)="valideEditActor(acteur)">
-                  check
-                </span>
-              </td>
-              <td class="text-center">
-                <span class="material-icons delete"  (click)="deleteActor(acteur)">
-                  delete
-                </span>
-              </td>
+                </td>
+                <td class="text-center">
+                  <span class="material-icons edit " *ngIf="!isEdtActor || edtActor !== acteur"
+                    (click)="editActor(acteur)">
+                    edit
+                  </span>
+                  <span class="material-icons edit " *ngIf="isEdtActor && edtActor === acteur"
+                    (click)="valideEditActor(acteur)">
+                    check
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="material-icons delete" (click)="deleteActor(acteur)">
+                    delete
+                  </span>
+                </td>
 
-            </tr>
-          </table>
-        </form>
+              </tr>
+            </table>
+          </form>
 
         </div>
       </div>

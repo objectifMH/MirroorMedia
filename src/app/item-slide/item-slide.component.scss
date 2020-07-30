@@ -9,7 +9,7 @@ div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: all .2s ease-in-out;
+    transition: all .3s ease-in-out;
 
     
 
@@ -54,8 +54,11 @@ div {
         top: -20px;
 
         transition: all .3s ease-in-out;
+    }
 
-        cursor: pointer;
+    span.material-icons {
+            
+        display: none;
     }
 
     &:hover {
@@ -88,6 +91,8 @@ div {
         opacity: 1;
         font-size: 3em;
         transition: all .3s ease-in-out;
+        color: white;
+        cursor: pointer;
 
             
             &:hover {
@@ -138,7 +143,7 @@ div {
     
             transition: all .3s ease-in-out;
     
-            cursor: pointer;
+            
         }
     
         &:hover {

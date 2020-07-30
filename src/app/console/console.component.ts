@@ -53,11 +53,7 @@ export class ConsoleComponent implements OnInit {
       filmId: [''],
       filmTitle: ['', [Validators.required]],
       filmDirector: ['', [Validators.required]],
-      filmActors: this.fb1.array([
-        [true],
-        [false],
-        [true]
-      ]),
+      filmActors: new FormArray([]),
       filmDate: ['', [Validators.required]],
       filmPrix: ['', [Validators.required]]
 
@@ -114,7 +110,7 @@ export class ConsoleComponent implements OnInit {
 
   deleteUser(user) {
 
-    if (confirm('Etes-vous sur de vouloir supprimer cet utilisateur, ' + user.pseudo + ' !')) {
+    if (confirm('Are you sure you want to delete this user, ' + user.pseudo + ' !')) {
       this.spb.deteleUser(user);
       this.toastr.warning(user.pseudo + " are deleted !", "User", {
         timeOut: 1000,
@@ -135,7 +131,7 @@ export class ConsoleComponent implements OnInit {
   }
 
   validRoleUser(user) {
-    if (confirm('Etes-vous sur de vouloir valider ce role,  "' + this.formEdit.value.roleControl + '" !')) {
+    if (confirm('Are you sure you want to edited this user,  "' + this.formEdit.value.roleControl + '" !')) {
 
       this.isEdtUser = !this.isEdtUser;
       this.spb.validRoleUser(user, this.formEdit.value);
@@ -152,7 +148,7 @@ export class ConsoleComponent implements OnInit {
 
   deleteFilmUser(user, cart) {
     console.log(cart);
-    if (confirm('Etes-vous sur de vouloir supprimer ce film,  "' + cart.title + '" !')) {
+    if (confirm('Are You sure you want to delete this movie,  "' + cart.title + '" !')) {
       cart.inCart = false;
       this.spb.setUsers(this.users);
       this.spb.setCarts(user.carts);
@@ -174,7 +170,7 @@ export class ConsoleComponent implements OnInit {
 
   deletefilm(film) {
     console.log(film);
-    if (confirm('Etes-vous sur de vouloir supprimer ce film, ' + film.title + ' !')) {
+    if (confirm('You will delete this movie, ' + film.title + ' !')) {
       this.spb.deleteFilm(film).subscribe(
         data => {
           this.toastr.warning(film.title + " are delete with success !", "Movie", {
@@ -224,7 +220,7 @@ export class ConsoleComponent implements OnInit {
 
     console.log("notre nouveau film : ", film);
 
-    if (confirm('Etes-vous sur de vouloir valider les attributs de ce film,  "' + this.formFilmEdit.value.filmTitle + '" !')) {
+    if (confirm('Are you sure you want validate,  "' + this.formFilmEdit.value.filmTitle + '" !')) {
 
 
       this.isEdtFilm = !this.isEdtFilm;
@@ -287,7 +283,7 @@ export class ConsoleComponent implements OnInit {
       console.log(this.formFilmEdit.value.filmTitle);
 
       console.log(" validation de l'ajout", film);
-      if (confirm('Etes-vous sur de vouloir ajouter ce film, ' + film.title + ' !')) {
+      if (confirm('Are you sure you want to add this movie, ' + film.title + ' !')) {
         this.spb.addFilm(film).subscribe(
           data => {
 
@@ -300,7 +296,7 @@ export class ConsoleComponent implements OnInit {
           },
           error => {
             console.log("Erreur, addFilm", film);
-            this.toastr.error(film.title + " are not add with success !", "Director", {
+            this.toastr.error(film.title + " are not add with success !", "Movie", {
               timeOut: 1000,
               progressBar: true,
               progressAnimation: 'increasing'
@@ -325,13 +321,13 @@ export class ConsoleComponent implements OnInit {
     }
     else {
       this.formFilmEdit.markAllAsTouched();
-      alert(" Tous les champs ne sont pas complétés ! ");
+      alert(" All fields are not completed ! ");
     }
 
   }
 
   cancelFilm() {
-    if (confirm('Etes-vous sur de vouloir abandonner l"ajout de ce film !')) {
+    if (confirm('Are you sure you want to discontinue adding this movie ?')) {
       this.isAddFilm = false;
     }
   }
@@ -367,7 +363,7 @@ export class ConsoleComponent implements OnInit {
   }
 
   deleteDirector(director) {
-    if (confirm('Etes-vous sur de vouloir supprimer ce directeur, ' + director.name + ' !')) {
+    if (confirm('Are you sure you want to delete this director, ' + director.name + ' !')) {
       this.spb.deleteDirector(director).subscribe(
         data => {
           this.init();
@@ -380,7 +376,7 @@ export class ConsoleComponent implements OnInit {
         error => {
           console.log(error, error.status)
           if (error.status === 409) {
-            alert('Pour supprimer ce directeur vous devez supprimer tous les films de : ' + director.name);
+            alert('To delete this director you must delete all movies from : ' + director.name);
           }
         }
       )
@@ -413,7 +409,7 @@ export class ConsoleComponent implements OnInit {
 
     console.log("notre nouveau film : ", director);
 
-    if (confirm('Etes-vous sur de vouloir valider les attributs de ce film,  "' + this.formDirectorEdit.value.directorName + '" !')) {
+    if (confirm('Are you sure you want to validate the attributes of this film,  "' + this.formDirectorEdit.value.directorName + '" !')) {
 
 
       this.isEdtDirector = !this.isEdtDirector;
@@ -468,7 +464,7 @@ export class ConsoleComponent implements OnInit {
       console.log(this.formDirectorEdit.value.directorName);
 
       console.log(" validation de l'ajout", director);
-      if (confirm('Etes-vous sur de vouloir ajouter ce director, ' + director.name + ' !')) {
+      if (confirm('Are you sure you want to add this director, ' + director.name + ' !')) {
         this.spb.addDirector(director).subscribe(
           data => {
             this.toastr.success(director.name + " are add with success !", "Director", {
@@ -501,14 +497,14 @@ export class ConsoleComponent implements OnInit {
     }
     else {
       this.formFilmEdit.markAllAsTouched();
-      alert(" Tous les champs ne sont pas complétés ! ");
+      alert(" All fields are not completed! ");
     }
 
   }
 
 
   cancelDirector() {
-    if (confirm('Etes-vous sur de vouloir abandonner l"ajout de ce Director !')) {
+    if (confirm('Are you sure you want to abandon adding this Director? !')) {
       this.isAddDirector = false;
     }
   }
@@ -523,10 +519,7 @@ export class ConsoleComponent implements OnInit {
 
         this.actorsData = this.acteurs;
         this.actorOptions = this.acteurs;
-        const actors = this.formFilmEdit.get('filmActors').value;
-        const selectedActors = this.actorOptions.filter((actor, index) => actors[index]);
 
-    console.log(selectedActors);
 
         ////////
         //console.log(this.acteurs);

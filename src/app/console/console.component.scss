@@ -52,6 +52,12 @@ section {
     }
   }
 
+  .checkbox-actors {
+      overflow-y: auto;
+      border: 2px solid $color;
+      padding: 5px;
+  }
+
   .panel-heading {
 
     padding: 5px 15px;
