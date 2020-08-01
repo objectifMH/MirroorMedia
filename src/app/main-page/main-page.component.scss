@@ -1,9 +1,34 @@
 @import '../../styles.scss';
 
+section {
+   // background: grey !important;
+}
+
+
 .body {
-    //background-color: black;
     min-height: 100%;
 }
+
+.min-h-100{
+    min-height: 100%;
+}
+
+.theme-black {
+    background: #0e0423 !important;
+}
+
+.theme-black-header {
+    background: black !important;
+}
+
+.theme-black-color {
+    color: white !important;
+}
+
+.theme-footer-black {
+    background: black !important;
+}
+
 
 
 
@@ -43,7 +68,7 @@ header {
     height: 70px;
     top: 0;
     
-    background:#232323;
+    //background:#232323;
     background: $back;
 
     //border-bottom: 1px solid #9a9494b3;
@@ -138,6 +163,20 @@ header {
                             font-size: normal;
                             background: $back-main;
                           }
+                    }
+
+                    .theme-black-input-search {
+                        background: #0e0423;
+                        color:white;
+
+                        &::placeholder {
+
+                            color: white; 
+                            font-weight: lighter;
+                            font-size: normal;
+                            background: #0e0423;
+                          }
+
                     }
 
                     span {
@@ -266,11 +305,11 @@ header {
     }
 }
 
-.margin-top-90 {
-    margin-top: 90px;
+.padding-top-90 {
+    padding-top: 90px;
 }
-.margin-bottom-90 {
-    margin-bottom: 90px;
+.padding-bottom-90 {
+    padding-bottom: 90px;
 }
 
 .footer {

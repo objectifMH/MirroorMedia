@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpbService } from '../services/spb.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { InOutService } from '../services/in-out.service';
 
 @Component({
   selector: 'app-console',
@@ -10,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ConsoleComponent implements OnInit {
 
+  theme;
 
   users;
   isEdtUser = false;
@@ -40,7 +42,7 @@ export class ConsoleComponent implements OnInit {
   actorOptions: any;
 
 
-  constructor(private spb: SpbService, private fb: FormBuilder,
+  constructor(private inout: InOutService, private spb: SpbService, private fb: FormBuilder,
     private fb1: FormBuilder,
     private fb2: FormBuilder,
     private fb3: FormBuilder,
@@ -71,11 +73,13 @@ export class ConsoleComponent implements OnInit {
       actorName: ['', [Validators.required]]
     });
 
+    
   }
 
   ngOnInit(): void {
     this.roles = this.spb.getRoles();
     this.init();
+    this.getTheme();
   }
 
   init() {
@@ -84,6 +88,15 @@ export class ConsoleComponent implements OnInit {
     this.recupereFilms();
     this.recupereDirectors();
     this.recupereActeurs();
+  }
+
+  getTheme() {
+    this.inout.getTheme().subscribe(
+      data => {
+        this.theme = data;
+      },
+      error => console.log("Erreur, brightness")
+    )
   }
 
   /******* User  */

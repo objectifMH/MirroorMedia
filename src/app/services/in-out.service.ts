@@ -18,6 +18,8 @@ export class InOutService {
   tvs: BehaviorSubject<any>;
   peoples: BehaviorSubject<any>;
 
+  theme: BehaviorSubject<any>;
+
   /* cart: BehaviorSubject<any>;
   carts: BehaviorSubject<any>; */
 
@@ -34,9 +36,20 @@ export class InOutService {
     this.movies = new BehaviorSubject<any>(null);
     this.tvs = new BehaviorSubject<any>(null);
     this.peoples = new BehaviorSubject<any>(null);
+    this.theme = new BehaviorSubject<any>(false);
 
     /* this.cart = new BehaviorSubject<any>({quantity: 0, total: 0});
     this.carts = new BehaviorSubject<any>(null); */
+  }
+
+  public getTheme() {
+    return this.theme.asObservable();
+  }
+
+  public setTheme(val) {
+    this.theme.next(val);
+    console.log("theme inout service " , this.theme);
+
   }
 
   public setSelectIcon(resultat) {

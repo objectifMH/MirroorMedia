@@ -23,6 +23,7 @@ export class MainPageComponent implements OnInit {
   isShow = true;
   cart = { quantity: 0, total: 0 };
   userAuth;
+  theme;
 
   constructor(private inoutService: InOutService, private route: ActivatedRoute, private router: Router,
     private tmdb: TmdbService, private spb: SpbService) {
@@ -35,7 +36,7 @@ export class MainPageComponent implements OnInit {
     this.isSelectedIcon[chemin] = true;
 
     this.getIsAuthenticated();
-    setTimeout(() => this.recupereSpb(), 2000);  
+    setTimeout(() => this.recupereSpb(), 2000);
   }
 
   clickIcon(li) {
@@ -92,6 +93,18 @@ export class MainPageComponent implements OnInit {
 
     this.spb.setUserAuthenticated({ pseudo: null, role: null, mdp: null, cart: null, carts: null });
     this.router.navigate(['/login']);
+  }
+
+  brightness() {
+    this.inoutService.setTheme( !this.theme);
+    this.inoutService.getTheme().subscribe(
+      data => {
+        this.theme = data;
+        console.log("Theme, " + this.theme);
+      },
+      error => console.log("Erreur, brightness")
+    )
+    
   }
 
 }

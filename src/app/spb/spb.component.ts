@@ -256,7 +256,7 @@ export class SpbComponent implements OnInit {
   }
 
   validateList() {
-    if (confirm('Etes-vous sur de vouloir valider votre liste !')) {
+    if (confirm('Are you sure you want to validate your list ?')) {
       //console.log("231, on valide la liste sans covers ", this.filmsSansCovers)
       this.spb.setCarts(this.filmsSansCovers);
     }

@@ -1,8 +1,8 @@
-<section >
-    <div class="haut">
+<section [ngClass]="{'theme-black': theme }">
+    <div class="haut" [ngClass]="{'theme-black-panel': theme }">
       <h4> {{userAuth ? userAuth.pseudo : ''}} </h4>
     </div>
-    <div class="bas">
+    <div class="bas" [ngClass]="{'theme-black': theme }">
       <div class="gauche">
         <img mat-card-image height="300"
                             src="{{'assets/users/major.jpg'}}"

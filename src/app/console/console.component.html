@@ -1,10 +1,10 @@
-<section>
+<section [ngClass]="{'theme-black': theme }">
   <h1>Consol Admin</h1>
   <!--  Utilisateurs localStorage  -->
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
+      <div class="panel-heading" [ngClass]="{'theme-black-panel': theme }">
+        <h4 class="panel-title" >
 
 
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="d-flex align-items-center">
@@ -132,8 +132,8 @@
 
     <div class="panel panel-default">
 
-      <div class="panel-heading flex-justify-content-space-between">
-        <h4 class="panel-title">
+      <div class="panel-heading flex-justify-content-space-between" [ngClass]="{'theme-black-panel': theme }">
+        <h4 class="panel-title" >
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="d-flex align-items-center">
             <span class="material-icons">
               movie
@@ -371,7 +371,7 @@
 
     <!-- Director -->
     <div class="panel panel-default">
-      <div class="panel-heading flex-justify-content-space-between">
+      <div class="panel-heading flex-justify-content-space-between" [ngClass]="{'theme-black-panel': theme }">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="d-flex align-items-center">
             <span class="material-icons">
@@ -524,7 +524,7 @@
 
     <!--  Actor Spring Boot  -->
     <div class="panel panel-default">
-      <div class="panel-heading flex-justify-content-space-between">
+      <div class="panel-heading flex-justify-content-space-between" [ngClass]="{'theme-black-panel': theme }">
         <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse-Actor" class="d-flex align-items-center">
             <span class="material-icons">

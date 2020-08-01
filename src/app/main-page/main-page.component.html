@@ -1,12 +1,16 @@
-<section class="body">
+<!-- <div [ngClass]="{'theme-black':theme  }" class="min-h-100"> -->
+  
+<section class="body" 
+[ngClass]="{'theme-black':theme  }"
+>
 
   <!-- bar nav head -->
-  <header>
+  <header [ngClass]="{'theme-black-header':theme  }">
     <div class="headContainer">
       <div class="gauche">
         <div class="logo">
           <a routerLink="/home" title="Home">
-            <span class="logo-bottom logo-gd">8Mirr∞r</span>
+            <span class="logo-bottom logo-gd" [ngClass]="{'theme-black-color':theme  }">8Mirr∞r</span>
             <span class="logo-bottom logo-pt">8M∞</span>
 
           </a>
@@ -18,7 +22,9 @@
       </div>
       <div class="centre" [ngClass]="{'cd-show': isShow , 'cd-fade': !isShow} ">
 
-        <input #search type="text" class="form-control" placeholder="Search" id="idSearch" name="search">
+        <input #search type="text" class="form-control" placeholder="Search" id="idSearch" name="search"
+        [ngClass]="{'theme-black-input-search':theme  }"
+        >
         <span class="material-icons" (click)="clickSearch(search)">
           search
         </span>
@@ -62,6 +68,14 @@
             </a>
 
           </li>
+          
+          <li #lii (click)="brightness()" data-icon="brightness">
+              <span class="material-icons">
+                settings_brightness
+              </span>
+
+          </li>
+
 
           <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="userAuth.pseudo"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">
@@ -102,13 +116,13 @@
   </header>
 
   <!-- le routeur -->
-  <div class="margin-top-90 margin-bottom-90">
+  <div class="padding-top-90 padding-bottom-90 " [ngClass]="{'theme-black':theme }">
     <router-outlet></router-outlet>
   </div>
 
 </section>
-<footer>
-  <div class="position-relative footer">
+<footer [ngClass]="{'theme-black':theme }">
+  <div class="position-relative footer" [ngClass]="{'theme-footer-black':theme }">
 
     <ul>
       <li class="nav-item active mx-2 ">
@@ -145,3 +159,5 @@
     </div>
   </div>
 </footer>
+<!-- 
+</div> -->

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpbService } from '../services/spb.service';
 import { Router } from '@angular/router';
 import { TmdbService } from '../services/tmdb.service';
+import { InOutService } from '../services/in-out.service';
 
 @Component({
   selector: 'app-user',
@@ -10,17 +11,29 @@ import { TmdbService } from '../services/tmdb.service';
 })
 export class UserComponent implements OnInit {
 
+  theme;
+
   userAuth;
   films = [];
   filmsCovers = [];
   urlBaseImage = '';
 
-  constructor(private spb: SpbService, private router: Router, private tmdb: TmdbService) {
+  constructor(private spb: SpbService, private router: Router, private tmdb: TmdbService, private inout: InOutService) {
     this.urlBaseImage = this.tmdb.getUrlBaseImg();
   }
 
   ngOnInit(): void {
     this.recupereAuth();
+    this.getTheme();
+  }
+
+  getTheme() {
+    this.inout.getTheme().subscribe(
+      data => {
+        this.theme = data;
+      },
+      error => console.log("Erreur, brightness")
+    )
   }
 
 
