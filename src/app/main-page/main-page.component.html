@@ -40,6 +40,12 @@
             </a>
 
           </li>
+          <li #lii (click)="brightness()" data-icon="brightness" title="bright / dark">
+            <span class="material-icons">
+              settings_brightness
+            </span>
+
+        </li>
           <li #liad (click)="clickIcon(liad)" *ngIf="userAuth.role === 'ADMIN'" class="console"
             [ngClass]="{'iconSelected':isSelectedIcon.admin}" data-icon='admin'>
             <a routerLink="/console" title="Console Admin">
@@ -69,12 +75,7 @@
 
           </li>
           
-          <li #lii (click)="brightness()" data-icon="brightness">
-              <span class="material-icons">
-                settings_brightness
-              </span>
-
-          </li>
+          
 
 
           <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="userAuth.pseudo"
