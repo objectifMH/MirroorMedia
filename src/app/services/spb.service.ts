@@ -63,7 +63,7 @@ export class SpbService {
   }
 
   public setLocalStorageUsers(users) {
-    console.log("65 >>>  setLocalStorageUsers ", users);
+    //console.log("65 >>>  setLocalStorageUsers ", users);
     const stateStringify = JSON.stringify(users);
     localStorage.setItem('users', stateStringify);
   }
@@ -89,6 +89,7 @@ export class SpbService {
       if (user.pseudo === this.userAuthenticated.value.pseudo) {
         console.log("dans delete film localstorage : ", user.pseudo)
         this.setUserAuthenticated(user);
+        this.setCarts(user.carts);
       }
     };
     //this.setLocalStorageUsers(users);
@@ -220,13 +221,13 @@ export class SpbService {
     }
     const stateStringify = JSON.stringify(this.users.value);
     localStorage.setItem('users', stateStringify);
-    console.log(this.users);
+    //console.log(this.users);
 
     this.carts.next(resultat);
   }
 
   public getCarts() {
-    console.log(' Dans  getCarts : ', this.carts);
+    //console.log(' Dans  getCarts : ', this.carts);
     return this.carts.asObservable();
   }
 

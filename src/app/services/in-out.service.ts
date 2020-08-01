@@ -48,7 +48,7 @@ export class InOutService {
 
   public setTheme(val) {
     this.theme.next(val);
-    console.log("theme inout service " , this.theme);
+    //console.log("theme inout service " , this.theme);
 
   }
 

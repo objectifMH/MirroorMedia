@@ -81,7 +81,7 @@ export class UserComponent implements OnInit {
           resCovers => {
             this.filmsCovers = [...this.filmsCovers, {filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
           })
-          console.log(this.filmsCovers);
+          //console.log(this.filmsCovers);
       })
   }
 

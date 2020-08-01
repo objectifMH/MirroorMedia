@@ -106,11 +106,11 @@
 
 
         </ul>
-        <span *ngIf="cart.quantity > 0 && userAuth.pseudo" class="btn btn-danger shopping">
+        <a routerLink="/user" title="User" *ngIf="cart.quantity > 0 && userAuth.pseudo" class="btn btn-danger shopping">
           <i class="material-icons shopping">add_shopping_cart
           </i>
           ({{cart.quantity}}) ${{cart.total}}
-        </span>
+        </a>
       </div>
     </div>
   </header>

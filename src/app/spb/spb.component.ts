@@ -102,13 +102,10 @@ export class SpbComponent implements OnInit {
 
   addCart(film) {
     film.inCart = !film.inCart;
-    //this.spb.setCarts(this.films);
 
     for (let f of this.filmsSansCovers) {
-      //console.log('105 >>>> ', f,film,  this.filmsSansCovers);
       if (f.id === film.id) {
         f.inCart = film.inCart;
-        //console.log('109 >>>> ', f, film,  this.filmsSansCovers);
       }
     }
     this.cartAvalide.quantity = this.films.filter(film => film.inCart === true).length;
@@ -119,8 +116,6 @@ export class SpbComponent implements OnInit {
   totalCarts() {
     let tot = 0;
     let compt = 0;
-
-
     if (this.films) {
       this.films.filter(film => film.inCart === true).map(film => {
         compt++;
@@ -144,19 +139,12 @@ export class SpbComponent implements OnInit {
     this.spb.getCarts().subscribe(
       data => {
         if (data) {
-
           this.filmslStorage = data;
           //console.log("local storage >> ", data);
-
-        }
-
-        //console.log("local Storage : ", this.filmslStorage);
-        console.log(" 152 >>>>>>>>>>>>>>>>>>>>>>      recupereCarts spb api : ", this.films);
-
+        } 
+        console.log("local Storage : ", this.filmslStorage);
+        console.log(" 146 >>>>>>>>>>>>>>>>>>>>>>      recupereCarts spb api : ", this.films);
         this.getAllMovies();
-
-
-
       },
       err => {
         console.log('erreur observable dans spb.coments', err);
@@ -245,7 +233,9 @@ export class SpbComponent implements OnInit {
         },
         error => { console.log('erreur recuperation search ' + film.title); },
         // Complete de search film.title 
-        () => { console.log(" complete " + film.title, this.films); this.totalCarts(); }
+        () => { 
+          //console.log(" complete " + film.title, this.films); this.totalCarts(); 
+        }
 
       )
 

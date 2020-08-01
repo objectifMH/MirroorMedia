@@ -60,7 +60,6 @@ export class ListeTendanceSlideComponent implements OnInit {
       this.tmdb.getDiscoverTvs().subscribe(
           data => {
              this.tvs = data['results'];
-             console.log('tvs shows dans liste tendance Slide ' , this.tvs, data);
           },
           err => {
             console.log(err);

@@ -115,7 +115,7 @@ export class ConsoleComponent implements OnInit {
             element.totalTrue = totalTrue;
           });
         }
-        console.log(this.users);
+        //console.log(this.users);
       }
     );
 
@@ -175,14 +175,14 @@ export class ConsoleComponent implements OnInit {
     this.spb.getAllMoviesFull().subscribe(
       data => {
         this.films = data;
-        console.log(this.films);
+        //console.log(this.films);
 
       }
     )
   }
 
   deletefilm(film) {
-    console.log(film);
+    console.log(" suppression de ce film " , film);
     if (confirm('You will delete this movie, ' + film.title + ' !')) {
       this.spb.deleteFilm(film).subscribe(
         data => {
@@ -351,7 +351,7 @@ export class ConsoleComponent implements OnInit {
       data => {
         this.directors = data['_embedded']['directors'];
         this.directors.map(di => di.films = []);
-        console.log(this.directors);
+        //console.log(this.directors);
         this.spb.getAllDirectorsFull().subscribe(
           dataD => {
             let directorsFull;
@@ -369,7 +369,7 @@ export class ConsoleComponent implements OnInit {
                 }
               });
             }
-            console.log(directorsFull);
+            //console.log(directorsFull);
             this.directors = directorsFull;
           });
       });

@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.errorConnected = false ; 
     this.monForm.markAllAsTouched();
-    console.log(this.monForm.value);
     this.verifUser();
   }
 
@@ -43,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.spb.getUserAuthenticated().subscribe(
       data => {
         this.userAuth = data; 
-        console.log(this.userAuth)
+        //console.log(this.userAuth)
         if ( this.userAuth.pseudo )
         {
 
