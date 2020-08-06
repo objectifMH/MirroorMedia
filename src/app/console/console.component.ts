@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpbService } from '../services/spb.service';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, Form } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { InOutService } from '../services/in-out.service';
 
@@ -18,7 +18,9 @@ export class ConsoleComponent implements OnInit {
   edtUser;
   roles;
   directors;
-  acteurs;
+  acteurs = [];
+  selectedActorsValues = [];
+
   formEdit: FormGroup;
   formFilmEdit: FormGroup;
   formDirectorEdit: FormGroup;
@@ -55,13 +57,13 @@ export class ConsoleComponent implements OnInit {
       filmId: [''],
       filmTitle: ['', [Validators.required]],
       filmDirector: ['', [Validators.required]],
-      filmActors: new FormArray([]),
+      filmActors: this.addActorsControl(),
       filmDate: ['', [Validators.required]],
       filmPrix: ['', [Validators.required]]
 
     });
 
-    
+
 
     this.formDirectorEdit = this.fb2.group({
       directorId: [''],
@@ -73,7 +75,7 @@ export class ConsoleComponent implements OnInit {
       actorName: ['', [Validators.required]]
     });
 
-    
+
   }
 
   ngOnInit(): void {
@@ -89,6 +91,41 @@ export class ConsoleComponent implements OnInit {
     this.recupereDirectors();
     this.recupereActeurs();
   }
+
+  addActorsControl() {
+    const arr = this.actorsData.map(elm => {
+      return this.fb1.control(false);
+    })
+    return this.fb1.array(arr);
+  }
+
+  addActorsEditControl(film) {
+    console.log(film);
+    const arr = this.actorsData.map(elm => {
+      for (let actor of film.actors) {
+        if (actor.id === elm.id) {
+          return this.fb1.control(true);
+        }
+      }
+      return this.fb1.control(false);
+    })
+    return this.fb1.array(arr);
+  }
+
+  get actorsArray() {
+    return <FormArray>this.formFilmEdit.get('filmActors');
+  }
+
+  getSelectedActorsValue() {
+    this.selectedActorsValues = [];
+    this.actorsArray.controls.forEach((control, i) => {
+      if (control.value) {
+        this.selectedActorsValues.push(this.actorsData[i]);
+      }
+    })
+    console.log(this.selectedActorsValues);
+  }
+
 
   getTheme() {
     this.inout.getTheme().subscribe(
@@ -134,6 +171,12 @@ export class ConsoleComponent implements OnInit {
     this.recupereUsers();
   }
 
+  deleteEdit(user) {
+    if (confirm('Are you sure you want to abandon this edit for, ' + user.pseudo + ' !')) {
+      this.isEdtUser = !this.isEdtUser;
+    }
+  }
+
   editUser(user) {
     this.formEdit = this.fb.group({
       roleControl: [user.role]
@@ -161,7 +204,7 @@ export class ConsoleComponent implements OnInit {
 
   deleteFilmUser(user, cart) {
     console.log(cart);
-    if (confirm('Are You sure you want to delete this movie,  "' + cart.title + '" !')) {
+    if (confirm('Are You sure you want to delete this movie,  "' + cart.title + ' for : " ' + user.name + ' !')) {
       cart.inCart = false;
       this.spb.setUsers(this.users);
       this.spb.setCarts(user.carts);
@@ -181,8 +224,8 @@ export class ConsoleComponent implements OnInit {
     )
   }
 
-  deletefilm(film) {
-    console.log(" suppression de ce film " , film);
+  deleteFilm(film) {
+    console.log(" suppression de ce film ", film);
     if (confirm('You will delete this movie, ' + film.title + ' !')) {
       this.spb.deleteFilm(film).subscribe(
         data => {
@@ -197,14 +240,19 @@ export class ConsoleComponent implements OnInit {
     }
   }
 
+  deleteEditFilm(film) {
+    if (confirm('You will abandon the edit of this movie, ' + film.title + ' !')) {
+      this.isEdtFilm = !this.isEdtFilm;
+    }
+  }
+
   editFilm(film) {
 
     console.log("edit film 142 ", film, film.director);
     this.formFilmEdit = this.fb1.group({
       filmId: [film.id],
       filmTitle: [film.title],
-      //filmDirector: [film.director.id +" : " +film.director.name],
-      //filmActors: [film.actors],
+      filmActors: this.addActorsEditControl(film),
       filmDirector: [film.director.id],
       filmDate: [film.date],
       filmPrix: [film.prix]
@@ -214,6 +262,7 @@ export class ConsoleComponent implements OnInit {
 
 
     this.isEdtFilm = !this.isEdtFilm;
+    this.isAddFilm = false;
     this.edtFilm = film;
     console.log(this.isEdtFilm, film);
 
@@ -221,29 +270,29 @@ export class ConsoleComponent implements OnInit {
 
   valideEditFilm(film) {
 
-    console.log(" 163 >> validate :  debut validate ", film, this.formFilmEdit.value);
-
     film.id = this.formFilmEdit.value.filmId;
     film.title = this.formFilmEdit.value.filmTitle;
     film.date = this.formFilmEdit.value.filmDate;
     film.prix = this.formFilmEdit.value.filmPrix;
     let newDirector = this.directors.filter(dir => dir.id === parseInt(this.formFilmEdit.value.filmDirector));
-    console.log(" 177 >>> newDirector ", newDirector);
-    film.director = { id: newDirector[0].id, name: newDirector[0].name };
 
-    console.log("notre nouveau film : ", film);
+    //director
+    film.director = { id: newDirector[0].id, name: newDirector[0].name };
+    //actors 
+    let actors = [];
+    for (let actor of this.selectedActorsValues) {
+      actors = [...actors, "http://localhost:8088/actors/" + actor.id];
+    }
+    film.actors = actors;
 
     if (confirm('Are you sure you want validate,  "' + this.formFilmEdit.value.filmTitle + '" !')) {
 
 
       this.isEdtFilm = !this.isEdtFilm;
       this.edtFilm = film;
-      console.log(" avant service ", film);
+      //film.actors = this.selectedActorsValues;
       this.spb.editFilm(film).subscribe(
         data => {
-          console.log(data);
-
-          console.log("203 ac form ", this.formFilmEdit);
           this.toastr.success(film.title + " are edit with success !", "Movie", {
             timeOut: 1000,
             progressBar: true,
@@ -252,7 +301,6 @@ export class ConsoleComponent implements OnInit {
 
         },
         error => {
-          console.log("error for ", film);
           this.toastr.error(film.title + " are not add !", "Movie", {
             timeOut: 1000,
             progressBar: true,
@@ -266,7 +314,7 @@ export class ConsoleComponent implements OnInit {
             filmId: [''],
             filmTitle: [''],
             filmDirector: [''],
-            //filmActors: [''],
+            filmActors: this.addActorsControl(),
             filmDate: [''],
             filmPrix: ['']
 
@@ -276,22 +324,40 @@ export class ConsoleComponent implements OnInit {
       )
 
     }
-    //this.init();
   }
 
   addFilm() {
-    this.isAddFilm = true;
+    this.isAddFilm = !this.isAddFilm;
+    this.isEdtFilm = false;
     console.log("On va ajouter  un film ");
+    // complete on remet les champs à zéro :
+    this.formFilmEdit = this.fb1.group({
+      filmId: [''],
+      filmTitle: [''],
+      filmDirector: [''],
+      filmActors: this.addActorsControl(),
+      filmDate: [''],
+      filmPrix: ['']
+
+    });
   }
 
   valideAddFilm() {
 
     console.log(" status du form ", this.formFilmEdit.status, this.formFilmEdit);
+
+    let actors = [];
+    for (let actor of this.selectedActorsValues) {
+      actors = [...actors, "http://localhost:8088/actors/" + actor.id];
+    }
+
     if (this.formFilmEdit.status === 'VALID') {
       let film = {
         title: this.formFilmEdit.value.filmTitle, date: this.formFilmEdit.value.filmDate, prix: this.formFilmEdit.value.filmPrix,
-        director: "/directors/" + this.formFilmEdit.value.filmDirector
+        director: "/directors/" + this.formFilmEdit.value.filmDirector,
+        actors: actors
       };
+
 
       console.log(this.formFilmEdit.value.filmTitle);
 
@@ -323,7 +389,7 @@ export class ConsoleComponent implements OnInit {
               filmId: [''],
               filmTitle: [''],
               filmDirector: [''],
-              //filmActors: [''],
+              filmActors: this.addActorsControl(),
               filmDate: [''],
               filmPrix: ['']
 
@@ -337,6 +403,48 @@ export class ConsoleComponent implements OnInit {
       alert(" All fields are not completed ! ");
     }
 
+  }
+
+  deleteActorForFilm(film, actor) {
+    if (confirm('Are you sure you want to delete this actor : ' + actor.name + ' from this movie : ' + film.title + ' !')) {
+      console.log(film, actor);
+
+      //actors 
+      let actors = [];
+      for (let act of film.actors) {
+        if (act.id !== actor.id)
+          actors = [...actors, "http://localhost:8088/actors/" + act.id];
+      }
+
+      film.actors = actors;
+      console.log(film);
+
+      this.spb.editFilm(film).subscribe(
+        data => {
+          this.toastr.success(actor.name + " are deleted for " + film.title + "  with success !", "Movie", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+
+        },
+        error => {
+          this.toastr.error(actor.name + " are not deleted !", "Movie", {
+            timeOut: 1000,
+            progressBar: true,
+            progressAnimation: 'increasing'
+          })
+        },
+        () => {
+          
+          this.recupereFilms();
+          this.recupereActeurs();
+        }
+      )
+
+
+
+    }
   }
 
   cancelFilm() {
@@ -376,7 +484,7 @@ export class ConsoleComponent implements OnInit {
   }
 
   deleteDirector(director) {
-    if (confirm('Are you sure you want to delete this director, ' + director.name + ' !')) {
+    if (confirm('Are you sure you want to delete this director : ' + director.name + ' !')) {
       this.spb.deleteDirector(director).subscribe(
         data => {
           this.init();
@@ -389,27 +497,31 @@ export class ConsoleComponent implements OnInit {
         error => {
           console.log(error, error.status)
           if (error.status === 409) {
-            alert('To delete this director you must delete all movies from : ' + director.name);
+            alert('To delete this director you must delete all movies of : ' + director.name);
           }
         }
       )
     }
   }
 
+  deleteEditDirector(director) {
+    if (confirm('You will abandon the delete of this director, ' + director.name + ' !')) {
+      this.isEdtDirector = !this.isEdtDirector;
+    }
+  }
+
   editDirector(director) {
 
-    console.log("edit director 336 ", director, director.name);
     this.formDirectorEdit = this.fb2.group({
       directorId: [''],
       directorName: [director.name]
     });
 
-    console.log("edit director 337", this.formDirectorEdit.value, director.id + " : " + director.name);
-
 
     this.isEdtDirector = !this.isEdtDirector;
+    this.isAddDirector = false;
+
     this.edtDirector = director;
-    console.log(this.isEdtDirector, director);
 
   }
 
@@ -463,20 +575,24 @@ export class ConsoleComponent implements OnInit {
   }
 
   addDirector() {
-    this.isAddDirector = true;
+    this.isAddDirector = !this.isAddDirector;
+    this.isEdtDirector = false;
+
+    // complete on remet les champs à zéro :
+    this.formDirectorEdit = this.fb2.group({
+      directorId: [''],
+      directorName: ['']
+
+    });
   }
 
   valideAddDirector() {
 
-    console.log(" status du form ", this.formDirectorEdit.status)
     if (this.formDirectorEdit.status === 'VALID') {
       let director = {
         name: this.formDirectorEdit.value.directorName
       };
 
-      console.log(this.formDirectorEdit.value.directorName);
-
-      console.log(" validation de l'ajout", director);
       if (confirm('Are you sure you want to add this director, ' + director.name + ' !')) {
         this.spb.addDirector(director).subscribe(
           data => {
@@ -515,7 +631,6 @@ export class ConsoleComponent implements OnInit {
 
   }
 
-
   cancelDirector() {
     if (confirm('Are you sure you want to abandon adding this Director? !')) {
       this.isAddDirector = false;
@@ -528,16 +643,19 @@ export class ConsoleComponent implements OnInit {
     this.spb.getAllActeurs().subscribe(
       data => {
         this.acteurs = data['_embedded']['actors'];
-        ////////
-
-        this.actorsData = this.acteurs;
-        this.actorOptions = this.acteurs;
+        this.actorsData = data['_embedded']['actors'];
 
 
-        ////////
-        //console.log(this.acteurs);
+        this.formFilmEdit = this.fb1.group({
+          filmId: [''],
+          filmTitle: ['', [Validators.required]],
+          filmDirector: ['', [Validators.required]],
+          filmActors: this.addActorsControl(),
+          filmDate: ['', [Validators.required]],
+          filmPrix: ['', [Validators.required]]
+
+        });
         this.acteurs.map(elmt => {
-          //console.log(elmt);
           this.spb.getActeurs(elmt).subscribe(
             res => {
               const films = res;
@@ -550,6 +668,12 @@ export class ConsoleComponent implements OnInit {
       },
       error => console.log('Erreur, de recuperation getAllActeursFull')
     )
+  }
+
+  deleteEditActor(actor) {
+    if (confirm('You will abandon the delete of this actor, ' + actor.name + ' !')) {
+      this.isEdtActor = !this.isEdtActor;
+    }
   }
 
   deleteActor(actor) {
@@ -574,7 +698,14 @@ export class ConsoleComponent implements OnInit {
   }
 
   addActor() {
-    this.isAddActor = true;
+    this.isAddActor = !this.isAddActor;
+    this.isEdtActor = false;
+
+    // Mise à zéro des champs :
+    this.formActorEdit = this.fb3.group({
+      actorId: [''],
+      actorName: ['', [Validators.required]]
+    });
   }
 
   valideAddActor() {
@@ -626,7 +757,6 @@ export class ConsoleComponent implements OnInit {
 
   }
 
-
   cancelActor() {
     if (confirm('Are you sure you want to abandon the add of this Actor !')) {
       this.isAddActor = false;
@@ -641,27 +771,21 @@ export class ConsoleComponent implements OnInit {
     });
 
     this.isEdtActor = !this.isEdtActor;
+    this.isAddActor = false;
     this.edtActor = actor;
-    console.log(this.isEdtActor, actor);
 
   }
 
-
   valideEditActor(actor) {
 
-    console.log(" 342 >> validate :  debut validate ", actor, this.formActorEdit.value);
 
     actor.name = this.formActorEdit.value.actorName;
-
-
-    console.log("notre nouveau acteur : ", actor);
 
     if (confirm('Are you sure you want to edit this ,  "' + this.formActorEdit.value.actorName + '" !')) {
 
 
       this.isEdtActor = !this.isEdtActor;
       this.edtActor = actor;
-      console.log(" avant service director ", actor);
       this.spb.editActor(actor).subscribe(
         data => {
           this.toastr.success(actor.name + " are edited with success !", "Actor", {
@@ -670,10 +794,8 @@ export class ConsoleComponent implements OnInit {
             progressAnimation: 'increasing'
           })
 
-          console.log("359 ac form ", this.formActorEdit)
         },
         error => {
-          console.log("error for ", actor);
 
           this.toastr.error(actor.name + " are not add with success !", "Actor", {
             timeOut: 1000,
@@ -682,7 +804,7 @@ export class ConsoleComponent implements OnInit {
           })
         },
         () => {
-          console.log(" complete ", actor);
+
           // Mise à zéro des champs :
           this.formActorEdit = this.fb3.group({
             actorId: [''],

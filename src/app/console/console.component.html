@@ -4,7 +4,7 @@
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading" [ngClass]="{'theme-black-panel': theme }">
-        <h4 class="panel-title" >
+        <h4 class="panel-title">
 
 
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="d-flex align-items-center">
@@ -12,14 +12,15 @@
               how_to_reg
             </span>
             Users
-            ({{this.users ? this.users.length : 0}})</a>
+            ({{this.users ? this.users.length : 0}})
+          </a>
         </h4>
 
       </div>
       <div id="collapse1" class="panel-collapse collapse in ">
         <div class="panel-body">
 
-          <table>
+          <table [ngClass]="{'theme-black-input': theme }">
 
             <tr>
               <th>pseudo</th>
@@ -108,9 +109,17 @@
                 </span>
               </td>
               <td class="text-center">
-                <span class="material-icons delete" (click)="deleteUser(user)">
+                <span class="material-icons delete " (click)="deleteUser(user)" *ngIf="!isEdtUser || user !== edtUser">
                   delete
                 </span>
+                <span class="material-icons delete " (click)="deleteEdit(user)" *ngIf="isEdtUser && user === edtUser">
+                  delete
+                </span>
+
+
+                <!-- <span class="material-icons delete" (click)="deleteUser(user)">
+                  delete
+                </span> -->
               </td>
 
 
@@ -133,7 +142,7 @@
     <div class="panel panel-default">
 
       <div class="panel-heading flex-justify-content-space-between" [ngClass]="{'theme-black-panel': theme }">
-        <h4 class="panel-title" >
+        <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="d-flex align-items-center">
             <span class="material-icons">
               movie
@@ -158,7 +167,7 @@
           <!-- debut form -->
 
           <form [formGroup]="formFilmEdit">
-            <table  >
+            <table [ngClass]="{'theme-black-input': theme }">
               <tr>
                 <th>id</th>
                 <th>title</th>
@@ -183,36 +192,17 @@
                   <select formControlName="filmDirector">
                     <option [value]="director.id" *ngFor="let director of this.directors">
                       {{director.id}} : {{director.name}}
-                      <!-- => {{actorsData[i]}} -->
                     </option>
                   </select>
                 </td>
                 <td>
                   <!-- actors -->
-                  <!-- <span class="material-icons ">
-                            add_circle
-                    </span> -->
-
-                  <!--  <select formControlName="filmActors">
-                      <option [value]="actor.id" *ngFor="let actor of this.acteurs">
-                        
-                        {{actor.id}} : {{actor.name}}
-                      </option>
-                    </select> -->
-
-                  <!-- <label formArrayName="filmActors" *ngFor="let actor of this.acteurs; let i = index">
-                      <input type="checkbox" [formControlName]="i">
-                      {{actor.id}} : {{actor.name}}
-                    </label> -->
-
-                  <!--  <div *ngFor="let actor of form.get('filmActors').controls; let i=index">
-                      <input type="checkbox" [formControl]="actorItem">
-                      {{ actorOptions[i] }}
-                    </div> -->
                   <div class="checkbox-actors">
-                    <div *ngFor="let actor of this.acteurs; let i=index">
-                      <input type="checkbox" name="{{actor.id}}" [value]="actor.id"  formControlName="filmActors">
-                      {{actor.id}} : {{actor.name}}
+                    <div *ngFor="let control of actorsArray.controls; let i=index">
+                      <input type="checkbox" [formControl]="control" id="inLineCheckbox{{i}}"
+                        (change)="getSelectedActorsValue()">
+
+                      <label for="inLineCheckbox{{i}}">{{ actorsData[i].name}}</label>
                     </div>
 
 
@@ -296,17 +286,18 @@
                                 <tr>
                                   <th>id</th>
                                   <th>name</th>
+                                  <th>delete</th>
                                   <!-- 
                                 <th class="text-center">delete</th> -->
                                 </tr>
                                 <tr *ngFor="let actor of film.actors">
                                   <td>{{actor.id}}</td>
                                   <td>{{actor.name}}</td>
-                                  <!-- <td class="text-center">
-                                  <span class="material-icons edit delete"  (click)="deleteActor(actor)">
-                                    delete
-                                  </span>
-                                </td> -->
+                                  <td class="text-center">
+                                    <span class="material-icons edit delete" (click)="deleteActorForFilm(film, actor)">
+                                      delete
+                                    </span>
+                                  </td>
 
                                 </tr>
                               </table>
@@ -323,9 +314,23 @@
                   </span>
                   <span *ngIf="isEdtFilm && edtFilm === film">
                     <!-- <input type="text" formControlName="filmActors" placeholder="actors">  -->
-                    <span class="material-icons ">
+                    <!-- <span class="material-icons ">
                       add_circle
-                    </span>
+                    </span> -->
+
+                    <div class="checkbox-actors">
+                      <div *ngFor="let control of actorsArray.controls; let i=index">
+                        <input type="checkbox" [formControl]="control" id="inLineCheckbox{{i}}"
+                          (change)="getSelectedActorsValue()">
+
+                        <label for="inLineCheckbox{{i}}">{{ actorsData[i].name}}</label>
+                      </div>
+
+
+                    </div>
+
+
+                    <!-- -->
                   </span>
                 </td>
                 <td>
@@ -355,9 +360,19 @@
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="material-icons delete" (click)="deletefilm(film)">
+
+                  <span class="material-icons delete " (click)="deleteFilm(film)"
+                    *ngIf="!isEdtFilm || edtFilm !== film">
                     delete
                   </span>
+                  <span class="material-icons delete " (click)="deleteEditFilm(film)"
+                    *ngIf="isEdtFilm && edtFilm === film">
+                    delete
+                  </span>
+
+                  <!-- <span class="material-icons delete" (click)="deletefilm(film)">
+                    delete
+                  </span> -->
                 </td>
 
               </tr>
@@ -397,7 +412,7 @@
         <div class="panel-body">
 
           <form [formGroup]="formDirectorEdit">
-            <table>
+            <table [ngClass]="{'theme-black-input': theme }">
               <tr>
                 <th>id</th>
                 <th>name</th>
@@ -479,7 +494,7 @@
 
                                 <td>{{film.id.date}}</td>
                                 <td class="text-center">
-                                  <span class="material-icons edit delete" (click)="deletefilm(film.id)">
+                                  <span class="material-icons edit delete" (click)="deleteFilm(film.id)">
                                     delete
                                   </span>
                                 </td>
@@ -509,7 +524,13 @@
 
 
                 <td class="text-center">
-                  <span class="material-icons delete " (click)="deleteDirector(director)">
+
+                  <span class="material-icons delete " *ngIf="!isEdtDirector || edtDirector !== director"
+                    (click)="deleteDirector(director)">
+                    delete
+                  </span>
+                  <span class="material-icons delete " *ngIf="isEdtDirector && edtDirector === director"
+                    (click)="deleteEditDirector(director)">
                     delete
                   </span>
                 </td>
@@ -547,7 +568,7 @@
       <div id="collapse-Actor" class="panel-collapse collapse in show" *ngIf="this.acteurs">
         <div class="panel-body">
           <form [formGroup]="formActorEdit">
-            <table>
+            <table [ngClass]="{'theme-black-input': theme }">
               <tr>
                 <th>id</th>
                 <th>name</th>
@@ -626,7 +647,7 @@
 
                                 <td>{{film.date}}</td>
                                 <td class="text-center">
-                                  <span class="material-icons edit delete " (click)="deletefilm(film)">
+                                  <span class="material-icons edit delete " (click)="deleteActorForFilm(film,acteur)">
                                     delete
                                   </span>
                                 </td>
@@ -652,7 +673,13 @@
                   </span>
                 </td>
                 <td class="text-center">
-                  <span class="material-icons delete" (click)="deleteActor(acteur)">
+
+                  <span class="material-icons delete " *ngIf="!isEdtActor || edtActor !== acteur"
+                    (click)="deleteActor(acteur)">
+                    delete
+                  </span>
+                  <span class="material-icons delete " *ngIf="isEdtActor && edtActor === acteur"
+                    (click)="deleteEditActor(acteur)">
                     delete
                   </span>
                 </td>

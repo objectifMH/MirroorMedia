@@ -14,6 +14,28 @@
   background: #0e0423 !important;
 }
 
+.theme-black-input {
+
+  select {
+    border-radius: 0;
+    background: #223e48 !important;
+    color: white !important;
+  }
+
+  input {
+    border-radius: 0;
+    background: #223e48 !important;
+    color: white !important;
+
+
+    &::placeholder {
+      background: #223e48 !important;
+      color: white !important;
+
+    }
+  }
+}
+
 section {
   width: 90vw;
   margin: auto;
@@ -113,12 +135,13 @@ section {
         input {
           border-radius: 0;
           background: #f5e06e;
-          color: #56c3bd !important;
+          color: #56c3bd ;
           border: 1px solid #f5e06e;
 
           &::placeholder {
-            color: #56c3bd !important;
+            color: #56c3bd;
           }
+          
       }
 
 
@@ -182,7 +205,7 @@ input.ng-touched.ng-invalid + .material-icons:before {
 input.ng-touched.ng-valid {
     border-width: 1px;
     border: green solid 2px;
-    color: green !important; 
+    //color: green !important; 
   }
 
 input.ng-touched.ng-valid + .material-icons:before {

@@ -260,7 +260,8 @@ export class SpbService {
     let filmPost = {
       id: film.id,
       title: film.title, date: film.date, prix: film.prix,
-      director: "/directors/" + film.director.id
+      director: "/directors/" + film.director.id,
+      actors: film.actors
     };
 
     console.log(filmPost);
