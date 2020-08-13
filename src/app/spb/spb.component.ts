@@ -142,8 +142,6 @@ export class SpbComponent implements OnInit {
           this.filmslStorage = data;
           //console.log("local storage >> ", data);
         } 
-        console.log("local Storage : ", this.filmslStorage);
-        console.log(" 146 >>>>>>>>>>>>>>>>>>>>>>      recupereCarts spb api : ", this.films);
         this.getAllMovies();
       },
       err => {

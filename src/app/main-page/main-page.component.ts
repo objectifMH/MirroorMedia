@@ -24,6 +24,7 @@ export class MainPageComponent implements OnInit {
   cart = { quantity: 0, total: 0 };
   userAuth;
   theme;
+  isConnected = false ; 
 
   constructor(private inoutService: InOutService, private route: ActivatedRoute, private router: Router,
     private tmdb: TmdbService, private spb: SpbService) {
@@ -79,11 +80,24 @@ export class MainPageComponent implements OnInit {
     this.spb.getUserAuthenticated().subscribe(
       data => {
         this.userAuth = data;
+        if ( this.userAuth.pseudo )
+        this.getIsConnected();
       }
       ,
       error => console.log("Erreur, récuperation getUserAuthenticated")
     );
 
+  }
+
+  getIsConnected() {
+    this.spb.getIsConnected().subscribe(
+      data => {
+        this.isConnected = data;
+        console.log("esttu connecté " , this.isConnected);
+      }
+      ,
+      error => console.log("Erreur, récuperation getIsConnected")
+    );
   }
 
   logOut() {
@@ -92,6 +106,7 @@ export class MainPageComponent implements OnInit {
     this.spb.setCart({ quantity: 0, total: 0 });
 
     this.spb.setUserAuthenticated({ pseudo: null, role: null, mdp: null, cart: null, carts: null });
+    this.spb.setIsConnected(false);
     this.router.navigate(['/login']);
   }
 

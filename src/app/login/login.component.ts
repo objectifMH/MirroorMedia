@@ -47,7 +47,14 @@ export class LoginComponent implements OnInit {
         {
 
           if ( this.inLogin === true )
-          setTimeout(() => this.router.navigate(['/spb']), 3000);
+          setTimeout(() => 
+          {
+            
+            this.spb.setIsConnected(true);
+            this.router.navigate(['/spb']);
+          }
+            
+            , 3000);
 
           this.monForm = this.fb.group({
             pseudo: [''],

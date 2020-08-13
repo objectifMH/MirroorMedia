@@ -46,7 +46,7 @@
             </span>
 
         </li>
-          <li #liad (click)="clickIcon(liad)" *ngIf="userAuth.role === 'ADMIN'" class="console"
+          <li #liad (click)="clickIcon(liad)" *ngIf="userAuth.role === 'ADMIN' && isConnected" class="console"
             [ngClass]="{'iconSelected':isSelectedIcon.admin}" data-icon='admin'>
             <a routerLink="/console" title="Console Admin">
               <span class="material-icons">
@@ -55,7 +55,7 @@
             </a>
           </li>
           
-          <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo" class="p-relative"
+          <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo && isConnected" class="p-relative"
             [ngClass]="{'iconSelected':isSelectedIcon.person}" data-icon='person'>
             <span >{{userAuth.pseudo}} </span>
             <a routerLink="/user" title="User">
@@ -78,7 +78,7 @@
           
 
 
-          <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="userAuth.pseudo"
+          <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="userAuth.pseudo && isConnected"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">
             <a routerLink="/spb" title="Spb" class="a-list-spb">
               <span class="material-icons">
@@ -107,7 +107,7 @@
 
 
         </ul>
-        <a routerLink="/user" title="User" *ngIf="cart.quantity > 0 && userAuth.pseudo" class="btn btn-danger shopping">
+        <a routerLink="/user" title="User" *ngIf="cart.quantity > 0 && userAuth.pseudo && isConnected" class="btn btn-danger shopping">
           <i class="material-icons shopping">add_shopping_cart
           </i>
           ({{cart.quantity}}) ${{cart.total}}

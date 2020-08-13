@@ -18,8 +18,8 @@ export class SpbService {
     { pseudo: "moto", mdp: "mdpmdp", role: "USER", cart: null, carts: null }
 
   ] */
-  /* 
-    isAuthenticated: BehaviorSubject<boolean>; */
+  
+  isConnected: BehaviorSubject<boolean>;
   userAuthenticated: BehaviorSubject<any>;
   userCart;
   userCarts;
@@ -29,8 +29,9 @@ export class SpbService {
 
   urlSpb = 'https://filmlksapi.herokuapp.com/';
 
-  constructor(private httpClient: HttpClient, private inout: InOutService) {/* 
-    this.isAuthenticated = new BehaviorSubject<boolean>(false); */
+  constructor(private httpClient: HttpClient, private inout: InOutService) {
+
+    this.isConnected = new BehaviorSubject<boolean>(false);
     this.userAuthenticated = new BehaviorSubject<any>({ pseudo: null, role: null, mdp: null, cart: null, carts: null });
 
     this.users = new BehaviorSubject<any>([
@@ -182,6 +183,14 @@ export class SpbService {
 
   public getUserAuthenticated() {
     return this.userAuthenticated.asObservable();
+  }
+
+  public setIsConnected(res) {
+    this.isConnected.next(res);
+  }
+
+  public getIsConnected() {
+    return this.isConnected.asObservable();
   }
 
   public inscription(login, mdp) {
