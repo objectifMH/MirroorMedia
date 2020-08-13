@@ -1,6 +1,6 @@
 <!-- <div [ngClass]="{'theme-black':theme  }" class="min-h-100"> -->
   
-<section class="body" 
+<section class="body" [ngClass]="{'no-show-mobile': !isShow} "
 [ngClass]="{'theme-black':theme  }"
 >
 
@@ -117,7 +117,7 @@
   </header>
 
   <!-- le routeur -->
-  <div class="padding-top-90 padding-bottom-90 " [ngClass]="{'theme-black':theme }">
+  <div class="padding-top-90 padding-bottom-all  " [ngClass]="{'theme-black':theme }">
     <router-outlet></router-outlet>
   </div>
 

@@ -29,6 +29,11 @@ section {
     background: black !important;
 }
 
+.mt--150 {
+    margin-top: -150px;
+    padding-top: 0;
+}
+
 
 
 
@@ -308,8 +313,8 @@ header {
 .padding-top-90 {
     padding-top: 90px;
 }
-.padding-bottom-90 {
-    padding-bottom: 90px;
+.padding-bottom-all {
+    padding-bottom: 100%;
 }
 
 .footer {
@@ -461,7 +466,7 @@ footer {
     }
 
     section {
-        margin-top: 220px;
+        margin-top: 120px;
         .mt-50 {
             margin-top: 0;
         }
@@ -502,6 +507,13 @@ footer {
 
         
     }
+
+    
+    .no-show-mobile {
+        margin-top: -10px;
+    }
+
+
 
 }
 

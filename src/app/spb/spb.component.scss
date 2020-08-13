@@ -112,3 +112,30 @@ section {
   
 
 }
+
+@media (max-width: 990px) {
+
+    td {
+        margin: auto !important;
+        padding: 2px !important;
+        font-size: small !important;
+        font-weight: unset !important;
+    }
+
+    a {
+
+        img {
+            max-height: 90px !important;
+            padding: 4px !important;
+        }
+    }
+
+    .material-icons {
+        font-size: 20px;
+    }
+
+    .btn {
+        font-size: 0.8rem;
+    }
+
+}
