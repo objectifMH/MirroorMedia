@@ -225,3 +225,15 @@ input.ng-touched.ng-valid + .material-icons:before {
 
 
 }
+
+
+@media (max-width: 480px) {
+  
+  td, th {
+    padding: 1px;
+  }
+
+  .panel-default {
+    overflow-x: scroll;
+  }
+}
