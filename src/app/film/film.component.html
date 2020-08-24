@@ -31,10 +31,10 @@
           </div>
 
           <div class="">
-            <h4 class="">Trailers:</h4>
+            <h4 class="" *ngIf="this.trailers.length > 0 ">Trailers:</h4>
             <p>
               <span *ngFor="let trail of this.trailers; let i = index" class="btn btn m-1 mt-3">
-                <a href="https://www.youtube.com/watch?v={{trail.key}}" *ngIf="trail.site === 'YouTube'" target="_blank">
+                <a href="https://www.youtube.com/watch?v={{trail.key}}"  target="_blank">
                   <span class="material-icons play">
                     play_circle_outline
                   </span>

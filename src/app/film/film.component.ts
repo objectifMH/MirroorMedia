@@ -46,7 +46,7 @@ export class FilmComponent implements OnInit {
     this.tmdb.getInfoFilm(id).subscribe(
       result => {
         this.film = result;
-        console.log(this.film);
+        //console.log(this.film);
         this.urlBackDrop = this.film.backdrop_path ? this.urlBaseImage+this.film.backdrop_path : '';
         this.getActeurs();
 
@@ -62,7 +62,7 @@ export class FilmComponent implements OnInit {
     this.tmdb.getInfoTv(id).subscribe(
       result => {
         this.film = result;
-        console.log(this.film);
+        //console.log(this.film);
         this.getActeurs();
 
       }
@@ -74,7 +74,7 @@ export class FilmComponent implements OnInit {
   getActeurs() {
     this.tmdb.getActeursByFilm(this.film).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.acteursFull = data['cast'];
         this.crewsFull = data['crew'];
 
@@ -84,8 +84,9 @@ export class FilmComponent implements OnInit {
         this.minActeurs = this.acteursFull.length > 8 ? true : false;
         this.tmdb.getTrailers(this.film).subscribe(
           dataTrailers => {
-            console.log(dataTrailers);
-            this.trailers = dataTrailers['results'];
+            console.log("trailers" , dataTrailers );
+            this.trailers = dataTrailers['results'].filter( trail => trail['site'] === 'YouTube')
+            //console.log(this.trailers );
 
           }
         )

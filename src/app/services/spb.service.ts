@@ -39,7 +39,8 @@ export class SpbService {
       { pseudo: "meruem", mdp: "mdpmdp", role: "SUPERADMIN", cart: null, carts: null },
       { pseudo: "motoko", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null },
       { pseudo: "moto", mdp: "mdpmdp", role: "USER", cart: null, carts: null },
-      { pseudo: "damien", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null }
+      { pseudo: "damien", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null },
+      { pseudo: "testeur", mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null }
     ]);
 
     this.cart = new BehaviorSubject<any>({ quantity: 0, total: 0 });
@@ -52,11 +53,23 @@ export class SpbService {
   }
 
   public getLocatStorageUsers() {
-    const users = JSON.parse(localStorage.getItem('users'));
+    let users = JSON.parse(localStorage.getItem('users'));
     if (!users) {
       this.setLocalStorageUsers(this.users.value);
     } else {
       // this.users = users;
+      console.log( "getLocatStorageUsers  >>>  " , users , this.users.value);
+
+      this.users.value.map( userMock => {
+        console.log(userMock.pseudo);
+        if ( users.filter( userStorage => userStorage.pseudo === userMock.pseudo).length === 0 )
+        {
+          users = [...users , 
+            { pseudo: userMock.pseudo, mdp: "mdpmdp", role: "ADMIN", cart: null, carts: null }
+          ]
+        }
+      });
+      
       this.setUsers(users);
     }
 
@@ -98,14 +111,14 @@ export class SpbService {
   }
 
   public editFilmlocalStorage(film) {
-    console.log("102  >>>  debut edit film local storage ", film);
+    //console.log("102  >>>  debut edit film local storage ", film);
     let users = this.getLocatStorageUsers();
     for (let user of users) {
       if (user.carts && user.carts.length > 0) {
         let newCarts = [];
         for (let cart of user.carts) {
           if (cart.id === film.id) {
-            console.log("cart ", cart, ' film ', film, parseInt(film.prix))
+            //console.log("cart ", cart, ' film ', film, parseInt(film.prix))
             cart = { date: film.date, prix: film.prix, title: film.title, id: film.id, inCart: cart.inCart };
           }
           newCarts = [...newCarts, cart];

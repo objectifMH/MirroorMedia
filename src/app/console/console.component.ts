@@ -204,7 +204,7 @@ export class ConsoleComponent implements OnInit {
 
   deleteFilmUser(user, cart) {
     console.log(cart);
-    if (confirm('Are You sure you want to delete this movie,  "' + cart.title + ' for : " ' + user.name + ' !')) {
+    if (confirm('Are You sure you want to delete this movie,  "' + cart.title + ' for : " ' + user.pseudo + ' !')) {
       cart.inCart = false;
       this.spb.setUsers(this.users);
       this.spb.setCarts(user.carts);

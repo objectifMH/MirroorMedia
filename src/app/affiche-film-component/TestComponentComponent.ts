@@ -48,18 +48,18 @@ export class TestComponentComponent implements OnInit {
   getActeurs() {
     this.tmdb.getActeursByFilm(this.film).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.acteursFull = data['cast'];
         this.crewsFull = data['crew'];
 
         this.acteurs = this.acteursFull.slice(0, 8);
-        this.director  = this.crewsFull.filter( crew => crew.job === 'Director');
-        this.directorName = data['crew'].length !== 0 ? ( this.director[0] ? this.director[0].name : false ) : false;
+        this.director = this.crewsFull.filter(crew => crew.job === 'Director');
+        this.directorName = data['crew'].length !== 0 ? (this.director[0] ? this.director[0].name : false) : false;
         this.minActeurs = this.acteursFull.length > 8 ? true : false;
         this.tmdb.getTrailers(this.film).subscribe(
           dataTrailers => {
-            console.log(dataTrailers);
-            this.trailers = dataTrailers['results'];
+
+            this.trailers = dataTrailers['results'].filter(trail => trail['site'] === 'YouTube')
 
           }
         )
@@ -68,7 +68,7 @@ export class TestComponentComponent implements OnInit {
 
 
 
-         //console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull, ' director > ', this.directorName);
+        //console.log('acteurs  dans liste tendance test Components ' , this.acteurs, data, this.crewsFull, ' director > ', this.directorName);
       },
       err => {
         console.log(err);
@@ -76,7 +76,7 @@ export class TestComponentComponent implements OnInit {
   }
 
   plusMoinsActeurs() {
-    if ( this.plus === true) {
+    if (this.plus === true) {
       this.acteurs = this.acteursFull;
     } else {
       this.acteurs = this.acteursFull.slice(0, 8);

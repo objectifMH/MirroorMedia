@@ -31,14 +31,14 @@
       <div class="droit" [ngClass]="{'cd-show': isShow , 'cd-fade': !isShow} ">
         <ul>
           <li #lih (click)="clickIcon(lih)" [ngClass]="{'iconSelected':isSelectedIcon.home}" data-icon='home'>
-            <a routerLink="/home" title="Retour à la home">
+            <a routerLink="/home" title="Home">
               <span class="material-icons">
                 home
               </span>
             </a>
 
           </li>
-          <li #lii (click)="brightness()" data-icon="brightness" title="bright / dark">
+          <li #lii (click)="brightness()" data-icon="brightness" title="Bright / Dark">
             <span class="material-icons">
               settings_brightness
             </span>
@@ -125,11 +125,11 @@
 
     <ul>
       <li class="nav-item active mx-2 ">
-        <a class="nav-link link-logo" routerLink='/home'> <span class="logo-bottom">8Mirr∞r</span> </a>
+        <a class="nav-link link-logo" routerLink='/home' title="Home"> <span class="logo-bottom">8Mirr∞r</span> </a>
 
       </li>
       <li>
-        <a href='https://www.themoviedb.org/?language=fr-FR' target="_blank"> <img class="card-img-top"
+        <a href='https://www.themoviedb.org/?language=fr-FR' target="_blank" title="TMDB"> <img class="card-img-top"
             src="assets/tmdb.svg" alt="The movie DB" />
         </a>
 
@@ -137,13 +137,13 @@
       <li>About Us
         <div class="reseaux">
 
-          <a routerLink="/admin" title="admin">
+          <a routerLink="/admin" title="Admin Michael Hatchi">
             <fa-icon [icon]="faUserCircle"></fa-icon>
           </a>
-          <a href='https://www.linkedin.com/in/m-hatchi-bb4b49156/' target="_blank">
+          <a href='https://www.linkedin.com/in/m-hatchi-bb4b49156/' title="Linkedin" target="_blank">
             <fa-icon class="fa-git" [icon]="faLinkedinIn"></fa-icon>
           </a>
-          <a href='https://github.com/objectifMH/MirroorMedia' target="_blank">
+          <a href='https://github.com/objectifMH/MirroorMedia' target="_blank" title="Github">
             <fa-icon [icon]="faGithub"></fa-icon>
           </a>
 

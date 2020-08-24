@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TmdbService } from '../services/tmdb.service';
+import { InOutService } from '../services/in-out.service';
 
 @Component({
   selector: 'app-people',
@@ -18,10 +19,11 @@ export class PeopleComponent implements OnInit {
   plusTvs = true;
   minMovies = false;
   minTvs = false;
+  theme;
 
   urlBaseImage: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private tmdb: TmdbService) {
+  constructor(private route: ActivatedRoute, private router: Router, private tmdb: TmdbService, private inout: InOutService) {
     this.urlBaseImage = this.tmdb.getUrlBaseImg();
 
   }
@@ -31,6 +33,7 @@ export class PeopleComponent implements OnInit {
     this.getActeurs(peopleId);
     this.getFilmsForActeurs(peopleId);
     this.getTvsForActeurs(peopleId);
+    this.getTheme();
 
   }
 
@@ -90,6 +93,15 @@ export class PeopleComponent implements OnInit {
       this.tvs = this.tvsFull.slice(0, 6);
     }
     this.plusTvs = !this.plusTvs;
+  }
+
+  getTheme() {
+    this.inout.getTheme().subscribe(
+      data => {
+        this.theme = data;
+      },
+      error => console.log("Erreur, brightness")
+    )
   }
 
 }
