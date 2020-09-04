@@ -54,21 +54,17 @@ export class SpbComponent implements OnInit {
         // Tous les films SPB Api :
         this.filmSpb = result['_embedded']['movies'];
         let filmsAux = [];
-        let inList = false ; 
+        let inList = false;
         if (this.filmslStorage.length > 0) {
-          console.log('59, Dans film storage ', this.filmslStorage);
           this.filmSpb.map(spb => {
             inList = false;
             for (let lstorage of this.filmslStorage) {
               if (spb.id === lstorage.id) {
-                //console.log(spb);
                 filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: lstorage.inCart }];
                 inList = true;
               }
-             
             }
-            if ( !inList)
-            {
+            if (!inList) {
               filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: false }];
             }
 
@@ -77,12 +73,9 @@ export class SpbComponent implements OnInit {
         else {
           // Pas de localStorage : 
           for (let spb of this.filmSpb) {
-            //console.log("74 >> >>" , spb);
             filmsAux = [...filmsAux, { date: spb.date, id: spb.id, prix: spb.prix, title: spb.title, inCart: false }];
-
           }
         }
-        //console.log('69 >>> La liste sans covers : ', filmsAux);
         this.filmsSansCovers = filmsAux;
 
         // On va recuperer les covers :
@@ -95,7 +88,7 @@ export class SpbComponent implements OnInit {
       ,
       error => {
         console.log('Une erreur est survenue, On arrive pas à charger les films de la spb bd', error);
-        this.errorConnexSpb = 'Erreur de connexion à la base de donnée Spring Boot Lks Movies';
+        this.errorConnexSpb = 'Spring Boot Lks Movies database connection error';
       }
     );
   }
@@ -127,7 +120,6 @@ export class SpbComponent implements OnInit {
       // tslint:disable-next-line:radix
       total: parseFloat(tot.toFixed(2))
     };
-    //console.log(this.cart);
     this.cartAvalide.quantity = compt;
     this.cartAvalide.total = parseFloat(tot.toFixed(2));
     this.spb.setCart(this.cart);
@@ -141,7 +133,7 @@ export class SpbComponent implements OnInit {
         if (data) {
           this.filmslStorage = data;
           //console.log("local storage >> ", data);
-        } 
+        }
         this.getAllMovies();
       },
       err => {
@@ -177,70 +169,69 @@ export class SpbComponent implements OnInit {
 
   getAllMoviesWithCovers(filmsAux) {
     //console.log(" !!!!!!!!!!!!!!!!!!!!!!!  debut films covers !!!!!!!!!!!!!!!!!!!!!!!");
-    //console.log(" 186, spb  this films >> ", this.films, filmsAux);
+    console.log(" 186, spb  this films >> ", this.films, filmsAux);
 
     // On récupère les covers tmdb Api :
 
     // on parcours notre liste mixte entre  local storage et api : 
     const filmsWCover = filmsAux.sort().map(film => {
 
-      //console.log("206, film de la liste mixte --- : ", film);
       // On fait une recherche pour chaque film de la liste : 
       this.tmdb.search(film.title).subscribe(
 
         resCovers => {
-          // Pour chaque film, on cherche sa cover dans tmdb : 
-          // si le film qu on recherche n'est pas present dans notre  liste this.films : 
-          if (this.films.filter(f => f.id === film.id).length < 1) {
 
-            //.log(" 202 >>> pas present " , film.title, film, this.films);
-            // si ce film vient de l'api  et pas du local storage donc il a  pas encore de filmdb : 
-            if (!film.filmdb) {
+          if (resCovers['results'].length) {
 
+            // Pour chaque film, on cherche sa cover dans tmdb : 
+            // si le film qu on recherche n'est pas present dans notre  liste this.films : 
+            if (this.films.filter(f => f.id === film.id).length < 1) {
               this.films =
                 [...this.films, { filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
-              //console.log(" 215, le film  est pas dans le  local storage : ", film , this.films)
-            } else {
-              // le film était déja present dans le  local storage : 
-              this.films =
-                [...this.films, { filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
-              //console.log(" 220, le film  est dans le  local storage : ", film , this.films)
             }
-          }
-          else {
-            //console.log(" film est present dans la liste ", film, this.films);
-            this.films.map(filmListe => {
+            else {
+              this.films.map(filmListe => {
                 if (filmListe.id === film.id) {
                   filmListe['filmdb'] = resCovers['results'][0];
-                  filmListe['title'] =  film.title;
-                  filmListe['prix'] =  film.prix;
-                  filmListe['inCart'] =  film.inCart;
+                  filmListe['title'] = film.title;
+                  filmListe['prix'] = film.prix;
+                  filmListe['inCart'] = film.inCart;
+                }
+              });
+            }
+          } 
+          else {
+
+            if (this.films.filter(f => f.id === film.id).length < 1) {
+              this.films =
+                [...this.films, { filmdb: { title: film.title, poster_path: undefined }, title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
+            }
+            else {
+              this.films.map(filmListe => {
+                if (filmListe.id === film.id) {
+                  filmListe['filmdb'] = { title: film.title, poster_path: undefined };
+                  filmListe['title'] = film.title;
+                  filmListe['prix'] = film.prix;
+                  filmListe['inCart'] = film.inCart;
 
                 }
               });
+            }
 
-              //console.log("228 >>>> ", this.films);
-          
           }
 
-
-          //console.log('>>>>>>>>>>>>> on va calculer total carts');
           this.totalCarts();
-          //console.log('>>>>>>>>>>>>>>> stop  calculer total carts');
 
         },
         error => { console.log('erreur recuperation search ' + film.title); },
         // Complete de search film.title 
-        () => { 
-          //console.log(" complete " + film.title, this.films); this.totalCarts(); 
+        () => {
+          console.log(" complete " + film.title, this.films); this.totalCarts();
         }
 
       )
 
     });
-
-    console.log(" 235 this film >> ", this.films, filmsAux);
-    //console.log(" $$$$$$$$$$$$$$$$$$$$$$$$  FINNN films covers $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
   }
 
   validateList() {

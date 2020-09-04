@@ -1,43 +1,40 @@
 <section [ngClass]="{'theme-black': theme }">
-    <div class="haut" [ngClass]="{'theme-black-panel': theme }">
-      <h4> {{userAuth ? userAuth.pseudo : ''}} </h4>
+  <div class="haut" [ngClass]="{'theme-black-panel': theme }">
+    <h4> {{userAuth ? userAuth.pseudo : ''}} </h4>
+  </div>
+  <div class="bas" [ngClass]="{'theme-black': theme }">
+    <div class="gauche">
+      <img mat-card-image height="300" src="{{'assets/users/major.jpg'}}" alt="img user">
     </div>
-    <div class="bas" [ngClass]="{'theme-black': theme }">
-      <div class="gauche">
-        <img mat-card-image height="300"
-                            src="{{'assets/users/major.jpg'}}"
-        alt="img user">
-      </div>
-      <div class="droit">
-        <div class="">
-  
-  
-          <div class="" *ngIf="userAuth" >
-            <h4 class="">Role:</h4> 
-            <p>{{userAuth.role}}</p>
+    <div class="droit">
+      <div class="">
 
-            <div class="" *ngIf="this.filmsCovers.length > 0">
-                <h4 class="">Spb List:</h4>
-                <p>
-                  <span *ngFor="let movie of this.filmsCovers; let i = index" class="btn btn  m-1 mt-3">
-                    
-                      
-                      <a routerLink="/film/{{movie.filmdb.id}}/movie" title="Fiche infos de {{movie.filmdb.title}}">
-                        <span class="span-acteur">{{movie.filmdb.title }} </span>
-                        <img mat-card-image class="acteur" src="{{movie.filmdb.poster_path ? this.urlBaseImage+movie.filmdb.poster_path : 'assets/no_image.png'}}" alt={{movie.filmdb.title}} />
-                      </a>
-                  </span>
-                </p>
-              </div>
+
+        <div class="" *ngIf="userAuth">
+          <h4 class="">Role:</h4>
+          <p>{{userAuth.role}}</p>
+
+          <div class="" *ngIf="this.filmsCovers.length > 0">
+            <h4 class="">Spb List:</h4>
+            <p>
+              <span *ngFor="let movie of this.filmsCovers; let i = index" class="btn btn  m-1 mt-3">
+                <a routerLink="{{movie.filmdb.media_type === 'movie' ? '/film/'+ movie.filmdb.id + '/movie' : '/recherche/'+ movie.title +'/film'}}"  title="Fiche infos de {{movie.title}}">
+                  <span class="span-acteur">{{movie.title }} </span>
+                  <img mat-card-image class="acteur"
+                    src="{{movie.filmdb.poster_path ? this.urlBaseImage+movie.filmdb.poster_path : 'assets/no_image.png'}}"
+                    alt={{movie.title}} />
+                </a>
+              </span>
+            </p>
           </div>
-  
-  
-          
-         
-          
-  
         </div>
+
+
+
+
+
+
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

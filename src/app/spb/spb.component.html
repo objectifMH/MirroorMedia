@@ -29,21 +29,21 @@
                 
                 <tr *ngFor="let film of this.films.sort(); let i = index" class=" span-container ">
                     <td>
-                        <a routerLink="/recherche/{{film.filmdb.title}}/film" title="Fiche infos de {{film.title}}">
+                        <a routerLink="/recherche/{{film.title}}/film" title="Fiche infos de {{film.title}}">
                                 <img    mat-card-image class="acteur"
                                         src="{{film.filmdb.poster_path ? this.urlBaseImage+film.filmdb.poster_path : 'assets/no_image.png'}}"
                                         alt={{film.title}} />
                         </a>
                     </td>
                     <td>
-                        <span class="span-film  ">{{ film.title }} </span>
+                        <span class="span-film">{{ film.title }} </span>
                     </td>
                     <td>
-                        <span class="btn btn-warning">{{film.prix}}$</span>
+                        <span class="badge badge-warning p-2">{{film.prix}}$</span>
                     </td>
                     <td>
-                        <a routerLink="/recherche/{{film.filmdb.title}}/film"
-                            title="Fiche infos de {{film.filmdb.title}}">
+                        <a routerLink="/recherche/{{film.title}}/film"
+                            title="Fiche infos de {{film.title}}">
                             <span class="material-icons infos ">
                                 info
                             </span>

@@ -79,7 +79,13 @@ export class UserComponent implements OnInit {
       film => {
         this.tmdb.search(film.title).subscribe(
           resCovers => {
-            this.filmsCovers = [...this.filmsCovers, {filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
+            if ( resCovers['results'].length > 0)
+            {
+              this.filmsCovers = [...this.filmsCovers, {filmdb: resCovers['results'][0], title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
+            }
+            else {
+              this.filmsCovers = [...this.filmsCovers, {filmdb: {title: film.title, poster_path:undefined}, title: film.title, id: film.id, prix: film.prix, inCart: film.inCart }];
+            }
           })
           //console.log(this.filmsCovers);
       })
