@@ -1,4 +1,4 @@
-En cours de création ... 
+
 
 deploy : ng build --prod --output-path docs --base-href /MirroorMedia/ 
 
