@@ -26,14 +26,13 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'console', component: ConsoleComponent},
 
-  {path: '**', redirectTo: '/home' },
-
-  /* {path: '**', redirectTo: '/' } */
+  {path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    onSameUrlNavigation: 'reload'
+    onSameUrlNavigation: 'reload',
+    useHash: true
   })],
   exports: [RouterModule]
 })
