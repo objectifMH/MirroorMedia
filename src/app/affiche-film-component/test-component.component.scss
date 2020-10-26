@@ -3,18 +3,13 @@
 section {
     width: 90vw;
     margin: auto;
-
     display: flex;
     flex-direction: column;
-
     color: white;
-
-
     height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 
     h4 {
@@ -29,7 +24,6 @@ section {
         position: absolute;
         right: 10px;
         top: 15px;
-
         cursor: pointer;
         transition: all .2s ease-in-out;
 
@@ -39,22 +33,18 @@ section {
           color: $color; 
         }
       }
-
     }
 
     .bas {
-      display: flex;
-      
+      display: flex;     
       border: 1px solid white;
       border-bottom: 2px solid white;
       border-right: 2px solid white;
 
-
       .droit {
         margin-top: 20px;
         padding: 15px 20px;
-
-        
+     
         .director {
           padding: 15px;
           font-size: large;
@@ -68,8 +58,6 @@ section {
       }
     }
 
-
-
     img {
       padding: 10px 15px;
       max-width: 500px;
@@ -80,8 +68,7 @@ section {
         transform: scale(1.12);
         box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
       }
-    }
-    
+    }    
   }
   
   .acteur {
@@ -89,8 +76,6 @@ section {
     border-radius: 15px !important;
     padding: 0 !important;
   }
-
-  
 
   .a-vignette {
     
@@ -122,8 +107,7 @@ section {
       img {
         opacity: 0.3;
       }
-
-
+      
       span {
         visibility: visible;
         transform: scale(1.2);

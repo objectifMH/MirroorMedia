@@ -56,7 +56,6 @@ input.ng-touched.ng-valid + .material-icons:before {
         }
 
         button {
-            //background: white;
             border: 2px solid $color;
             padding: 8px 12px;
             border-radius: 0;
@@ -67,10 +66,8 @@ input.ng-touched.ng-valid + .material-icons:before {
             &:hover {
                 color: $back; 
                 background: $color !important;
-
                 transform: scale(1.22);
             }
         }
-
     }
 }

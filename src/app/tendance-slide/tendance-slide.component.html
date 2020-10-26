@@ -1,7 +1,6 @@
 
   <section class="container-myGrid">
     <h4>{{titre}}</h4>
-
     <section class="myGrid" *ngIf="this.films ">
       <a (click)="clickGauche()"  *ngIf="isPresentG" class="gauche">
         <span class="material-icons">
@@ -17,8 +16,7 @@
         <span class="material-icons">
           arrow_forward_ios
         </span>
-      </a>
-     
+      </a>  
     </section>
     <div  *ngIf="!this.films " class="mt-50 container d-flex justify-content-center">
       <div class="spinner-border text-info" role="status">

@@ -47,8 +47,6 @@ export class UserComponent implements OnInit {
         } else {
           this.recupereCarts();
         }
-
-
         console.log('recupere auth dans spb', this.userAuth.pseudo);
         if (this.userAuth.pseudo === null) {
 

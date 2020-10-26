@@ -60,7 +60,8 @@ export class MainPageComponent implements OnInit {
 
   showMenu() {
     this.isShow = !this.isShow;
-    console.log(this.isShow);
+    console.log("Theme : " + this.theme);
+    console.log("Show : " + this.isShow);
   }
 
   // On récupère la cart gràce au service
@@ -86,7 +87,6 @@ export class MainPageComponent implements OnInit {
       ,
       error => console.log("Erreur, récuperation getUserAuthenticated")
     );
-
   }
 
   getIsConnected() {
@@ -115,11 +115,10 @@ export class MainPageComponent implements OnInit {
     this.inoutService.getTheme().subscribe(
       data => {
         this.theme = data;
-        console.log("Theme, " + this.theme);
+        console.log("Theme : " + this.theme);
+        console.log("Show : " + this.isShow);
       },
       error => console.log("Erreur, brightness")
-    )
-    
+    ) 
   }
-
 }

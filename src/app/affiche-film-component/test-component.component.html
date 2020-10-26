@@ -7,24 +7,20 @@
     <div class="gauche">
       <a routerLink="/film/{{film.id}}/{{film.title ? 'movie' : 'tv'}}" title="Fiche" class="affiche">
         <img mat-card-image src={{this.urlBaseImage}}{{film.poster_path}} alt={{film.title}}>
-      </a>
-      
+      </a>    
     </div>
     <div class="droit">
       <div class="">
-
         <div class="" *ngIf="directorName" >
           <h4 class="">Director:</h4>
           <p>
             <span class="badge badge-warning director"> {{this.directorName}}</span>
           </p>
         </div>
-
         <div class="">
           <h4 class="">Synopsis:</h4>
           <p>{{film.overview}}</p>
         </div>
-
         <div class="" *ngIf="this.trailers.length > 0" >
           <h4 class="">Trailers:</h4>
           <p>
@@ -40,13 +36,10 @@
             </span>
           </p>
         </div>
-
-
         <div class="" *ngIf="acteurs.length>0">
           <h4 class="">Actors:</h4>
           <p>
-            <span *ngFor="let acteur of this.acteurs; let i = index" class="btn btn m-1 mt-3">
-              
+            <span *ngFor="let acteur of this.acteurs; let i = index" class="btn btn m-1 mt-3">        
                 <a routerLink="/people/{{acteur.id}}" title="Fiche infos de {{acteur.name}}" class="a-vignette">
                   <span class="span-acteur">{{acteur.name }} </span>
                   <img mat-card-image class="acteur" src="{{acteur.profile_path ? this.urlBaseImage+acteur.profile_path : 'assets/no_image.png'}}" alt={{acteur.name}} />
@@ -57,8 +50,6 @@
             </span>
           </p>
         </div>
-        
-
       </div>
     </div>
   </div>

@@ -7,7 +7,6 @@ h1 {
     margin: 5px 20px;
 }
 h4 {
-
     color: $color;
     text-shadow: rgba(0, 0, 0, 0.75) 1px 1px;
     font-weight: large;
@@ -28,6 +27,9 @@ h4 {
 }
 
 section {
+    .alert-spring.fade {
+        display: none;
+    }
 
     .material-icons.shopping {
         color: red;
@@ -38,10 +40,7 @@ section {
         display: flex;
         align-items: center;
         flex-direction: row;
-        flex-wrap: wrap !important;
-
-
-        
+        flex-wrap: wrap !important;  
     }
 
     table {
@@ -52,42 +51,28 @@ section {
             margin: auto;
             padding: 5px;
             font-size: large;
-    
             color: #56c3bd;
             font-weight: bolder;
         }
     
         tr {
             transition: all 0.3s ease-in-out;
-
-            
             &:hover {
                 transform: scale(1.1);
                 box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
                 z-index: 3;
-                img {
-                    //max-height: 160px;
-                }
             }
-
-           
-    
         }
-
     }
 
-    
-
     a {
-
         img {
             max-height: 150px;
             padding: 2px;
         }
     }
 
-    .material-icons {
-        
+    .material-icons {        
         cursor: pointer;
     }
 
@@ -96,7 +81,6 @@ section {
         &:hover {
             transform:  rotate(360deg) scale(1.35);     
         }
-
     }
 
     .cart-add:before {
@@ -108,9 +92,6 @@ section {
         content:'check_circle' !important;
         color: green !important;
     }
-
-  
-
 }
 
 @media (max-width: 990px) {
@@ -123,7 +104,6 @@ section {
     }
 
     a {
-
         img {
             max-height: 90px !important;
             padding: 4px !important;
@@ -137,5 +117,4 @@ section {
     .btn {
         font-size: 0.8rem;
     }
-
 }

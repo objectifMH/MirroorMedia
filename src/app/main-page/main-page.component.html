@@ -1,7 +1,7 @@
-  <section class="body" [ngClass]="{'no-show-mobile': !isShow} "
-[ngClass]="{'theme-black':theme  }"
->
-
+<!-- Header -->
+<section  class="body" 
+          [ngClass]="{'theme-black':theme  }"
+          >
   <!-- bar nav head -->
   <header [ngClass]="{'theme-black-header':theme  }">
     <div class="headContainer">
@@ -10,7 +10,6 @@
           <a routerLink="/home" title="Home">
             <span class="logo-bottom logo-gd" [ngClass]="{'theme-black-color':theme  }">8Mirr∞r</span>
             <span class="logo-bottom logo-pt">8M∞</span>
-
           </a>
           <span class="material-icons menu-burger" [ngClass]="{'menu-show': isShow , 'menu-hide': !isShow} "
             (click)="showMenu()">
@@ -19,7 +18,6 @@
         </div>
       </div>
       <div class="centre" [ngClass]="{'cd-show': isShow , 'cd-fade': !isShow} ">
-
         <input #search type="text" class="form-control" placeholder="Search" id="idSearch" name="search"
         [ngClass]="{'theme-black-input-search':theme  }"
         >
@@ -27,7 +25,6 @@
           search
         </span>
       </div>
-
       <div class="droit" [ngClass]="{'cd-show': isShow , 'cd-fade': !isShow} ">
         <ul>
           <li #lih (click)="clickIcon(lih)" [ngClass]="{'iconSelected':isSelectedIcon.home}" data-icon='home'>
@@ -42,8 +39,7 @@
             <span class="material-icons">
               settings_brightness
             </span>
-
-        </li>
+          </li>
           <li #liad (click)="clickIcon(liad)" *ngIf="userAuth.role === 'ADMIN' && isConnected" class="console"
             [ngClass]="{'iconSelected':isSelectedIcon.admin}" data-icon='admin'>
             <a routerLink="/console" title="Console Admin">
@@ -51,16 +47,13 @@
                 admin_panel_settings
               </span>
             </a>
-          </li>
-          
+          </li>        
           <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo && isConnected" class="p-relative"
             [ngClass]="{'iconSelected':isSelectedIcon.person}" data-icon='person'>
-            <span >{{userAuth.pseudo}} </span>
             <a routerLink="/user" title="User">
               <span class="material-icons">
                 person
-              </span>
-              
+              </span>           
             </a>
           </li>
           <li #lii (click)="clickIcon(lii)" [ngClass]="{'iconSelected':isSelectedIcon.inscription}"
@@ -70,26 +63,18 @@
                 person_add
               </span>
             </a>
-
-          </li>
-          
-          
-
-
+          </li>    
           <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="userAuth.pseudo && isConnected"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">
             <a routerLink="/spb" title="Spb" class="a-list-spb">
               <span class="material-icons">
                 cloud
               </span>
-
               <span class="badge badge-pill badge-success span-list-spb">{{cart.quantity}}</span>
-
             </a>
           </li>
           <li #lilo title="login" data-icon="login" (click)="clickIcon(lilo)"
             [ngClass]="{'iconSelected':isSelectedIcon.login , 'd-none': userAuth.pseudo}">
-
             <a routerLink="/login" title="Login">
               <span class="material-icons">
                 login
@@ -102,8 +87,6 @@
               logout
             </span>
           </li>
-
-
         </ul>
         <a routerLink="/user" title="User" *ngIf="cart.quantity > 0 && userAuth.pseudo && isConnected" class="btn btn-danger shopping">
           <i class="material-icons shopping">add_shopping_cart
@@ -113,16 +96,18 @@
       </div>
     </div>
   </header>
-
-  <!-- le routeur -->
-  <div class="padding-top-90 padding-bottom-all  " [ngClass]="{'theme-black':theme }">
-    <router-outlet></router-outlet>
-  </div>
-
 </section>
+
+<!-- le routeur -->
+<div  class="router" 
+      [ngClass]="{'theme-black':theme, 'theme-color': !theme, 'no-show-mobile': !isShow }"
+      >
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Footer -->
 <footer [ngClass]="{'theme-black':theme }">
   <div class="position-relative footer" [ngClass]="{'theme-footer-black':theme }">
-
     <ul>
       <li class="nav-item active mx-2 ">
         <a class="nav-link link-logo" routerLink='/home' title="Home"> <span class="logo-bottom">8Mirr∞r</span> </a>
@@ -158,5 +143,3 @@
     </div>
   </div>
 </footer>
-<!-- 
-</div> -->
