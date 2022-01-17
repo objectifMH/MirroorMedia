@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject, Subject } from 'rxjs';
-import { Film } from 'src/film';
-import { SpbService } from './spb.service';
+import { Injectable } from "@angular/core";
+import { Observable, of, BehaviorSubject, Subject } from "rxjs";
+import { Film } from "src/film";
+import { SpbService } from "./spb.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class InOutService {
-
   filmAAfficher: BehaviorSubject<Film>;
   isAffiche: BehaviorSubject<boolean>;
   listeFilmRecherche: BehaviorSubject<Film[]>;
@@ -23,11 +22,17 @@ export class InOutService {
   /* cart: BehaviorSubject<any>;
   carts: BehaviorSubject<any>; */
 
-  
   selectedIcon: BehaviorSubject<any>;
 
   constructor() {
-    this.selectedIcon = new BehaviorSubject({home: true, favoris: false, inscription: false, login: false, logout:false, spb: false });
+    this.selectedIcon = new BehaviorSubject({
+      home: true,
+      favoris: false,
+      inscription: false,
+      login: false,
+      logout: false,
+      spb: false,
+    });
     this.isAffiche = new BehaviorSubject<boolean>(false);
     this.filmAAfficher = new BehaviorSubject<Film>(null);
     this.listeFilmRecherche = new BehaviorSubject<Film[]>(null);
@@ -49,7 +54,6 @@ export class InOutService {
   public setTheme(val) {
     this.theme.next(val);
     //console.log("theme inout service " , this.theme);
-
   }
 
   public setSelectIcon(resultat) {
@@ -65,38 +69,37 @@ export class InOutService {
   }
 
   public setAfficheFilm() {
-    console.log('Dans le service : on fixe le setAffiche');
+    console.log("Dans le service : on fixe le setAffiche");
     this.bool = !this.bool;
     this.isAffiche.next(this.bool);
-    console.log('Dans le service : setAffiche' , this.isAffiche);
+    console.log("Dans le service : setAffiche", this.isAffiche);
   }
 
   public setAfficheThisFilm(film) {
     this.filmAAfficher.next(film);
     //console.log('Dans le service : on fixe le setAfficheThisFilm' , film);
-
   }
 
   public getAfficheThisFilm() {
     return this.filmAAfficher.asObservable();
   }
 
-
   // l'observalbe de la liste de film qu'on cherche :
   public setListeFilmRecherche(film) {
     this.listeFilmRecherche.next(film);
-    console.log('Dans le service : on fixe le setListeFilmRecherche' , film);
-
+    console.log("Dans le service : on fixe le setListeFilmRecherche", film);
   }
 
   public getListeFilmRecherche() {
-    console.log('Dans le service : on return le getListeFilmRecherche' , this.listeFilmRecherche);
+    console.log(
+      "Dans le service : on return le getListeFilmRecherche",
+      this.listeFilmRecherche
+    );
     return this.listeFilmRecherche.asObservable();
   }
 
   // l'observable du champ de recherche :
   public setRechercheInput(resultat) {
-
     this.rechercheInput.next(resultat);
     // on va faire la recherche du mot clé dans notre tableau ;
     // tslint:disable-next-line:max-line-length
@@ -123,19 +126,21 @@ export class InOutService {
   }
 
   public getRechercheInput() {
-    console.log('Dans le service : on return la recherche input' , this.rechercheInput);
+    console.log(
+      "Dans le service : on return la recherche input",
+      this.rechercheInput
+    );
     return this.rechercheInput.asObservable();
   }
 
-
   // Les tableaux pour la recherche :
   public setSearchMovies(resultat) {
-    console.log('movies > ', this.movies);
+    console.log("movies > ", this.movies);
     this.movies.next(resultat);
   }
 
   public getSearchMovies() {
-    console.log('movies > ', this.movies);
+    console.log("movies > ", this.movies);
     return this.movies.asObservable();
   }
 
@@ -177,5 +182,4 @@ export class InOutService {
   public getCarts() {
     return this.carts.asObservable();
   } */
-
 }

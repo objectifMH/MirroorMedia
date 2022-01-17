@@ -1,9 +1,7 @@
 <!-- Header -->
-<section  class="body" 
-          [ngClass]="{'theme-black':theme  }"
-          >
+<section class="body" [ngClass]="{'theme-black':!theme  }">
   <!-- bar nav head -->
-  <header [ngClass]="{'theme-black-header':theme  }">
+  <header [ngClass]="{'theme-black-header':!theme  }">
     <div class="headContainer">
       <div class="gauche">
         <div class="logo">
@@ -19,8 +17,7 @@
       </div>
       <div class="centre" [ngClass]="{'cd-show': isShow , 'cd-fade': !isShow} ">
         <input #search type="text" class="form-control" placeholder="Search" id="idSearch" name="search"
-        [ngClass]="{'theme-black-input-search':theme  }"
-        >
+          [ngClass]="{'theme-black-input-search':!theme  }">
         <span class="material-icons" (click)="clickSearch(search)">
           search
         </span>
@@ -47,13 +44,13 @@
                 admin_panel_settings
               </span>
             </a>
-          </li>        
-          <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo && isConnected" class="p-relative"
-            [ngClass]="{'iconSelected':isSelectedIcon.person}" data-icon='person'>
+          </li>
+          <li #lip title="Compte user" (click)="clickIcon(lip)" *ngIf="userAuth.pseudo && isConnected"
+            class="p-relative" [ngClass]="{'iconSelected':isSelectedIcon.person}" data-icon='person'>
             <a routerLink="/user" title="User">
               <span class="material-icons">
                 person
-              </span>           
+              </span>
             </a>
           </li>
           <li #lii (click)="clickIcon(lii)" [ngClass]="{'iconSelected':isSelectedIcon.inscription}"
@@ -63,7 +60,7 @@
                 person_add
               </span>
             </a>
-          </li>    
+          </li>
           <li #lisp title="Spb DB" data-icon="spb" (click)="clickIcon(lisp)" *ngIf="userAuth.pseudo && isConnected"
             [ngClass]="{'iconSelected':isSelectedIcon.spb}">
             <a routerLink="/spb" title="Spb" class="a-list-spb">
@@ -88,7 +85,8 @@
             </span>
           </li>
         </ul>
-        <a routerLink="/user" title="User" *ngIf="cart.quantity > 0 && userAuth.pseudo && isConnected" class="btn btn-danger shopping">
+        <a routerLink="/user" title="User" *ngIf="cart.quantity > 0 && userAuth.pseudo && isConnected"
+          class="btn btn-danger shopping">
           <i class="material-icons shopping">add_shopping_cart
           </i>
           ({{cart.quantity}}) ${{cart.total}}
@@ -99,15 +97,13 @@
 </section>
 
 <!-- le routeur -->
-<div  class="router" 
-      [ngClass]="{'theme-black':theme, 'theme-color': !theme, 'no-show-mobile': !isShow }"
-      >
+<div class="router" [ngClass]="{'theme-black':!theme, 'theme-color': theme, 'no-show-mobile': !isShow }">
   <router-outlet></router-outlet>
 </div>
 
 <!-- Footer -->
-<footer [ngClass]="{'theme-black':theme }">
-  <div class="position-relative footer" [ngClass]="{'theme-footer-black':theme }">
+<footer [ngClass]="{'theme-black':!theme }">
+  <div class="position-relative footer" [ngClass]="{'theme-footer-black':!theme }">
     <ul>
       <li class="nav-item active mx-2 ">
         <a class="nav-link link-logo" routerLink='/home' title="Home"> <span class="logo-bottom">8Mirr∞r</span> </a>

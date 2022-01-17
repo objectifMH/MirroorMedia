@@ -1,30 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-
-$back: gold;  //black; //gold;  // #c104c1c7; // gold;  //#232323
-$back-main:  #f5e06e; //rgba(29, 26, 26, 0.897); // #f5e06e; //purple; // #f5e06e; 
-$color : #56c3bd;
+$back: gold; //black; //gold;  // #c104c1c7; // gold;  //#232323
+$back-main: #f5e06e; //rgba(29, 26, 26, 0.897); // #f5e06e; //purple; // #f5e06e;
+$color: #56c3bd; //#f5e06e; //#56c3bd;
 
 $back2: black; //gold;  // #c104c1c7; // gold;  //#232323
-$back-main2: rgba(29, 26, 26, 0.897); // #f5e06e; //purple; // #f5e06e; 
-$color2 : rgba(235, 15, 15, 0.897);
+$back-main2: rgba(29, 26, 26, 0.897); // #f5e06e; //purple; // #f5e06e;
+$color2: rgba(235, 15, 15, 0.897);
 
+$shadow: rgba(0, 0, 0, 0.75);
+$validate: purple;
+$error: red;
 
-$shadow : rgba(0,0,0,0.75);
-$validate : purple;
-$error : red;
-
-html, body { 
-    height: 100%; 
+html,
+body {
+  height: 100%;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background: $back-main !important;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: $back-main !important;
 }
 
-$image-item: calc(  (100vw / 7.12) );
-$slide-item: calc( 2 * $image-item );
-
+$image-item: calc((100vw / 7.12));
+$slide-item: calc(2 * $image-item);
